@@ -26,10 +26,11 @@ El contenido del curso tiene los siguientes temas:
 - Módulo 1: Modelos lineales para datos longitudinales continuos (I)
      + Visualización de datos longitudinales
      + ANOVA para medidas repetidas
+     + MANOVA
 
 - Módulo 2: Modelos lineales para datos longitudinales continuos (II)
-     + MANOVA
      + Modelos mixtos
+     + Otros modelos: GLS, GEE
 
 - Módulo 3: Análisis de supervivencia con eventos recurrentes (I)
      + Breve introducción al análisis de supervivencia
@@ -37,8 +38,7 @@ El contenido del curso tiene los siguientes temas:
      + Modelos de fragilidad
 
 - Módulo 4: Modelización conjunta de datos longitudinales y de supervivencia
-     + Modelos de fragilidad
-     + Modelo general para eventos recurrentes
+     + Joint models
 
 
 Este material está licenciado bajo una [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
