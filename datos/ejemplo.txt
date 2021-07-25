@@ -1,0 +1,4 @@
+id	sexo	colesterol_1	colesterol_2	colesterol_3
+1	hombre	223	234	241
+2	hombre	189	190	191
+3	mujer	210	204	190

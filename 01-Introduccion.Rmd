@@ -1,0 +1,5 @@
+
+# Introducción
+
+Este bookdown sirven como notas para el curso [Modelización estadística avanzada con R: análisis de datos longitudinales](https://www.iisaragon.es/event/curso-modelizacion-estadistica-avanzada-con-r-analisis-de-datos-longitudinales-iacs/) impartido en el [Insituto Aragonés de Ciencias de la Salud](https://www.iacs.es/)
+
