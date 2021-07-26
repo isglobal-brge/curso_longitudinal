@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 4 Visualización de datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales</title>
+  <meta name="description" content="Capítulo 4 Visualización de datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 4 Visualización de datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 4 Visualización de datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  
+  
+  
+
+<meta name="author" content="Juan R González" />
+
+
+<meta name="date" content="2021-07-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="estructura-de-los-datos.html"/>
+<link rel="next" href="ModelosNormal.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Datos Longitudinales</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preámbulo</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instalación-de-librerías-necesarias-para-el-curso"><i class="fa fa-check"></i><b>1.1</b> Instalación de librerías necesarias para el curso</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introducción a los diseños de datos longitudinales</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#definición"><i class="fa fa-check"></i><b>2.1</b> Definición</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#ejemplos"><i class="fa fa-check"></i><b>2.2</b> Ejemplos</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#esquemas-de-recogidas-de-datos"><i class="fa fa-check"></i><b>2.3</b> Esquemas de recogidas de datos</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#todas-las-medidas-con-intervalos-fijos"><i class="fa fa-check"></i><b>2.3.1</b> Todas las medidas con intervalos fijos</a></li>
+<li class="chapter" data-level="2.3.2" data-path="intro.html"><a href="intro.html#missings-al-azar-con-intervalos-fijos"><i class="fa fa-check"></i><b>2.3.2</b> Missings al azar con intervalos fijos</a></li>
+<li class="chapter" data-level="2.3.3" data-path="intro.html"><a href="intro.html#distintos-seguimientos"><i class="fa fa-check"></i><b>2.3.3</b> Distintos seguimientos</a></li>
+<li class="chapter" data-level="2.3.4" data-path="intro.html"><a href="intro.html#todas-las-medidas-a-distintos-tiempos"><i class="fa fa-check"></i><b>2.3.4</b> Todas las medidas a distintos tiempos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html"><i class="fa fa-check"></i><b>3</b> Estructura de los datos</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#formato-ancho-y-largo"><i class="fa fa-check"></i><b>3.1</b> Formato ancho y largo</a></li>
+<li class="chapter" data-level="3.2" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#formato-ancho"><i class="fa fa-check"></i><b>3.2</b> Formato ancho</a></li>
+<li class="chapter" data-level="3.3" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#formato-largo"><i class="fa fa-check"></i><b>3.3</b> Formato largo</a></li>
+<li class="chapter" data-level="3.4" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#valores-faltantes"><i class="fa fa-check"></i><b>3.4</b> Valores faltantes</a></li>
+<li class="chapter" data-level="3.5" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#tiempos-de-medidas-diferentes"><i class="fa fa-check"></i><b>3.5</b> Tiempos de medidas diferentes</a></li>
+<li class="chapter" data-level="3.6" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#transformación"><i class="fa fa-check"></i><b>3.6</b> Transformación</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#vertical-a-horizontal-y-viceversa"><i class="fa fa-check"></i><b>3.6.1</b> Vertical a horizontal y viceversa</a></li>
+<li class="chapter" data-level="3.6.2" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#colapsar"><i class="fa fa-check"></i><b>3.6.2</b> Colapsar</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html"><i class="fa fa-check"></i><b>4</b> Visualización de datos longitudinales</a></li>
+<li class="chapter" data-level="5" data-path="ModelosNormal.html"><a href="ModelosNormal.html"><i class="fa fa-check"></i><b>5</b> Modelos con respuesta normal</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#técnica-de-la-suma-de-cuadrados"><i class="fa fa-check"></i><b>5.1</b> Técnica de la suma de cuadrados</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#diseño-1w1b"><i class="fa fa-check"></i><b>5.1.1</b> Diseño 1W+1B</a></li>
+<li class="chapter" data-level="5.1.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#diseño-1w"><i class="fa fa-check"></i><b>5.1.2</b> Diseño 1W</a></li>
+<li class="chapter" data-level="5.1.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#función-ezanova"><i class="fa fa-check"></i><b>5.1.3</b> Función <code>ezANOVA</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#respuesta-multivariante"><i class="fa fa-check"></i><b>5.2</b> Respuesta Multivariante</a></li>
+<li class="chapter" data-level="5.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplos-1"><i class="fa fa-check"></i><b>5.3</b> Ejemplos</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplo-1"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo 1</a></li>
+<li class="chapter" data-level="5.3.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplo-2"><i class="fa fa-check"></i><b>5.3.2</b> Ejemplo 2</a></li>
+<li class="chapter" data-level="5.3.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplo-3"><i class="fa fa-check"></i><b>5.3.3</b> Ejemplo 3</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelización estadística avanzada con R: análisis de datos longitudinales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="visualización-de-datos-longitudinales" class="section level1" number="4">
+<h1><span class="header-section-number">Capítulo 4</span> Visualización de datos longitudinales</h1>
+<p>Para ilustrar cómo visualizar datos longitudinales usaremos los datos que se encuentran en formato ancho obtenidos de <a href="https://stats.idre.ucla.edu/r/examples/alda/r-applied-longitudinal-data-analysis-ch-2/">UCLA web site</a>. Este ejemplo pertenece a un estudio …</p>
+<p>Los datos podemos cargarlos de la forma habitual, pero teniendo en cuenta que se encuentran en formato “csv”</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="visualización-de-datos-longitudinales.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb33-2"><a href="visualización-de-datos-longitudinales.html#cb33-2" aria-hidden="true" tabindex="-1"></a>tolerance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://stats.idre.ucla.edu/wp-content/uploads/2016/02/tolerance1.txt&quot;</span>)</span>
+<span id="cb33-3"><a href="visualización-de-datos-longitudinales.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tolerance)</span></code></pre></div>
+<pre><code># A tibble: 6 x 8
+     id tol11 tol12 tol13 tol14 tol15  male exposure
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+1     9  2.23  1.79  1.9   2.12  2.66     0     1.54
+2    45  1.12  1.45  1.45  1.45  1.99     1     1.16
+3   268  1.45  1.34  1.99  1.79  1.34     1     0.9 
+4   314  1.22  1.22  1.55  1.12  1.12     0     0.81
+5   442  1.45  1.99  1.45  1.67  1.9      0     1.13
+6   514  1.34  1.67  2.23  2.12  2.44     1     0.9 </code></pre>
+<p>Con los datos en este formato, podemos aprovechar para obtener algunas estadísticas descriptivas que pueden resultar de interés. Por ejemplo, podemos ver cuántos individuos tenemos en nuestro estudio simplemente ejecutando:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="visualización-de-datos-longitudinales.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(tolerance)</span></code></pre></div>
+<pre><code>[1] 16</code></pre>
+<p>Para poder crear gráficos que nos informen sobre la evolución de la tolerancia entre individuos necesitamos que los datos estén en formato largo. Como hemos visto anteriormente, esto lo podemos realizar mediante</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="visualización-de-datos-longitudinales.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb37-2"><a href="visualización-de-datos-longitudinales.html#cb37-2" aria-hidden="true" tabindex="-1"></a>tolerance2 <span class="ot">&lt;-</span> <span class="fu">melt</span>(tolerance, <span class="at">measure.vars=</span><span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb37-3"><a href="visualización-de-datos-longitudinales.html#cb37-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">variable.name =</span> <span class="st">&quot;age&quot;</span>,</span>
+<span id="cb37-4"><a href="visualización-de-datos-longitudinales.html#cb37-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">value.name =</span> <span class="st">&quot;tolerance&quot;</span>)</span>
+<span id="cb37-5"><a href="visualización-de-datos-longitudinales.html#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co"># no nos olvidemos que nuestra variable edad</span></span>
+<span id="cb37-6"><a href="visualización-de-datos-longitudinales.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co"># debe de ser numérica</span></span>
+<span id="cb37-7"><a href="visualización-de-datos-longitudinales.html#cb37-7" aria-hidden="true" tabindex="-1"></a>tolerance2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(tolerance2, </span>
+<span id="cb37-8"><a href="visualización-de-datos-longitudinales.html#cb37-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">age =</span> <span class="fu">str_remove</span>(age,<span class="st">&quot;tol&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb37-9"><a href="visualización-de-datos-longitudinales.html#cb37-9" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">as.numeric</span>())</span>
+<span id="cb37-10"><a href="visualización-de-datos-longitudinales.html#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tolerance2)</span></code></pre></div>
+<pre><code>   id male exposure age tolerance
+1   9    0     1.54  11      2.23
+2  45    1     1.16  11      1.12
+3 268    1     0.90  11      1.45
+4 314    0     0.81  11      1.22
+5 442    0     1.13  11      1.45
+6 514    1     0.90  11      1.34</code></pre>
+<p>Puesto que nuestras observaciones para cada individuo se presenta a distintas edades, por eso hemos llamado <code>age</code> a nuestra variable temporal.</p>
+<p>Con los datos en este formato no resulta tan sencillo saber cuántos individuos estamos analizando. Podemos usar <code>tidyverse</code> para obtener esta información</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="visualización-de-datos-longitudinales.html#cb39-1" aria-hidden="true" tabindex="-1"></a>tolerance2 <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="visualización-de-datos-longitudinales.html#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(id) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-3"><a href="visualización-de-datos-longitudinales.html#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div>
+<pre><code>[1] 16</code></pre>
+<p><strong>NOTA:</strong> Para aquellos que no realizaron el último curso de R en el que se explicó tidyverse, se puede consultar <a href="https://isglobal-brge.github.io/Aprendizaje_Automatico_1/introducci%C3%B3n-a-tidyverse.html">este material</a>.</p>
+<p>Podemos empezar por visualizar nuestros datos creando lo que se conoce como <em>Empirical growth plots</em> o que nos nuestra la secuencia de nuestra variable de interés a lo largo del tiempo para cada individuo. En nuestro paso pondremos <code>age</code> en el eje X y <code>tolerance</code> en el Y. Para ello utilizaremos la función <code>geom_point()</code> y para crear el panel individual para cada sujeto usaremos <code>facet_wrap()</code> ambas son funciones de la librería <code>ggplot2</code>.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="visualización-de-datos-longitudinales.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb41-2"><a href="visualización-de-datos-longitudinales.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tolerance2, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> tolerance)) <span class="sc">+</span></span>
+<span id="cb41-3"><a href="visualización-de-datos-longitudinales.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb41-4"><a href="visualización-de-datos-longitudinales.html#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-35-1.png" width="432" /></p>
+<p>Por defecto, <code>ggplot2</code> mantiene las escalas de ambos ejes iguales en todos los paneles. Si queremos que sea distinto entre cada individuo, podemos modificar el argumento <code>scales</code> en la función <code>facet_wrap()</code>.</p>
+<p>Podemos añadir una línea para conectar los puntos usando <code>geom_line()</code></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="visualización-de-datos-longitudinales.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tolerance2, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> tolerance)) <span class="sc">+</span></span>
+<span id="cb42-2"><a href="visualización-de-datos-longitudinales.html#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb42-3"><a href="visualización-de-datos-longitudinales.html#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb42-4"><a href="visualización-de-datos-longitudinales.html#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-36-1.png" width="432" /></p>
+<p>Sin embargo, a veces es recomendable utilizar otras aproximaciones que nos ayuden a visualizar mejor cuál es la trayectoria de cada individuo. Para ello, se puede utilizar otras aproximaciones como:</p>
+<ul>
+<li>suavizado no paramétrico</li>
+<li>funciones paramétricas</li>
+</ul>
+<p>El suavizado paramétrico se puede llevar acabo usando un suavizado de tipo <em>loess</em>. Podemos usar esta opción mediante la función <code>stat_smooth()</code> y controlar el grado de suavizado con el argumento <code>span</code>.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="visualización-de-datos-longitudinales.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tolerance2, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> tolerance)) <span class="sc">+</span></span>
+<span id="cb43-2"><a href="visualización-de-datos-longitudinales.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb43-3"><a href="visualización-de-datos-longitudinales.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">span =</span> .<span class="dv">9</span>) <span class="sc">+</span></span>
+<span id="cb43-4"><a href="visualización-de-datos-longitudinales.html#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-37-1.png" width="432" />
+<strong>NOTA:</strong> El argumento <code>se=FALSE</code> sirve para que no pintemos la banda de confianza para la estimación no paramétrica.</p>
+<p>Podemos visualizar las trayectorias usando un modelo paramétrico. El más sencillo sería un modelo lineal que podemos visualizar mediante el argumento <code>method = 'lm'</code></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="visualización-de-datos-longitudinales.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tolerance2, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> tolerance)) <span class="sc">+</span></span>
+<span id="cb44-2"><a href="visualización-de-datos-longitudinales.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb44-3"><a href="visualización-de-datos-longitudinales.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb44-4"><a href="visualización-de-datos-longitudinales.html#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-38-1.png" width="432" /></p>
+<p>También podemos visualizar todas las trayectorias en único gráfico mediante lo que se conoce como un <strong>spaghetti plot</strong>. Esta representación es muy útil cuando queremos visualizar muchos individuos. Para ello deberíamos usar el argumento <code>group</code></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="visualización-de-datos-longitudinales.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tolerance2, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> tolerance, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb45-2"><a href="visualización-de-datos-longitudinales.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-39-1.png" width="432" /></p>
+<p>También podemos añadir el perfil promedio</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="visualización-de-datos-longitudinales.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tolerance2, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> tolerance, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb46-2"><a href="visualización-de-datos-longitudinales.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">col=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb46-3"><a href="visualización-de-datos-longitudinales.html#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="at">fun =</span> mean, <span class="at">size=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-40-1.png" width="432" /></p>
+<p>Podríamos obtener el mismo gráfico separado para hombres y mujeres usando de nuevo <code>facet_wrap()</code></p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="visualización-de-datos-longitudinales.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tolerance2, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> tolerance, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb47-2"><a href="visualización-de-datos-longitudinales.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb47-3"><a href="visualización-de-datos-longitudinales.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>male)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-41-1.png" width="432" /></p>
+<p><strong>NOTA:</strong> En <code>ggplot2</code> podemos guardar un gráfico con un nombre y luego “reciclar” el gráfico añadiendo más código de la siguiente manera. Por ejemplo, puedo guardar el gráfico anterior en el objeto <code>p</code></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="visualización-de-datos-longitudinales.html#cb48-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(tolerance2, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> tolerance, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb48-2"><a href="visualización-de-datos-longitudinales.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">col=</span><span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
+<span id="cb48-3"><a href="visualización-de-datos-longitudinales.html#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>male)</span></code></pre></div>
+<p>y luego decirle que me añada el perfir promedio:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="visualización-de-datos-longitudinales.html#cb49-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>),</span>
+<span id="cb49-2"><a href="visualización-de-datos-longitudinales.html#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="at">fun =</span> mean, <span class="at">size=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-43-1.png" width="432" /></p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="estructura-de-los-datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ModelosNormal.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/isglobal-brge/curso_longitudinal/tree/master/docs03-Visualizacion.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["cursoLongitudinal-bookdown.pdf", "cursoLongitudinal-bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

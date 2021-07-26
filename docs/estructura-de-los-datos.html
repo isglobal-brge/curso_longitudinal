@@ -1,0 +1,2604 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 3 Estructura de los datos | Modelización estadística avanzada con R: análisis de datos longitudinales</title>
+  <meta name="description" content="Capítulo 3 Estructura de los datos | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 3 Estructura de los datos | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 3 Estructura de los datos | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  
+  
+  
+
+<meta name="author" content="Juan R González" />
+
+
+<meta name="date" content="2021-07-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="visualización-de-datos-longitudinales.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Datos Longitudinales</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preámbulo</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instalación-de-librerías-necesarias-para-el-curso"><i class="fa fa-check"></i><b>1.1</b> Instalación de librerías necesarias para el curso</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introducción a los diseños de datos longitudinales</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#definición"><i class="fa fa-check"></i><b>2.1</b> Definición</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#ejemplos"><i class="fa fa-check"></i><b>2.2</b> Ejemplos</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#esquemas-de-recogidas-de-datos"><i class="fa fa-check"></i><b>2.3</b> Esquemas de recogidas de datos</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#todas-las-medidas-con-intervalos-fijos"><i class="fa fa-check"></i><b>2.3.1</b> Todas las medidas con intervalos fijos</a></li>
+<li class="chapter" data-level="2.3.2" data-path="intro.html"><a href="intro.html#missings-al-azar-con-intervalos-fijos"><i class="fa fa-check"></i><b>2.3.2</b> Missings al azar con intervalos fijos</a></li>
+<li class="chapter" data-level="2.3.3" data-path="intro.html"><a href="intro.html#distintos-seguimientos"><i class="fa fa-check"></i><b>2.3.3</b> Distintos seguimientos</a></li>
+<li class="chapter" data-level="2.3.4" data-path="intro.html"><a href="intro.html#todas-las-medidas-a-distintos-tiempos"><i class="fa fa-check"></i><b>2.3.4</b> Todas las medidas a distintos tiempos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html"><i class="fa fa-check"></i><b>3</b> Estructura de los datos</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#formato-ancho-y-largo"><i class="fa fa-check"></i><b>3.1</b> Formato ancho y largo</a></li>
+<li class="chapter" data-level="3.2" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#formato-ancho"><i class="fa fa-check"></i><b>3.2</b> Formato ancho</a></li>
+<li class="chapter" data-level="3.3" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#formato-largo"><i class="fa fa-check"></i><b>3.3</b> Formato largo</a></li>
+<li class="chapter" data-level="3.4" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#valores-faltantes"><i class="fa fa-check"></i><b>3.4</b> Valores faltantes</a></li>
+<li class="chapter" data-level="3.5" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#tiempos-de-medidas-diferentes"><i class="fa fa-check"></i><b>3.5</b> Tiempos de medidas diferentes</a></li>
+<li class="chapter" data-level="3.6" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#transformación"><i class="fa fa-check"></i><b>3.6</b> Transformación</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#vertical-a-horizontal-y-viceversa"><i class="fa fa-check"></i><b>3.6.1</b> Vertical a horizontal y viceversa</a></li>
+<li class="chapter" data-level="3.6.2" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#colapsar"><i class="fa fa-check"></i><b>3.6.2</b> Colapsar</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html"><i class="fa fa-check"></i><b>4</b> Visualización de datos longitudinales</a></li>
+<li class="chapter" data-level="5" data-path="ModelosNormal.html"><a href="ModelosNormal.html"><i class="fa fa-check"></i><b>5</b> Modelos con respuesta normal</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#técnica-de-la-suma-de-cuadrados"><i class="fa fa-check"></i><b>5.1</b> Técnica de la suma de cuadrados</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#diseño-1w1b"><i class="fa fa-check"></i><b>5.1.1</b> Diseño 1W+1B</a></li>
+<li class="chapter" data-level="5.1.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#diseño-1w"><i class="fa fa-check"></i><b>5.1.2</b> Diseño 1W</a></li>
+<li class="chapter" data-level="5.1.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#función-ezanova"><i class="fa fa-check"></i><b>5.1.3</b> Función <code>ezANOVA</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#respuesta-multivariante"><i class="fa fa-check"></i><b>5.2</b> Respuesta Multivariante</a></li>
+<li class="chapter" data-level="5.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplos-1"><i class="fa fa-check"></i><b>5.3</b> Ejemplos</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplo-1"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo 1</a></li>
+<li class="chapter" data-level="5.3.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplo-2"><i class="fa fa-check"></i><b>5.3.2</b> Ejemplo 2</a></li>
+<li class="chapter" data-level="5.3.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplo-3"><i class="fa fa-check"></i><b>5.3.3</b> Ejemplo 3</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelización estadística avanzada con R: análisis de datos longitudinales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="estructura-de-los-datos" class="section level1" number="3">
+<h1><span class="header-section-number">Capítulo 3</span> Estructura de los datos</h1>
+<div id="formato-ancho-y-largo" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Formato ancho y largo</h2>
+<p>Una vez que hemos recogido nuestros datos, debemos proceder con un análisis descriptivo para saber qué modelo debemos usar con el fin de contestar a las preguntas científicas planteadas en el estudio. La organización y visualización de los datos en estudios longitudinales no es tan sencilla como en cualquier otro tipo de diseño ya que los datos se pueden organizar de formas distintas. Básicamente, podemos:</p>
+<ul>
+<li><p>Datos a nivel de individuo, en el que cada individuo tiene un registro y múltiples variables contienen los datos de cada ocasión de medición (datos en formato ancho - <em>wide format</em> en inglés).</p></li>
+<li><p>Datos a nivel de tiempo, en el que cada persona tiene varios registros, uno para cada ocasión de medición (datos en formato largo - <em>long format</em> en inglés).</p></li>
+</ul>
+<p>Las funciones que tenemos en R tanto para visualizar como modelizar datos longitudinales puede requerir el tener los datos en cualquiera de los dos formatos. El formato largo normalmente se necesita para agrupar variables como por ejemplo si queremos visualizar nuestra información mediante gráficos de barras apilados. En R existen muchas funciones para pasar de formato ancho a largo y viceversa. Recientemente se han creado las fuciones <code>dcast()</code> y <code>melt()</code> en la librería <code>reshape2</code> que facilitan enormemente estas tareas. La siguiente figura muestra un ejemplo de cómo utilizar estas funciones:</p>
+<div class="figure"><span id="fig:unnamed-chunk-9"></span>
+<img src="fig/ejemplo_img_final.png" alt="Datos en formato ancho y largo y cómo pasar de un formato a otro usando funciones de la librería `reshape2`" width="800" />
+<p class="caption">
+Figura 3.1: Datos en formato ancho y largo y cómo pasar de un formato a otro usando funciones de la librería <code>reshape2</code>
+</p>
+</div>
+<p>Veamos cómo realizarlo con R. Empecemos por cargar los datos que hemos visto en el ejemplo anterior</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="estructura-de-los-datos.html#cb3-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;datos/ejemplo.txt&quot;</span>)</span>
+<span id="cb3-2"><a href="estructura-de-los-datos.html#cb3-2" aria-hidden="true" tabindex="-1"></a>datos</span></code></pre></div>
+<pre><code>  id   sexo colesterol_1 colesterol_2 colesterol_3
+1  1 hombre          223          234          241
+2  2 hombre          189          190          191
+3  3  mujer          210          204          190</code></pre>
+<p>Vemos que están en formato ancho. Podemos pasarlos a formato largo utilizando la función <code>melt()</code> que tiene los siguientes argumentos:</p>
+<ul>
+<li><code>data</code> es el objeto (data.frame o tibble) que vamos a convertir de ancho a largo,</li>
+<li><code>id.vars</code> son las variables en la tabla que vamos a dejar sin cambiar de dimensión. En nuestro ejemplo sería la variable “sexo”, aunque pueden ser más en tablas más complejas. Puede usarse un vector de nombres (tipo character) o de números enteros que correspondan al número de columna.</li>
+<li><code>measure.vars</code> son las variables en las que se encuentran las mediciones. Puede ser un vector de nombres o de números enteros indicando los índices de las columnas. En nuestro caso son las columnas 3 a 5.</li>
+<li><code>variable.name</code> es el nombre que va a adoptar la columna en la que queden nuestras variables, es decir, en nuestro caso sería el tiempo. Por defecto usa “variable”.</li>
+<li><code>value.name</code> es el nombre que va a adoptar la columna en la que queden los valores, que en nuestro caso sería el colestero. Por defecto usa “value”.</li>
+<li><code>variable.factor</code> es una valor lógico (TRUE o FALSE) para indicar si queremos que la columna de variable quede convertida a factor (opción por defecto), o quede simplemente como caracter.</li>
+</ul>
+<p>Veamos cómo aplicamos esto a nuestro ejemplo</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="estructura-de-los-datos.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb5-2"><a href="estructura-de-los-datos.html#cb5-2" aria-hidden="true" tabindex="-1"></a>datos_largo <span class="ot">&lt;-</span> <span class="fu">melt</span>(datos, <span class="at">measure.vars=</span><span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb5-3"><a href="estructura-de-los-datos.html#cb5-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">variable.name =</span> <span class="st">&quot;tiempo&quot;</span>,</span>
+<span id="cb5-4"><a href="estructura-de-los-datos.html#cb5-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">value.name =</span> <span class="st">&quot;colesterol&quot;</span>)</span>
+<span id="cb5-5"><a href="estructura-de-los-datos.html#cb5-5" aria-hidden="true" tabindex="-1"></a>datos_largo</span></code></pre></div>
+<pre><code>  id   sexo       tiempo colesterol
+1  1 hombre colesterol_1        223
+2  2 hombre colesterol_1        189
+3  3  mujer colesterol_1        210
+4  1 hombre colesterol_2        234
+5  2 hombre colesterol_2        190
+6  3  mujer colesterol_2        204
+7  1 hombre colesterol_3        241
+8  2 hombre colesterol_3        191
+9  3  mujer colesterol_3        190</code></pre>
+<p>Notemos que nuestra variable <code>tiempo</code> no es numérica indicando el momento donde se toma la medida de colesterol. Debería de ser una variable numérica 1, 2, 3. Podemos solucionar esto eliminando “colesterol_” de la variable simplemente ejecutando:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="estructura-de-los-datos.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb7-2"><a href="estructura-de-los-datos.html#cb7-2" aria-hidden="true" tabindex="-1"></a>datos_largo <span class="ot">&lt;-</span> <span class="fu">mutate</span>(datos_largo, </span>
+<span id="cb7-3"><a href="estructura-de-los-datos.html#cb7-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">tiempo =</span> <span class="fu">str_remove</span>(tiempo, <span class="st">&quot;colesterol_&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="estructura-de-los-datos.html#cb7-4" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">as.numeric</span>())</span>
+<span id="cb7-5"><a href="estructura-de-los-datos.html#cb7-5" aria-hidden="true" tabindex="-1"></a>datos_largo</span></code></pre></div>
+<pre><code>  id   sexo tiempo colesterol
+1  1 hombre      1        223
+2  2 hombre      1        189
+3  3  mujer      1        210
+4  1 hombre      2        234
+5  2 hombre      2        190
+6  3  mujer      2        204
+7  1 hombre      3        241
+8  2 hombre      3        191
+9  3  mujer      3        190</code></pre>
+<p>Podemos ordenar nuestros datos por individuo y tiempo de la siguiente manera</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="estructura-de-los-datos.html#cb9-1" aria-hidden="true" tabindex="-1"></a>datos_largo <span class="ot">&lt;-</span> <span class="fu">arrange</span>(datos_largo, id, tiempo)</span>
+<span id="cb9-2"><a href="estructura-de-los-datos.html#cb9-2" aria-hidden="true" tabindex="-1"></a>datos_largo</span></code></pre></div>
+<pre><code>  id   sexo tiempo colesterol
+1  1 hombre      1        223
+2  1 hombre      2        234
+3  1 hombre      3        241
+4  2 hombre      1        189
+5  2 hombre      2        190
+6  2 hombre      3        191
+7  3  mujer      1        210
+8  3  mujer      2        204
+9  3  mujer      3        190</code></pre>
+<p>Veamos ahora cómo pasar de formato largo a ancho. Para esta tarea usamos la función <code>dcast()</code>. Esta función tiene una notación un poco diferente, pues usa fórmulas para determinar qué variables poner en cada lugar. Tiene los siguientes argumentos:</p>
+<ul>
+<li><code>data</code> es la tabla que vamos a convertir,</li>
+<li><code>formula</code> es la forma en que vamos a distribuir las columnas. En general la fórmula es de forma x ~ y. Se puede usar una regla nemotécnica que consiste en: filas ~ columnas.</li>
+<li><code>drop</code> deberían los valores faltantes ser eliminados o mantenidos?. Por defecto es TRUE y no se ponen.</li>
+<li><code>value.var</code> es el nombre (o número) de la columna en la que están los valores. Generalmente <code>dcast()</code> adivina bien este valor, pero es bueno usarlo para asegurarnos de lo que estamos haciendo y evitar que salga un mensaje de advertencia.</li>
+</ul>
+<p>En nuestro caso ejecutaríamos:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="estructura-de-los-datos.html#cb11-1" aria-hidden="true" tabindex="-1"></a>datos_ancho <span class="ot">&lt;-</span> <span class="fu">dcast</span>(datos_largo, id <span class="sc">~</span> tiempo,</span>
+<span id="cb11-2"><a href="estructura-de-los-datos.html#cb11-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">value.var =</span> <span class="st">&quot;colesterol&quot;</span>)</span>
+<span id="cb11-3"><a href="estructura-de-los-datos.html#cb11-3" aria-hidden="true" tabindex="-1"></a>datos_ancho</span></code></pre></div>
+<pre><code>  id   1   2   3
+1  1 223 234 241
+2  2 189 190 191
+3  3 210 204 190</code></pre>
+<p>Si queremos mantener el resto de covariables debemos ejecutar:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="estructura-de-los-datos.html#cb13-1" aria-hidden="true" tabindex="-1"></a>datos_ancho <span class="ot">&lt;-</span> <span class="fu">dcast</span>(datos_largo, id <span class="sc">+</span> sexo <span class="sc">~</span> tiempo, </span>
+<span id="cb13-2"><a href="estructura-de-los-datos.html#cb13-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">value.var =</span> <span class="st">&quot;colesterol&quot;</span>)</span>
+<span id="cb13-3"><a href="estructura-de-los-datos.html#cb13-3" aria-hidden="true" tabindex="-1"></a>datos_ancho</span></code></pre></div>
+<pre><code>  id   sexo   1   2   3
+1  1 hombre 223 234 241
+2  2 hombre 189 190 191
+3  3  mujer 210 204 190</code></pre>
+<p>que es justo el conjunto de datos inicial del que partíamos excepto por el nombre de las variables (que ahora se llaman 1, 2, 3). Para poder poner el nombre original, basta con ejecutar:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="estructura-de-los-datos.html#cb15-1" aria-hidden="true" tabindex="-1"></a>datos_ancho <span class="ot">&lt;-</span> <span class="fu">dcast</span>(datos_largo, id <span class="sc">+</span> sexo <span class="sc">~</span> <span class="fu">paste0</span>(<span class="st">&quot;colesterol_&quot;</span>, tiempo), </span>
+<span id="cb15-2"><a href="estructura-de-los-datos.html#cb15-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">value.var =</span> <span class="st">&quot;colesterol&quot;</span>)</span>
+<span id="cb15-3"><a href="estructura-de-los-datos.html#cb15-3" aria-hidden="true" tabindex="-1"></a>datos_ancho</span></code></pre></div>
+<pre><code>  id   sexo colesterol_1 colesterol_2 colesterol_3
+1  1 hombre          223          234          241
+2  2 hombre          189          190          191
+3  3  mujer          210          204          190</code></pre>
+<p>Veamos ahora ejemplos más reales donde tenemos más de una variable repetida a lo largo del tiempo, datos faltantes u datos recogidos en distintos tiempos.</p>
+</div>
+<div id="formato-ancho" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Formato ancho</h2>
+<p>Como hemos comentado anteriormente, lo normal es recoger los datos en formato ancho (u horizontal) data su simplicidad.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+ind
+</th>
+<th style="text-align:center;">
+sexo
+</th>
+<th style="text-align:center;">
+edad
+</th>
+<th style="text-align:center;">
+coltot_1
+</th>
+<th style="text-align:center;">
+coltot_2
+</th>
+<th style="text-align:center;">
+coltot_3
+</th>
+<th style="text-align:center;">
+bmi_1
+</th>
+<th style="text-align:center;">
+bmi_2
+</th>
+<th style="text-align:center;">
+bmi_3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+44
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+213
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+220
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+199
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+33.3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+28.3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+45
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+196
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+238
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+218
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+31.1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+29.1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+30.1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+55
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+195
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+218
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+216
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+28.5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.0
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+27.9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+201
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+194
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+201
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+32.5
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+31.4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+24.5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+46
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+234
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+185
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+189
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+31.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+27.7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+213
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+183
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+214
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+30.4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+28.8
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+28.3
+</td>
+</tr>
+</tbody>
+</table>
+<p>La <strong>ventaja</strong> de esta estrategia es que tenemos una fila para cada individuo, como estamos acostumbrados.</p>
+<p>Sin embargo, existen varios <strong>inconvenientes</strong>:</p>
+<ul>
+<li><p>Si tenemos un missing en alguna medida hay que eliminar a todo el individuo</p></li>
+<li><p>Debemos suponer que todas las medidas se han realizado en los mismos momentos para todos los individuos, y esto puede no ser cierto.</p></li>
+<li><p>Las diferentes medidas de una misma variable predictora la debemos analizar como si fueran distintas variables</p></li>
+</ul>
+</div>
+<div id="formato-largo" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Formato largo</h2>
+<p>Estos mismos datos se dispondrían de la siguiente forma en formato largo (o vertical)</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+ind
+</th>
+<th style="text-align:center;">
+sexo
+</th>
+<th style="text-align:center;">
+edad
+</th>
+<th style="text-align:center;">
+coltot
+</th>
+<th style="text-align:center;">
+bmi
+</th>
+<th style="text-align:center;">
+momento
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+44
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+213
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+33.3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+44
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+220
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+44
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+199
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+28.3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+45
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+196
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+31.1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+45
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+238
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+29.1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+45
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+218
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+30.1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+55
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+195
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+28.5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+55
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+218
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.0
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+55
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+216
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+27.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+201
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+32.5
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+194
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+31.4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+201
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+24.5
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+46
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+234
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+46
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+185
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+31.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+46
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+189
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+27.7
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+213
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+30.4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+183
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+28.8
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+214
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+28.3
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="valores-faltantes" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Valores faltantes</h2>
+<p>Cuando hay valores faltantes en una medida y los datos se disponen de forma horizontal se descartan los demás valores ya que se elimina toda la fila.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+ind
+</th>
+<th style="text-align:center;">
+sexo
+</th>
+<th style="text-align:center;">
+edad
+</th>
+<th style="text-align:center;">
+coltot_1
+</th>
+<th style="text-align:center;">
+coltot_2
+</th>
+<th style="text-align:center;">
+coltot_3
+</th>
+<th style="text-align:center;">
+bmi_1
+</th>
+<th style="text-align:center;">
+bmi_2
+</th>
+<th style="text-align:center;">
+bmi_3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+44
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+213
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+220
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+199
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+33.3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+28.3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;color: red !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;color: red !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;color: red !important;">
+45
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;color: red !important;">
+196
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;color: red !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;color: red !important;">
+218
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;color: red !important;">
+31.1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;color: red !important;">
+29.1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;color: red !important;">
+30.1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+55
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+195
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+218
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+216
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+28.5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.0
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+27.9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+201
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+194
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+201
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+32.5
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+31.4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+24.5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;color: red !important;">
+5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;color: red !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;color: red !important;">
+46
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;color: red !important;">
+234
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;color: red !important;">
+185
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;color: red !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;color: red !important;">
+30.1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;color: red !important;">
+31.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;color: red !important;">
+27.7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+213
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+183
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+214
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+30.4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+28.8
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+28.3
+</td>
+</tr>
+</tbody>
+</table>
+<p>En cambio, en la disposición vertical sólo se pierden los valores de los tiempos en cuestión y no todas las medidas del individuo.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+ind
+</th>
+<th style="text-align:center;">
+sexo
+</th>
+<th style="text-align:center;">
+edad
+</th>
+<th style="text-align:center;">
+coltot
+</th>
+<th style="text-align:center;">
+bmi
+</th>
+<th style="text-align:center;">
+momento
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+44
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+213
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+33.3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+44
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+220
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+44
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+199
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+28.3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+45
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+196
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+31.1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;color: red !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;color: red !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;color: red !important;">
+45
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;color: red !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;color: red !important;">
+29.1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;color: red !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+45
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+218
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+30.1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+55
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+195
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+28.5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+55
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+218
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.0
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+55
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+216
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+27.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+201
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+32.5
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+194
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+31.4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+201
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+24.5
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+46
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+234
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+46
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+185
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+31.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;color: red !important;">
+5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;color: red !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;color: red !important;">
+46
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;color: red !important;">
+NA
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;color: red !important;">
+27.7
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;color: red !important;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+213
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+30.4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+183
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+28.8
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+214
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+28.3
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tiempos-de-medidas-diferentes" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Tiempos de medidas diferentes</h2>
+<p>Al disponer los datos de forma vertical se puede especificar en qué momento se ha recogido cada medida. Para ello simplemente se indica en la variable tiempo. Por ejemplo si se trata de los días que han pasado desde el momento inicial del experimento.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+ind
+</th>
+<th style="text-align:center;">
+sexo
+</th>
+<th style="text-align:center;">
+edad
+</th>
+<th style="text-align:center;">
+coltot
+</th>
+<th style="text-align:center;">
+bmi
+</th>
+<th style="text-align:center;">
+momento
+</th>
+<th style="text-align:center;">
+dias
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+44
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+213
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+33.3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+44
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+220
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+2
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+44
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+199
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+28.3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+45
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+196
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+31.1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+45
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+238
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+29.1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+45
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+218
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+30.1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+55
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+195
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+28.5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+55
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+218
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.0
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+2
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+55
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+216
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+27.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+201
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+32.5
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+194
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+31.4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+201
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+24.5
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+46
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+234
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+46
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+185
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+31.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+2
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+46
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+189
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+27.7
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+213
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+30.4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+183
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+28.8
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+214
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+28.3
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+10
+</td>
+</tr>
+</tbody>
+</table>
+<p>O incluso podemos tener mas medidas para unos individuos que para otros. Como sería el caso que tuviéramos algún missing en alguna medida. Como en este ejemplo, para el individuo 2 y el 5 tenemos sólo 2 medidas, mientras que para el resto tenemos 3.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+ind
+</th>
+<th style="text-align:center;">
+sexo
+</th>
+<th style="text-align:center;">
+edad
+</th>
+<th style="text-align:center;">
+coltot
+</th>
+<th style="text-align:center;">
+bmi
+</th>
+<th style="text-align:center;">
+momento
+</th>
+<th style="text-align:center;">
+dias
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+44
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+213
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+33.3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+44
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+220
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+2
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+44
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+199
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+28.3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+45
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+196
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+31.1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+45
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+218
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+30.1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+55
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+195
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+28.5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+55
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+218
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.0
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+2
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+55
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+216
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+27.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+3
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+201
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+32.5
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+194
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+31.4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+201
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+24.5
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+46
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+234
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+30.1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+5
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+1
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+46
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+185
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+31.9
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+2
+</td>
+<td style="text-align:center;background-color: #F2F2F2 !important;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+213
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+30.4
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+1
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+183
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+28.8
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+2
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+6
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+0
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+51
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+214
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+28.3
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+3
+</td>
+<td style="text-align:center;background-color: #FFFFFF !important;">
+10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="transformación" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Transformación</h2>
+<div id="vertical-a-horizontal-y-viceversa" class="section level3" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Vertical a horizontal y viceversa</h3>
+<p>En esta sección aprovecharemos para ver otras instrucciones útiles en <strong><code>R</code></strong> para pasar de la disposición vertical de los datos a la horizontal y viceversa (aunque yo recomiendo usar <code>melt()</code> y <code>dcast()</code>. Para ello usaremos los datos del ejemplo anterior que están guardados en formato .csv de la siguiente manera:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="estructura-de-los-datos.html#cb17-1" aria-hidden="true" tabindex="-1"></a>tablahorizontal <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;datos/tablahorizontal.csv&quot;</span>)</span>
+<span id="cb17-2"><a href="estructura-de-los-datos.html#cb17-2" aria-hidden="true" tabindex="-1"></a>tablahorizontal</span></code></pre></div>
+<pre><code>  ind sexo edad coltot_1 coltot_2 coltot_3 bmi_1 bmi_2 bmi_3
+1   1    1   44      213      220      199  33.3  30.9  28.3
+2   2    0   45      196      238      218  31.1  29.1  30.1
+3   3    1   55      195      218      216  28.5  30.0  27.9
+4   4    0   51      201      194      201  32.5  31.4  24.5
+5   5    1   46      234      185      189  30.1  31.9  27.7
+6   6    0   51      213      183      214  30.4  28.8  28.3</code></pre>
+<p>Como tenemos la base de datos en horizontal (una fila por individuo) y la queremos pasar a vertical (un registro por fila y varias filas por individuo) podemos usar:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="estructura-de-los-datos.html#cb19-1" aria-hidden="true" tabindex="-1"></a>tablong <span class="ot">&lt;-</span> <span class="fu">reshape</span>(<span class="at">data=</span>tablahorizontal, </span>
+<span id="cb19-2"><a href="estructura-de-los-datos.html#cb19-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">direction=</span><span class="st">&quot;long&quot;</span>, </span>
+<span id="cb19-3"><a href="estructura-de-los-datos.html#cb19-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">varying=</span><span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;coltot_1&quot;</span>,<span class="st">&quot;coltot_2&quot;</span>,<span class="st">&quot;coltot_3&quot;</span>),</span>
+<span id="cb19-4"><a href="estructura-de-los-datos.html#cb19-4" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">c</span>(<span class="st">&quot;bmi_1&quot;</span>,<span class="st">&quot;bmi_2&quot;</span>,<span class="st">&quot;bmi_3&quot;</span>)), </span>
+<span id="cb19-5"><a href="estructura-de-los-datos.html#cb19-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">times=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, </span>
+<span id="cb19-6"><a href="estructura-de-los-datos.html#cb19-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">timevar=</span><span class="st">&quot;momento&quot;</span>, </span>
+<span id="cb19-7"><a href="estructura-de-los-datos.html#cb19-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">idvar=</span><span class="st">&quot;ind&quot;</span>,</span>
+<span id="cb19-8"><a href="estructura-de-los-datos.html#cb19-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">v.names=</span><span class="fu">c</span>(<span class="st">&quot;coltot&quot;</span>,<span class="st">&quot;bmi&quot;</span>))</span>
+<span id="cb19-9"><a href="estructura-de-los-datos.html#cb19-9" aria-hidden="true" tabindex="-1"></a>tablong</span></code></pre></div>
+<pre><code>    ind sexo edad momento coltot  bmi
+1.1   1    1   44       1    213 33.3
+2.1   2    0   45       1    196 31.1
+3.1   3    1   55       1    195 28.5
+4.1   4    0   51       1    201 32.5
+5.1   5    1   46       1    234 30.1
+6.1   6    0   51       1    213 30.4
+1.2   1    1   44       2    220 30.9
+2.2   2    0   45       2    238 29.1
+3.2   3    1   55       2    218 30.0
+4.2   4    0   51       2    194 31.4
+5.2   5    1   46       2    185 31.9
+6.2   6    0   51       2    183 28.8
+1.3   1    1   44       3    199 28.3
+2.3   2    0   45       3    218 30.1
+3.3   3    1   55       3    216 27.9
+4.3   4    0   51       3    201 24.5
+5.3   5    1   46       3    189 27.7
+6.3   6    0   51       3    214 28.3</code></pre>
+<p>Ordeno la tabla por id y dentro de cada id por tiempo</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="estructura-de-los-datos.html#cb21-1" aria-hidden="true" tabindex="-1"></a>tablong <span class="ot">&lt;-</span> <span class="fu">arrange</span>(tablong, ind, momento)</span>
+<span id="cb21-2"><a href="estructura-de-los-datos.html#cb21-2" aria-hidden="true" tabindex="-1"></a>tablong</span></code></pre></div>
+<pre><code>    ind sexo edad momento coltot  bmi
+1.1   1    1   44       1    213 33.3
+1.2   1    1   44       2    220 30.9
+1.3   1    1   44       3    199 28.3
+2.1   2    0   45       1    196 31.1
+2.2   2    0   45       2    238 29.1
+2.3   2    0   45       3    218 30.1
+3.1   3    1   55       1    195 28.5
+3.2   3    1   55       2    218 30.0
+3.3   3    1   55       3    216 27.9
+4.1   4    0   51       1    201 32.5
+4.2   4    0   51       2    194 31.4
+4.3   4    0   51       3    201 24.5
+5.1   5    1   46       1    234 30.1
+5.2   5    1   46       2    185 31.9
+5.3   5    1   46       3    189 27.7
+6.1   6    0   51       1    213 30.4
+6.2   6    0   51       2    183 28.8
+6.3   6    0   51       3    214 28.3</code></pre>
+<p>Y si queremos pasar del formato largo al horizontal</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="estructura-de-los-datos.html#cb23-1" aria-hidden="true" tabindex="-1"></a>tablavertical <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;datos/tablavertical.csv&quot;</span>)</span>
+<span id="cb23-2"><a href="estructura-de-los-datos.html#cb23-2" aria-hidden="true" tabindex="-1"></a>tablavertical</span></code></pre></div>
+<pre><code>   ind sexo edad coltot  bmi momento dias
+1    1    1   44    213 33.3       1    1
+2    1    1   44    220 30.9       2    4
+3    1    1   44    199 28.3       3    5
+4    2    0   45    196 31.1       1    3
+5    2    0   45    238 29.1       2    7
+6    2    0   45    218 30.1       3   10
+7    3    1   55    195 28.5       1    2
+8    3    1   55    218 30.0       2    7
+9    3    1   55    216 27.9       3    8
+10   4    0   51    201 32.5       1    2
+11   4    0   51    194 31.4       2    8
+12   4    0   51    201 24.5       3    9
+13   5    1   46    234 30.1       1    1
+14   5    1   46    185 31.9       2    9
+15   5    1   46    189 27.7       3   10
+16   6    0   51    213 30.4       1    3
+17   6    0   51    183 28.8       2    6
+18   6    0   51    214 28.3       3   10</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="estructura-de-los-datos.html#cb25-1" aria-hidden="true" tabindex="-1"></a>tabwide <span class="ot">&lt;-</span> <span class="fu">reshape</span>(<span class="at">data=</span>tablavertical, </span>
+<span id="cb25-2"><a href="estructura-de-los-datos.html#cb25-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">direction=</span><span class="st">&quot;wide&quot;</span>, </span>
+<span id="cb25-3"><a href="estructura-de-los-datos.html#cb25-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">v.names=</span><span class="fu">c</span>(<span class="st">&quot;coltot&quot;</span>,<span class="st">&quot;bmi&quot;</span>), </span>
+<span id="cb25-4"><a href="estructura-de-los-datos.html#cb25-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">times=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, </span>
+<span id="cb25-5"><a href="estructura-de-los-datos.html#cb25-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">timevar=</span><span class="st">&quot;momento&quot;</span>, </span>
+<span id="cb25-6"><a href="estructura-de-los-datos.html#cb25-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">idvar=</span><span class="st">&quot;ind&quot;</span>)</span>
+<span id="cb25-7"><a href="estructura-de-los-datos.html#cb25-7" aria-hidden="true" tabindex="-1"></a>tabwide</span></code></pre></div>
+<pre><code>   ind sexo edad dias coltot.1 bmi.1 coltot.2 bmi.2 coltot.3 bmi.3
+1    1    1   44    1      213  33.3      220  30.9      199  28.3
+4    2    0   45    3      196  31.1      238  29.1      218  30.1
+7    3    1   55    2      195  28.5      218  30.0      216  27.9
+10   4    0   51    2      201  32.5      194  31.4      201  24.5
+13   5    1   46    1      234  30.1      185  31.9      189  27.7
+16   6    0   51    3      213  30.4      183  28.8      214  28.3</code></pre>
+<p>¿Y si tenemos algun individuo con menos medidas? Por ejemplo, tenemos la tabla en formato vertical y para el individuo id=1 tenemos dos medidas en lugar de 3 (quitamos la tercera medida)</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="estructura-de-los-datos.html#cb27-1" aria-hidden="true" tabindex="-1"></a>tablaverticalmiss <span class="ot">&lt;-</span> tablavertical[<span class="sc">-</span><span class="dv">3</span>,]</span>
+<span id="cb27-2"><a href="estructura-de-los-datos.html#cb27-2" aria-hidden="true" tabindex="-1"></a>tablaverticalmiss</span></code></pre></div>
+<pre><code>   ind sexo edad coltot  bmi momento dias
+1    1    1   44    213 33.3       1    1
+2    1    1   44    220 30.9       2    4
+4    2    0   45    196 31.1       1    3
+5    2    0   45    238 29.1       2    7
+6    2    0   45    218 30.1       3   10
+7    3    1   55    195 28.5       1    2
+8    3    1   55    218 30.0       2    7
+9    3    1   55    216 27.9       3    8
+10   4    0   51    201 32.5       1    2
+11   4    0   51    194 31.4       2    8
+12   4    0   51    201 24.5       3    9
+13   5    1   46    234 30.1       1    1
+14   5    1   46    185 31.9       2    9
+15   5    1   46    189 27.7       3   10
+16   6    0   51    213 30.4       1    3
+17   6    0   51    183 28.8       2    6
+18   6    0   51    214 28.3       3   10</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="estructura-de-los-datos.html#cb29-1" aria-hidden="true" tabindex="-1"></a>tabwidemiss <span class="ot">&lt;-</span> <span class="fu">reshape</span>(<span class="at">data=</span>tablaverticalmiss, </span>
+<span id="cb29-2"><a href="estructura-de-los-datos.html#cb29-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">direction=</span><span class="st">&quot;wide&quot;</span>, </span>
+<span id="cb29-3"><a href="estructura-de-los-datos.html#cb29-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">v.names=</span><span class="fu">c</span>(<span class="st">&quot;coltot&quot;</span>,<span class="st">&quot;bmi&quot;</span>), </span>
+<span id="cb29-4"><a href="estructura-de-los-datos.html#cb29-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">times=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, </span>
+<span id="cb29-5"><a href="estructura-de-los-datos.html#cb29-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">timevar=</span><span class="st">&quot;momento&quot;</span>, </span>
+<span id="cb29-6"><a href="estructura-de-los-datos.html#cb29-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">idvar=</span><span class="st">&quot;ind&quot;</span>)</span>
+<span id="cb29-7"><a href="estructura-de-los-datos.html#cb29-7" aria-hidden="true" tabindex="-1"></a>tabwidemiss</span></code></pre></div>
+<pre><code>   ind sexo edad dias coltot.1 bmi.1 coltot.2 bmi.2 coltot.3 bmi.3
+1    1    1   44    1      213  33.3      220  30.9       NA    NA
+4    2    0   45    3      196  31.1      238  29.1      218  30.1
+7    3    1   55    2      195  28.5      218  30.0      216  27.9
+10   4    0   51    2      201  32.5      194  31.4      201  24.5
+13   5    1   46    1      234  30.1      185  31.9      189  27.7
+16   6    0   51    3      213  30.4      183  28.8      214  28.3</code></pre>
+</div>
+<div id="colapsar" class="section level3" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Colapsar</h3>
+<p>Si tenemos los datos en vertical y queremos colapsar o resumir los distintos datos de cada individuo en un único valor, como por ejemplo la media.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="estructura-de-los-datos.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) </span>
+<span id="cb31-2"><a href="estructura-de-los-datos.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb31-3"><a href="estructura-de-los-datos.html#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="estructura-de-los-datos.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(tablavertical, ind) <span class="sc">%&gt;%</span></span>
+<span id="cb31-5"><a href="estructura-de-los-datos.html#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="fu">vars</span>(coltot, bmi), <span class="fu">list</span>(<span class="at">media =</span> mean))</span></code></pre></div>
+<pre><code># A tibble: 6 x 3
+    ind coltot_media bmi_media
+  &lt;int&gt;        &lt;dbl&gt;     &lt;dbl&gt;
+1     1         211.      30.8
+2     2         217.      30.1
+3     3         210.      28.8
+4     4         199.      29.5
+5     5         203.      29.9
+6     6         203.      29.2</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualización-de-datos-longitudinales.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/isglobal-brge/curso_longitudinal/tree/master/docs02-Estructura.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["cursoLongitudinal-bookdown.pdf", "cursoLongitudinal-bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

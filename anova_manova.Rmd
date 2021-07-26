@@ -1,0 +1,410 @@
+# Modelos con respuesta normal {#ModelosNormal}
+
+En este capítulo se describirán los métodos y modelos estadísticos para analizar medidas respetidas cuando la variable respuesta sigue una distribución normal o gaussiana. Se pueden probar algunas transformaciones, como el logaritmo, para normalizar la distribución de la variable.
+
+
+## Técnica de la suma de cuadrados
+
+Este método o técnica se basa en la suma de cuadrados. Es la más simple desde el punto de vista estadístico y computacional. Por contra, sólo permite analizar diseños balanceados, sin variables independientes cuantitativas (covariables), sólo cualitativas o factores y con un número limitado de factores que tienen que estar cruzados (no anidados). A continuación se presentan los dos diseños más simples de medidas repetidas que se pueden analizar con esta técnica.
+
+### Diseño 1W+1B
+
+Cuando el diseño es balanceado (mismo número de individuos por grupo), las medidas son las mismas para todos los individuos y no hay covariables, se puede usar la técnica de suma de cuadrados o tabla ANOVA.
+
+La notación que se usa para la ecuación del modelo en el contexto de suma de cuadrados es:
+
+$$y_{ijk} = \mu + \alpha_i + \beta_j + \alpha\beta_{ij} + \pi_{k(i)} + e_{ijk}$$
+
+Donde 
+
+- $\mu$ es la constante del modelo,
+- $\alpha_i$, son los efectos del grupo o tratamiento
+- $\beta_j$, son los efectos del tiempo
+- $\alpha\beta_{ij}$ es la interacción del tiempo con el grupo
+- $\pi_{k(i)}$ es el efecto aleatorio del individuo que está anidado al grupo
+- $e_{ijk}$ son los errores
+
+$\sum_{i=1}^a \alpha_i=0$, $\sum_{j=1}^b \beta_j=0$, $\sum_{i=1}^a \alpha\beta_{ij}=0, \forall j$, $\sum_{j=1}^b \alpha\beta_{ij}=0, \forall i$, 
+
+$\pi_{k(i)} \sim N(0, \sigma_{ind})$
+<format style="color:red">$e_{ijk} \sim N(0, \sigma)$ indep </format>
+
+En este contexto se dice que el tiempo y la interacción tratamiento:tiempo son términos o componentes "intra sujeto" (_within subject_). Mientras que el grupo es un componente "entre sujeto" (_between subject_). Por lo tanto, se trata de un diseño **1W+1B**.
+
+Las técnicas clásicas de la tabla ANOVA y su inferencia són válidas siempre y cuando se cumpla la **condición de esfericidad**: la variancia de la diferencia entre dos medidas es constante. Para comprobar la condición de esfericidad se puede aplicar el **test de Mauchly**. 
+
+Si no se cumple hay que corregir los grados de libertad de los términos "intra sujetos" de la tabla ANOVA y se recalculan sus p-valores. Hay dos métodos para **corregir los grados de libertad**: método "Huynh and Feldt" (H-F) y el método "Greenhouse-Geisser" (G-G) .
+
+
+### Diseño 1W
+
+Si en el diseño no hay grupos, luego el modelo se simplifica a un diseño de un solo factor "intra sujeto" **(1W)**
+
+
+$$y_{ij} = \mu + \pi_i + \beta_j + e_{ij}$$
+
+En ambos casos, tanto en el diseño en que tenemos grupos (1W+1B) como en el que no (1W), no nos interesa evaluar el efecto del individuo; ya sabemos que hay variabilidad entre ellos. Veremos en un ejemplo como el paquete **`ez`** que se usará para esta técnica de suma de cuadrados omite los resultados sobre el factor aleatorio individuo.
+
+
+### Función `ezANOVA`
+
+Para ajustar los modelos de medidas repetidas balanceados mediante la técnica de suma de cuadrados existe la función **`ezANOVA`** del paquete **`ez`** [@R-ez]
+
+```{r}
+library(ez)
+```
+
+Tanto la corrección por H-F o G-G, como el test de esfericidad de Mauchly estan implementados en el package `ez` de R. Para visualizar gráficamente los resultados, se usará la función `ezPlot()`. Más adelante en esta sección se verá en un ejemplo de ambas funciones. Para llevar a cabo los análisis ANOVA se usa la función `ezANOVA ()` que tiene los siguientes argumentos:
+
+
+- `data`: base de datos donde se encuentran las variables
+
+- `dv`: variable respuesta o variable dependiente
+
+- `wid`: variable individuo
+
+- `within`: factor o factores "intra sujeto". Típicamente en este argumento se espedificará el tiempo. Si se especifica más de un factor, éstos deben estar cruzados y se escribirá `.(var1,var2)`.
+
+- `between`: factor o factores "entre sujetos". Si no hay ningún factor "intra-sujeto" se deja a `NULL`. Como en el argumento `within`, si hay más de un factor "entre sujetos", éstos deben estar cruzados y se escribirá `.(var1,var2)`. 
+
+
+**Observaciones:**
+
+- Los datos deben estar en formato vertical.
+- La variable respuesta y los factores deben escribirse sin comillas.
+- Los factores "intra", "entre" y el sujeto deben estar en format `factor`.
+- El factor individuo debe tener tantos niveles como individuos.
+- Aunque en teoría la función permite covariables (variables independientes contínuas), esta opción está en versión "beta".
+- Todos los factores, excepto el individuo, deben ser de efectos fijos.
+
+
+
+
+## Respuesta Multivariante
+
+Esta metodología también conocida como MANOVA asume que las observaciones de cada individuo es un vector multivariante donde la variable respuesta se considera dicho vector. Podemos escribirlo de la siguiente forma:
+
+
+$$\vec{y}_i = \vec{\mu}_i + \vec{e}_i$$
+
+
+
+Donde 
+
+ - $\vec{y_i}=(y_{i1},\ldots,y_{iT})$ es el vector de medidas para el individuo $i$.
+ 
+ - $\vec{\mu}_i=(\mu_{i1},\ldots,\mu_{iT})$ es el vector con las medias de cada momento y para cada individuo. Las medias pueden depender de las variables independientes $x_k$. Fíjate que el coeficiente $\beta_{kj}$ puede ser diferente para cada momento.
+ 
+ $$\mu_{ij} = \sum_{k=1}^K \beta_{jk} x_{ik}, \quad j=1,...,T$$
+ 
+ - $\vec{e_i} \sim N(\vec{0},\Sigma)$, donde $\Sigma$ es la matrix de covarianzas de los errores y tiene que ser la misma para todos los individuos. Su estructura, pero, puede ser cualquiera.
+ 
+ - $x_{ik}$ valor de la variable independiente $k$ del individuo $i$.
+
+**Observaciones**
+
+- Para ajustar este modelo los datos se disponen de forma horizontal.
+
+- En este modelo los tiempos en que se toman las $T$ medidas tienen que ser los mismos para todos los individuos.
+
+- Para estudiar la evolución en el tiempo se puede realizar un contraste polinómico en el vector de medias $\vec{\mu}$.
+
+- Para comparar grupos de medidas, por ejemplo si se tienen cinco medidas, las dos primeras corresponden al tratamiento A y las otras tres al tratamiento B, se puede realizar un contraste lineal para comparar los dos tratamientos.
+
+- Cuando hay un valor faltante en alguna medida, toda la fila del individuo se tiene que eliminar.
+
+- Cada variable independiente, $x_{ki}$ es un único valor por individuo. O sea, que este modelo no contempla que las variables independientes sean de medidas repetidas. Si tuviéramos una variable que cambiara en el tiempo, se tienen que poner como variables diferentes (una para cada momento).
+
+- Los factores contribuyen con tantas dummy variables como categorías menos uno en los términos $x_{ik}$.
+
+- Los términos $x_{ik}$ pueden ser también interacciones entre variables, como el producto de sus términos.
+
+
+```{r, echo=FALSE}
+library(knitr)
+library(magrittr)
+library(kableExtra)
+datos <- data.frame(
+    indiv = 1:5,
+    edad = c(50, 55, 60, 65, 62),
+    fumador = factor(c("Ex","Actual","Actual","Nunca","Ex")),
+    sexo = factor(c("mujer","mujer","hombre","mujer","hombre"))
+)
+fumador <- factor(c("Ex","Actual","Actual","Nunca","Ex"))
+# matriz de diseño
+
+tabout <- cbind(datos, model.matrix( ~ fumador + edad + sexo + edad:fumador, datos)[,-1])
+
+ccc <- sapply(tabout, inherits, what="numeric")
+kable(tabout, align=ifelse(ccc,"c","r"))%>%kableExtra::kable_styling(font_size = 10,bootstrap_options = "striped")%>%
+    kableExtra::add_header_above(c("Datos"=4, "Matriz de diseño `~ fumador + edad + sexo + edad:fumador`"=6))
+
+```
+
+## Ejemplos
+
+Vamos a ver algunos ejemplos que se analizarán mediante las técnicas que se acaban de describir.
+
+
+### Ejemplo 1
+
+En la base de datos "Ejemplo_1W.csv" se tienen los datos de un diseño con 12 individuos en los que se toman los niveles en sangre de un cierto parámetro lipídico. Para cada invidivuo se miden los niveles a 1, 2 y 3 horas.
+
+```{r}
+datos <- read.csv2("datos/Ejemplo_1W.csv")
+```
+
+Ordenamos por individuo y dentro por tiempo dentro de individuo
+
+```{r}
+datos <- arrange(datos, indiv, tiempo)
+```
+
+
+#### Exploración de los datos
+
+```{r}
+library(ggplot2)
+p <- ggplot(data = datos, aes(x = tiempo, y = medida, group = indiv))
+p + geom_line(col="grey") + stat_summary(aes(group = 1),
+    geom = "line", fun = mean, size=2)
+```
+
+Cada línea representa a un individuo, mientras que la línea más gruesa es el promedio de los 12 individuos. Vemos como el efecto del tiempo no es del todo lineal. Además las líneas están bastante separadas indicando variabilidad entre los individuos. 
+
+Comprobemos si tenemos algún inviduo con datos faltantes
+
+```{r}
+sum(with(datos, tapply(is.na(medida), indiv, any)))
+```
+
+Como son datos balanceados, podemos usar ANOVA y MANOVA
+
+
+#### Suma de cuadrados (ANOVA)
+
+Para ajustar este modelo hay que usar los datos en disposición vertical. 
+Además, hay que convertir las variables `tiempo` e `indiv` a factor.
+    
+```{r}
+library(ez)
+
+datos.ez <- datos
+datos.ez$tiempo <- factor(datos.ez$tiempo)
+datos.ez$indiv <- factor(datos.ez$indiv)
+
+ezANOVA(data=datos.ez, dv=medida, wid=indiv, within=tiempo, detailed = TRUE)
+```
+
+La condición de esfericidad no se cumple dado que el test de Mauchly es significativo. Por lo tanto, hay que corregir los grados de libertad y, en consecuencia, el p-valor del factor tiempo. Después de la corrección, éste sigue siendo significativo.
+
+Observación: Fíjate que los resultados son los mismos que usando la función `lm`, y `anova` con la opción `test="Spherical"`:
+
+
+```{r}
+modelo <- lm(respuesta ~ 1, data=datosh)
+anova(modelo,X = ~1, test = "Spherical")
+```
+
+
+#### Modelo de respuesta multivariante (MANOVA)
+
+Para analizar los datos mediante el modelo de respuesta multivariante hay que disponer los datos de forma horizontal.  
+
+```{r}
+datosh <- dcast(datos, indiv ~ paste0("medida_", tiempo),
+                 value.var = "medida" )
+datosh
+```
+
+
+Para ajustar un modelo de regresión lineal con respuesta multivariante se puede usar la función `lm`. Y hay que poner la variable respuesta a la izquierda de `~` como una matriz de las tres variables (`medida.1`, `medida.2` y `medida.3`):
+
+```{r}
+respuesta <- as.matrix(datosh[,c("medida_1","medida_2","medida_3")])
+modelo <- lm(respuesta ~ 1, data=datosh)
+class(modelo)
+summary(modelo)
+```
+
+Para obtener la matriz de covarianzas de los residuos:
+
+```{r}
+estVar(modelo)
+```
+
+Y a partir de la matriz de covarianzas, se puede calcular fácilmente la matriz de correlaciones de los residuos:
+
+```{r}
+cov2cor(estVar(modelo))
+```
+
+
+Para obtener los resultados se usa la función `anova` (`?anova.mlm`)
+
+```{r}
+anova(modelo, X = ~1, test = "Pillai")
+```
+
+Los estadísticos disponibles (argumento `test`) son: "Pillai", "Wilks", "Hotelling-Lawley", "Roy" o  "Spherical". 
+
+
+Con la opcion `X=~1` se contrasta si $\mu_1 = \mu_2 = \mu_3$. En cambio la opción por defecto `X = ~ 0`, contrasta $\mu_1 = \mu_2 = \mu_3=0$ que no es de interés.
+
+El término `(Intercept)` corresponde al efecto del tiempo.
+
+
+**Resultado**
+
+Hay efecto del tiempo porque el p-valor < 0.05.
+
+
+
+
+
+
+
+### Ejemplo 2
+
+
+En la base de datos "Ejemplo_1W1B.csv" se tienen los datos de un estudio en el que participan 24 individuos randomizados en dos grupos de tratamiento (`trat`). Como en el anterior ejemplo, para cada invidivuo se miden los niveles a 1, 2 y 3 horas.
+
+```{r}
+datos <- read.csv2("datos/Ejemplo_1W1B.csv")
+```
+
+Como antes, ordenamos por individuo (de 1 a 24) y por tiempo
+
+```{r}
+datos <- arrange(datos, indiv2, tiempo)
+```
+
+
+Fíjate que hay dos variables que codifican al individuo:  la variable `indiv` va de 1 a 12 que son los individuos que hay dentro de cada grupo de tratamiento, mientras que `indiv2` va de 1 a 24 que son el total de individuos.
+
+
+
+#### Exploración de los datos
+
+```{r}
+datos$trat <- factor(datos$trat, 1:2, c("Control","Tratados"))
+
+library(ggplot2)
+p <- ggplot(data = datos, aes(x = tiempo, y = medida, group = indiv2))
+p <- p + geom_line(col="grey") + stat_summary(aes(group = 1),
+    geom = "line", fun = mean, size=2)
+p + facet_grid( ~ trat)
+```
+
+
+Para `trat=1`, la medida parece que no sube o sube muy poco. Mientras que para `trat=2` sube mucho hasta la segunda medida y se estabiliza en la tercera medida. Por lo tanto, parece que sí hay una interacción entre el tiempo y el grupo de tratamiento.
+
+
+
+
+
+#### Suma de cuadrados (ANOVA)
+
+Para ajustar este modelo hay que usar los datos en disposición vertical. 
+Como antes hay que convertir las variables `tiempo`, `indiv2` y `trat` a factor.
+    
+```{r}
+library(ez)
+
+datos.ez <- datos
+datos.ez$tiempo <- factor(datos.ez$tiempo)
+datos.ez$indiv2 <- factor(datos.ez$indiv2)
+datos.ez$trat <- factor(datos.ez$trat)
+
+ezANOVA(data=datos.ez, 
+        dv=medida, 
+        wid=indiv, 
+        within=tiempo, 
+        between=trat,
+        detailed = TRUE)
+```
+
+Vemos como se aplican las correcciones sólo en los términos "intra sujeto" que son `tiempo` y la interacción `trat:tiempo`, ya que el test de Mauchly es significativo (p-valor < 0.05).
+Una vez aplicados las correcciones sobre los grados de libertad, los p-valores cambian aunque las conclusiones son las mismas: tanto el efecto del tiempo como su interacción con el tratamiento son significativos.
+
+```{r}
+ezPlot(data=datos.ez, 
+       dv=medida, 
+       wid=indiv, 
+       within=tiempo, 
+       between=trat,
+       x=tiempo,
+       split=trat)
+```
+
+Las conclusiones con la tabla ANOVA corregida (tanto por GG como por HF), se ven claramente en el gráfico de interacción.
+
+
+#### Modelo de respuesta multivariante (MANOVA)
+
+Para analizar los datos mediante el modelo de respuesta multivariante, como antes hay que disponer los datos de forma horizontal. 
+
+```{r}
+datosh <- dcast(datos, indiv + trat ~ paste0("medida_", tiempo),
+                 value.var = "medida" )
+datosh
+```
+
+
+```{r}
+respuesta <- as.matrix(datosh[,c("medida_1","medida_2","medida_3")])
+modelo <- lm(respuesta ~ trat, data=datosh)
+summary(modelo)
+anova(modelo, X=~1)
+```
+
+
+Con la instrucción `summary`, contrasta si la media es diferente entre los dos grupos de tratamiento, y esto lo hace para cada momento por separado.
+
+En la tabla ANOVA, el p-valor de término `trat` contrasta si el efecto del tiempo es el mismo para los dos tratamientos, o sea, la interacción tratamiento y tiempo, que es lo que nos interesa. Mientras que el término `(Intercept)` corresponde al efecto marginal del tiempo.
+
+Fíjate qué pasa si no se especifica el argumento `X`:
+
+```{r}
+anova(modelo)
+```
+
+En este caso, el p-valor del tratamiento contrasta si hay diferencias entre tratamientos en alguno de los momentos (hay 3 grados de libertad). Y este contraste no es la interacción entre tratamiento y tiempo.
+
+
+
+### Ejemplo 3
+
+En un estudio se quieren comparar el efecto de régimen de ejercicio sobre el sobrepeso. Para ello se reclutan 100 personas. A la mitad se le asigna el régimen y al resto se le hacen algunas recomendaciones (grupo control). Se mide el índice de masa corporal justo antes de empezar el estudio (momento basal), y al cabo de 1, 2 y 3 semanas. Como la edad es una variable importante para predecir el IMC también se registra.
+
+Los datos los encontrarás en el fichero "imc.csv"
+
+En este ejemplo, vemos como en algunos de los individuos nos falta alguna medida en a partir de la primera semana. Por este motivo usaremos la técnica de los LMM.
+
+```{r}
+datos <- read.csv2("datos/imc.csv")
+```
+
+
+Nos aseguramos que los datos estén ordenados por individuo y tiempo
+
+```{r}
+datos <- arrange(datos, indiv, tiempo)
+```
+
+Recodificamos nuestra variable tratamiento: 
+
+```{r}
+datos$tx <- factor(datos$tx, 1:2, c("Control", "Tratados"))
+summary(datos)
+```
+
+Comprobemos si tenemos algún inviduo con datos faltantes
+
+```{r}
+sum(with(datos, tapply(is.na(respuesta), indiv, any)))
+```
+
+Como hay individuos con datos faltantes no podemos utilizar ANOVA o MANOVA y debemos usar modelos más avanzados que veremos más adelante.
+
+

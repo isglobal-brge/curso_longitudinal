@@ -1,0 +1,137 @@
+# Visualización de datos longitudinales
+
+Para ilustrar cómo visualizar datos longitudinales usaremos los datos que se encuentran en formato ancho obtenidos de  [UCLA web site](https://stats.idre.ucla.edu/r/examples/alda/r-applied-longitudinal-data-analysis-ch-2/). Este ejemplo pertenece a un estudio ... 
+
+Los datos podemos cargarlos de la forma habitual, pero teniendo en cuenta que se encuentran en formato "csv"
+
+```{r, warning = F, message = F}
+library(tidyverse)
+tolerance <- read_csv("https://stats.idre.ucla.edu/wp-content/uploads/2016/02/tolerance1.txt")
+head(tolerance)
+```
+
+Con los datos en este formato, podemos aprovechar para obtener algunas estadísticas descriptivas que pueden resultar de interés. Por ejemplo, podemos ver cuántos individuos tenemos en nuestro estudio simplemente ejecutando:
+
+```{r}
+nrow(tolerance)
+```
+
+Para poder crear gráficos que nos informen sobre la evolución de la tolerancia entre individuos necesitamos que los datos estén en formato largo. Como hemos visto anteriormente, esto lo podemos realizar mediante
+
+
+```{r}
+library(reshape2)
+tolerance2 <- melt(tolerance, measure.vars=2:6,
+                    variable.name = "age",
+                    value.name = "tolerance")
+# no nos olvidemos que nuestra variable edad
+# debe de ser numérica
+tolerance2 <- mutate(tolerance2, 
+                     age = str_remove(age,"tol")%>%
+                        as.numeric())
+head(tolerance2)
+```
+
+Puesto que nuestras observaciones para cada individuo se presenta a distintas edades, por eso hemos llamado `age` a nuestra variable temporal. 
+
+Con los datos en este formato no resulta tan sencillo saber cuántos individuos estamos analizando. Podemos usar `tidyverse` para obtener esta información
+
+```{r}
+tolerance2 %>% 
+  distinct(id) %>% 
+  nrow()
+```
+
+**NOTA:** Para aquellos que no realizaron el último curso de R en el que se explicó tidyverse, se puede consultar [este material](https://isglobal-brge.github.io/Aprendizaje_Automatico_1/introducci%C3%B3n-a-tidyverse.html).
+
+Podemos empezar por visualizar nuestros datos creando lo que se conoce como *Empirical growth plots* o que nos nuestra la secuencia de nuestra variable de interés a lo largo del tiempo para cada individuo. En nuestro paso pondremos  `age` en el eje X y `tolerance` en el Y. Para ello utilizaremos la función `geom_point()` y para crear el panel individual para cada sujeto usaremos  `facet_wrap()` ambas son funciones de la librería `ggplot2`.
+
+```{r, fig.width = 4.5, fig.height = 5}
+library(ggplot2)
+ggplot(tolerance2, aes(x = age, y = tolerance)) +
+  geom_point() +
+  facet_wrap(~id)
+```
+
+Por defecto, `ggplot2` mantiene las escalas de ambos ejes iguales en todos los paneles. Si queremos que sea distinto entre cada individuo, podemos modificar el argumento `scales` en la función `facet_wrap()`.
+
+Podemos añadir una línea para conectar los puntos usando `geom_line()`
+
+```{r, fig.width = 4.5, fig.height = 5}
+ggplot(tolerance2, aes(x = age, y = tolerance)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~id)
+```
+
+Sin embargo, a veces es recomendable utilizar otras aproximaciones que nos ayuden a visualizar mejor cuál es la trayectoria de cada individuo. Para ello, se puede utilizar otras aproximaciones como: 
+
+* suavizado no paramétrico
+* funciones paramétricas
+
+
+El suavizado paramétrico se puede llevar acabo usando un suavizado de tipo *loess*. Podemos usar esta opción mediante la función `stat_smooth()` y controlar el grado de suavizado con el argumento `span`.
+
+```{r, fig.width = 4.5, fig.height = 5}
+ggplot(tolerance2, aes(x = age, y = tolerance)) +
+  geom_point() +
+  stat_smooth(method = "loess", se = FALSE, span = .9) +
+  facet_wrap(~id)
+```
+**NOTA:** El argumento `se=FALSE` sirve para que no pintemos la banda de confianza para la estimación no paramétrica. 
+
+Podemos visualizar las trayectorias usando un modelo paramétrico. El más sencillo sería un modelo lineal que podemos visualizar mediante el argumento `method = 'lm'` 
+
+
+```{r, fig.width = 4.5, fig.height = 5}
+ggplot(tolerance2, aes(x = age, y = tolerance)) +
+  geom_point() +
+  stat_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~id)
+```
+
+También podemos visualizar todas las trayectorias en único gráfico  mediante lo que se conoce como un **spaghetti plot**. Esta representación es muy útil cuando queremos visualizar muchos individuos. Para ello deberíamos usar el argumento `group`
+
+
+```{r, fig.width = 4.5, fig.height = 5}
+ggplot(tolerance2, aes(x = age, y = tolerance, group = id)) +
+  geom_line()
+```
+
+
+También podemos añadir el perfil promedio
+
+
+```{r, fig.width = 4.5, fig.height = 5}
+ggplot(tolerance2, aes(x = age, y = tolerance, group = id)) +
+  geom_line(col="grey") + 
+  stat_summary(aes(group = 1), geom = "line", fun = mean, size=2)
+```
+
+
+Podríamos obtener el mismo gráfico separado para hombres y mujeres usando de nuevo `facet_wrap()`
+
+
+```{r, fig.width = 4.5, fig.height = 5}
+ggplot(tolerance2, aes(x = age, y = tolerance, group = id)) +
+  geom_line() +
+  facet_wrap(~male)
+```
+
+**NOTA:** En `ggplot2` podemos guardar un gráfico con un nombre y luego "reciclar" el gráfico añadiendo más código de la siguiente manera. Por ejemplo, puedo guardar el gráfico anterior en el objeto `p` 
+
+```{r, fig.width = 4.5, fig.height = 5}
+p <- ggplot(tolerance2, aes(x = age, y = tolerance, group = id)) +
+  geom_line(col="gray") +
+  facet_wrap(~male)
+```
+
+
+y luego decirle que me añada el perfir promedio:
+
+```{r, fig.width = 4.5, fig.height = 5}
+p + stat_summary(aes(group = 1),
+    geom = "line", fun = mean, size=2)
+```
+
+

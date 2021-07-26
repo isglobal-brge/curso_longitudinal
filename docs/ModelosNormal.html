@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 5 Modelos con respuesta normal | Modelización estadística avanzada con R: análisis de datos longitudinales</title>
+  <meta name="description" content="Capítulo 5 Modelos con respuesta normal | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 5 Modelos con respuesta normal | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 5 Modelos con respuesta normal | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  
+  
+  
+
+<meta name="author" content="Juan R González" />
+
+
+<meta name="date" content="2021-07-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="visualización-de-datos-longitudinales.html"/>
+
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Datos Longitudinales</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preámbulo</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instalación-de-librerías-necesarias-para-el-curso"><i class="fa fa-check"></i><b>1.1</b> Instalación de librerías necesarias para el curso</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introducción a los diseños de datos longitudinales</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#definición"><i class="fa fa-check"></i><b>2.1</b> Definición</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#ejemplos"><i class="fa fa-check"></i><b>2.2</b> Ejemplos</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#esquemas-de-recogidas-de-datos"><i class="fa fa-check"></i><b>2.3</b> Esquemas de recogidas de datos</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#todas-las-medidas-con-intervalos-fijos"><i class="fa fa-check"></i><b>2.3.1</b> Todas las medidas con intervalos fijos</a></li>
+<li class="chapter" data-level="2.3.2" data-path="intro.html"><a href="intro.html#missings-al-azar-con-intervalos-fijos"><i class="fa fa-check"></i><b>2.3.2</b> Missings al azar con intervalos fijos</a></li>
+<li class="chapter" data-level="2.3.3" data-path="intro.html"><a href="intro.html#distintos-seguimientos"><i class="fa fa-check"></i><b>2.3.3</b> Distintos seguimientos</a></li>
+<li class="chapter" data-level="2.3.4" data-path="intro.html"><a href="intro.html#todas-las-medidas-a-distintos-tiempos"><i class="fa fa-check"></i><b>2.3.4</b> Todas las medidas a distintos tiempos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html"><i class="fa fa-check"></i><b>3</b> Estructura de los datos</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#formato-ancho-y-largo"><i class="fa fa-check"></i><b>3.1</b> Formato ancho y largo</a></li>
+<li class="chapter" data-level="3.2" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#formato-ancho"><i class="fa fa-check"></i><b>3.2</b> Formato ancho</a></li>
+<li class="chapter" data-level="3.3" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#formato-largo"><i class="fa fa-check"></i><b>3.3</b> Formato largo</a></li>
+<li class="chapter" data-level="3.4" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#valores-faltantes"><i class="fa fa-check"></i><b>3.4</b> Valores faltantes</a></li>
+<li class="chapter" data-level="3.5" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#tiempos-de-medidas-diferentes"><i class="fa fa-check"></i><b>3.5</b> Tiempos de medidas diferentes</a></li>
+<li class="chapter" data-level="3.6" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#transformación"><i class="fa fa-check"></i><b>3.6</b> Transformación</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#vertical-a-horizontal-y-viceversa"><i class="fa fa-check"></i><b>3.6.1</b> Vertical a horizontal y viceversa</a></li>
+<li class="chapter" data-level="3.6.2" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#colapsar"><i class="fa fa-check"></i><b>3.6.2</b> Colapsar</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html"><i class="fa fa-check"></i><b>4</b> Visualización de datos longitudinales</a></li>
+<li class="chapter" data-level="5" data-path="ModelosNormal.html"><a href="ModelosNormal.html"><i class="fa fa-check"></i><b>5</b> Modelos con respuesta normal</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#técnica-de-la-suma-de-cuadrados"><i class="fa fa-check"></i><b>5.1</b> Técnica de la suma de cuadrados</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#diseño-1w1b"><i class="fa fa-check"></i><b>5.1.1</b> Diseño 1W+1B</a></li>
+<li class="chapter" data-level="5.1.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#diseño-1w"><i class="fa fa-check"></i><b>5.1.2</b> Diseño 1W</a></li>
+<li class="chapter" data-level="5.1.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#función-ezanova"><i class="fa fa-check"></i><b>5.1.3</b> Función <code>ezANOVA</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#respuesta-multivariante"><i class="fa fa-check"></i><b>5.2</b> Respuesta Multivariante</a></li>
+<li class="chapter" data-level="5.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplos-1"><i class="fa fa-check"></i><b>5.3</b> Ejemplos</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplo-1"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo 1</a></li>
+<li class="chapter" data-level="5.3.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplo-2"><i class="fa fa-check"></i><b>5.3.2</b> Ejemplo 2</a></li>
+<li class="chapter" data-level="5.3.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplo-3"><i class="fa fa-check"></i><b>5.3.3</b> Ejemplo 3</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelización estadística avanzada con R: análisis de datos longitudinales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ModelosNormal" class="section level1" number="5">
+<h1><span class="header-section-number">Capítulo 5</span> Modelos con respuesta normal</h1>
+<p>En este capítulo se describirán los métodos y modelos estadísticos para analizar medidas respetidas cuando la variable respuesta sigue una distribución normal o gaussiana. Se pueden probar algunas transformaciones, como el logaritmo, para normalizar la distribución de la variable.</p>
+<div id="técnica-de-la-suma-de-cuadrados" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Técnica de la suma de cuadrados</h2>
+<p>Este método o técnica se basa en la suma de cuadrados. Es la más simple desde el punto de vista estadístico y computacional. Por contra, sólo permite analizar diseños balanceados, sin variables independientes cuantitativas (covariables), sólo cualitativas o factores y con un número limitado de factores que tienen que estar cruzados (no anidados). A continuación se presentan los dos diseños más simples de medidas repetidas que se pueden analizar con esta técnica.</p>
+<div id="diseño-1w1b" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Diseño 1W+1B</h3>
+<p>Cuando el diseño es balanceado (mismo número de individuos por grupo), las medidas son las mismas para todos los individuos y no hay covariables, se puede usar la técnica de suma de cuadrados o tabla ANOVA.</p>
+<p>La notación que se usa para la ecuación del modelo en el contexto de suma de cuadrados es:</p>
+<p><span class="math display">\[y_{ijk} = \mu + \alpha_i + \beta_j + \alpha\beta_{ij} + \pi_{k(i)} + e_{ijk}\]</span></p>
+<p>Donde</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span> es la constante del modelo,</li>
+<li><span class="math inline">\(\alpha_i\)</span>, son los efectos del grupo o tratamiento</li>
+<li><span class="math inline">\(\beta_j\)</span>, son los efectos del tiempo</li>
+<li><span class="math inline">\(\alpha\beta_{ij}\)</span> es la interacción del tiempo con el grupo</li>
+<li><span class="math inline">\(\pi_{k(i)}\)</span> es el efecto aleatorio del individuo que está anidado al grupo</li>
+<li><span class="math inline">\(e_{ijk}\)</span> son los errores</li>
+</ul>
+<p><span class="math inline">\(\sum_{i=1}^a \alpha_i=0\)</span>, <span class="math inline">\(\sum_{j=1}^b \beta_j=0\)</span>, <span class="math inline">\(\sum_{i=1}^a \alpha\beta_{ij}=0, \forall j\)</span>, <span class="math inline">\(\sum_{j=1}^b \alpha\beta_{ij}=0, \forall i\)</span>,</p>
+<p><span class="math inline">\(\pi_{k(i)} \sim N(0, \sigma_{ind})\)</span>
+<format style="color:red"><span class="math inline">\(e_{ijk} \sim N(0, \sigma)\)</span> indep </format></p>
+<p>En este contexto se dice que el tiempo y la interacción tratamiento:tiempo son términos o componentes “intra sujeto” (<em>within subject</em>). Mientras que el grupo es un componente “entre sujeto” (<em>between subject</em>). Por lo tanto, se trata de un diseño <strong>1W+1B</strong>.</p>
+<p>Las técnicas clásicas de la tabla ANOVA y su inferencia són válidas siempre y cuando se cumpla la <strong>condición de esfericidad</strong>: la variancia de la diferencia entre dos medidas es constante. Para comprobar la condición de esfericidad se puede aplicar el <strong>test de Mauchly</strong>.</p>
+<p>Si no se cumple hay que corregir los grados de libertad de los términos “intra sujetos” de la tabla ANOVA y se recalculan sus p-valores. Hay dos métodos para <strong>corregir los grados de libertad</strong>: método “Huynh and Feldt” (H-F) y el método “Greenhouse-Geisser” (G-G) .</p>
+</div>
+<div id="diseño-1w" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Diseño 1W</h3>
+<p>Si en el diseño no hay grupos, luego el modelo se simplifica a un diseño de un solo factor “intra sujeto” <strong>(1W)</strong></p>
+<p><span class="math display">\[y_{ij} = \mu + \pi_i + \beta_j + e_{ij}\]</span></p>
+<p>En ambos casos, tanto en el diseño en que tenemos grupos (1W+1B) como en el que no (1W), no nos interesa evaluar el efecto del individuo; ya sabemos que hay variabilidad entre ellos. Veremos en un ejemplo como el paquete <strong><code>ez</code></strong> que se usará para esta técnica de suma de cuadrados omite los resultados sobre el factor aleatorio individuo.</p>
+</div>
+<div id="función-ezanova" class="section level3" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Función <code>ezANOVA</code></h3>
+<p>Para ajustar los modelos de medidas repetidas balanceados mediante la técnica de suma de cuadrados existe la función <strong><code>ezANOVA</code></strong> del paquete <strong><code>ez</code></strong> <span class="citation">[@R-ez]</span></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="ModelosNormal.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ez)</span></code></pre></div>
+<p>Tanto la corrección por H-F o G-G, como el test de esfericidad de Mauchly estan implementados en el package <code>ez</code> de R. Para visualizar gráficamente los resultados, se usará la función <code>ezPlot()</code>. Más adelante en esta sección se verá en un ejemplo de ambas funciones. Para llevar a cabo los análisis ANOVA se usa la función <code>ezANOVA ()</code> que tiene los siguientes argumentos:</p>
+<ul>
+<li><p><code>data</code>: base de datos donde se encuentran las variables</p></li>
+<li><p><code>dv</code>: variable respuesta o variable dependiente</p></li>
+<li><p><code>wid</code>: variable individuo</p></li>
+<li><p><code>within</code>: factor o factores “intra sujeto”. Típicamente en este argumento se espedificará el tiempo. Si se especifica más de un factor, éstos deben estar cruzados y se escribirá <code>.(var1,var2)</code>.</p></li>
+<li><p><code>between</code>: factor o factores “entre sujetos”. Si no hay ningún factor “intra-sujeto” se deja a <code>NULL</code>. Como en el argumento <code>within</code>, si hay más de un factor “entre sujetos”, éstos deben estar cruzados y se escribirá <code>.(var1,var2)</code>.</p></li>
+</ul>
+<p><strong>Observaciones:</strong></p>
+<ul>
+<li>Los datos deben estar en formato vertical.</li>
+<li>La variable respuesta y los factores deben escribirse sin comillas.</li>
+<li>Los factores “intra”, “entre” y el sujeto deben estar en format <code>factor</code>.</li>
+<li>El factor individuo debe tener tantos niveles como individuos.</li>
+<li>Aunque en teoría la función permite covariables (variables independientes contínuas), esta opción está en versión “beta”.</li>
+<li>Todos los factores, excepto el individuo, deben ser de efectos fijos.</li>
+</ul>
+</div>
+</div>
+<div id="respuesta-multivariante" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Respuesta Multivariante</h2>
+<p>Esta metodología también conocida como MANOVA asume que las observaciones de cada individuo es un vector multivariante donde la variable respuesta se considera dicho vector. Podemos escribirlo de la siguiente forma:</p>
+<p><span class="math display">\[\vec{y}_i = \vec{\mu}_i + \vec{e}_i\]</span></p>
+<p>Donde</p>
+<ul>
+<li><p><span class="math inline">\(\vec{y_i}=(y_{i1},\ldots,y_{iT})\)</span> es el vector de medidas para el individuo <span class="math inline">\(i\)</span>.</p></li>
+<li><p><span class="math inline">\(\vec{\mu}_i=(\mu_{i1},\ldots,\mu_{iT})\)</span> es el vector con las medias de cada momento y para cada individuo. Las medias pueden depender de las variables independientes <span class="math inline">\(x_k\)</span>. Fíjate que el coeficiente <span class="math inline">\(\beta_{kj}\)</span> puede ser diferente para cada momento.</p></li>
+</ul>
+<p><span class="math display">\[\mu_{ij} = \sum_{k=1}^K \beta_{jk} x_{ik}, \quad j=1,...,T\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\vec{e_i} \sim N(\vec{0},\Sigma)\)</span>, donde <span class="math inline">\(\Sigma\)</span> es la matrix de covarianzas de los errores y tiene que ser la misma para todos los individuos. Su estructura, pero, puede ser cualquiera.</p></li>
+<li><p><span class="math inline">\(x_{ik}\)</span> valor de la variable independiente <span class="math inline">\(k\)</span> del individuo <span class="math inline">\(i\)</span>.</p></li>
+</ul>
+<p><strong>Observaciones</strong></p>
+<ul>
+<li><p>Para ajustar este modelo los datos se disponen de forma horizontal.</p></li>
+<li><p>En este modelo los tiempos en que se toman las <span class="math inline">\(T\)</span> medidas tienen que ser los mismos para todos los individuos.</p></li>
+<li><p>Para estudiar la evolución en el tiempo se puede realizar un contraste polinómico en el vector de medias <span class="math inline">\(\vec{\mu}\)</span>.</p></li>
+<li><p>Para comparar grupos de medidas, por ejemplo si se tienen cinco medidas, las dos primeras corresponden al tratamiento A y las otras tres al tratamiento B, se puede realizar un contraste lineal para comparar los dos tratamientos.</p></li>
+<li><p>Cuando hay un valor faltante en alguna medida, toda la fila del individuo se tiene que eliminar.</p></li>
+<li><p>Cada variable independiente, <span class="math inline">\(x_{ki}\)</span> es un único valor por individuo. O sea, que este modelo no contempla que las variables independientes sean de medidas repetidas. Si tuviéramos una variable que cambiara en el tiempo, se tienen que poner como variables diferentes (una para cada momento).</p></li>
+<li><p>Los factores contribuyen con tantas dummy variables como categorías menos uno en los términos <span class="math inline">\(x_{ik}\)</span>.</p></li>
+<li><p>Los términos <span class="math inline">\(x_{ik}\)</span> pueden ser también interacciones entre variables, como el producto de sus términos.</p></li>
+</ul>
+<table class="table table-striped" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Datos
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="6">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Matriz de diseño <code>~ fumador + edad + sexo + edad:fumador</code>
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:right;">
+indiv
+</th>
+<th style="text-align:center;">
+edad
+</th>
+<th style="text-align:right;">
+fumador
+</th>
+<th style="text-align:right;">
+sexo
+</th>
+<th style="text-align:center;">
+fumadorEx
+</th>
+<th style="text-align:center;">
+fumadorNunca
+</th>
+<th style="text-align:center;">
+edad
+</th>
+<th style="text-align:center;">
+sexomujer
+</th>
+<th style="text-align:center;">
+fumadorEx:edad
+</th>
+<th style="text-align:center;">
+fumadorNunca:edad
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:center;">
+50
+</td>
+<td style="text-align:right;">
+Ex
+</td>
+<td style="text-align:right;">
+mujer
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+50
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+50
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:center;">
+55
+</td>
+<td style="text-align:right;">
+Actual
+</td>
+<td style="text-align:right;">
+mujer
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+55
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:center;">
+60
+</td>
+<td style="text-align:right;">
+Actual
+</td>
+<td style="text-align:right;">
+hombre
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+60
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:center;">
+65
+</td>
+<td style="text-align:right;">
+Nunca
+</td>
+<td style="text-align:right;">
+mujer
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+65
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:center;">
+62
+</td>
+<td style="text-align:right;">
+Ex
+</td>
+<td style="text-align:right;">
+hombre
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+62
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+62
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="ejemplos-1" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Ejemplos</h2>
+<p>Vamos a ver algunos ejemplos que se analizarán mediante las técnicas que se acaban de describir.</p>
+<div id="ejemplo-1" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Ejemplo 1</h3>
+<p>En la base de datos “Ejemplo_1W.csv” se tienen los datos de un diseño con 12 individuos en los que se toman los niveles en sangre de un cierto parámetro lipídico. Para cada invidivuo se miden los niveles a 1, 2 y 3 horas.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="ModelosNormal.html#cb51-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;datos/Ejemplo_1W.csv&quot;</span>)</span></code></pre></div>
+<p>Ordenamos por individuo y dentro por tiempo dentro de individuo</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="ModelosNormal.html#cb52-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">arrange</span>(datos, indiv, tiempo)</span></code></pre></div>
+<div id="exploración-de-los-datos" class="section level4" number="5.3.1.1">
+<h4><span class="header-section-number">5.3.1.1</span> Exploración de los datos</h4>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="ModelosNormal.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb53-2"><a href="ModelosNormal.html#cb53-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(<span class="at">x =</span> tiempo, <span class="at">y =</span> medida, <span class="at">group =</span> indiv))</span>
+<span id="cb53-3"><a href="ModelosNormal.html#cb53-3" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>),</span>
+<span id="cb53-4"><a href="ModelosNormal.html#cb53-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="at">fun =</span> mean, <span class="at">size=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-48-1.png" width="672" /></p>
+<p>Cada línea representa a un individuo, mientras que la línea más gruesa es el promedio de los 12 individuos. Vemos como el efecto del tiempo no es del todo lineal. Además las líneas están bastante separadas indicando variabilidad entre los individuos.</p>
+<p>Comprobemos si tenemos algún inviduo con datos faltantes</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="ModelosNormal.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">with</span>(datos, <span class="fu">tapply</span>(<span class="fu">is.na</span>(medida), indiv, any)))</span></code></pre></div>
+<pre><code>[1] 0</code></pre>
+<p>Como son datos balanceados, podemos usar ANOVA y MANOVA</p>
+</div>
+<div id="suma-de-cuadrados-anova" class="section level4" number="5.3.1.2">
+<h4><span class="header-section-number">5.3.1.2</span> Suma de cuadrados (ANOVA)</h4>
+<p>Para ajustar este modelo hay que usar los datos en disposición vertical.
+Además, hay que convertir las variables <code>tiempo</code> e <code>indiv</code> a factor.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="ModelosNormal.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ez)</span>
+<span id="cb56-2"><a href="ModelosNormal.html#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="ModelosNormal.html#cb56-3" aria-hidden="true" tabindex="-1"></a>datos.ez <span class="ot">&lt;-</span> datos</span>
+<span id="cb56-4"><a href="ModelosNormal.html#cb56-4" aria-hidden="true" tabindex="-1"></a>datos.ez<span class="sc">$</span>tiempo <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos.ez<span class="sc">$</span>tiempo)</span>
+<span id="cb56-5"><a href="ModelosNormal.html#cb56-5" aria-hidden="true" tabindex="-1"></a>datos.ez<span class="sc">$</span>indiv <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos.ez<span class="sc">$</span>indiv)</span>
+<span id="cb56-6"><a href="ModelosNormal.html#cb56-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-7"><a href="ModelosNormal.html#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(<span class="at">data=</span>datos.ez, <span class="at">dv=</span>medida, <span class="at">wid=</span>indiv, <span class="at">within=</span>tiempo, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>$ANOVA
+       Effect DFn DFd       SSn       SSd         F            p p&lt;.05       ges
+1 (Intercept)   1  11 66546.801 1892.0589 386.88796 6.390053e-10     * 0.9686088
+2      tiempo   2  22  2166.376  264.6244  90.05264 2.542699e-11     * 0.5011210
+
+$`Mauchly&#39;s Test for Sphericity`
+  Effect         W          p p&lt;.05
+2 tiempo 0.4433135 0.01712201     *
+
+$`Sphericity Corrections`
+  Effect       GGe        p[GG] p[GG]&lt;.05       HFe        p[HF] p[HF]&lt;.05
+2 tiempo 0.6423901 5.662497e-08         * 0.6905331 1.998401e-08         *</code></pre>
+<p>La condición de esfericidad no se cumple dado que el test de Mauchly es significativo. Por lo tanto, hay que corregir los grados de libertad y, en consecuencia, el p-valor del factor tiempo. Después de la corrección, éste sigue siendo significativo.</p>
+<p>Observación: Fíjate que los resultados son los mismos que usando la función <code>lm</code>, y <code>anova</code> con la opción <code>test="Spherical"</code>:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="ModelosNormal.html#cb58-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(respuesta <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>datosh)</span>
+<span id="cb58-2"><a href="ModelosNormal.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo,<span class="at">X =</span> <span class="sc">~</span><span class="dv">1</span>, <span class="at">test =</span> <span class="st">&quot;Spherical&quot;</span>)</span></code></pre></div>
+<pre><code>Analysis of Variance Table
+
+
+Contrasts orthogonal to
+~1
+
+Greenhouse-Geisser epsilon: 0.5782
+Huynh-Feldt epsilon:        0.5895
+
+            Df      F num Df den Df     Pr(&gt;F)     G-G Pr     H-F Pr
+(Intercept)  1 28.573      2     46 8.5891e-09 5.8716e-06 4.9243e-06
+Residuals   23                                                      </code></pre>
+</div>
+<div id="modelo-de-respuesta-multivariante-manova" class="section level4" number="5.3.1.3">
+<h4><span class="header-section-number">5.3.1.3</span> Modelo de respuesta multivariante (MANOVA)</h4>
+<p>Para analizar los datos mediante el modelo de respuesta multivariante hay que disponer los datos de forma horizontal.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="ModelosNormal.html#cb60-1" aria-hidden="true" tabindex="-1"></a>datosh <span class="ot">&lt;-</span> <span class="fu">dcast</span>(datos, indiv <span class="sc">~</span> <span class="fu">paste0</span>(<span class="st">&quot;medida_&quot;</span>, tiempo),</span>
+<span id="cb60-2"><a href="ModelosNormal.html#cb60-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">value.var =</span> <span class="st">&quot;medida&quot;</span> )</span>
+<span id="cb60-3"><a href="ModelosNormal.html#cb60-3" aria-hidden="true" tabindex="-1"></a>datosh</span></code></pre></div>
+<pre><code>   indiv medida_1 medida_2 medida_3
+1      1     39.4     65.3     68.6
+2      2     33.5     53.2     54.3
+3      3     27.1     42.3     41.3
+4      4     30.9     52.3     45.7
+5      5     32.2     57.4     53.5
+6      6     26.6     42.5     36.7
+7      7     28.5     37.5     36.4
+8      8     37.7     56.0     55.3
+9      9     35.7     50.3     46.4
+10    10     30.6     43.2     38.3
+11    11     24.4     39.9     37.3
+12    12     38.8     56.1     52.6</code></pre>
+<p>Para ajustar un modelo de regresión lineal con respuesta multivariante se puede usar la función <code>lm</code>. Y hay que poner la variable respuesta a la izquierda de <code>~</code> como una matriz de las tres variables (<code>medida.1</code>, <code>medida.2</code> y <code>medida.3</code>):</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="ModelosNormal.html#cb62-1" aria-hidden="true" tabindex="-1"></a>respuesta <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(datosh[,<span class="fu">c</span>(<span class="st">&quot;medida_1&quot;</span>,<span class="st">&quot;medida_2&quot;</span>,<span class="st">&quot;medida_3&quot;</span>)])</span>
+<span id="cb62-2"><a href="ModelosNormal.html#cb62-2" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(respuesta <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>datosh)</span>
+<span id="cb62-3"><a href="ModelosNormal.html#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(modelo)</span></code></pre></div>
+<pre><code>[1] &quot;mlm&quot; &quot;lm&quot; </code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="ModelosNormal.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<pre><code>Response medida_1 :
+
+Call:
+lm(formula = medida_1 ~ 1, data = datosh)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7.7167 -3.9667 -0.5667  4.0833  7.2833 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   32.117      1.445   22.23 1.72e-10 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 5.006 on 11 degrees of freedom
+
+
+Response medida_2 :
+
+Call:
+lm(formula = medida_2 ~ 1, data = datosh)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-12.167  -7.217   1.633   6.358  15.633 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   49.667      2.456   20.22 4.75e-10 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 8.509 on 11 degrees of freedom
+
+
+Response medida_3 :
+
+Call:
+lm(formula = medida_3 ~ 1, data = datosh)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-10.80  -9.15  -1.15   6.50  21.40 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   47.200      2.867   16.47 4.25e-09 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 9.93 on 11 degrees of freedom</code></pre>
+<p>Para obtener la matriz de covarianzas de los residuos:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="ModelosNormal.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">estVar</span>(modelo)</span></code></pre></div>
+<pre><code>         medida_1 medida_2 medida_3
+medida_1 25.05970 36.58970 42.08727
+medida_2 36.58970 72.39879 81.30000
+medida_3 42.08727 81.30000 98.60364</code></pre>
+<p>Y a partir de la matriz de covarianzas, se puede calcular fácilmente la matriz de correlaciones de los residuos:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="ModelosNormal.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov2cor</span>(<span class="fu">estVar</span>(modelo))</span></code></pre></div>
+<pre><code>          medida_1  medida_2  medida_3
+medida_1 1.0000000 0.8590239 0.8466744
+medida_2 0.8590239 1.0000000 0.9622290
+medida_3 0.8466744 0.9622290 1.0000000</code></pre>
+<p>Para obtener los resultados se usa la función <code>anova</code> (<code>?anova.mlm</code>)</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="ModelosNormal.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="at">X =</span> <span class="sc">~</span><span class="dv">1</span>, <span class="at">test =</span> <span class="st">&quot;Pillai&quot;</span>)</span></code></pre></div>
+<pre><code>Analysis of Variance Table
+
+
+Contrasts orthogonal to
+~1
+
+            Df Pillai approx F num Df den Df    Pr(&gt;F)    
+(Intercept)  1  0.945   85.903      2     10 5.035e-07 ***
+Residuals   11                                            
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Los estadísticos disponibles (argumento <code>test</code>) son: “Pillai”, “Wilks”, “Hotelling-Lawley”, “Roy” o “Spherical”.</p>
+<p>Con la opcion <code>X=~1</code> se contrasta si <span class="math inline">\(\mu_1 = \mu_2 = \mu_3\)</span>. En cambio la opción por defecto <code>X = ~ 0</code>, contrasta <span class="math inline">\(\mu_1 = \mu_2 = \mu_3=0\)</span> que no es de interés.</p>
+<p>El término <code>(Intercept)</code> corresponde al efecto del tiempo.</p>
+<p><strong>Resultado</strong></p>
+<p>Hay efecto del tiempo porque el p-valor &lt; 0.05.</p>
+</div>
+</div>
+<div id="ejemplo-2" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Ejemplo 2</h3>
+<p>En la base de datos “Ejemplo_1W1B.csv” se tienen los datos de un estudio en el que participan 24 individuos randomizados en dos grupos de tratamiento (<code>trat</code>). Como en el anterior ejemplo, para cada invidivuo se miden los niveles a 1, 2 y 3 horas.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="ModelosNormal.html#cb72-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;datos/Ejemplo_1W1B.csv&quot;</span>)</span></code></pre></div>
+<p>Como antes, ordenamos por individuo (de 1 a 24) y por tiempo</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="ModelosNormal.html#cb73-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">arrange</span>(datos, indiv2, tiempo)</span></code></pre></div>
+<p>Fíjate que hay dos variables que codifican al individuo: la variable <code>indiv</code> va de 1 a 12 que son los individuos que hay dentro de cada grupo de tratamiento, mientras que <code>indiv2</code> va de 1 a 24 que son el total de individuos.</p>
+<div id="exploración-de-los-datos-1" class="section level4" number="5.3.2.1">
+<h4><span class="header-section-number">5.3.2.1</span> Exploración de los datos</h4>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="ModelosNormal.html#cb74-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>trat <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos<span class="sc">$</span>trat, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>,<span class="st">&quot;Tratados&quot;</span>))</span>
+<span id="cb74-2"><a href="ModelosNormal.html#cb74-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-3"><a href="ModelosNormal.html#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb74-4"><a href="ModelosNormal.html#cb74-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(<span class="at">x =</span> tiempo, <span class="at">y =</span> medida, <span class="at">group =</span> indiv2))</span>
+<span id="cb74-5"><a href="ModelosNormal.html#cb74-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>),</span>
+<span id="cb74-6"><a href="ModelosNormal.html#cb74-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="at">fun =</span> mean, <span class="at">size=</span><span class="dv">2</span>)</span>
+<span id="cb74-7"><a href="ModelosNormal.html#cb74-7" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">facet_grid</span>( <span class="sc">~</span> trat)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-59-1.png" width="672" /></p>
+<p>Para <code>trat=1</code>, la medida parece que no sube o sube muy poco. Mientras que para <code>trat=2</code> sube mucho hasta la segunda medida y se estabiliza en la tercera medida. Por lo tanto, parece que sí hay una interacción entre el tiempo y el grupo de tratamiento.</p>
+</div>
+<div id="suma-de-cuadrados-anova-1" class="section level4" number="5.3.2.2">
+<h4><span class="header-section-number">5.3.2.2</span> Suma de cuadrados (ANOVA)</h4>
+<p>Para ajustar este modelo hay que usar los datos en disposición vertical.
+Como antes hay que convertir las variables <code>tiempo</code>, <code>indiv2</code> y <code>trat</code> a factor.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="ModelosNormal.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ez)</span>
+<span id="cb75-2"><a href="ModelosNormal.html#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="ModelosNormal.html#cb75-3" aria-hidden="true" tabindex="-1"></a>datos.ez <span class="ot">&lt;-</span> datos</span>
+<span id="cb75-4"><a href="ModelosNormal.html#cb75-4" aria-hidden="true" tabindex="-1"></a>datos.ez<span class="sc">$</span>tiempo <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos.ez<span class="sc">$</span>tiempo)</span>
+<span id="cb75-5"><a href="ModelosNormal.html#cb75-5" aria-hidden="true" tabindex="-1"></a>datos.ez<span class="sc">$</span>indiv2 <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos.ez<span class="sc">$</span>indiv2)</span>
+<span id="cb75-6"><a href="ModelosNormal.html#cb75-6" aria-hidden="true" tabindex="-1"></a>datos.ez<span class="sc">$</span>trat <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos.ez<span class="sc">$</span>trat)</span>
+<span id="cb75-7"><a href="ModelosNormal.html#cb75-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-8"><a href="ModelosNormal.html#cb75-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(<span class="at">data=</span>datos.ez, </span>
+<span id="cb75-9"><a href="ModelosNormal.html#cb75-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv=</span>medida, </span>
+<span id="cb75-10"><a href="ModelosNormal.html#cb75-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid=</span>indiv, </span>
+<span id="cb75-11"><a href="ModelosNormal.html#cb75-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">within=</span>tiempo, </span>
+<span id="cb75-12"><a href="ModelosNormal.html#cb75-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">between=</span>trat,</span>
+<span id="cb75-13"><a href="ModelosNormal.html#cb75-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>$ANOVA
+       Effect DFn DFd         SSn       SSd         F            p p&lt;.05       ges
+1 (Intercept)   1  22 102808.4513 2849.9219 793.63083 9.363797e-19     * 0.9701554
+2        trat   1  22   1952.0835 2849.9219  15.06913 8.040878e-04     * 0.3816578
+3      tiempo   2  44   1397.0700  312.7422  98.27755 5.878117e-17     * 0.3063929
+4 trat:tiempo   2  44    811.8211  312.7422  57.10794 5.921847e-13     * 0.2042582
+
+$`Mauchly&#39;s Test for Sphericity`
+       Effect         W           p p&lt;.05
+3      tiempo 0.5725954 0.002866835     *
+4 trat:tiempo 0.5725954 0.002866835     *
+
+$`Sphericity Corrections`
+       Effect       GGe        p[GG] p[GG]&lt;.05       HFe        p[HF] p[HF]&lt;.05
+3      tiempo 0.7005722 1.520842e-12         * 0.7336894 4.932994e-13         *
+4 trat:tiempo 0.7005722 1.003472e-09         * 0.7336894 4.400536e-10         *</code></pre>
+<p>Vemos como se aplican las correcciones sólo en los términos “intra sujeto” que son <code>tiempo</code> y la interacción <code>trat:tiempo</code>, ya que el test de Mauchly es significativo (p-valor &lt; 0.05).
+Una vez aplicados las correcciones sobre los grados de libertad, los p-valores cambian aunque las conclusiones son las mismas: tanto el efecto del tiempo como su interacción con el tratamiento son significativos.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="ModelosNormal.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezPlot</span>(<span class="at">data=</span>datos.ez, </span>
+<span id="cb77-2"><a href="ModelosNormal.html#cb77-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">dv=</span>medida, </span>
+<span id="cb77-3"><a href="ModelosNormal.html#cb77-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">wid=</span>indiv, </span>
+<span id="cb77-4"><a href="ModelosNormal.html#cb77-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">within=</span>tiempo, </span>
+<span id="cb77-5"><a href="ModelosNormal.html#cb77-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">between=</span>trat,</span>
+<span id="cb77-6"><a href="ModelosNormal.html#cb77-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span>tiempo,</span>
+<span id="cb77-7"><a href="ModelosNormal.html#cb77-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">split=</span>trat)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-61-1.png" width="672" /></p>
+<p>Las conclusiones con la tabla ANOVA corregida (tanto por GG como por HF), se ven claramente en el gráfico de interacción.</p>
+</div>
+<div id="modelo-de-respuesta-multivariante-manova-1" class="section level4" number="5.3.2.3">
+<h4><span class="header-section-number">5.3.2.3</span> Modelo de respuesta multivariante (MANOVA)</h4>
+<p>Para analizar los datos mediante el modelo de respuesta multivariante, como antes hay que disponer los datos de forma horizontal.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="ModelosNormal.html#cb78-1" aria-hidden="true" tabindex="-1"></a>datosh <span class="ot">&lt;-</span> <span class="fu">dcast</span>(datos, indiv <span class="sc">+</span> trat <span class="sc">~</span> <span class="fu">paste0</span>(<span class="st">&quot;medida_&quot;</span>, tiempo),</span>
+<span id="cb78-2"><a href="ModelosNormal.html#cb78-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">value.var =</span> <span class="st">&quot;medida&quot;</span> )</span>
+<span id="cb78-3"><a href="ModelosNormal.html#cb78-3" aria-hidden="true" tabindex="-1"></a>datosh</span></code></pre></div>
+<pre><code>   indiv     trat medida_1 medida_2 medida_3
+1      1  Control     34.7     34.8     36.9
+2      1 Tratados     39.4     65.3     68.6
+3      2  Control     38.7     44.3     44.6
+4      2 Tratados     33.5     53.2     54.3
+5      3  Control     28.7     32.1     32.4
+6      3 Tratados     27.1     42.3     41.3
+7      4  Control     30.8     32.4     33.8
+8      4 Tratados     30.9     52.3     45.7
+9      5  Control     29.9     36.3     34.3
+10     5 Tratados     32.2     57.4     53.5
+11     6  Control     27.6     27.4     27.6
+12     6 Tratados     26.6     42.5     36.7
+13     7  Control     24.9     28.0     26.0
+14     7 Tratados     28.5     37.5     36.4
+15     8  Control     37.7     38.1     35.6
+16     8 Tratados     37.7     56.0     55.3
+17     9  Control     31.0     33.2     33.0
+18     9 Tratados     35.7     50.3     46.4
+19    10  Control     25.4     25.3     28.1
+20    10 Tratados     30.6     43.2     38.3
+21    11  Control     24.8     26.0     29.6
+22    11 Tratados     24.4     39.9     37.3
+23    12  Control     38.5     40.0     40.4
+24    12 Tratados     38.8     56.1     52.6</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="ModelosNormal.html#cb80-1" aria-hidden="true" tabindex="-1"></a>respuesta <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(datosh[,<span class="fu">c</span>(<span class="st">&quot;medida_1&quot;</span>,<span class="st">&quot;medida_2&quot;</span>,<span class="st">&quot;medida_3&quot;</span>)])</span>
+<span id="cb80-2"><a href="ModelosNormal.html#cb80-2" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(respuesta <span class="sc">~</span> trat, <span class="at">data=</span>datosh)</span>
+<span id="cb80-3"><a href="ModelosNormal.html#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<pre><code>Response medida_1 :
+
+Call:
+lm(formula = medida_1 ~ trat, data = datosh)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7.7167 -3.9667 -0.7083  4.1271  7.6417 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    31.058      1.476  21.048 4.57e-16 ***
+tratTratados    1.058      2.087   0.507    0.617    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 5.112 on 22 degrees of freedom
+Multiple R-squared:  0.01156,   Adjusted R-squared:  -0.03337 
+F-statistic: 0.2572 on 1 and 22 DF,  p-value: 0.6171
+
+
+Response medida_2 :
+
+Call:
+lm(formula = medida_2 ~ trat, data = datosh)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-12.1667  -6.6396   0.3375   5.2896  15.6333 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    33.158      2.113  15.692 1.98e-13 ***
+tratTratados   16.508      2.988   5.524 1.50e-05 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 7.32 on 22 degrees of freedom
+Multiple R-squared:  0.5811,    Adjusted R-squared:  0.5621 
+F-statistic: 30.52 on 1 and 22 DF,  p-value: 1.495e-05
+
+
+Response medida_3 :
+
+Call:
+lm(formula = medida_3 ~ trat, data = datosh)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-10.8000  -5.9063  -0.6625   5.6250  21.4000 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    33.525      2.310  14.511 9.55e-13 ***
+tratTratados   13.675      3.267   4.186 0.000384 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 8.003 on 22 degrees of freedom
+Multiple R-squared:  0.4433,    Adjusted R-squared:  0.418 
+F-statistic: 17.52 on 1 and 22 DF,  p-value: 0.0003835</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="ModelosNormal.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="at">X=</span><span class="sc">~</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>Analysis of Variance Table
+
+
+Contrasts orthogonal to
+~1
+
+            Df  Pillai approx F num Df den Df    Pr(&gt;F)    
+(Intercept)  1 0.88537   81.102      2     21 1.326e-10 ***
+trat         1 0.83628   53.633      2     21 5.599e-09 ***
+Residuals   22                                             
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Con la instrucción <code>summary</code>, contrasta si la media es diferente entre los dos grupos de tratamiento, y esto lo hace para cada momento por separado.</p>
+<p>En la tabla ANOVA, el p-valor de término <code>trat</code> contrasta si el efecto del tiempo es el mismo para los dos tratamientos, o sea, la interacción tratamiento y tiempo, que es lo que nos interesa. Mientras que el término <code>(Intercept)</code> corresponde al efecto marginal del tiempo.</p>
+<p>Fíjate qué pasa si no se especifica el argumento <code>X</code>:</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="ModelosNormal.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo)</span></code></pre></div>
+<pre><code>Analysis of Variance Table
+
+            Df  Pillai approx F num Df den Df    Pr(&gt;F)    
+(Intercept)  1 0.97752  289.829      3     20 &lt; 2.2e-16 ***
+trat         1 0.84439   36.176      3     20 2.854e-08 ***
+Residuals   22                                             
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>En este caso, el p-valor del tratamiento contrasta si hay diferencias entre tratamientos en alguno de los momentos (hay 3 grados de libertad). Y este contraste no es la interacción entre tratamiento y tiempo.</p>
+</div>
+</div>
+<div id="ejemplo-3" class="section level3" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> Ejemplo 3</h3>
+<p>En un estudio se quieren comparar el efecto de régimen de ejercicio sobre el sobrepeso. Para ello se reclutan 100 personas. A la mitad se le asigna el régimen y al resto se le hacen algunas recomendaciones (grupo control). Se mide el índice de masa corporal justo antes de empezar el estudio (momento basal), y al cabo de 1, 2 y 3 semanas. Como la edad es una variable importante para predecir el IMC también se registra.</p>
+<p>Los datos los encontrarás en el fichero “imc.csv”</p>
+<p>En este ejemplo, vemos como en algunos de los individuos nos falta alguna medida en a partir de la primera semana. Por este motivo usaremos la técnica de los LMM.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="ModelosNormal.html#cb86-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;datos/imc.csv&quot;</span>)</span></code></pre></div>
+<p>Nos aseguramos que los datos estén ordenados por individuo y tiempo</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="ModelosNormal.html#cb87-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">arrange</span>(datos, indiv, tiempo)</span></code></pre></div>
+<p>Recodificamos nuestra variable tratamiento:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="ModelosNormal.html#cb88-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>tx <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos<span class="sc">$</span>tx, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Tratados&quot;</span>))</span>
+<span id="cb88-2"><a href="ModelosNormal.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(datos)</span></code></pre></div>
+<pre><code>   respuesta         indiv            tiempo          edad              tx     
+ Min.   : 9.80   Min.   :  1.00   Min.   :0.00   Min.   :25.00   Control :200  
+ 1st Qu.:27.02   1st Qu.: 25.75   1st Qu.:0.75   1st Qu.:43.00   Tratados:200  
+ Median :30.75   Median : 50.50   Median :1.50   Median :49.00                 
+ Mean   :30.46   Mean   : 50.50   Mean   :1.50   Mean   :49.03                 
+ 3rd Qu.:34.60   3rd Qu.: 75.25   3rd Qu.:2.25   3rd Qu.:57.00                 
+ Max.   :43.70   Max.   :100.00   Max.   :3.00   Max.   :69.00                 
+ NA&#39;s   :50                                                                    </code></pre>
+<p>Comprobemos si tenemos algún inviduo con datos faltantes</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="ModelosNormal.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">with</span>(datos, <span class="fu">tapply</span>(<span class="fu">is.na</span>(respuesta), indiv, any)))</span></code></pre></div>
+<pre><code>[1] 42</code></pre>
+<p>Como hay individuos con datos faltantes no podemos utilizar ANOVA o MANOVA y debemos usar modelos más avanzados que veremos más adelante.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="visualización-de-datos-longitudinales.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/isglobal-brge/curso_longitudinal/tree/master/docsanova_manova.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["cursoLongitudinal-bookdown.pdf", "cursoLongitudinal-bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

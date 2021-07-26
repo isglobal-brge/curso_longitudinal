@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Modelización estadística avanzada con R: análisis de datos longitudinales</title>
-  <meta name="description" content="Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <title>Capítulo 2 Introducción a los diseños de datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales</title>
+  <meta name="description" content="Capítulo 2 Introducción a los diseños de datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <meta property="og:title" content="Capítulo 2 Introducción a los diseños de datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <meta name="twitter:title" content="Capítulo 2 Introducción a los diseños de datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="estructura-de-los-datos.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -205,52 +205,111 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Modelización estadística avanzada con R: análisis de datos longitudinales</h1>
-<p class="author"><em>Juan R González</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>2021-07-26</em></p>
-</div>
-<div id="preámbulo" class="section level1" number="1">
-<h1><span class="header-section-number">Capítulo 1</span> Preámbulo</h1>
-<p>Este bookdown sirve como notas para el curso <a href="https://www.iisaragon.es/event/curso-modelizacion-estadistica-avanzada-con-r-analisis-de-datos-longitudinales-iacs/">Modelización estadística avanzada con R: análisis de datos longitudinales</a> impartido en el <a href="https://www.iacs.es/">Insituto Aragonés de Ciencias de la Salud</a></p>
-<p>El contenido del curso tiene los siguientes temas:</p>
+<div id="intro" class="section level1" number="2">
+<h1><span class="header-section-number">Capítulo 2</span> Introducción a los diseños de datos longitudinales</h1>
+<div id="definición" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Definición</h2>
+<p>Un diseño longitudinal se obtiene cuando obtenemos distintas medidas a un sujeto. Por esto a veces a este tipo de datos también se les llama de medidas repetidas. En cada momento del tiempo se realiza una medida de una variable o de variables variables. Esta variable o variables diremos que serán cambiantes en el tiempo o tiempo-dependientes. En los diseños longitudinales típicamente se tiene una variable medida en distintos momentos del tiempo que será la variable respuesta (que normalmente queremos predecir o explicar) y opcionalmente otras variables que pueden medirse sólo en el momento basal o inicial o también pueden ser variables tiempo-dependientes.</p>
+<p>Hay variables que, aunque cambien en el tiempo, como puede ser la edad, como lo hace igual para todos, no se considerará tiempo-dependiente. Y otras que són constantes como el sexo.</p>
+<p>Los <strong>objetivos</strong> pueden ser distintos:</p>
 <ul>
-<li>Módulo 1: Modelos lineales para datos longitudinales continuos (I)
-<ul>
-<li>Introducción</li>
-<li>Formato de datos</li>
-<li>Visualización de datos longitudinales</li>
-<li>ANOVA para medidas repetidas</li>
-<li>MANOVA</li>
-</ul></li>
-<li>Módulo 2: Modelos lineales para datos longitudinales continuos (II)
-<ul>
-<li>Modelos mixtos</li>
-<li>Otros modelos: GLS, GEE</li>
-</ul></li>
-<li>Módulo 3: Análisis de supervivencia con eventos recurrentes (I)
-<ul>
-<li>Breve introducción al análisis de supervivencia</li>
-<li>Modelos condicionales y marginales</li>
-<li>Modelos de fragilidad</li>
-</ul></li>
-<li>Módulo 4: Modelización conjunta de datos longitudinales y de supervivencia
-<ul>
-<li>Introducción</li>
-<li>Joint models</li>
-</ul></li>
+<li>Estudiar la <strong>evolución de una variable a lo largo del tiempo</strong> (o espacio). Esto es equivalente a evaluar el efecto que tiene el tiempo (o espacio) sobre esta variable.</li>
 </ul>
-<div id="instalación-de-librerías-necesarias-para-el-curso" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Instalación de librerías necesarias para el curso</h2>
-<p>Para poder reproducir todo el código de este libro se necesitan tener instaladas las siguientes librería</p>
-<pre><code>install.packages(c(&quot;tidyverse&quot;, &quot;dplyr&quot;, &quot;magrittr&quot;, &quot;ggplot2&quot;, &quot;reshape2&quot;,
-                   &quot;ez&quot;, &quot;MANOVA.RM&quot;))
-</code></pre>
-<p>Los datos están accesibles en esta carpeta</p>
-<pre><code>https://github.com/isglobal-brge/curso_longitudinal/tree/main/datos</code></pre>
-<p>Este material está licenciado bajo una <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAMAAABUFvrSAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAEZ0FNQQAAsY58+1GTAAAAAXNSR0IB2cksfwAAAW5QTFRF////////////////7+/v39/f1tXV09bS0tXS0tXR0dTR0dTQ0NTQ0NPPz9PPztLOztHNzdHNzdHMz8/PzdDMzNDMzNDLzM/Ly8/Ly8/Ky87Kys3Jyc3Jyc3IyMzIyMzHx8vHxsrGxsrFxcnFxcnExMnExMjDw8jDxMfDw8fCwsfCwcXAwMXAwMW/wMS/v8S+v8O+vsO+vsK9vcK9vcK8v7+/vMG8vMG7vMC8u8C7u8C6ur+6ur+5ub65ub64uL23t7y2tru1tbq0tLqztLmzs7iysrixsrexsbewsbawsLavsLWvr7Wur7SusLOvrrStrrOtr7KvrbOsrLKrr6+vq7Gqn6OenqCdn5+flpmWk5iTkZSRkZORj4+PiYyJhIaEhIWEgoWCgICAfX98fH98eXx5cHJvcHBwYGBgXV5dUFFQUFBQQ0RDQEBAPj8+NTY1MjMxMDAwKSkpKCkoICAgGxsbEBAQDg4ODQ4NAAAAlzoSDQAAAAN0Uk5TAAoO5yEBUwAAAvhJREFUeNq1lutX2kAQxWmXFDVGYy1EIjQ2VZDiu1CsRQQURYvV+qSKj6II8rANYOT+9z0JqIASo9Y5ydkP2f2d2Ts7d2N4jRcJgwEIBwO+SbdTFGw8ZzZz1n5BdLgnfLPBcCT6fW1jY3P78QEYEA76PWMu0W5lGbrNZGrrYNg+u+ga9fgVcmxtY/NJZAOCfs+IY4Bn6eN8RdlEJX9Ed1uFIfdnfzC8uBJbv5tyqqhMLKa0wQHPiEOwMInLW4Eu9xmzfdDtmQ0uLK3cSXmvBBTS6QJQ2tMC+8YcgpnOApAzSa83mZEBZIff2odGfYFQJNqc8s4VchQhhFA5XO1pgCddAxaFKyeNpBpxGSgNmwXXxMxcWE25fkkJGUIIoExESQPsFnkmC0gUuQmjBGQZq+j2BEKR5dUGLVLIvbkGkxxSrcHO92wCkIyENJL3u+2O8Zng/FJsvR5cRF0GFIqtwaKVvoTcSxrCKOOS7hPdXwLhxUYtUFC+Z6AKQgpoDRZ6joEkaYo4cMQKril/KLLcCE4TVYmqFmkNsK0rD9lIiDdXKCSrwwEhREae6Ve0WIiuPg3M0xVlW171BBe21CGjbLbSYR0c/To3H409TQquHTggREKZ8pbjEiRqqxxXtWjjRLdvLrzUAK4Vr5qwZvEsJsCrzExWF9Tk9gIm84e74BRyRN9xeyS4vkHSmg1yK4Wxt5yUIClDayn0t3SteLWq3RQvjQrN31O87e2dEiBl0tJDJmTrykImN8dtq6AOpIw8Y3OMf2s+bvptU+hJqFrc1yCfpmZDkWYX0mv0H9WWpvS2tH6w8z27e58JJVi7c2ImuNBkQvrBOOWZc0CqsyFKtU3+97OuaQBnXGe90RuTMvCHtpziuWCcmDvPm64m+t2vlmuq/YHqqwnGCcfs1l+mCcbSmgtSe8iDGQNnPEsnrq//fZrltXS4tk3oAOPvT2tPF91uMrXTDNv340JrjQ4hbsHAxeE0z1ksHD99eKFdl0dl/P//Cl+9EPcfS+yBAoqk3eUAAAAASUVORK5CYII=" /></p>
+<p><img src="fig_out/unnamed-chunk-2-1.png" width="672" /></p>
+<ul>
+<li>Ver si la <strong>evolución de una variable a lo largo del tiempo es la misma en diferentes grupos</strong>. Por ejemplo ver si la concentración de un fármaco evoluaciona de la misma manera que otro fármaco ó placebo.</li>
+</ul>
+<p><img src="fig_out/unnamed-chunk-3-1.png" width="672" /></p>
+<ul>
+<li><strong>Identificar patrones en la evolución</strong> o cambio de una variable a lo largo del tiempo. En este contexto se pueden usar técnicas basadas en las distancias entre curvas (que no se explicarán en este curso).</li>
+</ul>
+<p><img src="fig_out/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="ejemplos" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Ejemplos</h2>
+<p><strong>Ejemplo 1</strong></p>
+<blockquote>
+<p>En un estudio de intervención de dieta se reclutan 100 individuos por grupo. Estos grupos son (1) grupo control: se sigue una dieta mediterránea; (2) grupo de frutos secos: la dieta mediterranea es complementada con una cantidad de nueces; (3) grupo de aceite de oliva: a la dieta mediterránea se le añade una cantidad de aceite de oliva virgen.
+A lo largo de los siete años que dura el estudio, cada participante es visitado y se le toman distintas medidas desde cuestionarios de dieta, actividad física, medidas antropométricas (peso, talla), la tensión arterial, o medidas en sangre (perfil lipídico, etc.).
+No todos los individuos acuden en todas las visitas con lo cual aparecen datos faltantes. Además, por motivos de enfermedad o de muerte, algunos de alguno de ellos no se tiene la información de las visitas finales, dando lugar a distintos tiempos de seguimiento.</p>
+</blockquote>
+<p><strong>Ejemplo 2</strong></p>
+<blockquote>
+<p>A fin de comparar tres medicamentos (A, B y C) para reducir el colesterol, se reclutan 30 voluntarios, todos ellos diagnosticados de hipercolesterolemia y de entre 40 y 60 años de edad. Cada partipante se le asigna uno de los tres medicamentos al azar de forma que 10 de ellos toman el medicamento A, otros el medicamento B y los 10 restantes el medicamento C.</p>
+<p>Se miden los niveles de colesterol total en sangre (en mg/dL) justo en el inicio del estudio y cada 7 días en ayunas, a lo largo de 12 semanas.</p>
+</blockquote>
+<p><strong>Ejemplo 3</strong></p>
+<blockquote>
+<p>En un estudio sobre la polución ambiental en zonas urbanas, se eligen al azar 15 ciudades de más de 100.000 habitantes. De cada ciudad se eligen 4 puntos al azar con alta densidad de tráfico.</p>
+<p>En cada punto se realizan 10 medidas desde las 8h de la mañana hasta las 17h de la tarde con intervalos de 60 minutos, en un día entre semana.</p>
+</blockquote>
+<p><strong>Ejemplo 4</strong></p>
+<blockquote>
+<p>Se quiere estudiar la población de una especie de alga en aguas marinas poco profundas.
+Para ello se muestrean veinte puntos al azar lo largo de la costa y a una distancia de aproximadamente un quilómetro de la playa. En cada punto se recoge una muestra a dos, cuatro, seis, ocho y diez metros de profundidas.</p>
+<p>Finalmente, en cada muestra se contabilizan el número de especímenes que hay por centímetro cúbico de agua.</p>
+</blockquote>
+<p><strong>Ejemplo 5</strong></p>
+<blockquote>
+<p>En un estudio farmacocinético, se inyecta una cierta cantidad de un componente farmacológico en sangre. Se reclutan 15 individuos y para cada uno de ellos se mide cada hora la concentración en sangre.</p>
+<p>Se puede estudiar las características de la curva de la concentración a lo largo del tiempo resumiendo todos los datos de concentración en un solo valor como es el AUC, o el tiempo de inflexión, etc. O bien, se puede analizar la concentración en cada punto desde el punto de vista de medidas repetidas.</p>
+<p>Este ejemplo también se podría tratar como análisis funcional, viendo los datos de cada individuo como una función del tiempo.</p>
+</blockquote>
+<p><strong>Ejemplo 6</strong></p>
+<blockquote>
+<p>En un estudio sobre la adherencia a un medicamento, se hacen visitas mensuales a los participantes y en cada visita se pregunta si toma o no el medicamento con las dosis adecuadas, siendo la variable medida binaria (sí/no).</p>
+</blockquote>
+<p><strong>Ejemplo 7</strong></p>
+<blockquote>
+<p>En un estudio se quiere ver la eficacia de una dieta rica en aceite de oliva sobre los niveles de colesterol triglicéridos.
+Para ello se reculatan 3,000 participantes que son aleatorizados al grupo de tratamiento basado en una dieta enriquecida con aceite de oliva y a un grupo control a los que sólo se les indica que sigan una dieta saludable y pobre en grasas.
+Cada participante se visita anualmente durante sieta años en que se mide, entre otras variables los niveles de triglicéridos. A fin de asegurar o evaluar hasta qué punto los participantes siguen la dieta que les ha tocado, también se mide en cada visita un parámetro en sangre sensible a la cantidad de aceite de oliva ingerido.</p>
+</blockquote>
+<p><strong>No serían medidas repetidas:</strong></p>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>Expresión génica de distintos genes. En este ejemplo cada gen sería una variable distinta; nos podría interesar comparar los niveles de expresión entre distintos genes. Éste sería un ejemplo de muchas variables respuesta.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>Datos de seguimiento en el que se quiere estudiar la incidencia de diabetes. Para ello se hacen distintas visitas y se reporta en cada visita si el paciente es diabético o no. En este ejemplo, cada medida se toma o se mide si y solo si en la medida anterior el resultado es negativo. Sería un ejemplo de análisis de supervivencia con tiempo discreto.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3" style="list-style-type: decimal">
+<li>Si tenemos sólo dos medidas, aunque estrictamente son medidas repetidas, se pueden usar técnicas y modelos estándard. Por ejemplo, si la variable es continua se puede trabajar con la diferencia (después - antes) como la varaible respuesta y ajustar por el valor basal.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="4" style="list-style-type: decimal">
+<li>Si tenemos distintas medidas pero no sabemos cuando o en qué orden se han recogido. Por ejemplo, si tenemos 3 medidas de tensión arterial para cada individuo pero no sabemos el orden en que se han tomado las medidas. En este caso, se trataría o analizaría como datos en clúster. Alternativamente se puede calcular la media para cada individuo y trabajar con modelo estándar con un sólo dato por individuo.</li>
+</ol>
+</blockquote>
+</div>
+<div id="esquemas-de-recogidas-de-datos" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Esquemas de recogidas de datos</h2>
+<div id="todas-las-medidas-con-intervalos-fijos" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Todas las medidas con intervalos fijos</h3>
+<p>Medidas tomadas en los momentos <span class="math inline">\(t_1\)</span>, <span class="math inline">\(t_2\)</span>, …, <span class="math inline">\(t_5\)</span>. El intervalo transcurrido entre dos medidas puede ser constante o no. Pero son las mismas para todos los individuos. En caso que el intervalo no sea constante es importante anotar en qué momentos (segundos, minutos, horas, días, o metros…) se han hecho las medidas.</p>
+<p><img src="fig_out/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="missings-al-azar-con-intervalos-fijos" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Missings al azar con intervalos fijos</h3>
+<p>No todos los individuos tienen datos observados en todos los tiempos. Es importante que estos datos faltantes ocurran al azar para poder considerar los modelos que vamos a ver en este curso como correctos.</p>
+<p><img src="fig_out/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="distintos-seguimientos" class="section level3" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Distintos seguimientos</h3>
+<p>Algunos individuos son seguidos a lo largo del tiempo en más visitas que otros.</p>
+<p><img src="fig_out/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="todas-las-medidas-a-distintos-tiempos" class="section level3" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> Todas las medidas a distintos tiempos</h3>
+<p>Los datos anteriores se consideran estudios de <strong>datos panel</strong>. Es decir, los datos se recogen de forma diara, semanal, anual, etc. (a tiempo fijo). Sin embargo, lo más habitual es disponer de observaciones en distintos tiempos para cada individuo y distintos número de observaciones para cada individuo.</p>
+<p><img src="fig_out/unnamed-chunk-8-1.png" width="672" /></p>
 
+</div>
 </div>
 </div>
             </section>
@@ -258,8 +317,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estructura-de-los-datos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -291,7 +350,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/isglobal-brge/curso_longitudinal/tree/master/docsindex.Rmd",
+"link": "https://github.com/isglobal-brge/curso_longitudinal/tree/master/docs01-Introduccion.Rmd",
 "text": "Edit"
 },
 "history": {

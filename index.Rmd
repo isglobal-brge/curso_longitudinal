@@ -15,15 +15,17 @@ knitr::opts_chunk$set(cache=T, warning=FALSE, message=FALSE,
 ```
 
 
-# Introducción
+# Preámbulo
 
-Este bookdown sirven como notas para el curso [Modelización estadística avanzada con R: análisis de datos longitudinales](https://www.iisaragon.es/event/curso-modelizacion-estadistica-avanzada-con-r-analisis-de-datos-longitudinales-iacs/) impartido en el [Insituto Aragonés de Ciencias de la Salud](https://www.iacs.es/)
+Este bookdown sirve como notas para el curso [Modelización estadística avanzada con R: análisis de datos longitudinales](https://www.iisaragon.es/event/curso-modelizacion-estadistica-avanzada-con-r-analisis-de-datos-longitudinales-iacs/) impartido en el [Insituto Aragonés de Ciencias de la Salud](https://www.iacs.es/)
 
 
 El contenido del curso tiene los siguientes temas:
 
 
 - Módulo 1: Modelos lineales para datos longitudinales continuos (I)
+     + Introducción
+     + Formato de datos
      + Visualización de datos longitudinales
      + ANOVA para medidas repetidas
      + MANOVA
@@ -38,7 +40,27 @@ El contenido del curso tiene los siguientes temas:
      + Modelos de fragilidad
 
 - Módulo 4: Modelización conjunta de datos longitudinales y de supervivencia
+     + Introducción
      + Joint models
+
+
+## Instalación de librerías necesarias para el curso
+
+Para poder reproducir todo el código de este libro se necesitan tener instaladas las siguientes librería
+
+```
+install.packages(c("tidyverse", "dplyr", "magrittr", "ggplot2", "reshape2",
+                   "ez", "MANOVA.RM"))
+
+```
+
+Los datos están accesibles en esta carpeta
+
+
+```
+https://github.com/isglobal-brge/curso_longitudinal/tree/main/datos
+```
+
 
 
 Este material está licenciado bajo una [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
