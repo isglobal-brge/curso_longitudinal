@@ -411,7 +411,7 @@ Como hay individuos con datos faltantes no podemos utilizar ANOVA o MANOVA y deb
 ## Ejercicios 
 
 
-## Ejercicio 1
+### Ejercicio 1
 
 > Para estudiar las diferencias entre dos procedimientos diferentes de recuperación de pacientes de un infarto, se consideraron dos grupos experimentales en sendos hospitales, de 8 pacientes cada uno. La variable respuesta es el índice de Bartel, que varía entre 0 y 100, y que constituye una medida de la habilidad funcional con la que se valoran diferentes capacidades, de forma que valores más altos se corresponden con una mejor situación del paciente. De cada uno de los 16 pacientes se dispone de su respuesta cada semana a lo largo de 5 semanas consecutivas. Los datos se pueden encontrar en el archivo *recuperainfarto.txt*. El fichero contiene la información para cada individuo en una fila, la primera columna contiene la información del hostpital y las siguiente 5 columnas corresponden al valor del índice para cada semana.
 >
