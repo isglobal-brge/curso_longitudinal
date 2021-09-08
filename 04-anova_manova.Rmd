@@ -435,10 +435,11 @@ Como hay individuos con datos faltantes no podemos utilizar ANOVA o MANOVA y deb
 ### Ejercicio 3
 > Los datos `o2cons`, disponibles en el paquete `MANOVA.RM`, contiene medidas sobre el consumo de oxígeno de los leucocitos ("O2") de 144 individuos, 72 de ellos asignados al grupo control ("Group=P") y el resto al grupo de tratamiento con Verum (Group=V). Además, para cada individuo se recoge si los estafilococos ("Staphylococci") estaban activados o no (0/1). Para cada individuo se tomaron los niveles de oxígeno de los leucocitos después de 6, 12 y 18 minutos.
 >
-1. Haz una pequeña descriptiva de los datos contenidos en esta base de datos
-2. Analiza la evolución del consumo de oxígeno del grupo de tratamiento ("Group=V").
-3. Crea una figura para mostrar si visualmente hay diferencias en la evolución del comsumo de =2 entre el grupo de intervención y el grupo de tratamiento.
-4. ¿Son estas diferencias estadísticamente significativas?
+1. Crea otro data.frame con los datos en formato ancho
+2. Haz una pequeña descriptiva de los datos contenidos en esta base de datos
+3. Analiza la evolución del consumo de oxígeno del grupo de tratamiento ("Group=V").
+4. Crea una figura para mostrar si visualmente hay diferencias en la evolución del comsumo de =2 entre el grupo de intervención y el grupo de tratamiento.
+5. ¿Son estas diferencias estadísticamente significativas?
 >
 > Recuerda que los datos los puedes cargar mediante la instrucción
 ```{r}
