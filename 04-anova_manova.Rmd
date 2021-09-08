@@ -48,7 +48,7 @@ En ambos casos, tanto en el diseño en que tenemos grupos (1W+1B) como en el que
 
 ### Función `ezANOVA`
 
-Para ajustar los modelos de medidas repetidas balanceados mediante la técnica de suma de cuadrados existe la función **`ezANOVA`** del paquete **`ez`** [@R-ez]
+Para ajustar los modelos de medidas repetidas balanceados mediante la técnica de suma de cuadrados existe la función **`ezANOVA`** del paquete [ez](https://github.com/mike-lawrence/ez).
 
 ```{r}
 library(ez)
@@ -103,7 +103,7 @@ Donde
 
 **Observaciones**
 
-- Para ajustar este modelo los datos se disponen de forma horizontal.
+- Para ajustar este modelo los datos se disponen de forma horizontal (ancho).
 
 - En este modelo los tiempos en que se toman las $T$ medidas tienen que ser los mismos para todos los individuos.
 
