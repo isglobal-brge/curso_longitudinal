@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 4 Visualización de datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales</title>
   <meta name="description" content="Capítulo 4 Visualización de datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 4 Visualización de datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-07-26" />
+<meta name="date" content="2021-09-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,8 @@
   
 <link rel="prev" href="estructura-de-los-datos.html"/>
 <link rel="next" href="ModelosNormal.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -168,7 +168,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6.2" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#colapsar"><i class="fa fa-check"></i><b>3.6.2</b> Colapsar</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html"><i class="fa fa-check"></i><b>4</b> Visualización de datos longitudinales</a></li>
+<li class="chapter" data-level="4" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html"><i class="fa fa-check"></i><b>4</b> Visualización de datos longitudinales</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html#trayectorias"><i class="fa fa-check"></i><b>4.1</b> Trayectorias</a></li>
+<li class="chapter" data-level="4.2" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html#spaghetti-plots"><i class="fa fa-check"></i><b>4.2</b> Spaghetti plots</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="ModelosNormal.html"><a href="ModelosNormal.html"><i class="fa fa-check"></i><b>5</b> Modelos con respuesta normal</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#técnica-de-la-suma-de-cuadrados"><i class="fa fa-check"></i><b>5.1</b> Técnica de la suma de cuadrados</a>
@@ -183,6 +187,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplo-1"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo 1</a></li>
 <li class="chapter" data-level="5.3.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplo-2"><i class="fa fa-check"></i><b>5.3.2</b> Ejemplo 2</a></li>
 <li class="chapter" data-level="5.3.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplo-3"><i class="fa fa-check"></i><b>5.3.3</b> Ejemplo 3</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicios"><i class="fa fa-check"></i><b>5.4</b> Ejercicios</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicio-1"><i class="fa fa-check"></i><b>5.4.1</b> Ejercicio 1</a></li>
+<li class="chapter" data-level="5.4.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicio-2"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio 2</a></li>
+<li class="chapter" data-level="5.4.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicio-3"><i class="fa fa-check"></i><b>5.4.3</b> Ejercicio 3</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -207,8 +217,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="visualización-de-datos-longitudinales" class="section level1" number="4">
 <h1><span class="header-section-number">Capítulo 4</span> Visualización de datos longitudinales</h1>
-<p>Para ilustrar cómo visualizar datos longitudinales usaremos los datos que se encuentran en formato ancho obtenidos de <a href="https://stats.idre.ucla.edu/r/examples/alda/r-applied-longitudinal-data-analysis-ch-2/">UCLA web site</a>. Este ejemplo pertenece a un estudio …</p>
-<p>Los datos podemos cargarlos de la forma habitual, pero teniendo en cuenta que se encuentran en formato “csv”</p>
+<p>Para ilustrar cómo visualizar datos longitudinales usaremos los datos que se encuentran en formato ancho obtenidos de <a href="https://stats.idre.ucla.edu/r/examples/alda/r-applied-longitudinal-data-analysis-ch-2/">UCLA web site</a>. Este ejemplo pertenece a un estudio realizado en adolescentes en el que se ha medido su tolerancia a tener un comportamiento que se “desvia de lo habitual” usando 9 items (medidos en una escala de 1 a 4 que va de un comportamiento muy malo hasta para nada malo) que se resumen con la media del valor obtenido en cada uno de ellos. Además del sexo del adolescente, también se ha recogido una variable (“exposure”) que corresponde a la respuesta autoreportada por el adolescente a los 11 años de su exposición a tener un comportamiento que anómalo</p>
+<p>Los datos podemos cargarlos de la forma habitual, pero teniendo en cuenta que se encuentran en formato “csv”. Notemos que no hace falta descargarlos en nuestro ordenador y cargarlos desde ahí, ya que la función <code>read_csv</code> acepta que los datos estén en un repositorio en la red (basta con indicar su URL).</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="visualización-de-datos-longitudinales.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb33-2"><a href="visualización-de-datos-longitudinales.html#cb33-2" aria-hidden="true" tabindex="-1"></a>tolerance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://stats.idre.ucla.edu/wp-content/uploads/2016/02/tolerance1.txt&quot;</span>)</span>
 <span id="cb33-3"><a href="visualización-de-datos-longitudinales.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tolerance)</span></code></pre></div>
@@ -224,6 +234,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Con los datos en este formato, podemos aprovechar para obtener algunas estadísticas descriptivas que pueden resultar de interés. Por ejemplo, podemos ver cuántos individuos tenemos en nuestro estudio simplemente ejecutando:</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="visualización-de-datos-longitudinales.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(tolerance)</span></code></pre></div>
 <pre><code>[1] 16</code></pre>
+<div id="trayectorias" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Trayectorias</h2>
 <p>Para poder crear gráficos que nos informen sobre la evolución de la tolerancia entre individuos necesitamos que los datos estén en formato largo. Como hemos visto anteriormente, esto lo podemos realizar mediante</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="visualización-de-datos-longitudinales.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
 <span id="cb37-2"><a href="visualización-de-datos-longitudinales.html#cb37-2" aria-hidden="true" tabindex="-1"></a>tolerance2 <span class="ot">&lt;-</span> <span class="fu">melt</span>(tolerance, <span class="at">measure.vars=</span><span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,</span>
@@ -280,6 +292,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb44-3"><a href="visualización-de-datos-longitudinales.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb44-4"><a href="visualización-de-datos-longitudinales.html#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id)</span></code></pre></div>
 <p><img src="fig_out/unnamed-chunk-38-1.png" width="432" /></p>
+</div>
+<div id="spaghetti-plots" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Spaghetti plots</h2>
 <p>También podemos visualizar todas las trayectorias en único gráfico mediante lo que se conoce como un <strong>spaghetti plot</strong>. Esta representación es muy útil cuando queremos visualizar muchos individuos. Para ello deberíamos usar el argumento <code>group</code></p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="visualización-de-datos-longitudinales.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tolerance2, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> tolerance, <span class="at">group =</span> id)) <span class="sc">+</span></span>
 <span id="cb45-2"><a href="visualización-de-datos-longitudinales.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
@@ -303,6 +318,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb49-2"><a href="visualización-de-datos-longitudinales.html#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="at">fun =</span> mean, <span class="at">size=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="fig_out/unnamed-chunk-43-1.png" width="432" /></p>
 
+</div>
 </div>
             </section>
 
@@ -354,6 +370,10 @@ gitbook.start({
 "text": null
 },
 "download": ["cursoLongitudinal-bookdown.pdf", "cursoLongitudinal-bookdown.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

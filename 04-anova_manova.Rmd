@@ -408,3 +408,43 @@ sum(with(datos, tapply(is.na(respuesta), indiv, any)))
 Como hay individuos con datos faltantes no podemos utilizar ANOVA o MANOVA y debemos usar modelos más avanzados que veremos más adelante.
 
 
+## Ejercicios 
+
+
+### Ejercicio 1
+> Para estudiar las diferencias entre dos procedimientos diferentes de recuperación de pacientes de un infarto, se consideraron dos grupos experimentales en sendos hospitales, de 8 pacientes cada uno. La variable respuesta es el índice de Bartel, que varía entre 0 y 100, y que constituye una medida de la habilidad funcional con la que se valoran diferentes capacidades, de forma que valores más altos se corresponden con una mejor situación del paciente. De cada uno de los 16 pacientes se dispone de su respuesta cada semana a lo largo de 5 semanas consecutivas. Los datos se pueden encontrar en el archivo *recuperainfarto.txt*.
+>
+1. Crea una figura para visualizar la evolución en la respuesta a lo largo del tiempo para cada individuo.
+1. Crea una figura para mostrar si visualmente hay diferencias entre ambos procedimientos a lo largo del tiempo.
+2. ¿Qué procedimiento presenta una mejor recuperación de los pacientes? ¿Es esta diferencia estadísticamente significativa? 
+
+
+### Ejercicio 2
+
+> En un estudio sobre la agudeza visual se dispone de la respuesta de siete individuos. La respuesta en cada ojo es el retraso en milisegundos entre la emisión de una luz y la respuesta en a la misma por el cortex. Cada ojo se somete a cuatro mediciones correspondientes a cuatro instantes consecutivos. Se tienen mediciones en el ojo izquierdo y derecho. Los datos se pueden encontrar en el archivo *agudezavisual.txt*
+>
+1. Crea una nueva base de datos agregando la información para cada una de la medida repetida (ojo) [NOTA: toma la media - usa la función `aggregate` o cualquier otra que creas oportuna]. Usando esta nueva base de datos, contesta a las siguientes preguntas:
+2. Crea una figura para mostrar si visualmente hay diferencias en el retraso promedio de ambos ojos a lo largo del tiempo para cada individuo.
+3. ¿Existen diferencias entre la medición final y la basal?
+4. ¿Existe un efecto temporal en la respuesta?
+
+
+
+
+### Ejercicio 3
+> Los datos `o2cons`, disponibles en el paquete `MANOVA.RM`, contiene medidas sobre el consumo de oxígeno de los leucocitos ("O2") de 144 individuos, 72 de ellos asignados al grupo control ("Group=P") y el resto al grupo de tratamiento con Verum (Group=V). Además, para cada individuo se recoge si los estafilococos ("Staphylococci") estaban activados o no (0/1). Para cada individuo se tomaron los niveles de oxígeno de los leucocitos después de 6, 12 y 18 minutos.
+>
+1. Haz una pequeña descriptiva de los datos contenidos en esta base de datos
+2. Analiza la evolución del consumo de oxígeno del grupo de tratamiento ("Group=V").
+3. Crea una figura para mostrar si visualmente hay diferencias en la evolución del comsumo de =2 entre el grupo de intervención y el grupo de tratamiento.
+4. ¿Son estas diferencias estadísticamente significativas?
+>
+> Recuerda que los datos los puedes cargar mediante la instrucción
+```{r}
+library(MANOVA.RM)
+data(o2cons)
+```
+>
+>
+
+

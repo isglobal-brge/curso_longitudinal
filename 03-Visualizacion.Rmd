@@ -1,8 +1,8 @@
 # Visualización de datos longitudinales
 
-Para ilustrar cómo visualizar datos longitudinales usaremos los datos que se encuentran en formato ancho obtenidos de  [UCLA web site](https://stats.idre.ucla.edu/r/examples/alda/r-applied-longitudinal-data-analysis-ch-2/). Este ejemplo pertenece a un estudio ... 
+Para ilustrar cómo visualizar datos longitudinales usaremos los datos que se encuentran en formato ancho obtenidos de  [UCLA web site](https://stats.idre.ucla.edu/r/examples/alda/r-applied-longitudinal-data-analysis-ch-2/). Este ejemplo pertenece a un estudio realizado en adolescentes en el que se ha medido su tolerancia a tener un comportamiento que se "desvia de lo habitual" usando 9 items (medidos en una escala de 1 a 4 que va de un comportamiento muy malo hasta para nada malo) que se resumen con la media del valor obtenido en cada uno de ellos. Además del sexo del adolescente, también se ha recogido una variable ("exposure") que corresponde a la respuesta autoreportada por el adolescente a los 11 años de su exposición a tener un comportamiento que anómalo  
 
-Los datos podemos cargarlos de la forma habitual, pero teniendo en cuenta que se encuentran en formato "csv"
+Los datos podemos cargarlos de la forma habitual, pero teniendo en cuenta que se encuentran en formato "csv". Notemos que no hace falta descargarlos en nuestro ordenador y cargarlos desde ahí, ya que la función `read_csv` acepta que los datos estén en un repositorio en la red (basta con indicar su URL).
 
 ```{r, warning = F, message = F}
 library(tidyverse)
@@ -15,6 +15,8 @@ Con los datos en este formato, podemos aprovechar para obtener algunas estadíst
 ```{r}
 nrow(tolerance)
 ```
+
+## Trayectorias
 
 Para poder crear gráficos que nos informen sobre la evolución de la tolerancia entre individuos necesitamos que los datos estén en formato largo. Como hemos visto anteriormente, esto lo podemos realizar mediante
 
@@ -89,6 +91,8 @@ ggplot(tolerance2, aes(x = age, y = tolerance)) +
   stat_smooth(method = "lm", se = FALSE) +
   facet_wrap(~id)
 ```
+
+## Spaghetti plots
 
 También podemos visualizar todas las trayectorias en único gráfico  mediante lo que se conoce como un **spaghetti plot**. Esta representación es muy útil cuando queremos visualizar muchos individuos. Para ello deberíamos usar el argumento `group`
 

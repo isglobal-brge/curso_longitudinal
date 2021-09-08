@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 2 Introducción a los diseños de datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales</title>
   <meta name="description" content="Capítulo 2 Introducción a los diseños de datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 2 Introducción a los diseños de datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-07-26" />
+<meta name="date" content="2021-09-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,8 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="estructura-de-los-datos.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -168,7 +168,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6.2" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#colapsar"><i class="fa fa-check"></i><b>3.6.2</b> Colapsar</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html"><i class="fa fa-check"></i><b>4</b> Visualización de datos longitudinales</a></li>
+<li class="chapter" data-level="4" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html"><i class="fa fa-check"></i><b>4</b> Visualización de datos longitudinales</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html#trayectorias"><i class="fa fa-check"></i><b>4.1</b> Trayectorias</a></li>
+<li class="chapter" data-level="4.2" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html#spaghetti-plots"><i class="fa fa-check"></i><b>4.2</b> Spaghetti plots</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="ModelosNormal.html"><a href="ModelosNormal.html"><i class="fa fa-check"></i><b>5</b> Modelos con respuesta normal</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#técnica-de-la-suma-de-cuadrados"><i class="fa fa-check"></i><b>5.1</b> Técnica de la suma de cuadrados</a>
@@ -183,6 +187,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplo-1"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo 1</a></li>
 <li class="chapter" data-level="5.3.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplo-2"><i class="fa fa-check"></i><b>5.3.2</b> Ejemplo 2</a></li>
 <li class="chapter" data-level="5.3.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplo-3"><i class="fa fa-check"></i><b>5.3.3</b> Ejemplo 3</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicios"><i class="fa fa-check"></i><b>5.4</b> Ejercicios</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicio-1"><i class="fa fa-check"></i><b>5.4.1</b> Ejercicio 1</a></li>
+<li class="chapter" data-level="5.4.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicio-2"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio 2</a></li>
+<li class="chapter" data-level="5.4.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicio-3"><i class="fa fa-check"></i><b>5.4.3</b> Ejercicio 3</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -209,11 +219,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Capítulo 2</span> Introducción a los diseños de datos longitudinales</h1>
 <div id="definición" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Definición</h2>
-<p>Un diseño longitudinal se obtiene cuando obtenemos distintas medidas a un sujeto. Por esto a veces a este tipo de datos también se les llama de medidas repetidas. En cada momento del tiempo se realiza una medida de una variable o de variables variables. Esta variable o variables diremos que serán cambiantes en el tiempo o tiempo-dependientes. En los diseños longitudinales típicamente se tiene una variable medida en distintos momentos del tiempo que será la variable respuesta (que normalmente queremos predecir o explicar) y opcionalmente otras variables que pueden medirse sólo en el momento basal o inicial o también pueden ser variables tiempo-dependientes.</p>
+<p>Un diseño longitudinal se obtiene cuando obtenemos distintas medidas de un sujeto a lo largo del tiempo. Por esto a veces a este tipo de datos también se les llama de medidas repetidas. En cada momento del tiempo se realiza una medida de una variable o de variables variables. Esta variable o variables diremos que serán cambiantes en el tiempo o tiempo-dependientes. En los diseños longitudinales típicamente se tiene una variable medida en distintos momentos del tiempo que será la variable respuesta (que normalmente queremos predecir o explicar) y opcionalmente otras variables que pueden medirse sólo en el momento basal o inicial o también pueden ser variables tiempo-dependientes.</p>
 <p>Hay variables que, aunque cambien en el tiempo, como puede ser la edad, como lo hace igual para todos, no se considerará tiempo-dependiente. Y otras que són constantes como el sexo.</p>
 <p>Los <strong>objetivos</strong> pueden ser distintos:</p>
 <ul>
-<li>Estudiar la <strong>evolución de una variable a lo largo del tiempo</strong> (o espacio). Esto es equivalente a evaluar el efecto que tiene el tiempo (o espacio) sobre esta variable.</li>
+<li>Estudiar la <strong>evolución de una variable a lo largo del tiempo</strong>. Esto es equivalente a evaluar el efecto que tiene el tiempo sobre esta variable.</li>
 </ul>
 <p><img src="fig_out/unnamed-chunk-2-1.png" width="672" /></p>
 <ul>
@@ -362,6 +372,10 @@ gitbook.start({
 "text": null
 },
 "download": ["cursoLongitudinal-bookdown.pdf", "cursoLongitudinal-bookdown.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

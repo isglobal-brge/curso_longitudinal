@@ -19,6 +19,8 @@ transformación
 vertical-a-horizontal-y-viceversa
 colapsar
 visualización-de-datos-longitudinales
+trayectorias
+spaghetti-plots
 ModelosNormal
 técnica-de-la-suma-de-cuadrados
 diseño-1w1b
@@ -35,3 +37,7 @@ exploración-de-los-datos-1
 suma-de-cuadrados-anova-1
 modelo-de-respuesta-multivariante-manova-1
 ejemplo-3
+ejercicios
+ejercicio-1
+ejercicio-2
+ejercicio-3

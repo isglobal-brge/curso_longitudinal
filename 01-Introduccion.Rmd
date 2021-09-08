@@ -5,14 +5,14 @@
 ## Definición
 
 
-Un diseño longitudinal se obtiene cuando obtenemos distintas medidas a un sujeto. Por esto a veces a este tipo de datos también se les llama de medidas repetidas. En cada momento del tiempo se realiza una medida de una variable o de variables variables. Esta variable o variables diremos que serán cambiantes en el tiempo o tiempo-dependientes. En los diseños longitudinales típicamente se tiene una variable medida en distintos momentos del tiempo que será la variable respuesta (que normalmente queremos predecir o explicar) y opcionalmente otras variables que pueden medirse sólo en el momento basal o inicial o también pueden ser variables tiempo-dependientes.
+Un diseño longitudinal se obtiene cuando obtenemos distintas medidas de un sujeto a lo largo del tiempo. Por esto a veces a este tipo de datos también se les llama de medidas repetidas. En cada momento del tiempo se realiza una medida de una variable o de variables variables. Esta variable o variables diremos que serán cambiantes en el tiempo o tiempo-dependientes. En los diseños longitudinales típicamente se tiene una variable medida en distintos momentos del tiempo que será la variable respuesta (que normalmente queremos predecir o explicar) y opcionalmente otras variables que pueden medirse sólo en el momento basal o inicial o también pueden ser variables tiempo-dependientes.
 
 Hay variables que, aunque cambien en el tiempo, como puede ser la edad, como lo hace igual para todos, no se considerará tiempo-dependiente. Y otras que són constantes como el sexo.
 
 
 Los **objetivos** pueden ser distintos:
 
-- Estudiar la **evolución de una variable a lo largo del tiempo** (o espacio). Esto es equivalente a evaluar el efecto que tiene el tiempo (o espacio) sobre esta variable.
+- Estudiar la **evolución de una variable a lo largo del tiempo**. Esto es equivalente a evaluar el efecto que tiene el tiempo sobre esta variable.
 
 
 ```{r, echo=FALSE}
