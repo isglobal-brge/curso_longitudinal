@@ -1,4 +1,4 @@
-fig:unnamed-chunk-83
+fig:unnamed-chunk-9
 preámbulo
 instalación-de-librerías-necesarias-para-el-curso
 intro
@@ -62,3 +62,6 @@ ejemplo-2
 ejemplo-3
 análisis-del-grupo-control
 comparación-de-los-dos-tratamientos
+ejercicios-1
+ejercicio-4
+ejercicio-5

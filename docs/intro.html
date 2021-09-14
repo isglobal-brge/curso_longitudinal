@@ -222,6 +222,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejemplo-2"><i class="fa fa-check"></i><b>6.7.2</b> Ejemplo 2</a></li>
 <li class="chapter" data-level="6.7.3" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejemplo-3"><i class="fa fa-check"></i><b>6.7.3</b> Ejemplo 3</a></li>
 </ul></li>
+<li class="chapter" data-level="6.8" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejercicios-1"><i class="fa fa-check"></i><b>6.8</b> Ejercicios</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejercicio-4"><i class="fa fa-check"></i><b>6.8.1</b> Ejercicio 4</a></li>
+<li class="chapter" data-level="6.8.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejercicio-5"><i class="fa fa-check"></i><b>6.8.2</b> Ejercicio 5</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -253,15 +258,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Estudiar la <strong>evolución de una variable a lo largo del tiempo</strong>. Esto es equivalente a evaluar el efecto que tiene el tiempo sobre esta variable.</li>
 </ul>
-<p><img src="fig_out/unnamed-chunk-76-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-2-1.png" width="672" /></p>
 <ul>
 <li>Ver si la <strong>evolución de una variable a lo largo del tiempo es la misma en diferentes grupos</strong>. Por ejemplo ver si la concentración de un fármaco evoluaciona de la misma manera que otro fármaco ó placebo.</li>
 </ul>
-<p><img src="fig_out/unnamed-chunk-77-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-3-1.png" width="672" /></p>
 <ul>
 <li><strong>Identificar patrones en la evolución</strong> o cambio de una variable a lo largo del tiempo. En este contexto se pueden usar técnicas basadas en las distancias entre curvas (que no se explicarán en este curso).</li>
 </ul>
-<p><img src="fig_out/unnamed-chunk-78-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="ejemplos" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Ejemplos</h2>
@@ -330,22 +335,22 @@ Cada participante se visita anualmente durante sieta años en que se mide, entre
 <div id="todas-las-medidas-con-intervalos-fijos" class="section level3" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Todas las medidas con intervalos fijos</h3>
 <p>Medidas tomadas en los momentos <span class="math inline">\(t_1\)</span>, <span class="math inline">\(t_2\)</span>, …, <span class="math inline">\(t_5\)</span>. El intervalo transcurrido entre dos medidas puede ser constante o no. Pero son las mismas para todos los individuos. En caso que el intervalo no sea constante es importante anotar en qué momentos (segundos, minutos, horas, días, o metros…) se han hecho las medidas.</p>
-<p><img src="fig_out/unnamed-chunk-79-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="missings-al-azar-con-intervalos-fijos" class="section level3" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> Missings al azar con intervalos fijos</h3>
 <p>No todos los individuos tienen datos observados en todos los tiempos. Es importante que estos datos faltantes ocurran al azar para poder considerar los modelos que vamos a ver en este curso como correctos.</p>
-<p><img src="fig_out/unnamed-chunk-80-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="distintos-seguimientos" class="section level3" number="2.3.3">
 <h3><span class="header-section-number">2.3.3</span> Distintos seguimientos</h3>
 <p>Algunos individuos son seguidos a lo largo del tiempo en más visitas que otros.</p>
-<p><img src="fig_out/unnamed-chunk-81-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="todas-las-medidas-a-distintos-tiempos" class="section level3" number="2.3.4">
 <h3><span class="header-section-number">2.3.4</span> Todas las medidas a distintos tiempos</h3>
 <p>Los datos anteriores se consideran estudios de <strong>datos panel</strong>. Es decir, los datos se recogen de forma diara, semanal, anual, etc. (a tiempo fijo). Sin embargo, lo más habitual es disponer de observaciones en distintos tiempos para cada individuo y distintos número de observaciones para cada individuo.</p>
-<p><img src="fig_out/unnamed-chunk-82-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-8-1.png" width="672" /></p>
 
 </div>
 </div>

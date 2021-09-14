@@ -1188,3 +1188,34 @@ grid.arrange(
 nrow=1, ncol=2)
 ```
 
+
+## Ejercicios 
+
+
+### Ejercicio 4
+
+>
+Los datos `sleepstudy` de la librería `lme4` contienen información sobre 18 dindividuos que se han seguido durante 9 días, y para los cuales se ha registrado el tiempo de reacción (en milisegundos) tras haber estado en deprivación de sueño. 
+>
+Los datos pueden cargarse mediante
+>
+```{r, eval=FALSE}
+library(lme4)
+data(sleepstudy)
+``` 
+>
+1. Crea un spaguetti plot para ver la evolución de la reacción a lo largo del tiempo
+2. Modeliza el tiempo de reacción (variable respuesta) a lo largo de los días. Usa tanto polinomios como splines con la función `ns()`. Puedes usar la función `anova()` con el test LRT para contrastar si es necesario usar términos splines (`ns()`) o polinomios `poly()`).
+>
+
+### Ejercicio 5
+>
+Los datos `dietox` de la librería `geepack` contienen el peso de cerdos medidos semanalmente durante 12 semanas cuando son sacrificados (Weight). Los datos también contienen el peso en la semana 1 (Start), tres niveles diferentes de vitamina E (Evit - dosis: 0, 100, 200 mg dl-alfa-tocoferil acetato / kg de alimento) en combinación con 3 niveles diferentes de cobre (Cu - dosis: 0, 35, 175 mg / kg de alimento) que reciben en el alimento. También se registra la ingesta acumulada de alimento (Feed). Los cerdos son compañeros de camada (Litter). El objetivo principal es ver qué combinación de suplementos en el alimento hace que los cerdos alcancen un mayor peso. 
+>
+1. Haz una descriptiva de las variables (summary)
+2. ¿Qué variables son tiempo dependientes y cuáles no? (crea un gráfico para Weight, Evit y Cu)
+3. Ajusta un modelo mixto para contestar a la pregunta científica
+4. ¿Qué variables as considerado con efecto aleatorio?
+5. ¿Qué estructura de correlaciones has considerado?
+6. Intenta cambiar algunos aspectos del modelo (añadir quitar coeficientes aleatorios, estructura de correlación de los errores, simplificar o añadir variables/interacciones, ...) para elegir el mejor modelo
+7. Una vez escogido el modelo final, haz un gráfico de la evolución de la variable respuesta a diferentes niveles de `Start`.

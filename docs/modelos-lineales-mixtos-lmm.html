@@ -222,6 +222,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejemplo-2"><i class="fa fa-check"></i><b>6.7.2</b> Ejemplo 2</a></li>
 <li class="chapter" data-level="6.7.3" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejemplo-3"><i class="fa fa-check"></i><b>6.7.3</b> Ejemplo 3</a></li>
 </ul></li>
+<li class="chapter" data-level="6.8" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejercicios-1"><i class="fa fa-check"></i><b>6.8</b> Ejercicios</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejercicio-4"><i class="fa fa-check"></i><b>6.8.1</b> Ejercicio 4</a></li>
+<li class="chapter" data-level="6.8.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejercicio-5"><i class="fa fa-check"></i><b>6.8.2</b> Ejercicio 5</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -292,11 +297,11 @@ y_{ij} = \beta_{0i} + \sum_{k=1}^K \beta_{ki} x_{ijk} + e_{ij}
 <h3><span class="header-section-number">6.2.1</span> Modelo con constante aleatoria</h3>
 <p><span class="math display">\[y_{ij} = \beta_{0i} + \beta_{1} t_{ij} + e_{ij}\]</span></p>
 <p>Donde <span class="math inline">\(\beta_{0i} \sim N(\beta_0, \sigma_{\beta_0})\)</span>, y <span class="math inline">\(\beta_1\)</span> es el coeficiente fijo del tiempo. En este caso se supone que el tiempo tiene un efecto lineal.</p>
-<p><img src="fig_out/unnamed-chunk-143-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-69-1.png" width="672" /></p>
 <p>Podríamos añadir un término cuadrático, cúbico, etc. si el efecto no fuera lineal y añadiéramos un término cuadrático:</p>
 <p><span class="math display">\[y_{ij} = \beta_{0i} + \beta_{1} t_{ij} + \beta_{2} t_{ij}^2 + e_{ij}\]</span>
 en este caso, <span class="math inline">\(x_{ij1}=t_{ij}\)</span> y <span class="math inline">\(x_{ij2}=t_{ij}^2\)</span>.</p>
-<p><img src="fig_out/unnamed-chunk-144-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-70-1.png" width="672" /></p>
 <p><strong>Correlacion entre observaciones</strong></p>
 <p>Si los errores son independientes, las observaciones de la variable respuesta de un mismo individuo están correlacionadas. Y esta correlación es constante: no depende de la distancia entre las medidas.</p>
 <p><span class="math display">\[\text{corr}(y_{i1},y_{i2}) = \text{corr}(y_{i1},y_{i3}) = \ldots = \frac{\sigma_{\beta_{0}}^2}{\sigma_{e}^2}\]</span></p>
@@ -312,7 +317,7 @@ en este caso, <span class="math inline">\(x_{ij1}=t_{ij}\)</span> y <span class=
 \end{pmatrix}
 \]</span></p>
 <p>El término <span class="math inline">\(\sigma_{\beta_0,\beta_1}\)</span> es la covarianza entre la constante y la pendiente. Ésta en general puede no ser cero.</p>
-<p><img src="fig_out/unnamed-chunk-145-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-71-1.png" width="672" /></p>
 <p>En este gráfico se observa primero que las pendientes son diferentes entre los individuos. Y además, que los individuos que empiezan de más arriba bajan más rápido y viceversa. Así pues, la correlación entre la constante y la pendiente es negativa.</p>
 <p><strong>Correlacion entre observaciones</strong></p>
 <p>En el modelo con constante y pendientes aleatorios, si asumimos que los errores son independientes, las observaciones de la variable respuesta de un mismo individuo están correlacionadas. Y esta correlación depende de los momentos:</p>
@@ -320,7 +325,7 @@ en este caso, <span class="math inline">\(x_{ij1}=t_{ij}\)</span> y <span class=
 <p>Por lo tanto depende tanto de <span class="math inline">\(t_1\)</span> como de <span class="math inline">\(t_2\)</span> y no sólo de la distancia entre las medidas.</p>
 <p>Si lo comparamos con el AR(1):</p>
 <p>Ejemplo con <span class="math inline">\(t_1=1\)</span>, <span class="math inline">\(\sigma_{\beta_{0}}^2=0.5^2\)</span>, <span class="math inline">\(\sigma_{\beta_{1}}^2=0.3^2\)</span> y <span class="math inline">\(\sigma_{e}^2=0.1^2\)</span>, con <span class="math inline">\(t_1=1\)</span></p>
-<p><img src="fig_out/unnamed-chunk-146-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-72-1.png" width="672" /></p>
 <p>En este ejemplo, vemos como especificando el AR y la pendiente fija, la correlación entre observaciones baja más rápidamente a medida que las observaciones se alejan (<span class="math inline">\(t_2\)</span>) que lo que se consigue especificando la pendiente aleatoria y los errores incorrelacionados.</p>
 </div>
 </div>
@@ -762,9 +767,9 @@ Number of Groups: 12 </code></pre>
 <p>Finalmente, validamos el modelo:</p>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="modelos-lineales-mixtos-lmm.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb127-2"><a href="modelos-lineales-mixtos-lmm.html#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-164-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-90-1.png" width="672" /></p>
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="modelos-lineales-mixtos-lmm.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(modelo)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-164-2.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-90-2.png" width="672" /></p>
 <p>Según estos gráficos, diremos que sí se cumplen las premisas sobre los residuos.</p>
 <p><strong>Predicciones:</strong></p>
 <p>Para calcular las predicciones nos será útil usar las funciones del paquete <strong><code>ggeffects</code></strong>. Con este paquete se pueden realizar las predicciones de distinto tipo y también graficarlas con el paquete <code>ggplot2</code>.</p>
@@ -812,7 +817,7 @@ Adjusted for:
 <blockquote>
 <p><strong>Nota:</strong> Es importante notar que las técnicas de respuesta multivariable y de suma de cuadrados al tratar la variable tiempo como factor, no se puede distinguir si tiempos de las medidas son o no equiespaiados. Por ejemplo los resultados obtenidos mediante estas dos técnicas serán los mismos tanto si se recogen las medidas a 1h, 2h y 3h, o si se recoge a 1h, 2h y 6h. En cambio, si se desea estudiar el efecto lineal ambas situaciones son muy distintas.</p>
 </blockquote>
-<p><img src="fig_out/unnamed-chunk-170-1.png" width="960" /></p>
+<p><img src="fig_out/unnamed-chunk-96-1.png" width="960" /></p>
 <hr />
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="modelos-lineales-mixtos-lmm.html#cb136-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed =</span> medida <span class="sc">~</span> <span class="fu">as.factor</span>(tiempo), </span>
 <span id="cb136-2"><a href="modelos-lineales-mixtos-lmm.html#cb136-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>datos,</span>
@@ -977,9 +982,9 @@ poly(tiempo, 2)2     -24.889          -58.669           35.802
 <p>Por último, validamos el modelo</p>
 <div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="modelos-lineales-mixtos-lmm.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb161-2"><a href="modelos-lineales-mixtos-lmm.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-184-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-110-1.png" width="672" /></p>
 <div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="modelos-lineales-mixtos-lmm.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(modelo)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-184-2.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-110-2.png" width="672" /></p>
 <p>Según los gráficos, parece que sí que se cumplen las premisas sobre los residuos.</p>
 <p><strong>Predicciones</strong></p>
 <div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="modelos-lineales-mixtos-lmm.html#cb163-1" aria-hidden="true" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(modelo, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;tiempo [all]&quot;</span>, <span class="st">&quot;trat&quot;</span>))</span>
@@ -1005,7 +1010,7 @@ tiempo | Predicted |         95% CI
 Adjusted for:
 * indiv2 = 0 (population-level)</code></pre>
 <div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="modelos-lineales-mixtos-lmm.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr, <span class="at">add.data =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-185-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-111-1.png" width="672" /></p>
 </div>
 <div id="ejemplo-3" class="section level3" number="6.7.3">
 <h3><span class="header-section-number">6.7.3</span> Ejemplo 3</h3>
@@ -1042,7 +1047,7 @@ Adjusted for:
 <span id="cb174-3"><a href="modelos-lineales-mixtos-lmm.html#cb174-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>),</span>
 <span id="cb174-4"><a href="modelos-lineales-mixtos-lmm.html#cb174-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="at">fun =</span> mean, <span class="at">size=</span><span class="dv">2</span>)</span>
 <span id="cb174-5"><a href="modelos-lineales-mixtos-lmm.html#cb174-5" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">facet_grid</span>( <span class="sc">~</span> tx)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-191-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-117-1.png" width="672" /></p>
 <div id="análisis-del-grupo-control" class="section level4" number="6.7.3.1">
 <h4><span class="header-section-number">6.7.3.1</span> Análisis del grupo control</h4>
 <p>Si analizamos sólo el grupo control, se trata de un diseño 1W con una covariable (edad).</p>
@@ -1279,19 +1284,19 @@ tiempo      -0.9593285 0.10302297 117 -9.311792 9.105728e-16</code></pre>
 </ul>
 <div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="modelos-lineales-mixtos-lmm.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb201-2"><a href="modelos-lineales-mixtos-lmm.html#cb201-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-203-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-129-1.png" width="672" /></p>
 <div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="modelos-lineales-mixtos-lmm.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(modelo)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-203-2.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-129-2.png" width="672" /></p>
 <ul>
 <li>Efectos aleatorios</li>
 </ul>
 <div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="modelos-lineales-mixtos-lmm.html#cb203-1" aria-hidden="true" tabindex="-1"></a>beta0i<span class="ot">&lt;-</span> <span class="fu">ranef</span>(modelo)[,<span class="dv">1</span>]</span>
 <span id="cb203-2"><a href="modelos-lineales-mixtos-lmm.html#cb203-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(beta0i); <span class="fu">qqline</span>(beta0i)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-204-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-130-1.png" width="672" /></p>
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="modelos-lineales-mixtos-lmm.html#cb204-1" aria-hidden="true" tabindex="-1"></a>edad <span class="ot">&lt;-</span> <span class="fu">with</span>(datos, <span class="fu">tapply</span>(edad, indiv, mean))</span>
 <span id="cb204-2"><a href="modelos-lineales-mixtos-lmm.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="co"># gráfico de los efectos aleatorios vs variables individuo</span></span>
 <span id="cb204-3"><a href="modelos-lineales-mixtos-lmm.html#cb204-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(edad, beta0i)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-204-2.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-130-2.png" width="672" /></p>
 <p>Parece que los efectos aleatorios siguen una distribución normal. Y no están relacionados con la edad.</p>
 <p><strong>Predicciones</strong></p>
 <div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="modelos-lineales-mixtos-lmm.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
@@ -1310,9 +1315,9 @@ Adjusted for:
 *  edad = 48.00
 * indiv = 26.00</code></pre>
 <div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="modelos-lineales-mixtos-lmm.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr, <span class="at">add.data =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-205-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-131-1.png" width="672" /></p>
 <div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="modelos-lineales-mixtos-lmm.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr, <span class="at">residuals =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-205-2.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-131-2.png" width="672" /></p>
 <p>Las predicciones las realiza en la media de las covariables, en este caso la edad.
 Si queremos que las predicciones las haga para un individuo de 55 años:</p>
 <div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="modelos-lineales-mixtos-lmm.html#cb209-1" aria-hidden="true" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(modelo, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;tiempo [all]&quot;</span>), <span class="at">condition=</span><span class="fu">c</span>(<span class="st">&quot;edad&quot;</span><span class="ot">=</span><span class="dv">55</span>))</span>
@@ -1329,7 +1334,7 @@ tiempo | Predicted |         95% CI
 Adjusted for:
 * indiv = 26.00</code></pre>
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="modelos-lineales-mixtos-lmm.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-206-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-132-1.png" width="672" /></p>
 </div>
 <div id="comparación-de-los-dos-tratamientos" class="section level4" number="6.7.3.2">
 <h4><span class="header-section-number">6.7.3.2</span> Comparación de los dos tratamientos</h4>
@@ -1450,17 +1455,17 @@ tiempo:tx1   1.138168 0.13574697 248   8.384481 3.860440e-15</code></pre>
 <p><strong>Validación</strong></p>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="modelos-lineales-mixtos-lmm.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="co"># residuos</span></span>
 <span id="cb230-2"><a href="modelos-lineales-mixtos-lmm.html#cb230-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-216-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-142-1.png" width="672" /></p>
 <div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="modelos-lineales-mixtos-lmm.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(modelo)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-216-2.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-142-2.png" width="672" /></p>
 <div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="modelos-lineales-mixtos-lmm.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="co"># efectos aleatorios</span></span>
 <span id="cb232-2"><a href="modelos-lineales-mixtos-lmm.html#cb232-2" aria-hidden="true" tabindex="-1"></a>beta0i <span class="ot">&lt;-</span> <span class="fu">ranef</span>(modelo)[,<span class="dv">1</span>]</span>
 <span id="cb232-3"><a href="modelos-lineales-mixtos-lmm.html#cb232-3" aria-hidden="true" tabindex="-1"></a>grupo <span class="ot">&lt;-</span> <span class="fu">with</span>(datos, <span class="fu">tapply</span>(tx, indiv, head, <span class="at">n=</span><span class="dv">1</span>))</span>
 <span id="cb232-4"><a href="modelos-lineales-mixtos-lmm.html#cb232-4" aria-hidden="true" tabindex="-1"></a>edad <span class="ot">&lt;-</span> <span class="fu">with</span>(datos, <span class="fu">tapply</span>(edad, indiv, mean))</span>
 <span id="cb232-5"><a href="modelos-lineales-mixtos-lmm.html#cb232-5" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(beta0i <span class="sc">~</span> grupo)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-216-3.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-142-3.png" width="672" /></p>
 <div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="modelos-lineales-mixtos-lmm.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(edad, beta0i)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-216-4.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-142-4.png" width="672" /></p>
 <p><strong>Predicciones</strong></p>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="modelos-lineales-mixtos-lmm.html#cb234-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>tx <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos<span class="sc">$</span>tx, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
 <span id="cb234-2"><a href="modelos-lineales-mixtos-lmm.html#cb234-2" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">update</span>(modelo)</span>
@@ -1498,9 +1503,42 @@ Adjusted for:
 <span id="cb238-3"><a href="modelos-lineales-mixtos-lmm.html#cb238-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(pr.cont) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">24</span>,<span class="dv">40</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;controles&quot;</span>),</span>
 <span id="cb238-4"><a href="modelos-lineales-mixtos-lmm.html#cb238-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(pr.tx) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">24</span>,<span class="dv">40</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;tratados&quot;</span>),</span>
 <span id="cb238-5"><a href="modelos-lineales-mixtos-lmm.html#cb238-5" aria-hidden="true" tabindex="-1"></a><span class="at">nrow=</span><span class="dv">1</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-217-1.png" width="672" /></p>
-
+<p><img src="fig_out/unnamed-chunk-143-1.png" width="672" /></p>
 </div>
+</div>
+</div>
+<div id="ejercicios-1" class="section level2" number="6.8">
+<h2><span class="header-section-number">6.8</span> Ejercicios</h2>
+<div id="ejercicio-4" class="section level3" number="6.8.1">
+<h3><span class="header-section-number">6.8.1</span> Ejercicio 4</h3>
+<blockquote>
+<p>Los datos <code>sleepstudy</code> de la librería <code>lme4</code> contienen información sobre 18 dindividuos que se han seguido durante 9 días, y para los cuales se ha registrado el tiempo de reacción (en milisegundos) tras haber estado en deprivación de sueño.</p>
+<p>Los datos pueden cargarse mediante</p>
+</blockquote>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="modelos-lineales-mixtos-lmm.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb239-2"><a href="modelos-lineales-mixtos-lmm.html#cb239-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(sleepstudy)</span></code></pre></div>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>Crea un spaguetti plot para ver la evolución de la reacción a lo largo del tiempo</li>
+<li>Modeliza el tiempo de reacción (variable respuesta) a lo largo de los días. Usa tanto polinomios como splines con la función <code>ns()</code>. Puedes usar la función <code>anova()</code> con el test LRT para contrastar si es necesario usar términos splines (<code>ns()</code>) o polinomios <code>poly()</code>).</li>
+</ol>
+</blockquote>
+</div>
+<div id="ejercicio-5" class="section level3" number="6.8.2">
+<h3><span class="header-section-number">6.8.2</span> Ejercicio 5</h3>
+<blockquote>
+<p>Los datos <code>dietox</code> de la librería <code>geepack</code> contienen el peso de cerdos medidos semanalmente durante 12 semanas cuando son sacrificados (Weight). Los datos también contienen el peso en la semana 1 (Start), tres niveles diferentes de vitamina E (Evit - dosis: 0, 100, 200 mg dl-alfa-tocoferil acetato / kg de alimento) en combinación con 3 niveles diferentes de cobre (Cu - dosis: 0, 35, 175 mg / kg de alimento) que reciben en el alimento. También se registra la ingesta acumulada de alimento (Feed). Los cerdos son compañeros de camada (Litter). El objetivo principal es ver qué combinación de suplementos en el alimento hace que los cerdos alcancen un mayor peso.</p>
+<ol style="list-style-type: decimal">
+<li>Haz una descriptiva de las variables (summary)</li>
+<li>¿Qué variables son tiempo dependientes y cuáles no? (crea un gráfico para Weight, Evit y Cu)</li>
+<li>Ajusta un modelo mixto para contestar a la pregunta científica</li>
+<li>¿Qué variables as considerado con efecto aleatorio?</li>
+<li>¿Qué estructura de correlaciones has considerado?</li>
+<li>Intenta cambiar algunos aspectos del modelo (añadir quitar coeficientes aleatorios, estructura de correlación de los errores, simplificar o añadir variables/interacciones, …) para elegir el mejor modelo</li>
+<li>Una vez escogido el modelo final, haz un gráfico de la evolución de la variable respuesta a diferentes niveles de <code>Start</code>.</li>
+</ol>
+</blockquote>
+
 </div>
 </div>
 </div>
