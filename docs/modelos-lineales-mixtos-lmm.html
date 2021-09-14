@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 6 Modelos Lineales Mixtos (LMM) | Modelización estadística avanzada con R: análisis de datos longitudinales</title>
+  <meta name="description" content="Capítulo 6 Modelos Lineales Mixtos (LMM) | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 6 Modelos Lineales Mixtos (LMM) | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 6 Modelos Lineales Mixtos (LMM) | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  
+  
+  
+
+<meta name="author" content="Juan R González" />
+
+
+<meta name="date" content="2021-09-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ModelosNormal.html"/>
+
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Datos Longitudinales</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preámbulo</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instalación-de-librerías-necesarias-para-el-curso"><i class="fa fa-check"></i><b>1.1</b> Instalación de librerías necesarias para el curso</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introducción a los diseños de datos longitudinales</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#definición"><i class="fa fa-check"></i><b>2.1</b> Definición</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#ejemplos"><i class="fa fa-check"></i><b>2.2</b> Ejemplos</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#esquemas-de-recogidas-de-datos"><i class="fa fa-check"></i><b>2.3</b> Esquemas de recogidas de datos</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#todas-las-medidas-con-intervalos-fijos"><i class="fa fa-check"></i><b>2.3.1</b> Todas las medidas con intervalos fijos</a></li>
+<li class="chapter" data-level="2.3.2" data-path="intro.html"><a href="intro.html#missings-al-azar-con-intervalos-fijos"><i class="fa fa-check"></i><b>2.3.2</b> Missings al azar con intervalos fijos</a></li>
+<li class="chapter" data-level="2.3.3" data-path="intro.html"><a href="intro.html#distintos-seguimientos"><i class="fa fa-check"></i><b>2.3.3</b> Distintos seguimientos</a></li>
+<li class="chapter" data-level="2.3.4" data-path="intro.html"><a href="intro.html#todas-las-medidas-a-distintos-tiempos"><i class="fa fa-check"></i><b>2.3.4</b> Todas las medidas a distintos tiempos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html"><i class="fa fa-check"></i><b>3</b> Estructura de los datos</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#formato-ancho-y-largo"><i class="fa fa-check"></i><b>3.1</b> Formato ancho y largo</a></li>
+<li class="chapter" data-level="3.2" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#formato-ancho"><i class="fa fa-check"></i><b>3.2</b> Formato ancho</a></li>
+<li class="chapter" data-level="3.3" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#formato-largo"><i class="fa fa-check"></i><b>3.3</b> Formato largo</a></li>
+<li class="chapter" data-level="3.4" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#valores-faltantes"><i class="fa fa-check"></i><b>3.4</b> Valores faltantes</a></li>
+<li class="chapter" data-level="3.5" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#tiempos-de-medidas-diferentes"><i class="fa fa-check"></i><b>3.5</b> Tiempos de medidas diferentes</a></li>
+<li class="chapter" data-level="3.6" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#transformación"><i class="fa fa-check"></i><b>3.6</b> Transformación</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#vertical-a-horizontal-y-viceversa"><i class="fa fa-check"></i><b>3.6.1</b> Vertical a horizontal y viceversa</a></li>
+<li class="chapter" data-level="3.6.2" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#colapsar"><i class="fa fa-check"></i><b>3.6.2</b> Colapsar</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html"><i class="fa fa-check"></i><b>4</b> Visualización de datos longitudinales</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html#trayectorias"><i class="fa fa-check"></i><b>4.1</b> Trayectorias</a></li>
+<li class="chapter" data-level="4.2" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html#spaghetti-plots"><i class="fa fa-check"></i><b>4.2</b> Spaghetti plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ModelosNormal.html"><a href="ModelosNormal.html"><i class="fa fa-check"></i><b>5</b> Modelos con respuesta normal</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#técnica-de-la-suma-de-cuadrados"><i class="fa fa-check"></i><b>5.1</b> Técnica de la suma de cuadrados</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#diseño-1w1b"><i class="fa fa-check"></i><b>5.1.1</b> Diseño 1W+1B</a></li>
+<li class="chapter" data-level="5.1.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#diseño-1w"><i class="fa fa-check"></i><b>5.1.2</b> Diseño 1W</a></li>
+<li class="chapter" data-level="5.1.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#función-ezanova"><i class="fa fa-check"></i><b>5.1.3</b> Función <code>ezANOVA</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#respuesta-multivariante"><i class="fa fa-check"></i><b>5.2</b> Respuesta Multivariante</a></li>
+<li class="chapter" data-level="5.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplos-1"><i class="fa fa-check"></i><b>5.3</b> Ejemplos</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#Ejemplo1"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo 1</a></li>
+<li class="chapter" data-level="5.3.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#Ejemplo2"><i class="fa fa-check"></i><b>5.3.2</b> Ejemplo 2</a></li>
+<li class="chapter" data-level="5.3.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#Ejemplo3"><i class="fa fa-check"></i><b>5.3.3</b> Ejemplo 3</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicios"><i class="fa fa-check"></i><b>5.4</b> Ejercicios</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicio-1"><i class="fa fa-check"></i><b>5.4.1</b> Ejercicio 1</a></li>
+<li class="chapter" data-level="5.4.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicio-2"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio 2</a></li>
+<li class="chapter" data-level="5.4.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicio-3"><i class="fa fa-check"></i><b>5.4.3</b> Ejercicio 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html"><i class="fa fa-check"></i><b>6</b> Modelos Lineales Mixtos (LMM)</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ecuación"><i class="fa fa-check"></i><b>6.1</b> Ecuación</a></li>
+<li class="chapter" data-level="6.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#casos-particulares"><i class="fa fa-check"></i><b>6.2</b> Casos particulares</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#modelo-con-constante-aleatoria"><i class="fa fa-check"></i><b>6.2.1</b> Modelo con constante aleatoria</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#simplificación-del-modelo"><i class="fa fa-check"></i><b>6.3</b> Simplificación del modelo</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#significación-de-los-efectos-aleatorios"><i class="fa fa-check"></i><b>6.3.1</b> Significación de los efectos aleatorios</a></li>
+<li class="chapter" data-level="6.3.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#elección-matriz-covarianzas-de-los-efectos-aleatorios"><i class="fa fa-check"></i><b>6.3.2</b> Elección matriz covarianzas de los efectos aleatorios</a></li>
+<li class="chapter" data-level="6.3.3" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#estructura-de-correlación-de-los-errores"><i class="fa fa-check"></i><b>6.3.3</b> Estructura de correlación de los errores</a></li>
+<li class="chapter" data-level="6.3.4" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#efectos-fijos"><i class="fa fa-check"></i><b>6.3.4</b> Efectos fijos</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#validación-del-modelo"><i class="fa fa-check"></i><b>6.4</b> Validación del modelo</a></li>
+<li class="chapter" data-level="6.5" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#predicciones"><i class="fa fa-check"></i><b>6.5</b> Predicciones</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#efectos-marginales"><i class="fa fa-check"></i><b>6.5.1</b> Efectos marginales</a></li>
+<li class="chapter" data-level="6.5.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#estimación-de-los-efectos-aleatorios"><i class="fa fa-check"></i><b>6.5.2</b> Estimación de los efectos aleatorios</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#función-lme"><i class="fa fa-check"></i><b>6.6</b> Función <code>lme</code></a></li>
+<li class="chapter" data-level="6.7" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejemplos-2"><i class="fa fa-check"></i><b>6.7</b> Ejemplos</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejemplo-1"><i class="fa fa-check"></i><b>6.7.1</b> Ejemplo 1</a></li>
+<li class="chapter" data-level="6.7.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejemplo-2"><i class="fa fa-check"></i><b>6.7.2</b> Ejemplo 2</a></li>
+<li class="chapter" data-level="6.7.3" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejemplo-3"><i class="fa fa-check"></i><b>6.7.3</b> Ejemplo 3</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelización estadística avanzada con R: análisis de datos longitudinales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="modelos-lineales-mixtos-lmm" class="section level1" number="6">
+<h1><span class="header-section-number">Capítulo 6</span> Modelos Lineales Mixtos (LMM)</h1>
+<p>Esta técnica es la más potente para analizar datos longitudinales ya que permite introducir efectos aleatorios y especificar la estructura de correlaciones de los residuos dentro de un mismo individuo.</p>
+<p>Además, a diferencia de las dos técnicas anteriores, permite trabajar con missings.</p>
+<div id="ecuación" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Ecuación</h2>
+<p><span class="math display">\[
+y_{ij} = \beta_{0i} + \sum_{k=1}^K \beta_{ki} x_{ijk} + e_{ij}
+\]</span></p>
+<p>Donde <span class="math inline">\(i\)</span> representa al individuo, <span class="math inline">\(j\)</span> representa el momento (de uno hasta hasta el número de observaciones del individuo <span class="math inline">\(i\)</span>),</p>
+<ul>
+<li><p><span class="math inline">\(x_{ijk}\)</span> valor de la <span class="math inline">\(k\)</span>-ésima variable independiente del individuo <span class="math inline">\(i\)</span> en el momento <span class="math inline">\(j\)</span>.</p></li>
+<li><p><span class="math inline">\(\beta_{0i} \sim N\left(\beta_0, \sigma_{\beta_0}^2\right)\)</span> es la constante del modelo aunque en general se supone aleatoria, o sea que tiene cierta varianza entre individuos y está centrada en la contaste <span class="math inline">\(\mu\)</span>.</p></li>
+<li><p><span class="math inline">\(\beta_{ki} \sim N\left(\beta_k, \sigma_{\beta_k}^2\right)\)</span>: pendientes o coeficientes de las variables del modelo. Pueden ser aleatorias, o sea, variar entre individuos.</p></li>
+</ul>
+<p>En general puede haber correlación entre la contante <span class="math inline">\(\beta_{0i}\)</span> y las pendientes <span class="math inline">\(\beta_{ki}\)</span>.</p>
+<p>El vector formado por la constante y por los coeficientes aleatorios, son los <strong>efectos aleatorios</strong> y se supone que sigue una distribución normal multivariada:</p>
+<p><span class="math display">\[\vec{\beta}_i = (\beta_{0i},\beta_{1i},\ldots,\beta_{Ki})^t \sim N\left(\vec{\beta}, \Omega) \right)\]</span></p>
+<ul>
+<li>El vector formado por los errores de un individuo <span class="math inline">\(\vec{e_i} \sim N(\vec{0},\Sigma_i)\)</span>, sigue una distribuión normal multivariante con una cierta matriz de covarianzas <span class="math inline">\(\Sigma_i\)</span> que no tiene porqué ser la misma ni del mismo tamaño para todos los individuos ya que no todos los individuos tendrán el mismo número de observaciones. <strong>Los errores son independientes de la constante aleatoria y de los coeficientes aleatorios</strong>.</li>
+</ul>
+<p><strong>Observaciones</strong></p>
+<ul>
+<li><p>Para ajustar este modelo los datos se disponen de forma vertical.</p></li>
+<li><p>El modelo LMM es muy flexible y potente. No sólo permite especificar efectos aleatorios con lo que evaluar la variabilidad de ciertos efectos o variables entre individuos sinó también la correlación residual entre las distintas medidas repetidas en un mismo individuo.</p></li>
+<li><p>Cuando hay missings en una observación no hace falta eliminar las otras del mismo individuo, ya que cada fila aquí es una observación y no un individuo.</p></li>
+<li><p>La esperanza de la constante y coeficientes aleatorios <span class="math inline">\(\vec{\beta}_i\)</span> es la misma para todos los individuos, <span class="math inline">\(\vec{\beta}\)</span>, y la matriz de covarianzas, <span class="math inline">\(\Omega\)</span>, también (<strong>homocedesticidad</strong>).</p></li>
+<li><p>Si un coeficiente no es aleatorio, se puede notar como <span class="math inline">\(\beta_{k&#39;i} = \beta_{k&#39;}\)</span> en lugar de suponer que sigue una distribución normal. También se podría pensar que sigue una distribución “normal” con varianza cero.</p></li>
+<li><p>Los <strong>efectos fijos</strong> son la esperanza de los efectos aleatorios (<span class="math inline">\(\beta_0, \beta_1, \ldots, \ldots, \beta_k\)</span>). Además, cuando un coeficiente no es aleatorio (tiene varianza cero) se denomina fijo directamente.</p></li>
+<li><p>Hay un número limitado de efectos aleatorios que se pueden incorporar en el modelo, que no puede exceder el número de medidas por individuo.</p></li>
+<li><p>La presencia de <strong>efectos aleatorios inducen correlación</strong> entre medidas de un mismo individuo. Sin embargo, según que estructura de correlación sólo se puede conseguir definiendo también una estructura de correlación entre residuos no nula (no diagonal).</p>
+<ul>
+<li><p>Considerando los coeficientes del tiempo como aleatorios se induce correlación distinta según los tiempos que se toman las medidas.</p></li>
+<li><p>Considerando el coeficiente de una variable <strong>no</strong> cambiante en el tiempo se induce <strong>heterocedesticidad</strong> (varianza diferente) entre los individuos.</p></li>
+</ul></li>
+</ul>
+<p>Por ejemplo, supongamos un modelo con efecto lineal del tiempo y una covariable no cambiante del tiempo (<span class="math inline">\(x_i\)</span>). Y tomamos la constante y el coeficiente de <span class="math inline">\(x_i\)</span> aleatorios y ambos no correlacionados.</p>
+<p><span class="math display">\[y_{ij} = \beta_{0i} + \beta_1 t_{ij} + \beta_{2i} x_i\]</span></p>
+<p>Luego la varianza de <span class="math inline">\(y_{ij}\)</span> es <span class="math inline">\(\sigma_{\beta_{0}}^2 + \sigma_{2i}^2 x_i^2\)</span>. Si <span class="math inline">\(x_i\)</span> vale 0 para el grupo placebo y 1 para los tratados, entonces la varianza del grupo placebo será <span class="math inline">\(\sigma_{\beta_{0}}^2\)</span> y para los tratados <span class="math inline">\(\sigma_{\beta_{0}}^2 + \sigma_{\beta_{2}}^2\)</span></p>
+<ul>
+<li>A diferencia de las técnicas de sumas de cuadrados y de respuesta multivariante, en que la variable <strong>tiempo</strong> se trata como a un <strong>factor</strong>, con los LMM se tratar también como <strong>variable continua</strong>.</li>
+</ul>
+</div>
+<div id="casos-particulares" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Casos particulares</h2>
+<div id="modelo-con-constante-aleatoria" class="section level3" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Modelo con constante aleatoria</h3>
+<p><span class="math display">\[y_{ij} = \beta_{0i} + \beta_{1} t_{ij} + e_{ij}\]</span></p>
+<p>Donde <span class="math inline">\(\beta_{0i} \sim N(\beta_0, \sigma_{\beta_0})\)</span>, y <span class="math inline">\(\beta_1\)</span> es el coeficiente fijo del tiempo. En este caso se supone que el tiempo tiene un efecto lineal.</p>
+<p><img src="fig_out/unnamed-chunk-143-1.png" width="672" /></p>
+<p>Podríamos añadir un término cuadrático, cúbico, etc. si el efecto no fuera lineal y añadiéramos un término cuadrático:</p>
+<p><span class="math display">\[y_{ij} = \beta_{0i} + \beta_{1} t_{ij} + \beta_{2} t_{ij}^2 + e_{ij}\]</span>
+en este caso, <span class="math inline">\(x_{ij1}=t_{ij}\)</span> y <span class="math inline">\(x_{ij2}=t_{ij}^2\)</span>.</p>
+<p><img src="fig_out/unnamed-chunk-144-1.png" width="672" /></p>
+<p><strong>Correlacion entre observaciones</strong></p>
+<p>Si los errores son independientes, las observaciones de la variable respuesta de un mismo individuo están correlacionadas. Y esta correlación es constante: no depende de la distancia entre las medidas.</p>
+<p><span class="math display">\[\text{corr}(y_{i1},y_{i2}) = \text{corr}(y_{i1},y_{i3}) = \ldots = \frac{\sigma_{\beta_{0}}^2}{\sigma_{e}^2}\]</span></p>
+<p>A esta correlación también se la conoce como <strong>coeficiente de correlación intraclase (ICC)</strong></p>
+<div id="modelo-con-pendiente-y-constante-aleatoria" class="section level4" number="6.2.1.1">
+<h4><span class="header-section-number">6.2.1.1</span> Modelo con pendiente y constante aleatoria</h4>
+<p><span class="math display">\[y_{ij} = \beta_{0i} + \beta_{1i} t_{ij} + e_{ij}\]</span></p>
+<p><span class="math inline">\(\vec{\beta}_i = (\beta_{0i}, \beta_{1i})^t \sim N\left((\beta_0,\beta_1)^t, \Omega\right)\)</span>, donde</p>
+<p><span class="math display">\[\Omega= 
+\begin{pmatrix}
+\sigma_{\beta_0}^2 &amp; \sigma_{\beta_0,\beta_1} \\
+\sigma_{\beta_0,\beta_1} &amp; \sigma_{\beta_1}^2
+\end{pmatrix}
+\]</span></p>
+<p>El término <span class="math inline">\(\sigma_{\beta_0,\beta_1}\)</span> es la covarianza entre la constante y la pendiente. Ésta en general puede no ser cero.</p>
+<p><img src="fig_out/unnamed-chunk-145-1.png" width="672" /></p>
+<p>En este gráfico se observa primero que las pendientes son diferentes entre los individuos. Y además, que los individuos que empiezan de más arriba bajan más rápido y viceversa. Así pues, la correlación entre la constante y la pendiente es negativa.</p>
+<p><strong>Correlacion entre observaciones</strong></p>
+<p>En el modelo con constante y pendientes aleatorios, si asumimos que los errores son independientes, las observaciones de la variable respuesta de un mismo individuo están correlacionadas. Y esta correlación depende de los momentos:</p>
+<p><span class="math display">\[\text{corr}(y_{i1},y_{i2}) = \frac{\sigma_{\beta_{0}}^2+\sigma_{\beta_{1i}^2 \cdot t_1 \cdot t_2}}{\sqrt{\sigma_{\beta_{0}}^2+\sigma_{\beta_{1}}^2 \cdot t_1^2 + \sigma_e^2}\sqrt{\sigma_{\beta_{0}}^2+\sigma_{\beta_{1}}^2 \cdot t_2^2 + \sigma_e^2}}\]</span></p>
+<p>Por lo tanto depende tanto de <span class="math inline">\(t_1\)</span> como de <span class="math inline">\(t_2\)</span> y no sólo de la distancia entre las medidas.</p>
+<p>Si lo comparamos con el AR(1):</p>
+<p>Ejemplo con <span class="math inline">\(t_1=1\)</span>, <span class="math inline">\(\sigma_{\beta_{0}}^2=0.5^2\)</span>, <span class="math inline">\(\sigma_{\beta_{1}}^2=0.3^2\)</span> y <span class="math inline">\(\sigma_{e}^2=0.1^2\)</span>, con <span class="math inline">\(t_1=1\)</span></p>
+<p><img src="fig_out/unnamed-chunk-146-1.png" width="672" /></p>
+<p>En este ejemplo, vemos como especificando el AR y la pendiente fija, la correlación entre observaciones baja más rápidamente a medida que las observaciones se alejan (<span class="math inline">\(t_2\)</span>) que lo que se consigue especificando la pendiente aleatoria y los errores incorrelacionados.</p>
+</div>
+</div>
+</div>
+<div id="simplificación-del-modelo" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Simplificación del modelo</h2>
+<p>Empezaremos con el modelo más general, o sea, sin asumir independencia de los residuos, con efectos aleatorios (todos los que se admitan) correlacionados.</p>
+<p>En cuanto a los efectos fijos, se incluyrán también los máximos que se puedan, interacciones si es pertinente, terminos cuadráticos (cúbicos), …</p>
+<p>A partir de aquí se simplificará el modelo en el siguiente orden:</p>
+<div id="significación-de-los-efectos-aleatorios" class="section level3" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Significación de los efectos aleatorios</h3>
+<p>La hipótesis nula para contrastar los factores de efectos aleatorios es que su varianza es igual a cero. Por ejemplo para la constante aleatoria:</p>
+<p><span class="math display">\[\left\{\begin{array}{l}
+\text{H}_0: \sigma_{\beta_0}^2 = 0 \\
+\text{H}_1: \sigma_{\beta_0}^2 &gt; 0
+\end{array}\right.
+\]</span></p>
+<p>Hay diferentes técnicas estadísticas para contrastar estos tests, pero no son estándard. El problema es que la varianza de una distribución normal no puede ser cero, por lo tanto la hipótesis nula está fuera del espacio parametrico (“beyond boundary”). Existen, pero, algunas herramientas en R que lo realizan mediante técnicas de remuestreo (“bootstrap”). Éstas son complejas desde el punto de visto teórico y no se explicarán en este curso (véase el paquete de R <code>pbkrtest</code> <span class="citation">@pbkrtest2014</span>).
+Otra alternativa es usar índices como el AIC o BIC (cuanto más bajo mejor), que proporciona la función <code>anova</code> en la comparación de dos modelos: uno considerando el coeficiente como aleatorio (<span class="math inline">\(\beta_{ik}\)</span>) el otro considerando el coeficiente como fijo (<span class="math inline">\(\beta_{k}\)</span>).</p>
+</div>
+<div id="elección-matriz-covarianzas-de-los-efectos-aleatorios" class="section level3" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Elección matriz covarianzas de los efectos aleatorios</h3>
+<p>Si en el paso anterior, hay más de un efecto aleatorio significativo, seguidamente hay que contrastar si la correlación entre ellos es cero o no. Es decir, H<span class="math inline">\(_0\)</span> postula que la matriz <span class="math inline">\(\Omega\)</span> es diagonal, mientras que la H<span class="math inline">\(_1\)</span> se asume que las correlaciones pueden ser no nulas.</p>
+<p><span class="math display">\[\left\{\begin{array}{l}
+\text{H}_0: \Omega= 
+\begin{pmatrix}
+\sigma_{\beta_0}^2 &amp; 0 \\
+0 &amp; \sigma_{\beta_1}^2
+\end{pmatrix}\\
+\text{H}_1: \Omega= 
+\begin{pmatrix}
+\sigma_{\beta_0}^2 &amp; \sigma_{\beta_0\beta_1} \\
+\sigma_{\beta_0\beta_1} &amp; \sigma_{\beta_1}^2
+\end{pmatrix}
+\end{array}\right.
+\]</span></p>
+<p>Como la matriz diagonal es un caso particular de la matriz general, en que las correlaciones son cero se puede aplicar el test de razón de verosimilitudes.</p>
+</div>
+<div id="estructura-de-correlación-de-los-errores" class="section level3" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Estructura de correlación de los errores</h3>
+<p>Mediante el <strong>test de razón de verosimilitudes (LRT)</strong>, se comparan las verosimilitudes de dos modelos.</p>
+<p>Hay que ajustar el modelo mediante el criterio de máxima verosimilutud.</p>
+<p><strong>Los modelos tienen que estar anidados</strong>: la matriz de covarianzas de los errores de un modelo se pueda expresar como un caso particular de la del otro modelo. Por ejemplo, la matriz sin estructura sería la más general de todas, y la matriz de simetría compuesta sería un caso particular en que todas las correlación son iguales.
+No están anidadas las matrices con estructura MA(1) y una AR(1).</p>
+<p>La simetría compuesta es un caso particular de matriz sin estructura.</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+1 &amp;  \rho_{12} &amp; \rho_{13} \\
+\rho_{12} &amp; 1 &amp; \rho_{23} \\
+\rho_{13} &amp; \rho_{23} &amp; 1 \\
+\end{pmatrix}
+\Rightarrow \color{blue}{(\rho_{12}=\rho_{13}=\rho_{23} =\rho)} \Rightarrow
+\begin{pmatrix}
+1 &amp;  \rho &amp; \rho \\
+\rho &amp; 1 &amp; \rho \\
+\rho &amp; \rho &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>La matriz que supone independencia entre los residuos es un caso particular de matriz de simetría compuesta.</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+1 &amp;  \rho &amp; \rho \\
+\rho &amp; 1 &amp; \rho \\
+\rho &amp; \rho &amp; 1 \\
+\end{pmatrix}
+\Rightarrow \color{blue}{(\rho=0)} \Rightarrow
+\begin{pmatrix}
+1 &amp;  0 &amp; 0 \\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>Pero no se puede pasar de una AR(1) a una MA(1) ni viceversa. En este caso el test LRT no es válido pero sí el criterio AIC o BIC.</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+1 &amp;  \rho &amp; \rho^2 \\
+\rho &amp; 1 &amp; \rho \\
+\rho^2 &amp; \rho &amp; 1 \\
+\end{pmatrix}
+\Rightarrow \color{blue}{(????)} \Rightarrow
+\begin{pmatrix}
+1 &amp; \frac{\theta}{1+\theta^2} &amp; 0 \\
+\frac{\theta}{1+\theta^2} &amp; 1 &amp; \frac{\theta}{1+\theta^2} \\
+0 &amp; \frac{\theta}{1+\theta^2} &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>Una matriz AR(p’) está anidada a AR(p) si p’ &lt; p, o sea un AR de orden menor está anidado a una de orden mayor, y por lo tanto, se puede aplicar un LRT para decidir el valor de p. Por ejemplo, un AR de orden 3 se especificaría como <code>correlation = corARMA(p=3, q=0)</code>. Lo mismo sucede para decidir el orden de una MA. Por ejemplo, para una MA de orden 4, <code>correlation = corARMA(p=0, q=4)</code>.</p>
+<p><strong>Heterocedesticidad</strong>:</p>
+<p>La heterocedesticidad se produce cuando los parámetros de la matriz de covarianzas <span class="math inline">\(\Sigma\)</span> dependen de variables. Por ejemplo, del sexo o de la edad, etc, o de una combinación lineal de las variables (valor esperado).</p>
+<p>Por ejemplo, que la varianza sea distinta según el sexo, mientras que la correlación sea la misma:</p>
+<p>para hombres</p>
+<p><span class="math display">\[ 
+\Sigma_{\text{H}} = \sigma_{\text{H}}^2
+\begin{pmatrix}
+1 &amp;  \rho &amp; \rho^2 \\
+\rho &amp; 1 &amp; \rho \\
+\rho^2 &amp; \rho &amp; 1 \\
+\end{pmatrix}
+\]</span>,</p>
+<p>y para las mujeres</p>
+<p><span class="math display">\[ 
+\Sigma_{\text{M}} = \sigma_{\text{M}}^2
+\begin{pmatrix}
+1 &amp;  \rho &amp; \rho^2 \\
+\rho &amp; 1 &amp; \rho \\
+\rho^2 &amp; \rho &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>También podríamos definir las varianzas (diagonal de <span class="math inline">\(\Sigma\)</span>), en función del tiempo.</p>
+<p>Veremos como es posible modelizar diferentes varianzas distintas entre grupos de individuos con la función <code>lme</code> de R que se describirá en esta sección.</p>
+</div>
+<div id="efectos-fijos" class="section level3" number="6.3.4">
+<h3><span class="header-section-number">6.3.4</span> Efectos fijos</h3>
+<p>Una vez escogida la estructura de covarianzas de los efectos aleatorios, de los errores, y qué efectos son aleatorios (contraste sobre sus varianzas), vamos a contrastar la significación de los efectos fijos:</p>
+<p>Para ello, se puede usar el test de Wald para testar un único parámetro:</p>
+<p><span class="math display">\[
+\left\{\begin{array}{l}
+\text{H}_0: \beta_1 = 0\\
+\text{H}_1: \beta_1 \neq 0
+\end{array}\right.
+\]</span></p>
+<p>o LRT para testar más de un parámetro a la vez, por ejemplo las dummies de un factor de más de dos categorías:</p>
+<p><span class="math display">\[
+\left\{\begin{array}{l}
+\text{H}_0: \beta_1 = \beta_2 = 0\\
+\text{H}_1: \text{alguno diferente de 0}
+\end{array}\right.
+\]</span></p>
+</div>
+</div>
+<div id="validación-del-modelo" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Validación del modelo</h2>
+<p>Una vez simplificado y seleccionado el modelo, hay que validarlo.</p>
+<p>De todas las premisas a comprobar en este curso nos limitaremos a las asumciones sobre los <strong>residuos</strong>.</p>
+<p>Para ellos se realizarán dos gráficos:</p>
+<ul>
+<li><p><strong>Residuos estandarizados vs valores predichos:</strong> en este gráficos debería aparecer una nube de puntos
+uniformemente distribuida sin ninguna tendencia. Ésto nos indicaría que no nos hemos dejado ninguna variable, o ningún término cuadrático o cúbico del tiempo.</p></li>
+<li><p><strong>QQ-plot:</strong> éste gráfico está pensado para comprobar la normalidad. Si los puntos se encuentran alrededor de la diagonal sin seguir ningún patrón, dará evidencia de que los residuos siguen una distribución normal</p></li>
+</ul>
+<p>Hay otras premisas que se deberían comprobar, como por ejemplo la normalidad de los efectos aleatorios. Pero, por su complejidad, no se verá en este curso.</p>
+<p>La valicación de los <strong>efectos aleatorios</strong> es más compleja. Una posibilidad “naive” es considerar que sus estimaciones siguen una distribución normal y que su distribución no depende de ninguna covariable a nivel de individuo. Veremos como las funciones de R para estimar los LMM proporcionan las estimaciones de los efectos aleatorios (“Empirical Bayes Estimates”). Aunque los efectos aleatorios se suponen normalmente distribuidos, los “Empirical Bayes Estimates” no tienen porqué.</p>
+</div>
+<div id="predicciones" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> Predicciones</h2>
+<div id="efectos-marginales" class="section level3" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> Efectos marginales</h3>
+<p>Los efectos marginales representan el valor esperado de la variable respuesta. Para calcularlos hay que especificar los valores de las variables predictoras (condicionar):</p>
+<p><span class="math display">\[E(Y_{ij} | x_{ij1},\ldots,x_{ijK}) = \beta_0 + \sum_{k=i}^K \beta_k x_{ijk}\]</span></p>
+<p>Una vez ajustado el modelo con los datos de la muestra, se estiman los valores de los parámetros para estimar los efectos marginales o predicciones.</p>
+<p><span class="math display">\[\hat{E}(Y_{ij} | x_{ij1},\ldots,x_{ijK}) = \hat{\beta}_0 + \sum_{k=i}^K \hat{\beta}_k x_{ijk}\]</span></p>
+</div>
+<div id="estimación-de-los-efectos-aleatorios" class="section level3" number="6.5.2">
+<h3><span class="header-section-number">6.5.2</span> Estimación de los efectos aleatorios</h3>
+<p>También podemos condicionar al individuo:</p>
+<p><span class="math display">\[\hat{E}(Y_{ij} | x_{ij1},\ldots,x_{ijK}, i) = \hat{\beta}_{0i} + \sum_{k=i}^K \hat{\beta}_{ki} x_{ijk}\]</span></p>
+<p>Donde <span class="math inline">\(\hat{\beta}_{0i}\)</span>, <span class="math inline">\(\hat{\beta}_{ki}\)</span> son los “Empirical Bayes Estimates”.</p>
+</div>
+</div>
+<div id="función-lme" class="section level2" number="6.6">
+<h2><span class="header-section-number">6.6</span> Función <code>lme</code></h2>
+<p>Para ajustar los modelos lineales mixtos usaremos la función <strong><code>lme</code></strong> del paquete <strong><code>nlme</code></strong> <span class="citation">[@R-nlme]</span>.
+Esta función permite incorporar efectos aleatorios, así como especificar la estructura de la matriz de correlaciones de los residuos.</p>
+<p>El método se basa en el <strong>criterio de máxima verosimilidud</strong> (“Maximum Likelihood” - ML), que busca el valor de los parámetros que maximizan la función de verosimilitud. Generalmente, la solución no es una fórmula cerrada y se necesitan métodos iterativos numéricos para encontrar el óptimo. También se calculan mediante métodos numéricos la primera y segunda derivada para acelerar el proceso de estimación y para obtener los errores estándard de las estimaciones.</p>
+<p>Para usar la función <code>lme</code>, los datos deben estar en formato horizontal. No hace falta que haya el mismo número de medidas para cada individuo, ni que las medidas se hayan producido en los mismos tiempos.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="modelos-lineales-mixtos-lmm.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="modelos-lineales-mixtos-lmm.html#cb92-1" aria-hidden="true" tabindex="-1"></a>?lme</span></code></pre></div>
+<p>Los <strong>argumentos</strong> más importantes de la función <code>lme</code></p>
+<ul>
+<li><strong><code>fixed</code></strong>: Fórmula de la forma</li>
+</ul>
+<pre><code>respuesta ~ var1 + var2 + var3
+</code></pre>
+<p>La constante se presupone que está y no hace falta escribir <code>1+</code>.
+La sintaxis es la misma que para el “formula environment” de otras funciones estándard como <code>lm</code> para regresión lineal ordinaria (los términos van separados con <code>+</code>, las interacciones se especifican con <code>:</code>, etc.).
+A la izquierda de <code>~</code> se especifica la variable respuesta.</p>
+<p><br></p>
+<ul>
+<li><strong><code>random</code></strong>: fórmula de la forma</li>
+</ul>
+<pre><code> ~ var1 + var2 + ... + varK | indiv</code></pre>
+<p>sin ninguna variable a la izquierda de <code>~</code>, donde <code>indiv</code> es la variable sujeto y <code>var1</code>, <code>var2</code>, … <code>varK</code> son las variables con coeficiente aleatorio.
+Por defecto se supone que la constante está incluida.</p>
+<p>Si se desea que la constante no sea aleatoria
+<code>~ var1 + ... + varK - 1 | indiv</code>.</p>
+<p>Si sólo la constante es aleatoria
+<code>~ 1 | indiv</code></p>
+<p>Para especificar que la matriz <span class="math inline">\(\Omega\)</span> es diagonal se usa la función <code>pdDiag</code></p>
+<p><code>list(indiv = pdDiag( ~ var1 + var2 + ... + varK))</code></p>
+<p>Si los individuos estuvieran anidados en clústers aleatorios:
+<code>~ var1+..| clusters / indiv</code></p>
+<p><br></p>
+<ul>
+<li><p><strong>correlation</strong>: Para especificar la forma de la matriz de covarianzas de los residuos <span class="math inline">\(\Sigma_i\)</span>. Para más estructuras: <code>?corClasses</code></p>
+<ul>
+<li><p>Residuos independientes (valor por defecto): <code>NULL</code></p></li>
+<li><p>Simetría compuesta: <code>corCompSymm()</code></p></li>
+<li><p>AR(1): <code>corAR1()</code></p></li>
+<li><p>ARMA(p,q): <code>corARMA(p,q)</code></p></li>
+<li><p><span class="math inline">\(\phi^{|t_i-t_j|}\)</span>: <code>corCAR1(form = ~ tiempo | indiv)</code></p></li>
+<li><p>Sin estructura | <code>corSymm()</code></p></li>
+</ul></li>
+</ul>
+<p>Para <code>corCAR1</code>, <span class="math inline">\(\phi\)</span> es la correlación entre dos medidas a distancia de una unidad de tiempo.</p>
+<p><strong>Importante!:</strong> para <code>corCompSymm</code>, <code>corAR1</code>, <code>corARMA</code> o <code>corSymm</code>, las medidas tienen que estar ordenadas dentro de cada individuo. Si no, hay que especificar la variable momento,</p>
+<pre><code>corAR1(form = ~ tiempo | indiv)</code></pre>
+<p><br></p>
+<ul>
+<li><p><strong>weights</strong>: Este argumento modeliza la varianza, <span class="math inline">\(\sigma^2\)</span> según variables. Por defecto, <code>NULL</code> que supone que la matriz de covarianzas es la misma para todos los individuos. En lugar de una variable, puede ser el valor predicho, <code>varFixed(fitted(.))</code>. Para ver más <code>?varClasses</code>.</p>
+<ul>
+<li><p><code>varPower()</code>: <span class="math inline">\(\sigma^2(x) = |x|^{2*\theta}\)</span></p></li>
+<li><p><code>varFixed()</code>: <span class="math inline">\(\sigma^2(x) = |x|\)</span></p></li>
+<li><p><code>varConstPower()</code> <span class="math inline">\(\sigma^2(x) = (\theta_1 + |x|^{\theta_2})^2\)</span></p></li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li><p><strong>method</strong>: Método usado para estimar los parámetros (ML o REML). Para usar el LRT, o calcular los índices AIC o BIC se usa el método ML. La función <code>anova</code> que compara dos modelos por LRT, reajusta los modelos automàticamente bajo el método ML si han sido estimados con REML.</p>
+<ul>
+<li><p>REML (“REstricted Maximum Likelihood”): método por defecto y que proporciona estimaciones no sesgadas de los parámetros.</p></li>
+<li><p>ML (“Maximum Likelihood”): proporciona estimaciones de los parámetros sesgados.</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="ejemplos-2" class="section level2" number="6.7">
+<h2><span class="header-section-number">6.7</span> Ejemplos</h2>
+<div id="ejemplo-1" class="section level3" number="6.7.1">
+<h3><span class="header-section-number">6.7.1</span> Ejemplo 1</h3>
+<p>Analicemos de nuevo el primer ejemplo que vimos en el <a href="ModelosNormal.html#Ejemplo1">anterior tema</a> y que están disponibles en la base de datos “Ejemplo_1W.csv”. Esta fichero contiene los datos de un diseño con 12 individuos en los que se toman los niveles en sangre de un cierto parámetro lipídico. Para cada invidivuo se miden los niveles a 1, 2 y 3 horas.</p>
+<p>Recordemos que los datos se pueden cargar en R mediante</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="modelos-lineales-mixtos-lmm.html#cb96-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;datos/Ejemplo_1W.csv&quot;</span>)</span></code></pre></div>
+<p>Ordenamos por individuo y dentro por tiempo dentro de individuo</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="modelos-lineales-mixtos-lmm.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb97-2"><a href="modelos-lineales-mixtos-lmm.html#cb97-2" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">arrange</span>(datos, indiv, tiempo)</span></code></pre></div>
+<p>Primero, ajustamos el modelo más complejo con constante y pendiente aleatoria, y añadimos el tiempo al cuadrado ya que vemos por el gráfico que la tendencia no es lineal.</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="modelos-lineales-mixtos-lmm.html#cb98-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed =</span> medida <span class="sc">~</span> <span class="fu">poly</span>(tiempo, <span class="dv">2</span>), </span>
+<span id="cb98-2"><a href="modelos-lineales-mixtos-lmm.html#cb98-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>datos,</span>
+<span id="cb98-3"><a href="modelos-lineales-mixtos-lmm.html#cb98-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">random =</span> <span class="sc">~</span> <span class="fu">poly</span>(tiempo, <span class="dv">2</span>) <span class="sc">|</span> indiv,</span>
+<span id="cb98-4"><a href="modelos-lineales-mixtos-lmm.html#cb98-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">correlation =</span> <span class="fu">corAR1</span>(<span class="at">form =</span> <span class="sc">~</span> tiempo <span class="sc">|</span> indiv)</span>
+<span id="cb98-5"><a href="modelos-lineales-mixtos-lmm.html#cb98-5" aria-hidden="true" tabindex="-1"></a>              )</span>
+<span id="cb98-6"><a href="modelos-lineales-mixtos-lmm.html#cb98-6" aria-hidden="true" tabindex="-1"></a>modelo<span class="sc">$</span>modelStruct<span class="sc">$</span>corStruct</span></code></pre></div>
+<pre><code>Correlation structure of class corAR1 representing
+         Phi 
+0.0001428372 </code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="modelos-lineales-mixtos-lmm.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<pre><code>Linear mixed-effects model fit by REML
+  Data: datos 
+       AIC      BIC    logLik
+  208.6888 225.1504 -93.34439
+
+Random effects:
+ Formula: ~poly(tiempo, 2) | indiv
+ Structure: General positive-definite, Log-Cholesky parametrization
+                 StdDev    Corr         
+(Intercept)       7.526056 (Intr) p(,2)1
+poly(tiempo, 2)1 14.559990  0.881       
+poly(tiempo, 2)2  5.178443 -0.663 -0.729
+Residual          1.441564              
+
+Correlation Structure: AR(1)
+ Formula: ~tiempo | indiv 
+ Parameter estimate(s):
+         Phi 
+0.0001428372 
+Fixed effects:  medida ~ poly(tiempo, 2) 
+                     Value Std.Error DF    t-value p-value
+(Intercept)       42.99444  2.185832 22  19.669598       0
+poly(tiempo, 2)1  36.94647  4.443447 22   8.314823       0
+poly(tiempo, 2)2 -28.30784  2.076632 22 -13.631610       0
+ Correlation: 
+                 (Intr) p(,2)1
+poly(tiempo, 2)1  0.828       
+poly(tiempo, 2)2 -0.475 -0.497
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-1.0450552 -0.4346930 -0.1931843  0.5001057  1.1924184 
+
+Number of Observations: 36
+Number of Groups: 12 </code></pre>
+<ul>
+<li>Valor esperado de la constante y coeficientes, <span class="math inline">\(\beta_0, \ldots, \beta_K\)</span>. También se conoce como los coeficientes fijos. Para obtener la tabla de sus estimaciones y los p-valores:</li>
+</ul>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="modelos-lineales-mixtos-lmm.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
+<pre><code>                     Value Std.Error DF    t-value      p-value
+(Intercept)       42.99444  2.185832 22  19.669598 1.886788e-15
+poly(tiempo, 2)1  36.94647  4.443447 22   8.314823 3.092000e-08
+poly(tiempo, 2)2 -28.30784  2.076632 22 -13.631610 3.311649e-12</code></pre>
+<ul>
+<li>Estimación de los efectos aleatorios, <span class="math inline">\(\color{green}{(\beta_{0i}^{*},\beta_{1i}^{*},\beta_{2i}^{*})}\)</span></li>
+</ul>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="modelos-lineales-mixtos-lmm.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(modelo)</span></code></pre></div>
+<pre><code>    (Intercept) poly(tiempo, 2)1 poly(tiempo, 2)2
+1  14.730441065       30.8722315       -6.5833764
+2   4.054046210       11.0739532       -1.2028619
+3  -5.907126225       -5.2717958        2.8619041
+4   0.001779692        0.6665792       -3.8718583
+5   4.796479128       13.7400443       -6.6013406
+6  -7.601895827      -11.9016785        1.3545235
+7  -8.829202865      -17.6630563        7.7680601
+8   6.499328908        7.4984525       -0.9466624
+9   0.924045128       -6.5624802        1.6842059
+10 -5.693831230      -15.1669218        3.7578624
+11 -8.860625561       -8.7246544        2.6200805
+12  5.886561577        1.4393264       -0.8405368</code></pre>
+<p>Hay una fila para cada individuo.</p>
+<p>La función <code>ranef</code> retorna <span class="math inline">\(\hat{\theta}_{ki}\)</span>, donde <span class="math inline">\(\beta_{ki} = \beta_k + \theta_{ki}\)</span>. Así pues, <span class="math inline">\(\theta_{ki} \sim N\left(0,\sigma_{\beta_{k}}^2\right)\)</span> se pueden interpretar como los <strong>“efectos aleatorios centrados”</strong> tal y como se ha escrito la ecuación del modelo.</p>
+<ul>
+<li>Matriz de covarianzas de la constante y coeficientes aleatorios, <span class="math inline">\(\Omega\)</span>:</li>
+</ul>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="modelos-lineales-mixtos-lmm.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getVarCov</span>(modelo)</span></code></pre></div>
+<pre><code>Random effects variance covariance matrix
+                 (Intercept) poly(tiempo, 2)1 poly(tiempo, 2)2
+(Intercept)           56.642           96.553          -25.856
+poly(tiempo, 2)1      96.553          211.990          -54.998
+poly(tiempo, 2)2     -25.856          -54.998           26.816
+  Standard Deviations: 7.5261 14.56 5.1784 </code></pre>
+<ul>
+<li>Matriz de correlaciones de los residuos, <span class="math inline">\(\Sigma_i\)</span></li>
+</ul>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="modelos-lineales-mixtos-lmm.html#cb108-1" aria-hidden="true" tabindex="-1"></a>modelo<span class="sc">$</span>modelStruct<span class="sc">$</span>corStruct</span></code></pre></div>
+<pre><code>Correlation structure of class corAR1 representing
+         Phi 
+0.0001428372 </code></pre>
+<p>Podemos especificar que la correlación entre efectos aleatorios sea cero con la función <code>pdDiag</code> en el argumento <code>random</code>:</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="modelos-lineales-mixtos-lmm.html#cb110-1" aria-hidden="true" tabindex="-1"></a>modelo2 <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed =</span> medida <span class="sc">~</span> <span class="fu">poly</span>(tiempo, <span class="dv">2</span>), </span>
+<span id="cb110-2"><a href="modelos-lineales-mixtos-lmm.html#cb110-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>datos,</span>
+<span id="cb110-3"><a href="modelos-lineales-mixtos-lmm.html#cb110-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">random =</span> <span class="fu">list</span>(<span class="at">indiv=</span><span class="fu">pdDiag</span>(<span class="sc">~</span> <span class="fu">poly</span>(tiempo, <span class="dv">2</span>))),</span>
+<span id="cb110-4"><a href="modelos-lineales-mixtos-lmm.html#cb110-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">correlation =</span> <span class="fu">corAR1</span>()</span>
+<span id="cb110-5"><a href="modelos-lineales-mixtos-lmm.html#cb110-5" aria-hidden="true" tabindex="-1"></a>              )</span>
+<span id="cb110-6"><a href="modelos-lineales-mixtos-lmm.html#cb110-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo2)</span></code></pre></div>
+<pre><code>Linear mixed-effects model fit by REML
+  Data: datos 
+       AIC      BIC    logLik
+  217.8098 229.7819 -100.9049
+
+Random effects:
+ Formula: ~poly(tiempo, 2) | indiv
+ Structure: Diagonal
+        (Intercept) poly(tiempo, 2)1 poly(tiempo, 2)2 Residual
+StdDev:  0.00304907         9.921619     6.785107e-05 7.683502
+
+Correlation Structure: AR(1)
+ Formula: ~1 | indiv 
+ Parameter estimate(s):
+     Phi 
+0.896943 
+Fixed effects:  medida ~ poly(tiempo, 2) 
+                     Value Std.Error DF    t-value p-value
+(Intercept)       42.99444  2.116748 22  20.311555       0
+poly(tiempo, 2)1  36.94647  4.443466 22   8.314786       0
+poly(tiempo, 2)2 -28.30784  2.065204 22 -13.707045       0
+ Correlation: 
+                 (Intr) p(,2)1
+poly(tiempo, 2)1  0.000       
+poly(tiempo, 2)2 -0.098  0.000
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-1.58347912 -0.87272384  0.04840927  0.77580090  2.40352231 
+
+Number of Observations: 36
+Number of Groups: 12 </code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="modelos-lineales-mixtos-lmm.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getVarCov</span>(modelo2)</span></code></pre></div>
+<pre><code>Random effects variance covariance matrix
+                 (Intercept) poly(tiempo, 2)1 poly(tiempo, 2)2
+(Intercept)       9.2968e-06            0.000       0.0000e+00
+poly(tiempo, 2)1  0.0000e+00           98.439       0.0000e+00
+poly(tiempo, 2)2  0.0000e+00            0.000       4.6038e-09
+  Standard Deviations: 0.0030491 9.9216 6.7851e-05 </code></pre>
+<p>Y para contrastar esta asunción</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="modelos-lineales-mixtos-lmm.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, modelo2)</span></code></pre></div>
+<pre><code>        Model df      AIC      BIC     logLik   Test  L.Ratio p-value
+modelo      1 11 208.6888 225.1504  -93.34439                        
+modelo2     2  8 217.8098 229.7819 -100.90491 1 vs 2 15.12105  0.0017</code></pre>
+<p>El mejor a escoger es el que contempla que hay correlación entre los efectos aleatorios.</p>
+<p><strong>Simplificación del modelo</strong></p>
+<p>Miramos primero si los coeficientes son aleatorios o fijos. Para ello comparamos el modelo completo con el modelo sólo con la constante aleatoria.</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="modelos-lineales-mixtos-lmm.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> indiv))</span></code></pre></div>
+<pre><code>                                    Model df      AIC      BIC     logLik   Test  L.Ratio p-value
+modelo                                  1 11 208.6888 225.1504  -93.34439                        
+update(modelo, random = ~1 | indiv)     2  6 214.6890 223.6680 -101.34449 1 vs 2 16.00021  0.0068</code></pre>
+<p>Con la función <code>anova</code> se comparan los dos modelos mediante el LRT, uno con los coeficientes aleatorios y el otro sólo con la constante aleatoria. En este caso, y como se ha dicho, el LRT para constrastar si las varianzas son cero no es del todo adecuado. Existen otros tests basados en remuestreo, pero hasta la fecha no funcionan con <code>lme</code> y no se explicarán en este curso.</p>
+<p>Basándonos en el LRT, y también el criterio AIC o BIC, se tiene que el modelo más complejo (el que supone que los coeficientes son aleatorios) es el que se eligirá.</p>
+<p>Posteriormente miramos si la correlación entre los efectos aleatorios es cero o no:</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="modelos-lineales-mixtos-lmm.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">random=</span><span class="fu">list</span>(<span class="at">indiv=</span><span class="fu">pdDiag</span>(<span class="sc">~</span><span class="fu">poly</span>(tiempo,<span class="dv">2</span>)))))</span></code></pre></div>
+<pre><code>                                                                Model df      AIC      BIC     logLik   Test
+modelo                                                              1 11 208.6888 225.1504  -93.34439       
+update(modelo, random = list(indiv = pdDiag(~poly(tiempo, 2))))     2  8 217.8098 229.7819 -100.90491 1 vs 2
+                                                                 L.Ratio p-value
+modelo                                                                          
+update(modelo, random = list(indiv = pdDiag(~poly(tiempo, 2)))) 15.12105  0.0017</code></pre>
+<p>Nos quedamos con el modelo más complejo, ya que el p-valor del LRT es &lt; 0.005.</p>
+<p>Finalmente, miramos si podemos simplificar la matriz de correlación de los residuos. Comparamos mediante el LRT el modelo ajustado con uno que suponga independencia de los residuos:</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="modelos-lineales-mixtos-lmm.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">correlation=</span><span class="cn">NULL</span>))</span></code></pre></div>
+<pre><code>                                   Model df      AIC      BIC    logLik   Test      L.Ratio p-value
+modelo                                 1 11 208.6888 225.1504 -93.34439                            
+update(modelo, correlation = NULL)     2 10 206.6888 221.6539 -93.34439 1 vs 2 3.668106e-10       1</code></pre>
+<p>Como el p-valor &gt; 0.05, elegimos el modelo más simple (el de independencia de los residuos). Además, según el criteria AIC, o BIC (cuánto más bajo mejor), también nos decantamos por el modelo de independencia de los residuos.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="modelos-lineales-mixtos-lmm.html#cb122-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">update</span>(modelo, <span class="at">correlation=</span><span class="cn">NULL</span>)</span></code></pre></div>
+<p>En el siguiente paso evaluamos la significación de los efectos fijos:</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="modelos-lineales-mixtos-lmm.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
+<pre><code>                     Value Std.Error DF    t-value      p-value
+(Intercept)       42.99444  2.185834 22  19.669582 1.886821e-15
+poly(tiempo, 2)1  36.94647  4.443441 22   8.314834 3.091930e-08
+poly(tiempo, 2)2 -28.30784  2.076630 22 -13.631623 3.311588e-12</code></pre>
+<p>Todos los coeficientes son significativos. Por lo tanto no podemos simplificar el modelo.</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="modelos-lineales-mixtos-lmm.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<pre><code>Linear mixed-effects model fit by REML
+  Data: datos 
+       AIC      BIC    logLik
+  206.6888 221.6539 -93.34439
+
+Random effects:
+ Formula: ~poly(tiempo, 2) | indiv
+ Structure: General positive-definite, Log-Cholesky parametrization
+                 StdDev    Corr         
+(Intercept)       7.526075 (Intr) p(,2)1
+poly(tiempo, 2)1 14.560044  0.881       
+poly(tiempo, 2)2  5.178188 -0.663 -0.729
+Residual          1.441501              
+
+Fixed effects:  medida ~ poly(tiempo, 2) 
+                     Value Std.Error DF    t-value p-value
+(Intercept)       42.99444  2.185834 22  19.669582       0
+poly(tiempo, 2)1  36.94647  4.443441 22   8.314834       0
+poly(tiempo, 2)2 -28.30784  2.076630 22 -13.631623       0
+ Correlation: 
+                 (Intr) p(,2)1
+poly(tiempo, 2)1  0.828       
+poly(tiempo, 2)2 -0.475 -0.497
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-1.0451512 -0.4348223 -0.1931091  0.5002053  1.1925501 
+
+Number of Observations: 36
+Number of Groups: 12 </code></pre>
+<p>Finalmente, validamos el modelo:</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="modelos-lineales-mixtos-lmm.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb127-2"><a href="modelos-lineales-mixtos-lmm.html#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-164-1.png" width="672" /></p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="modelos-lineales-mixtos-lmm.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(modelo)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-164-2.png" width="672" /></p>
+<p>Según estos gráficos, diremos que sí se cumplen las premisas sobre los residuos.</p>
+<p><strong>Predicciones:</strong></p>
+<p>Para calcular las predicciones nos será útil usar las funciones del paquete <strong><code>ggeffects</code></strong>. Con este paquete se pueden realizar las predicciones de distinto tipo y también graficarlas con el paquete <code>ggplot2</code>.</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="modelos-lineales-mixtos-lmm.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="modelos-lineales-mixtos-lmm.html#cb130-1" aria-hidden="true" tabindex="-1"></a>pr.fixed <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(modelo, <span class="st">&quot;tiempo [all]&quot;</span>, <span class="at">type=</span><span class="st">&quot;fixed&quot;</span>)</span>
+<span id="cb130-2"><a href="modelos-lineales-mixtos-lmm.html#cb130-2" aria-hidden="true" tabindex="-1"></a>pr.fixed</span></code></pre></div>
+<pre><code># Predicted values of medida
+
+tiempo | Predicted |         95% CI
+-----------------------------------
+     1 |     32.12 | [29.28, 34.95]
+     2 |     49.67 | [44.85, 54.48]
+     3 |     47.20 | [41.58, 52.82]
+
+Adjusted for:
+* indiv = 0 (population-level)</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="modelos-lineales-mixtos-lmm.html#cb132-1" aria-hidden="true" tabindex="-1"></a>pr.random <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(modelo, <span class="st">&quot;tiempo [all]&quot;</span>, <span class="at">type=</span><span class="st">&quot;random&quot;</span>)</span>
+<span id="cb132-2"><a href="modelos-lineales-mixtos-lmm.html#cb132-2" aria-hidden="true" tabindex="-1"></a>pr.random</span></code></pre></div>
+<pre><code># Predicted values of medida
+
+tiempo
+------
+     1
+     2
+     3
+
+Adjusted for:
+* indiv = 0 (population-level)</code></pre>
+<p>Con el argumento <code>type="random"</code>, el intervalo es más ancho porque no sólo tiene en cuenta el error estándar de las estimaciones de los parámetros sino también la varianza de los efectos aleatorios.</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="modelos-lineales-mixtos-lmm.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb134-2"><a href="modelos-lineales-mixtos-lmm.html#cb134-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(</span>
+<span id="cb134-3"><a href="modelos-lineales-mixtos-lmm.html#cb134-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(pr.fixed) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">25</span>,<span class="dv">60</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;CI: fixed&quot;</span>),</span>
+<span id="cb134-4"><a href="modelos-lineales-mixtos-lmm.html#cb134-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(pr.random) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">25</span>,<span class="dv">60</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;CI: random&quot;</span>),</span>
+<span id="cb134-5"><a href="modelos-lineales-mixtos-lmm.html#cb134-5" aria-hidden="true" tabindex="-1"></a><span class="at">nrow=</span><span class="dv">1</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><strong>Resultado</strong></p>
+<p>Por lo tanto el modelo final contendrá el tiempo, el tiempo al cuadrado, la contaste y los coeficientes aleatorios. Finalmente, los residuos se puede suponer independientes.</p>
+<p><strong>Observaciones</strong></p>
+<ul>
+<li>Se pueden incorporar <strong>términos splines</strong> en la fórmula usando la función <strong><code>ns</code></strong> del paquete <code>spline</code>. Es útil cuando se tienen muchas medidas repetidas y/o en distintos momentos para los diferentes individuos. Se usa en las fórmulas (argumentos <code>fixed</code> i <code>random</code>)</li>
+</ul>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="modelos-lineales-mixtos-lmm.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lme</span>(respuesta <span class="sc">~</span> <span class="fu">ns</span>(tiempo), <span class="at">random =</span> <span class="fu">ns</span>(tiempo) <span class="sc">|</span> indiv, ...)</span></code></pre></div>
+<p><strong>Comparación con las otras técnicas</strong></p>
+<p>A fin de poder comparar los resultados de los modelo LMM con los modelos basados en la suma de cuadrados y en la respuesta multivariante, el tiempo se debe tratar como factor. Fíjate en el uso de <code>as.factor</code> para convertir una variable numérica a factor o variable categórica. Para ello, hay que tener las mismas categorías de tiempo para todos los individuos. Además, tanto los modelos de respuesta multivariable como los basados en suma de cuadrados, asumen la pendiente fija o constante, y la correlación sin estructura.</p>
+<hr />
+<blockquote>
+<p><strong>Nota:</strong> Es importante notar que las técnicas de respuesta multivariable y de suma de cuadrados al tratar la variable tiempo como factor, no se puede distinguir si tiempos de las medidas son o no equiespaiados. Por ejemplo los resultados obtenidos mediante estas dos técnicas serán los mismos tanto si se recogen las medidas a 1h, 2h y 3h, o si se recoge a 1h, 2h y 6h. En cambio, si se desea estudiar el efecto lineal ambas situaciones son muy distintas.</p>
+</blockquote>
+<p><img src="fig_out/unnamed-chunk-170-1.png" width="960" /></p>
+<hr />
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="modelos-lineales-mixtos-lmm.html#cb136-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed =</span> medida <span class="sc">~</span> <span class="fu">as.factor</span>(tiempo), </span>
+<span id="cb136-2"><a href="modelos-lineales-mixtos-lmm.html#cb136-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>datos,</span>
+<span id="cb136-3"><a href="modelos-lineales-mixtos-lmm.html#cb136-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> indiv,</span>
+<span id="cb136-4"><a href="modelos-lineales-mixtos-lmm.html#cb136-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">correlation =</span> <span class="fu">corSymm</span>()</span>
+<span id="cb136-5"><a href="modelos-lineales-mixtos-lmm.html#cb136-5" aria-hidden="true" tabindex="-1"></a>              )</span>
+<span id="cb136-6"><a href="modelos-lineales-mixtos-lmm.html#cb136-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<pre><code>Linear mixed-effects model fit by REML
+  Data: datos 
+       AIC      BIC    logLik
+  218.5233 230.4954 -101.2616
+
+Random effects:
+ Formula: ~1 | indiv
+        (Intercept) Residual
+StdDev:    7.069756 3.498312
+
+Correlation Structure: General
+ Formula: ~1 | indiv 
+ Parameter estimate(s):
+ Correlation: 
+  1      2     
+2  0.081       
+3 -0.561  0.628
+Fixed effects:  medida ~ as.factor(tiempo) 
+                      Value Std.Error DF   t-value p-value
+(Intercept)        32.11667  2.277053 22 14.104488       0
+as.factor(tiempo)2 17.55000  1.368874 22 12.820757       0
+as.factor(tiempo)3 15.08333  1.784415 22  8.452817       0
+ Correlation: 
+                   (Intr) as.()2
+as.factor(tiempo)2 -0.301       
+as.factor(tiempo)3 -0.392  0.880
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-1.95466422 -0.48588298 -0.07605957  0.47680669  2.08061488 
+
+Number of Observations: 36
+Number of Groups: 12 </code></pre>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="modelos-lineales-mixtos-lmm.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
+<pre><code>                      Value Std.Error DF   t-value      p-value
+(Intercept)        32.11667  2.277053 22 14.104488 1.683824e-12
+as.factor(tiempo)2 17.55000  1.368874 22 12.820757 1.104451e-11
+as.factor(tiempo)3 15.08333  1.784415 22  8.452817 2.338498e-08</code></pre>
+<p>La función <code>anova</code> aplicada a un sólo modelo ajustado es útil para contrastar la significación de un factor de más de una categoría (o posibles interacciones de factores de más de dos categorías).</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="modelos-lineales-mixtos-lmm.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo)</span></code></pre></div>
+<pre><code>                  numDF denDF  F-value p-value
+(Intercept)           1    22 319.4667  &lt;.0001
+as.factor(tiempo)     2    22  99.9590  &lt;.0001</code></pre>
+</div>
+<div id="ejemplo-2" class="section level3" number="6.7.2">
+<h3><span class="header-section-number">6.7.2</span> Ejemplo 2</h3>
+<p>Analicemos ahora los datos introducidos en el capítulo anterior en el <a href="#Ejercicio2">ejercicio 2</a>. Recordemos que en la base de datos “Ejemplo_1W1B.csv” se tienen los datos de un estudio en el que participan 24 individuos randomizados en dos grupos de tratamiento (<code>trat</code>). Como en el anterior ejemplo, para cada invidivuo se miden los niveles a 1, 2 y 3 horas.</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="modelos-lineales-mixtos-lmm.html#cb142-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;datos/Ejemplo_1W1B.csv&quot;</span>)</span></code></pre></div>
+<p>Como antes, ordenamos por individuo (de 1 a 24) y por tiempo</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="modelos-lineales-mixtos-lmm.html#cb143-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">arrange</span>(datos, indiv2, tiempo)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="modelos-lineales-mixtos-lmm.html#cb144-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed =</span> medida <span class="sc">~</span> <span class="fu">poly</span>(tiempo,<span class="dv">2</span>)<span class="sc">*</span>trat, </span>
+<span id="cb144-2"><a href="modelos-lineales-mixtos-lmm.html#cb144-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>datos,</span>
+<span id="cb144-3"><a href="modelos-lineales-mixtos-lmm.html#cb144-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">random =</span> <span class="sc">~</span> <span class="fu">poly</span>(tiempo,<span class="dv">2</span>) <span class="sc">|</span> indiv2,</span>
+<span id="cb144-4"><a href="modelos-lineales-mixtos-lmm.html#cb144-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">correlation =</span> <span class="fu">corAR1</span>()</span>
+<span id="cb144-5"><a href="modelos-lineales-mixtos-lmm.html#cb144-5" aria-hidden="true" tabindex="-1"></a>              )</span>
+<span id="cb144-6"><a href="modelos-lineales-mixtos-lmm.html#cb144-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<pre><code>Linear mixed-effects model fit by REML
+  Data: datos 
+      AIC      BIC   logLik
+  386.914 417.5692 -179.457
+
+Random effects:
+ Formula: ~poly(tiempo, 2) | indiv2
+ Structure: General positive-definite, Log-Cholesky parametrization
+                 StdDev    Corr         
+(Intercept)       6.528818 (Intr) p(,2)1
+poly(tiempo, 2)1 15.016144  0.720       
+poly(tiempo, 2)2  5.983554 -0.637 -0.653
+Residual          1.290085              
+
+Correlation Structure: AR(1)
+ Formula: ~1 | indiv2 
+ Parameter estimate(s):
+         Phi 
+5.458068e-05 
+Fixed effects:  medida ~ poly(tiempo, 2) * trat 
+                          Value Std.Error DF    t-value p-value
+(Intercept)            22.16667  4.241672 44   5.225927  0.0000
+poly(tiempo, 2)1      -35.16063 10.516421 44  -3.343403  0.0017
+poly(tiempo, 2)2       33.10000  5.617817 44   5.891968  0.0000
+trat                   10.41389  2.682669 22   3.881914  0.0008
+poly(tiempo, 2)1:trat  43.70542  6.651169 44   6.571088  0.0000
+poly(tiempo, 2)2:trat -36.56667  3.553020 44 -10.291715  0.0000
+ Correlation: 
+                      (Intr) pl(,2)1 pl(,2)2 trat   p(,2)1:
+poly(tiempo, 2)1       0.659                               
+poly(tiempo, 2)2      -0.435 -0.414                        
+trat                  -0.949 -0.625   0.413                
+poly(tiempo, 2)1:trat -0.625 -0.949   0.393   0.659        
+poly(tiempo, 2)2:trat  0.413  0.393  -0.949  -0.435 -0.414 
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-1.17636054 -0.41451565 -0.05512438  0.37021883  1.36156358 
+
+Number of Observations: 72
+Number of Groups: 24 </code></pre>
+<p><strong>Nota</strong>:
+Si los individuos estuvieran anidados dentro de clusters, se especificaría en el argumento <code>random = ~ 1 | indiv / clusters</code>, donde “cluster” sería el nombre de la variable que codifica los clusters.</p>
+<p><strong>Observación</strong> Para que el modelo quede bien definido no es posible poner la interacción del tiempo y el tratamiento como coeficiente aleatorio. De esta manera se especifican como aleatorios la costante y los coeficientes del tiempo (lineal y cuadrático) para el grupo control.</p>
+<p>Como en el anterior ejemplo, contrastamos la significación de los coeficientes aleatorios del tiempo:</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="modelos-lineales-mixtos-lmm.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> indiv2))</span></code></pre></div>
+<pre><code>                                     Model df      AIC      BIC   logLik   Test  L.Ratio p-value
+modelo                                   1 14 386.9140 417.5692 -179.457                        
+update(modelo, random = ~1 | indiv2)     2  9 393.6099 413.3168 -187.805 1 vs 2 16.69594  0.0051</code></pre>
+<p>Según el criterio AIC o BIC, el modelo con pendientes aleatorias es mejor.</p>
+<p>Luego, contrastamos si se puede simplificar la matriz de correlaciones de los efectos aleatorios:</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="modelos-lineales-mixtos-lmm.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">random =</span> <span class="fu">list</span>(<span class="at">indiv2=</span><span class="fu">pdDiag</span>(<span class="sc">~</span><span class="fu">poly</span>(tiempo,<span class="dv">2</span>)))))</span></code></pre></div>
+<pre><code>                                                                 Model df      AIC      BIC    logLik   Test
+modelo                                                               1 14 386.9140 417.5692 -179.4570       
+update(modelo, random = list(indiv2 = pdDiag(~poly(tiempo, 2))))     2 11 397.1845 421.2707 -187.5922 1 vs 2
+                                                                  L.Ratio p-value
+modelo                                                                           
+update(modelo, random = list(indiv2 = pdDiag(~poly(tiempo, 2)))) 16.27047   0.001</code></pre>
+<p>El test LRT es significativo (p-valor &lt; 0.05). Por lo tanto nos quedamos con el modelo más complejo que supone que hay correlación entre los efectos aleatorios.</p>
+<p>Seguidamente, miramos si se puede simplificar la matriz de correlaciones de los errores.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="modelos-lineales-mixtos-lmm.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">correlation=</span><span class="cn">NULL</span>))</span></code></pre></div>
+<pre><code>                                   Model df     AIC      BIC   logLik   Test      L.Ratio p-value
+modelo                                 1 14 386.914 417.5692 -179.457                            
+update(modelo, correlation = NULL)     2 13 384.914 413.3795 -179.457 1 vs 2 1.063989e-08  0.9999</code></pre>
+<p>Sí que se puede suponer que hay indipendencia entre los residuos.</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="modelos-lineales-mixtos-lmm.html#cb152-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">update</span>(modelo, <span class="at">correlation=</span><span class="cn">NULL</span>)</span></code></pre></div>
+<p>Por lo tanto el modelo final, que supone independencia entre residuos, tiene la siguiente estimación de los efectos fijos:</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="modelos-lineales-mixtos-lmm.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
+<pre><code>                          Value Std.Error DF    t-value      p-value
+(Intercept)            22.16667  4.241667 44   5.225932 4.556683e-06
+poly(tiempo, 2)1      -35.16063 10.516526 44  -3.343370 1.698154e-03
+poly(tiempo, 2)2       33.10000  5.617838 44   5.891946 4.863408e-07
+trat                   10.41389  2.682666 22   3.881918 8.040480e-04
+poly(tiempo, 2)1:trat  43.70542  6.651235 44   6.571023 4.876727e-08
+poly(tiempo, 2)2:trat -36.56667  3.553033 44 -10.291677 2.732020e-13</code></pre>
+<p>Vemos como el efecto del tiempo para el grupo control no llega a ser significativo (p-valores &gt;0.05) tanto para su componente lineal como cuadrático. Hay efecto del tratamiento en el momento basal (<code>trat2</code>).</p>
+<p>Si queremos ver el efecto del tiempo para el grupo 2, hay que cambiar su categoría de referencia.</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="modelos-lineales-mixtos-lmm.html#cb155-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>trat <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(datos<span class="sc">$</span>trat),<span class="dv">2</span>)</span>
+<span id="cb155-2"><a href="modelos-lineales-mixtos-lmm.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(<span class="fu">update</span>(modelo)))</span></code></pre></div>
+<pre><code>                           Value Std.Error DF    t-value      p-value
+(Intercept)             42.99444  1.896932 44  22.665259 6.756030e-26
+poly(tiempo, 2)1        52.25020  4.703133 44  11.109658 2.358252e-14
+poly(tiempo, 2)2       -40.03333  2.512374 44 -15.934465 6.870764e-20
+trat1                  -10.41389  2.682666 22  -3.881917 8.040486e-04
+poly(tiempo, 2)1:trat1 -43.70542  6.651235 44  -6.571023 4.876723e-08
+poly(tiempo, 2)2:trat1  36.56667  3.553033 44  10.291676 2.732023e-13</code></pre>
+<p>Vemos que para el grupo 2 tanto la componente lineal como la cuadrática del tiempo son significativas.</p>
+<p>Con la siguiente matriz de varianzas y covarianzas de los efectos aleatorios:</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="modelos-lineales-mixtos-lmm.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getVarCov</span>(modelo)</span></code></pre></div>
+<pre><code>Random effects variance covariance matrix
+                 (Intercept) poly(tiempo, 2)1 poly(tiempo, 2)2
+(Intercept)           42.625           70.566          -24.889
+poly(tiempo, 2)1      70.566          225.490          -58.669
+poly(tiempo, 2)2     -24.889          -58.669           35.802
+  Standard Deviations: 6.5288 15.016 5.9835 </code></pre>
+<p>Y varianza de los residuos</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="modelos-lineales-mixtos-lmm.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(modelo)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>[1] 1.664273</code></pre>
+<p>Por último, validamos el modelo</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="modelos-lineales-mixtos-lmm.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb161-2"><a href="modelos-lineales-mixtos-lmm.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-184-1.png" width="672" /></p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="modelos-lineales-mixtos-lmm.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(modelo)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-184-2.png" width="672" /></p>
+<p>Según los gráficos, parece que sí que se cumplen las premisas sobre los residuos.</p>
+<p><strong>Predicciones</strong></p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="modelos-lineales-mixtos-lmm.html#cb163-1" aria-hidden="true" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(modelo, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;tiempo [all]&quot;</span>, <span class="st">&quot;trat&quot;</span>))</span>
+<span id="cb163-2"><a href="modelos-lineales-mixtos-lmm.html#cb163-2" aria-hidden="true" tabindex="-1"></a>pr</span></code></pre></div>
+<pre><code># Predicted values of medida
+
+# trat = 1
+
+tiempo | Predicted |         95% CI
+-----------------------------------
+     1 |     31.06 | [28.17, 33.95]
+     2 |     33.16 | [29.02, 37.30]
+     3 |     33.52 | [29.00, 38.05]
+
+# trat = 2
+
+tiempo | Predicted |         95% CI
+-----------------------------------
+     1 |     32.12 | [29.22, 35.01]
+     2 |     49.67 | [45.53, 53.81]
+     3 |     47.20 | [42.67, 51.73]
+
+Adjusted for:
+* indiv2 = 0 (population-level)</code></pre>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="modelos-lineales-mixtos-lmm.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr, <span class="at">add.data =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-185-1.png" width="672" /></p>
+</div>
+<div id="ejemplo-3" class="section level3" number="6.7.3">
+<h3><span class="header-section-number">6.7.3</span> Ejemplo 3</h3>
+<p>Finalmente, analicemos ahora los datos introducidos en el capítulo anterior en el <a href="#Ejercicio3">ejercicio 3</a>. En un estudio se quieren comparar el efecto de régimen de ejercicio sobre el sobrepeso. Para ello se reclutan 100 personas. A la mitad se le asigna el régimen y al resto se le hacen algunas recomendaciones (grupo control). Se mide el índice de masa corporal justo antes de empezar el estudio (momento basal), y al cabo de 1, 2 y 3 semanas. Como la edad es una variable importante para predecir el IMC también se registra.</p>
+<p>Los datos los encontrarás en el fichero “imc.csv”</p>
+<p>En este ejemplo, vemos como en algunos de los individuos nos falta alguna medida en a partir de la primera semana. Por este motivo usaremos la técnica de los LMM.</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="modelos-lineales-mixtos-lmm.html#cb166-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;datos/imc.csv&quot;</span>)</span></code></pre></div>
+<p>Nos aseguramos que los datos estén ordenados por individuo y tiempo</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="modelos-lineales-mixtos-lmm.html#cb167-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">arrange</span>(datos, indiv, tiempo)</span></code></pre></div>
+<p>Recodificamos nuestra variable tratamiento:</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="modelos-lineales-mixtos-lmm.html#cb168-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>tx <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos<span class="sc">$</span>tx, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Tratados&quot;</span>))</span>
+<span id="cb168-2"><a href="modelos-lineales-mixtos-lmm.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(datos)</span></code></pre></div>
+<pre><code>   respuesta         indiv            tiempo          edad              tx     
+ Min.   : 9.80   Min.   :  1.00   Min.   :0.00   Min.   :25.00   Control :200  
+ 1st Qu.:27.02   1st Qu.: 25.75   1st Qu.:0.75   1st Qu.:43.00   Tratados:200  
+ Median :30.75   Median : 50.50   Median :1.50   Median :49.00                 
+ Mean   :30.46   Mean   : 50.50   Mean   :1.50   Mean   :49.03                 
+ 3rd Qu.:34.60   3rd Qu.: 75.25   3rd Qu.:2.25   3rd Qu.:57.00                 
+ Max.   :43.70   Max.   :100.00   Max.   :3.00   Max.   :69.00                 
+ NA&#39;s   :50                                                                    </code></pre>
+<p>Recordemos también que estos datos no puedieron ser analizados con métodos tradicionales ya que tienen inviduos con datos faltantes</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="modelos-lineales-mixtos-lmm.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">with</span>(datos, <span class="fu">tapply</span>(<span class="fu">is.na</span>(respuesta), indiv, any)))</span></code></pre></div>
+<pre><code>[1] 42</code></pre>
+<p>Elimino las observaciones con valores missing (que no los individuos!)</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="modelos-lineales-mixtos-lmm.html#cb172-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">subset</span>(datos, <span class="sc">!</span><span class="fu">is.na</span>(respuesta))</span>
+<span id="cb172-2"><a href="modelos-lineales-mixtos-lmm.html#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="co"># número de individuos con 2, 3 o 4 medidas válidas.</span></span>
+<span id="cb172-3"><a href="modelos-lineales-mixtos-lmm.html#cb172-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">table</span>(datos<span class="sc">$</span>indiv))</span></code></pre></div>
+<pre><code>
+ 2  3  4 
+ 8 34 58 </code></pre>
+<p>Como siempre, hagamos una visualización de los datos</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="modelos-lineales-mixtos-lmm.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb174-2"><a href="modelos-lineales-mixtos-lmm.html#cb174-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(<span class="at">x =</span> tiempo, <span class="at">y =</span> respuesta, <span class="at">group =</span> indiv))</span>
+<span id="cb174-3"><a href="modelos-lineales-mixtos-lmm.html#cb174-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>),</span>
+<span id="cb174-4"><a href="modelos-lineales-mixtos-lmm.html#cb174-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="at">fun =</span> mean, <span class="at">size=</span><span class="dv">2</span>)</span>
+<span id="cb174-5"><a href="modelos-lineales-mixtos-lmm.html#cb174-5" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">facet_grid</span>( <span class="sc">~</span> tx)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-191-1.png" width="672" /></p>
+<div id="análisis-del-grupo-control" class="section level4" number="6.7.3.1">
+<h4><span class="header-section-number">6.7.3.1</span> Análisis del grupo control</h4>
+<p>Si analizamos sólo el grupo control, se trata de un diseño 1W con una covariable (edad).</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="modelos-lineales-mixtos-lmm.html#cb175-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">subset</span>(datos, tx<span class="sc">==</span><span class="st">&#39;Control&#39;</span>)</span>
+<span id="cb175-2"><a href="modelos-lineales-mixtos-lmm.html#cb175-2" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(datos)</span></code></pre></div>
+<p>Ajustamos el modelo más completo, con la edad y el tiempo hasta el término cúbico ya que tenemos cuatro medidas.</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="modelos-lineales-mixtos-lmm.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
+<span id="cb176-2"><a href="modelos-lineales-mixtos-lmm.html#cb176-2" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lme</span>(respuesta <span class="sc">~</span> <span class="fu">poly</span>(tiempo,<span class="dv">3</span>) <span class="sc">+</span> edad, </span>
+<span id="cb176-3"><a href="modelos-lineales-mixtos-lmm.html#cb176-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">random=</span> <span class="sc">~</span> <span class="fu">poly</span>(tiempo,<span class="dv">3</span>) <span class="sc">|</span> indiv, </span>
+<span id="cb176-4"><a href="modelos-lineales-mixtos-lmm.html#cb176-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>datos, </span>
+<span id="cb176-5"><a href="modelos-lineales-mixtos-lmm.html#cb176-5" aria-hidden="true" tabindex="-1"></a>              <span class="co">#correlation = corSymm(), # sin estructura</span></span>
+<span id="cb176-6"><a href="modelos-lineales-mixtos-lmm.html#cb176-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">correlation=</span><span class="fu">corCAR1</span>(<span class="at">form =</span> <span class="sc">~</span> tiempo <span class="sc">|</span> indiv),</span>
+<span id="cb176-7"><a href="modelos-lineales-mixtos-lmm.html#cb176-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">control=</span><span class="fu">lmeControl</span>(<span class="at">opt=</span><span class="st">&quot;optim&quot;</span>))</span>
+<span id="cb176-8"><a href="modelos-lineales-mixtos-lmm.html#cb176-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<pre><code>Linear mixed-effects model fit by REML
+  Data: datos 
+       AIC      BIC    logLik
+  672.3888 724.9826 -319.1944
+
+Random effects:
+ Formula: ~poly(tiempo, 3) | indiv
+ Structure: General positive-definite, Log-Cholesky parametrization
+                 StdDev     Corr                
+(Intercept)       2.1235727 (Intr) p(,3)1 p(,3)2
+poly(tiempo, 3)1 10.8729435 -0.143              
+poly(tiempo, 3)2  5.3455110  0.317  0.071       
+poly(tiempo, 3)3  4.2631158  0.057 -0.026  0.193
+Residual          0.5431964                     
+
+Correlation Structure: Continuous AR(1)
+ Formula: ~tiempo | indiv 
+ Parameter estimate(s):
+      Phi 
+0.1999231 
+Fixed effects:  respuesta ~ poly(tiempo, 3) + edad 
+                      Value Std.Error  DF   t-value p-value
+(Intercept)       10.409728 1.4770932 115  7.047442  0.0000
+poly(tiempo, 3)1 -15.045596 1.6657189 115 -9.032494  0.0000
+poly(tiempo, 3)2  -0.518758 1.0075975 115 -0.514846  0.6076
+poly(tiempo, 3)3   1.865008 0.8918255 115  2.091225  0.0387
+edad               0.432945 0.0297828  48 14.536718  0.0000
+ Correlation: 
+                 (Intr) p(,3)1 p(,3)2 p(,3)3
+poly(tiempo, 3)1 -0.024                     
+poly(tiempo, 3)2  0.081  0.089              
+poly(tiempo, 3)3  0.012 -0.041  0.149       
+edad             -0.978 -0.001 -0.037 -0.003
+
+Standardized Within-Group Residuals:
+         Min           Q1          Med           Q3          Max 
+-1.025920132 -0.293663743 -0.008367651  0.290693758  1.093099300 
+
+Number of Observations: 168
+Number of Groups: 50 </code></pre>
+<p>El modelo de correlación sin estructura no converge (NOTA: intentad ejecutar el mismo código cambiando la correlación que tiene por la que está comentada). Es normal ya que tenemos distintas medidas.</p>
+<p>Es importante especificar la AR(1) continua <code>corCAR1</code> ya que tenemos algunos individuos con datos faltantes en algunas de sus medidas. Luego el tiempo que ha pasado entre las medidas disponibles hay que tenerlo en cuenta.</p>
+<p>Fíjate en la varianza de los efectos aleatorios, sobretodo en la constante si en el modelo no ponemos la edad,</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="modelos-lineales-mixtos-lmm.html#cb178-1" aria-hidden="true" tabindex="-1"></a>modelo0 <span class="ot">&lt;-</span> <span class="fu">update</span>(modelo, <span class="at">fixed =</span> . <span class="sc">~</span> . <span class="sc">-</span>edad)</span>
+<span id="cb178-2"><a href="modelos-lineales-mixtos-lmm.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getVarCov</span>(modelo)</span></code></pre></div>
+<pre><code>Random effects variance covariance matrix
+                 (Intercept) poly(tiempo, 3)1 poly(tiempo, 3)2 poly(tiempo, 3)3
+(Intercept)           4.5096          -3.2917           3.6035           0.5144
+poly(tiempo, 3)1     -3.2917         118.2200           4.1274          -1.1839
+poly(tiempo, 3)2      3.6035           4.1274          28.5740           4.4056
+poly(tiempo, 3)3      0.5144          -1.1839           4.4056          18.1740
+  Standard Deviations: 2.1236 10.873 5.3455 4.2631 </code></pre>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="modelos-lineales-mixtos-lmm.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getVarCov</span>(modelo0) <span class="co"># sin la edad</span></span></code></pre></div>
+<pre><code>Random effects variance covariance matrix
+                 (Intercept) poly(tiempo, 3)1 poly(tiempo, 3)2 poly(tiempo, 3)3
+(Intercept)         22.65700         -2.56910          0.79669          0.60630
+poly(tiempo, 3)1    -2.56910        108.79000          2.88170          0.23627
+poly(tiempo, 3)2     0.79669          2.88170         20.71700          3.90920
+poly(tiempo, 3)3     0.60630          0.23627          3.90920         13.19500
+  Standard Deviations: 4.76 10.43 4.5516 3.6326 </code></pre>
+<p>Es importante poner la edad ya que si no, la varianza de los efectos aleatorios quedan infladas y la inferencia no es válida.</p>
+<p><strong>Contraste de los efectos aleatorios</strong></p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="modelos-lineales-mixtos-lmm.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> indiv))</span></code></pre></div>
+<pre><code>                                    Model df      AIC      BIC    logLik   Test  L.Ratio p-value
+modelo                                  1 17 672.3888 724.9826 -319.1944                        
+update(modelo, random = ~1 | indiv)     2  8 662.1079 686.8579 -323.0539 1 vs 2 7.719062  0.5627</code></pre>
+<p>Nos quedamos con el modelo con los coeficientes del tiempo fijos:</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="modelos-lineales-mixtos-lmm.html#cb184-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">update</span>(modelo, <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> indiv)</span></code></pre></div>
+<blockquote>
+<p><strong>Observación</strong> Fíjate en el valor de <span class="math inline">\(\phi\)</span> de la matriz de correlaciones de los errores: al considerar el coeficiente del tiempo como fijo, ha pasado de ser cero a un valor alto. Al considerar el coeficiente aleatorio en cierta manera se inducía una estructura de AR entre las observaciones y ya no hacía falta considerar los errores correlacionados. Por esto, el orden en que se simplifica el modelo es importante.</p>
+</blockquote>
+<p>Si queremos <strong>contrastar si la constante es aletoria</strong> se compara el modelo con todos los efectos fijos. Así que ya no se podrá usar la función <code>lme</code> sino que se usará la función <code>gls</code> en su lugar.</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="modelos-lineales-mixtos-lmm.html#cb185-1" aria-hidden="true" tabindex="-1"></a>modelo.gls <span class="ot">&lt;-</span> <span class="fu">gls</span>(respuesta <span class="sc">~</span> <span class="fu">poly</span>(tiempo,<span class="dv">3</span>) <span class="sc">+</span> edad, </span>
+<span id="cb185-2"><a href="modelos-lineales-mixtos-lmm.html#cb185-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data=</span>datos, </span>
+<span id="cb185-3"><a href="modelos-lineales-mixtos-lmm.html#cb185-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">correlation=</span><span class="fu">corCAR1</span>(<span class="at">form =</span> <span class="sc">~</span> tiempo <span class="sc">|</span>indiv))</span>
+<span id="cb185-4"><a href="modelos-lineales-mixtos-lmm.html#cb185-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo.gls)</span></code></pre></div>
+<pre><code>Generalized least squares fit by REML
+  Model: respuesta ~ poly(tiempo, 3) + edad 
+  Data: datos 
+       AIC      BIC    logLik
+  660.2088 681.8651 -323.1044
+
+Correlation Structure: Continuous AR(1)
+ Formula: ~tiempo | indiv 
+ Parameter estimate(s):
+      Phi 
+0.8409838 
+
+Coefficients:
+                      Value Std.Error   t-value p-value
+(Intercept)       10.743564 1.5857081  6.775247  0.0000
+poly(tiempo, 3)1 -15.049949 1.6527760 -9.105861  0.0000
+poly(tiempo, 3)2  -0.382757 1.0563295 -0.362347  0.7176
+poly(tiempo, 3)3   1.978662 0.8789044  2.251283  0.0257
+edad               0.425951 0.0319656 13.325311  0.0000
+
+ Correlation: 
+                 (Intr) p(,3)1 p(,3)2 p(,3)3
+poly(tiempo, 3)1  0.001                     
+poly(tiempo, 3)2 -0.022  0.019              
+poly(tiempo, 3)3  0.003 -0.121  0.024       
+edad             -0.980 -0.002 -0.008 -0.001
+
+Standardized residuals:
+        Min          Q1         Med          Q3         Max 
+-2.39865570 -0.70572628 -0.01464924  0.74989249  2.07647314 
+
+Residual standard error: 2.492824 
+Degrees of freedom: 168 total; 163 residual</code></pre>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="modelos-lineales-mixtos-lmm.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<pre><code>Linear mixed-effects model fit by REML
+  Data: datos 
+       AIC      BIC    logLik
+  662.1079 686.8579 -323.0539
+
+Random effects:
+ Formula: ~1 | indiv
+        (Intercept) Residual
+StdDev:   0.8028047 2.378488
+
+Correlation Structure: Continuous AR(1)
+ Formula: ~tiempo | indiv 
+ Parameter estimate(s):
+      Phi 
+0.8266025 
+Fixed effects:  respuesta ~ poly(tiempo, 3) + edad 
+                      Value Std.Error  DF   t-value p-value
+(Intercept)       10.738507 1.6033545 115  6.697525  0.0000
+poly(tiempo, 3)1 -15.048689 1.6348726 115 -9.204808  0.0000
+poly(tiempo, 3)2  -0.382488 1.0548435 115 -0.362602  0.7176
+poly(tiempo, 3)3   1.978466 0.8786767 115  2.251643  0.0262
+edad               0.426057 0.0323229  48 13.181289  0.0000
+ Correlation: 
+                 (Intr) p(,3)1 p(,3)2 p(,3)3
+poly(tiempo, 3)1  0.001                     
+poly(tiempo, 3)2 -0.020  0.019              
+poly(tiempo, 3)3  0.003 -0.122  0.024       
+edad             -0.980 -0.002 -0.008 -0.001
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-2.25670886 -0.66026076  0.01991706  0.66013218  1.92440305 
+
+Number of Observations: 168
+Number of Groups: 50 </code></pre>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="modelos-lineales-mixtos-lmm.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, modelo.gls)</span></code></pre></div>
+<pre><code>           Model df      AIC      BIC    logLik   Test   L.Ratio p-value
+modelo         1  8 662.1079 686.8579 -323.0539                         
+modelo.gls     2  7 660.2088 681.8651 -323.1044 1 vs 2 0.1009386  0.7507</code></pre>
+<p>Los dos modelos no están anidados. Así que a parte del p-valor del LRT también miraremos el AIC y el BIC. Bajo los tres criterios nos decantamos por el modelo con la constante aleatoria.</p>
+<p><strong>Estructura de correlación de los errores</strong></p>
+<p>Comparamos con la matriz de independencia</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="modelos-lineales-mixtos-lmm.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">correlation=</span><span class="cn">NULL</span>))</span></code></pre></div>
+<pre><code>                                   Model df      AIC      BIC    logLik   Test  L.Ratio p-value
+modelo                                 1  8 662.1079 686.8579 -323.0539                        
+update(modelo, correlation = NULL)     2  7 677.6130 699.2693 -331.8065 1 vs 2 17.50515  &lt;.0001</code></pre>
+<p>Nos quedamos con la estructura AR1</p>
+<p><strong>Contraste de los efectos fijos</strong></p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="modelos-lineales-mixtos-lmm.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
+<pre><code>                       Value Std.Error  DF   t-value      p-value
+(Intercept)       10.7385066 1.6033545 115  6.697525 8.187045e-10
+poly(tiempo, 3)1 -15.0486889 1.6348726 115 -9.204808 1.848306e-15
+poly(tiempo, 3)2  -0.3824884 1.0548435 115 -0.362602 7.175678e-01
+poly(tiempo, 3)3   1.9784662 0.8786767 115  2.251643 2.624396e-02
+edad               0.4260575 0.0323229  48 13.181289 1.441756e-17</code></pre>
+<p>Vemos como la parte cuadrática no es significativa y la cúbico tampoco.
+Para contrastar los dos términos (cuadrático y cúbico) a la vez comparamos mediante el LRT el modelo completo con el modelo que supone el efecto del tiempo lineal</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="modelos-lineales-mixtos-lmm.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(</span>
+<span id="cb195-2"><a href="modelos-lineales-mixtos-lmm.html#cb195-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update</span>(modelo, <span class="at">method=</span><span class="st">&quot;ML&quot;</span>), </span>
+<span id="cb195-3"><a href="modelos-lineales-mixtos-lmm.html#cb195-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update</span>(modelo, <span class="at">fixed =</span> . <span class="sc">~</span> . <span class="sc">-</span> <span class="fu">poly</span>(tiempo,<span class="dv">3</span>) <span class="sc">+</span> tiempo, <span class="at">method=</span><span class="st">&quot;ML&quot;</span>)</span>
+<span id="cb195-4"><a href="modelos-lineales-mixtos-lmm.html#cb195-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>                                                                        Model df      AIC      BIC    logLik
+update(modelo, method = &quot;ML&quot;)                                               1  8 662.6555 687.6473 -323.3278
+update(modelo, fixed = . ~ . - poly(tiempo, 3) + tiempo, method = &quot;ML&quot;)     2  6 663.4848 682.2286 -325.7424
+                                                                          Test L.Ratio p-value
+update(modelo, method = &quot;ML&quot;)                                                                 
+update(modelo, fixed = . ~ . - poly(tiempo, 3) + tiempo, method = &quot;ML&quot;) 1 vs 2 4.82924  0.0894</code></pre>
+<p>El p-valor &gt; 0.05, por lo tanto nos quedamos con el modelo lineal.</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="modelos-lineales-mixtos-lmm.html#cb197-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">update</span>(modelo, <span class="at">fixed =</span> . <span class="sc">~</span> . <span class="sc">-</span> <span class="fu">poly</span>(tiempo,<span class="dv">3</span>) <span class="sc">+</span> tiempo)</span>
+<span id="cb197-2"><a href="modelos-lineales-mixtos-lmm.html#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<pre><code>Linear mixed-effects model fit by REML
+  Data: datos 
+       AIC      BIC    logLik
+  671.7705 690.4062 -329.8853
+
+Random effects:
+ Formula: ~1 | indiv
+        (Intercept) Residual
+StdDev:     1.61273 1.877586
+
+Correlation Structure: Continuous AR(1)
+ Formula: ~tiempo | indiv 
+ Parameter estimate(s):
+      Phi 
+0.7045807 
+Fixed effects:  respuesta ~ edad + tiempo 
+                Value Std.Error  DF   t-value p-value
+(Intercept) 12.084507 1.5894665 117  7.602870       0
+edad         0.426773 0.0319158  48 13.371839       0
+tiempo      -0.959328 0.1030230 117 -9.311792       0
+ Correlation: 
+       (Intr) edad  
+edad   -0.976       
+tiempo -0.092 -0.002
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-2.13574976 -0.49274745  0.00586512  0.57010471  2.16657427 
+
+Number of Observations: 168
+Number of Groups: 50 </code></pre>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="modelos-lineales-mixtos-lmm.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
+<pre><code>                 Value  Std.Error  DF   t-value      p-value
+(Intercept) 12.0845065 1.58946650 117  7.602870 7.939399e-12
+edad         0.4267727 0.03191578  48 13.371839 8.365041e-18
+tiempo      -0.9593285 0.10302297 117 -9.311792 9.105728e-16</code></pre>
+<p><strong>Validación del modelo</strong></p>
+<ul>
+<li>Errores</li>
+</ul>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="modelos-lineales-mixtos-lmm.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb201-2"><a href="modelos-lineales-mixtos-lmm.html#cb201-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-203-1.png" width="672" /></p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="modelos-lineales-mixtos-lmm.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(modelo)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-203-2.png" width="672" /></p>
+<ul>
+<li>Efectos aleatorios</li>
+</ul>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="modelos-lineales-mixtos-lmm.html#cb203-1" aria-hidden="true" tabindex="-1"></a>beta0i<span class="ot">&lt;-</span> <span class="fu">ranef</span>(modelo)[,<span class="dv">1</span>]</span>
+<span id="cb203-2"><a href="modelos-lineales-mixtos-lmm.html#cb203-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(beta0i); <span class="fu">qqline</span>(beta0i)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-204-1.png" width="672" /></p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="modelos-lineales-mixtos-lmm.html#cb204-1" aria-hidden="true" tabindex="-1"></a>edad <span class="ot">&lt;-</span> <span class="fu">with</span>(datos, <span class="fu">tapply</span>(edad, indiv, mean))</span>
+<span id="cb204-2"><a href="modelos-lineales-mixtos-lmm.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="co"># gráfico de los efectos aleatorios vs variables individuo</span></span>
+<span id="cb204-3"><a href="modelos-lineales-mixtos-lmm.html#cb204-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(edad, beta0i)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-204-2.png" width="672" /></p>
+<p>Parece que los efectos aleatorios siguen una distribución normal. Y no están relacionados con la edad.</p>
+<p><strong>Predicciones</strong></p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="modelos-lineales-mixtos-lmm.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb205-2"><a href="modelos-lineales-mixtos-lmm.html#cb205-2" aria-hidden="true" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(modelo, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;tiempo [all]&quot;</span>))</span>
+<span id="cb205-3"><a href="modelos-lineales-mixtos-lmm.html#cb205-3" aria-hidden="true" tabindex="-1"></a>pr</span></code></pre></div>
+<pre><code># Predicted values of respuesta
+
+tiempo | Predicted |         95% CI
+-----------------------------------
+     0 |     32.57 | [31.89, 33.25]
+     1 |     31.61 | [30.99, 32.24]
+     2 |     30.65 | [30.02, 31.28]
+     3 |     29.69 | [29.00, 30.38]
+
+Adjusted for:
+*  edad = 48.00
+* indiv = 26.00</code></pre>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="modelos-lineales-mixtos-lmm.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr, <span class="at">add.data =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-205-1.png" width="672" /></p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="modelos-lineales-mixtos-lmm.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr, <span class="at">residuals =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-205-2.png" width="672" /></p>
+<p>Las predicciones las realiza en la media de las covariables, en este caso la edad.
+Si queremos que las predicciones las haga para un individuo de 55 años:</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="modelos-lineales-mixtos-lmm.html#cb209-1" aria-hidden="true" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(modelo, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;tiempo [all]&quot;</span>), <span class="at">condition=</span><span class="fu">c</span>(<span class="st">&quot;edad&quot;</span><span class="ot">=</span><span class="dv">55</span>))</span>
+<span id="cb209-2"><a href="modelos-lineales-mixtos-lmm.html#cb209-2" aria-hidden="true" tabindex="-1"></a>pr</span></code></pre></div>
+<pre><code># Predicted values of respuesta
+
+tiempo | Predicted |         95% CI
+-----------------------------------
+     0 |     35.56 | [34.76, 36.35]
+     1 |     34.60 | [33.86, 35.34]
+     2 |     33.64 | [32.89, 34.38]
+     3 |     32.68 | [31.88, 33.48]
+
+Adjusted for:
+* indiv = 26.00</code></pre>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="modelos-lineales-mixtos-lmm.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-206-1.png" width="672" /></p>
+</div>
+<div id="comparación-de-los-dos-tratamientos" class="section level4" number="6.7.3.2">
+<h4><span class="header-section-number">6.7.3.2</span> Comparación de los dos tratamientos</h4>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="modelos-lineales-mixtos-lmm.html#cb212-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;datos/imc.csv&quot;</span>)</span>
+<span id="cb212-2"><a href="modelos-lineales-mixtos-lmm.html#cb212-2" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos[<span class="fu">order</span>(datos<span class="sc">$</span>indiv,datos<span class="sc">$</span>tiempo),]</span>
+<span id="cb212-3"><a href="modelos-lineales-mixtos-lmm.html#cb212-3" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(datos) <span class="co"># para eliminar datos con missings (pero no individuos)</span></span></code></pre></div>
+<p>Volvemos al enunciado original trabajando con todos los datos. Ahora el objetivo es comparar la evolución de los dos tratamientos ajustando por la edad.</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="modelos-lineales-mixtos-lmm.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
+<span id="cb213-2"><a href="modelos-lineales-mixtos-lmm.html#cb213-2" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lme</span>(respuesta <span class="sc">~</span> <span class="fu">poly</span>(tiempo, <span class="dv">3</span>, <span class="at">raw=</span><span class="dv">3</span>) <span class="sc">+</span> tx<span class="sc">:</span><span class="fu">poly</span>(tiempo, <span class="dv">3</span>, <span class="at">raw=</span><span class="dv">3</span>) <span class="sc">+</span> edad,</span>
+<span id="cb213-3"><a href="modelos-lineales-mixtos-lmm.html#cb213-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">random=</span> <span class="sc">~</span> <span class="fu">poly</span>(tiempo, <span class="dv">3</span>, <span class="at">raw=</span><span class="dv">3</span>)  <span class="sc">|</span> indiv, </span>
+<span id="cb213-4"><a href="modelos-lineales-mixtos-lmm.html#cb213-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>datos, </span>
+<span id="cb213-5"><a href="modelos-lineales-mixtos-lmm.html#cb213-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">correlation=</span><span class="fu">corCAR1</span>(<span class="at">form =</span> <span class="sc">~</span> tiempo<span class="sc">|</span>indiv))</span>
+<span id="cb213-6"><a href="modelos-lineales-mixtos-lmm.html#cb213-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<pre><code>Linear mixed-effects model fit by REML
+  Data: datos 
+       AIC     BIC    logLik
+  1417.874 1494.57 -688.9369
+
+Random effects:
+ Formula: ~poly(tiempo, 3, raw = 3) | indiv
+ Structure: General positive-definite, Log-Cholesky parametrization
+                          StdDev    Corr                        
+(Intercept)               2.3069274 (Intr) p(,3,r=3)1 p(,3,r=3)2
+poly(tiempo, 3, raw = 3)1 1.9231468 -0.470                      
+poly(tiempo, 3, raw = 3)2 1.7013762  0.354 -0.904               
+poly(tiempo, 3, raw = 3)3 0.3562430 -0.342  0.852     -0.990    
+Residual                  0.9432126                             
+
+Correlation Structure: Continuous AR(1)
+ Formula: ~tiempo | indiv 
+ Parameter estimate(s):
+     Phi 
+0.248855 
+Fixed effects:  respuesta ~ poly(tiempo, 3, raw = 3) + tx:poly(tiempo, 3, raw = 3) +      edad 
+                                 Value Std.Error  DF   t-value p-value
+(Intercept)                  11.168714 1.1301845 244  9.882204  0.0000
+poly(tiempo, 3, raw = 3)1     2.402332 1.2555058 244  1.913438  0.0569
+poly(tiempo, 3, raw = 3)2    -2.075890 1.1602056 244 -1.789243  0.0748
+poly(tiempo, 3, raw = 3)3     0.447207 0.2546185 244  1.756379  0.0803
+edad                          0.442918 0.0224834  98 19.699782  0.0000
+poly(tiempo, 3, raw = 3)1:tx -2.107063 0.7636948 244 -2.759037  0.0062
+poly(tiempo, 3, raw = 3)2:tx  0.905552 0.7097238 244  1.275922  0.2032
+poly(tiempo, 3, raw = 3)3:tx -0.194165 0.1561157 244 -1.243724  0.2148
+ Correlation: 
+                             (Intr) pl(,3,r=3)1 pl(,3,r=3)2 pl(,3,r=3)3 edad   p(,3,r=3)1: p(,3,r=3)2:
+poly(tiempo, 3, raw = 3)1    -0.048                                                                   
+poly(tiempo, 3, raw = 3)2     0.033 -0.949                                                            
+poly(tiempo, 3, raw = 3)3    -0.028  0.899      -0.989                                                
+edad                         -0.975  0.027      -0.020       0.016                                    
+poly(tiempo, 3, raw = 3)1:tx  0.020 -0.948       0.903      -0.856      -0.020                        
+poly(tiempo, 3, raw = 3)2:tx -0.013  0.898      -0.951       0.941       0.013 -0.947                 
+poly(tiempo, 3, raw = 3)3:tx  0.010 -0.849       0.939      -0.951      -0.010  0.896      -0.988     
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-1.65153170 -0.36449401 -0.04684107  0.39784060  1.80027927 
+
+Number of Observations: 350
+Number of Groups: 100 </code></pre>
+<p>Nota: <code>poly(tiempo, 3, raw=TRUE)</code> es lo miso que <code>tiempo + I(tiempo^2) + I(tiempo^3)</code>.</p>
+<p>Fijate cómo se ha escrito la fórmula. De esta manera, cuando tiempo=0 (momento basal) no hay diferencias entre en los tratamientos.</p>
+<p><strong>Efectos aleatorios</strong></p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="modelos-lineales-mixtos-lmm.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> indiv))</span></code></pre></div>
+<pre><code>                                    Model df      AIC     BIC    logLik   Test L.Ratio p-value
+modelo                                  1 20 1417.874 1494.57 -688.9369                       
+update(modelo, random = ~1 | indiv)     2 11 1408.597 1450.78 -693.2985 1 vs 2  8.7233  0.4632</code></pre>
+<p>Vemos en este caso, como el p-valor del LRT no coincide con la decisión basada en el AIC o el BIC. Podemos decantarnos con el modelo más simple, o sea, el que supone que los coeficientes del tiempo son fijos.</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="modelos-lineales-mixtos-lmm.html#cb217-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">update</span>(modelo, <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> indiv)</span></code></pre></div>
+<p><strong>Estructura de correlación de los errores</strong></p>
+<p>Comparamos con la matriz de independencia</p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="modelos-lineales-mixtos-lmm.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">correlation=</span><span class="cn">NULL</span>))</span></code></pre></div>
+<pre><code>                                   Model df      AIC      BIC    logLik   Test  L.Ratio p-value
+modelo                                 1 11 1408.597 1450.780 -693.2985                        
+update(modelo, correlation = NULL)     2 10 1446.555 1484.903 -713.2774 1 vs 2 39.95779  &lt;.0001</code></pre>
+<p>Nos quedamos con la estructura AR1.</p>
+<p>Finalmente, comprovamos los efectos fijos:</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="modelos-lineales-mixtos-lmm.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
+<pre><code>                                  Value  Std.Error  DF   t-value      p-value
+(Intercept)                  10.9983674 1.17012354 244  9.399322 4.150278e-18
+poly(tiempo, 3, raw = 3)1     2.2104398 1.28087236 244  1.725730 8.566199e-02
+poly(tiempo, 3, raw = 3)2    -1.8762381 1.14921815 244 -1.632621 1.038384e-01
+poly(tiempo, 3, raw = 3)3     0.4026454 0.25308582 244  1.590944 1.129169e-01
+edad                          0.4463927 0.02329682  98 19.161101 6.509723e-35
+poly(tiempo, 3, raw = 3)1:tx -1.9653182 0.78262641 244 -2.511183 1.268004e-02
+poly(tiempo, 3, raw = 3)2:tx  0.7598944 0.70301744 244  1.080904 2.808070e-01
+poly(tiempo, 3, raw = 3)3:tx -0.1617992 0.15513365 244 -1.042967 2.979960e-01</code></pre>
+<p>Como era de esperar, la edad es muy significativa.</p>
+<p>Contrastamos el efecto cuadrático y cúbico del tiempo (tanto para el grupo control como para el grupo de tratados):</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="modelos-lineales-mixtos-lmm.html#cb222-1" aria-hidden="true" tabindex="-1"></a>modelo2 <span class="ot">&lt;-</span> <span class="fu">update</span>(modelo, <span class="at">fixed =</span> . <span class="sc">~</span> tiempo <span class="sc">+</span> tiempo<span class="sc">:</span>tx <span class="sc">+</span> edad)</span>
+<span id="cb222-2"><a href="modelos-lineales-mixtos-lmm.html#cb222-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo2))</span></code></pre></div>
+<pre><code>                 Value  Std.Error  DF    t-value      p-value
+(Intercept) 11.0143619 1.16920806 248  9.4203610 3.281588e-18
+tiempo       0.1947449 0.21775844 248  0.8943163 3.720198e-01
+edad         0.4462810 0.02328366  98 19.1671311 6.352777e-35
+tiempo:tx   -1.1381679 0.13574697 248 -8.3844810 3.860440e-15</code></pre>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="modelos-lineales-mixtos-lmm.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, modelo2)</span></code></pre></div>
+<pre><code>        Model df      AIC      BIC    logLik   Test  L.Ratio p-value
+modelo      1 11 1408.597 1450.780 -693.2985                        
+modelo2     2  7 1394.327 1421.252 -690.1637 1 vs 2 6.269749  0.1799</code></pre>
+<p>Como el p-valor del LRT es &gt;0.05, nos quedamos con el modelo más simple, en que el tiempo tiene un efecto lineal en ambos grupos</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="modelos-lineales-mixtos-lmm.html#cb226-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> modelo2</span>
+<span id="cb226-2"><a href="modelos-lineales-mixtos-lmm.html#cb226-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
+<pre><code>                 Value  Std.Error  DF    t-value      p-value
+(Intercept) 11.0143619 1.16920806 248  9.4203610 3.281588e-18
+tiempo       0.1947449 0.21775844 248  0.8943163 3.720198e-01
+edad         0.4462810 0.02328366  98 19.1671311 6.352777e-35
+tiempo:tx   -1.1381679 0.13574697 248 -8.3844810 3.860440e-15</code></pre>
+<p>El efecto del tiempo en el grupo control no es significativo.</p>
+<p>Para ver el efecto del tiempo en el grupo de tratamiento, cambiamos la categoria de referencia:</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="modelos-lineales-mixtos-lmm.html#cb228-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>tx <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos<span class="sc">$</span>tx, <span class="dv">2</span><span class="sc">:</span><span class="dv">1</span>)</span>
+<span id="cb228-2"><a href="modelos-lineales-mixtos-lmm.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(<span class="fu">update</span>(modelo)))</span></code></pre></div>
+<pre><code>                Value  Std.Error  DF    t-value      p-value
+(Intercept) 11.014362 1.16920806 248   9.420361 3.281588e-18
+tiempo      -2.081591 0.10101027 248 -20.607715 1.166972e-55
+edad         0.446281 0.02328366  98  19.167131 6.352777e-35
+tiempo:tx1   1.138168 0.13574697 248   8.384481 3.860440e-15</code></pre>
+<p>Vemos como el efecto del tiempo en el grupo de tratados es significativo y la pendiente es negativa.</p>
+<p><strong>Validación</strong></p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="modelos-lineales-mixtos-lmm.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="co"># residuos</span></span>
+<span id="cb230-2"><a href="modelos-lineales-mixtos-lmm.html#cb230-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-216-1.png" width="672" /></p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="modelos-lineales-mixtos-lmm.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(modelo)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-216-2.png" width="672" /></p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="modelos-lineales-mixtos-lmm.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="co"># efectos aleatorios</span></span>
+<span id="cb232-2"><a href="modelos-lineales-mixtos-lmm.html#cb232-2" aria-hidden="true" tabindex="-1"></a>beta0i <span class="ot">&lt;-</span> <span class="fu">ranef</span>(modelo)[,<span class="dv">1</span>]</span>
+<span id="cb232-3"><a href="modelos-lineales-mixtos-lmm.html#cb232-3" aria-hidden="true" tabindex="-1"></a>grupo <span class="ot">&lt;-</span> <span class="fu">with</span>(datos, <span class="fu">tapply</span>(tx, indiv, head, <span class="at">n=</span><span class="dv">1</span>))</span>
+<span id="cb232-4"><a href="modelos-lineales-mixtos-lmm.html#cb232-4" aria-hidden="true" tabindex="-1"></a>edad <span class="ot">&lt;-</span> <span class="fu">with</span>(datos, <span class="fu">tapply</span>(edad, indiv, mean))</span>
+<span id="cb232-5"><a href="modelos-lineales-mixtos-lmm.html#cb232-5" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(beta0i <span class="sc">~</span> grupo)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-216-3.png" width="672" /></p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="modelos-lineales-mixtos-lmm.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(edad, beta0i)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-216-4.png" width="672" /></p>
+<p><strong>Predicciones</strong></p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="modelos-lineales-mixtos-lmm.html#cb234-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>tx <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos<span class="sc">$</span>tx, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb234-2"><a href="modelos-lineales-mixtos-lmm.html#cb234-2" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">update</span>(modelo)</span>
+<span id="cb234-3"><a href="modelos-lineales-mixtos-lmm.html#cb234-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb234-4"><a href="modelos-lineales-mixtos-lmm.html#cb234-4" aria-hidden="true" tabindex="-1"></a>pr.cont <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(modelo, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;tiempo&quot;</span>), <span class="at">condition=</span><span class="fu">c</span>(<span class="at">tx=</span><span class="dv">1</span>), <span class="at">type=</span><span class="st">&quot;fixed&quot;</span>)</span>
+<span id="cb234-5"><a href="modelos-lineales-mixtos-lmm.html#cb234-5" aria-hidden="true" tabindex="-1"></a>pr.tx <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(modelo, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;tiempo&quot;</span>), <span class="at">condition=</span><span class="fu">c</span>(<span class="at">tx=</span><span class="dv">2</span>), <span class="at">type=</span><span class="st">&quot;fixed&quot;</span>)</span>
+<span id="cb234-6"><a href="modelos-lineales-mixtos-lmm.html#cb234-6" aria-hidden="true" tabindex="-1"></a>pr.cont</span></code></pre></div>
+<pre><code># Predicted values of respuesta
+
+tiempo | Predicted |         95% CI
+-----------------------------------
+     0 |     32.88 | [32.39, 33.38]
+     1 |     31.94 | [31.47, 32.41]
+     2 |     31.00 | [30.47, 31.52]
+     3 |     30.05 | [29.41, 30.69]
+
+Adjusted for:
+*  edad = 49.00
+* indiv = 52.50</code></pre>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="modelos-lineales-mixtos-lmm.html#cb236-1" aria-hidden="true" tabindex="-1"></a>pr.tx</span></code></pre></div>
+<pre><code># Predicted values of respuesta
+
+tiempo | Predicted |         95% CI
+-----------------------------------
+     0 |     32.88 | [32.39, 33.38]
+     1 |     30.80 | [30.33, 31.27]
+     2 |     28.72 | [28.19, 29.25]
+     3 |     26.64 | [25.99, 27.28]
+
+Adjusted for:
+*  edad = 49.00
+* indiv = 52.50</code></pre>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="modelos-lineales-mixtos-lmm.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb238-2"><a href="modelos-lineales-mixtos-lmm.html#cb238-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(</span>
+<span id="cb238-3"><a href="modelos-lineales-mixtos-lmm.html#cb238-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(pr.cont) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">24</span>,<span class="dv">40</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;controles&quot;</span>),</span>
+<span id="cb238-4"><a href="modelos-lineales-mixtos-lmm.html#cb238-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(pr.tx) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">24</span>,<span class="dv">40</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;tratados&quot;</span>),</span>
+<span id="cb238-5"><a href="modelos-lineales-mixtos-lmm.html#cb238-5" aria-hidden="true" tabindex="-1"></a><span class="at">nrow=</span><span class="dv">1</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-217-1.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ModelosNormal.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/isglobal-brge/curso_longitudinal/tree/master/docs05-modelos_mixtos.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["cursoLongitudinal-bookdown.pdf", "cursoLongitudinal-bookdown.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

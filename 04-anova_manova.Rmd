@@ -146,7 +146,7 @@ kable(tabout, align=ifelse(ccc,"c","r"))%>%kableExtra::kable_styling(font_size =
 Vamos a ver algunos ejemplos que se analizarán mediante las técnicas que se acaban de describir.
 
 
-### Ejemplo 1
+### Ejemplo 1 {#Ejemplo1}
 
 En la base de datos "Ejemplo_1W.csv" se tienen los datos de un diseño con 12 individuos en los que se toman los niveles en sangre de un cierto parámetro lipídico. Para cada invidivuo se miden los niveles a 1, 2 y 3 horas.
 
@@ -197,14 +197,6 @@ ezANOVA(data=datos.ez, dv=medida, wid=indiv, within=tiempo, detailed = TRUE)
 ```
 
 La condición de esfericidad no se cumple dado que el test de Mauchly es significativo. Por lo tanto, hay que corregir los grados de libertad y, en consecuencia, el p-valor del factor tiempo. Después de la corrección, éste sigue siendo significativo.
-
-Observación: Fíjate que los resultados son los mismos que usando la función `lm`, y `anova` con la opción `test="Spherical"`:
-
-
-```{r}
-modelo <- lm(respuesta ~ 1, data=datosh)
-anova(modelo,X = ~1, test = "Spherical")
-```
 
 
 #### Modelo de respuesta multivariante (MANOVA)
@@ -264,7 +256,7 @@ Hay efecto del tiempo porque el p-valor < 0.05.
 
 
 
-### Ejemplo 2
+### Ejemplo 2 {#Ejemplo2}
 
 
 En la base de datos "Ejemplo_1W1B.csv" se tienen los datos de un estudio en el que participan 24 individuos randomizados en dos grupos de tratamiento (`trat`). Como en el anterior ejemplo, para cada invidivuo se miden los niveles a 1, 2 y 3 horas.
@@ -373,7 +365,7 @@ En este caso, el p-valor del tratamiento contrasta si hay diferencias entre trat
 
 
 
-### Ejemplo 3
+### Ejemplo 3 {#Ejemplo3}
 
 En un estudio se quieren comparar el efecto de régimen de ejercicio sobre el sobrepeso. Para ello se reclutan 100 personas. A la mitad se le asigna el régimen y al resto se le hacen algunas recomendaciones (grupo control). Se mide el índice de masa corporal justo antes de empezar el estudio (momento basal), y al cabo de 1, 2 y 3 semanas. Como la edad es una variable importante para predecir el IMC también se registra.
 
