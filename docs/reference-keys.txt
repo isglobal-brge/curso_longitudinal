@@ -1,4 +1,4 @@
-fig:unnamed-chunk-26
+fig:unnamed-chunk-9
 preámbulo
 instalación-de-librerías-necesarias-para-el-curso
 intro
@@ -70,8 +70,8 @@ tiempo-hasta-evento
 ejemplos-3
 otros-tipos-de-censura
 kaplan-meier
-medidas-para-variables-de-seguimiento
-modelo-de-regresión-de-cox
+funciones-involucradas-en-el-análisis-de-supervivencia
+modelo-de-regresión-de-cox-con-datos-longitudinales
 efectos-tiempo-dependientes
 variables-tiempo-dependientes-datos-longitudinales
 estructura-de-los-datos-1

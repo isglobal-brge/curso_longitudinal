@@ -1,4 +1,4 @@
-# Análisis de supervivencia
+# Análisis de supervivencia con datos longitudinales
 
 ## Tiempo hasta evento
 
@@ -197,7 +197,7 @@ NOTA: la opción `pval=TRUE` nos permitiría ver el p-valor de Kaplan-Meier en e
 
 
 
-## Medidas para variables de seguimiento
+## Funciones involucradas en el análisis de supervivencia
 
 Aparte de la función de supervivencia que se define como:
 
@@ -246,7 +246,7 @@ ggsurvplot(
 
 
 
-## Modelo de regresión de Cox
+## Modelo de regresión de Cox con datos longitudinales
 
 Normalmente queremos estudiar cómo influye más de una variable en la supervivencia. Para este caso, necesitamos utilizar modelos de regresión. Los modelos de regresión de Cox sirven para evaluar el efecto de distintas variables sobre el tiempo hasta el evento, o para crear un moelo de predicción.
 

@@ -236,8 +236,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#otros-tipos-de-censura"><i class="fa fa-check"></i><b>7.1.2</b> Otros tipos de censura</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#kaplan-meier"><i class="fa fa-check"></i><b>7.2</b> Kaplan-Meier</a></li>
-<li class="chapter" data-level="7.3" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#medidas-para-variables-de-seguimiento"><i class="fa fa-check"></i><b>7.3</b> Medidas para variables de seguimiento</a></li>
-<li class="chapter" data-level="7.4" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#modelo-de-regresión-de-cox"><i class="fa fa-check"></i><b>7.4</b> Modelo de regresión de Cox</a>
+<li class="chapter" data-level="7.3" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#funciones-involucradas-en-el-análisis-de-supervivencia"><i class="fa fa-check"></i><b>7.3</b> Funciones involucradas en el análisis de supervivencia</a></li>
+<li class="chapter" data-level="7.4" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#modelo-de-regresión-de-cox-con-datos-longitudinales"><i class="fa fa-check"></i><b>7.4</b> Modelo de regresión de Cox con datos longitudinales</a>
 <ul>
 <li class="chapter" data-level="7.4.1" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#efectos-tiempo-dependientes"><i class="fa fa-check"></i><b>7.4.1</b> Efectos tiempo-dependientes</a></li>
 <li class="chapter" data-level="7.4.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#variables-tiempo-dependientes-datos-longitudinales"><i class="fa fa-check"></i><b>7.4.2</b> Variables tiempo-dependientes (datos longitudinales)</a></li>
@@ -577,7 +577,7 @@ hombre
 <span id="cb53-2"><a href="ModelosNormal.html#cb53-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(<span class="at">x =</span> tiempo, <span class="at">y =</span> medida, <span class="at">group =</span> indiv))</span>
 <span id="cb53-3"><a href="ModelosNormal.html#cb53-3" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>),</span>
 <span id="cb53-4"><a href="ModelosNormal.html#cb53-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="at">fun =</span> mean, <span class="at">size=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-65-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-48-1.png" width="672" /></p>
 <p>Cada línea representa a un individuo, mientras que la línea más gruesa es el promedio de los 12 individuos. Vemos como el efecto del tiempo no es del todo lineal. Además las líneas están bastante separadas indicando variabilidad entre los individuos.</p>
 <p>Comprobemos si tenemos algún inviduo con datos faltantes</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="ModelosNormal.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">with</span>(datos, <span class="fu">tapply</span>(<span class="fu">is.na</span>(medida), indiv, any)))</span></code></pre></div>
@@ -734,7 +734,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <span id="cb72-5"><a href="ModelosNormal.html#cb72-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>),</span>
 <span id="cb72-6"><a href="ModelosNormal.html#cb72-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="at">fun =</span> mean, <span class="at">size=</span><span class="dv">2</span>)</span>
 <span id="cb72-7"><a href="ModelosNormal.html#cb72-7" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">facet_grid</span>( <span class="sc">~</span> trat)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-75-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-58-1.png" width="672" /></p>
 <p>Para <code>trat=1</code>, la medida parece que no sube o sube muy poco. Mientras que para <code>trat=2</code> sube mucho hasta la segunda medida y se estabiliza en la tercera medida. Por lo tanto, parece que sí hay una interacción entre el tiempo y el grupo de tratamiento.</p>
 </div>
 <div id="suma-de-cuadrados-anova-1" class="section level4" number="5.3.2.2">
@@ -779,7 +779,7 @@ Una vez aplicados las correcciones sobre los grados de libertad, los p-valores c
 <span id="cb75-5"><a href="ModelosNormal.html#cb75-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">between=</span>trat,</span>
 <span id="cb75-6"><a href="ModelosNormal.html#cb75-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span>tiempo,</span>
 <span id="cb75-7"><a href="ModelosNormal.html#cb75-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">split=</span>trat)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-77-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-60-1.png" width="672" /></p>
 <p>Las conclusiones con la tabla ANOVA corregida (tanto por GG como por HF), se ven claramente en el gráfico de interacción.</p>
 </div>
 <div id="modelo-de-respuesta-multivariante-manova-1" class="section level4" number="5.3.2.3">

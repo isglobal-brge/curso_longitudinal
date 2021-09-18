@@ -236,8 +236,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#otros-tipos-de-censura"><i class="fa fa-check"></i><b>7.1.2</b> Otros tipos de censura</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#kaplan-meier"><i class="fa fa-check"></i><b>7.2</b> Kaplan-Meier</a></li>
-<li class="chapter" data-level="7.3" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#medidas-para-variables-de-seguimiento"><i class="fa fa-check"></i><b>7.3</b> Medidas para variables de seguimiento</a></li>
-<li class="chapter" data-level="7.4" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#modelo-de-regresión-de-cox"><i class="fa fa-check"></i><b>7.4</b> Modelo de regresión de Cox</a>
+<li class="chapter" data-level="7.3" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#funciones-involucradas-en-el-análisis-de-supervivencia"><i class="fa fa-check"></i><b>7.3</b> Funciones involucradas en el análisis de supervivencia</a></li>
+<li class="chapter" data-level="7.4" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#modelo-de-regresión-de-cox-con-datos-longitudinales"><i class="fa fa-check"></i><b>7.4</b> Modelo de regresión de Cox con datos longitudinales</a>
 <ul>
 <li class="chapter" data-level="7.4.1" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#efectos-tiempo-dependientes"><i class="fa fa-check"></i><b>7.4.1</b> Efectos tiempo-dependientes</a></li>
 <li class="chapter" data-level="7.4.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#variables-tiempo-dependientes-datos-longitudinales"><i class="fa fa-check"></i><b>7.4.2</b> Variables tiempo-dependientes (datos longitudinales)</a></li>
@@ -302,13 +302,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Veamos que valores toma la variable CD4 a lo largo del tiempo usando las funciones de ggplot que ya hemos visto en este curso</p>
 <div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(aids, <span class="fu">aes</span>(<span class="at">x =</span> obstime, <span class="at">y =</span> CD4, <span class="at">group =</span> patient)) <span class="sc">+</span></span>
 <span id="cb280-2"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb280-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Months&quot;</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>drug)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-187-1.png" width="672" />
+<p><img src="fig_out/unnamed-chunk-170-1.png" width="672" />
 Visualicemos los 10 primeros individuos para ver si tenemos que usar un modelo mixto con intercept o pendiente aleatoria</p>
 <div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb281-1" aria-hidden="true" tabindex="-1"></a>aids10 <span class="ot">&lt;-</span> <span class="fu">filter</span>(aids, patient<span class="sc">%in%</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>))</span>
 <span id="cb281-2"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb281-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(aids10, <span class="fu">aes</span>(<span class="at">x =</span> obstime, <span class="at">y =</span> CD4)) <span class="sc">+</span> </span>
 <span id="cb281-3"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb281-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb281-4"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb281-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Months&quot;</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>patient)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-188-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-171-1.png" width="672" /></p>
 <p>Ahora vamos a especificar y ajustar los modelos para cada uno de nuestros outcomes. El modelo lineal de efectos mixtos para los recuentos de células CD4 incluye:</p>
 <ul>
 <li>Parte de efectos fijos: efecto principal del tiempo y la interacción con el tratamiento.</li>
@@ -403,7 +403,7 @@ obstime:drugddI -0.2137151 -0.1710964 -0.1284777</code></pre>
 <span id="cb290-6"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb290-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill.area=</span><span class="cn">TRUE</span>, <span class="at">col.area=</span><span class="st">&quot;lightblue&quot;</span>, <span class="at">main=</span><span class="st">&quot;Patient 2&quot;</span>)</span>
 <span id="cb290-7"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb290-7" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">plot</span>(fit4, <span class="at">estimator=</span><span class="st">&quot;mean&quot;</span>, <span class="at">include.y =</span> <span class="cn">TRUE</span>, <span class="at">conf.int=</span><span class="fl">0.95</span>, </span>
 <span id="cb290-8"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb290-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill.area=</span><span class="cn">TRUE</span>, <span class="at">col.area=</span><span class="st">&quot;lightblue&quot;</span>, <span class="at">main=</span><span class="st">&quot;Patient 2&quot;</span>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-192-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-175-1.png" width="672" /></p>
 
 </div>
 </div>

@@ -236,8 +236,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#otros-tipos-de-censura"><i class="fa fa-check"></i><b>7.1.2</b> Otros tipos de censura</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#kaplan-meier"><i class="fa fa-check"></i><b>7.2</b> Kaplan-Meier</a></li>
-<li class="chapter" data-level="7.3" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#medidas-para-variables-de-seguimiento"><i class="fa fa-check"></i><b>7.3</b> Medidas para variables de seguimiento</a></li>
-<li class="chapter" data-level="7.4" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#modelo-de-regresión-de-cox"><i class="fa fa-check"></i><b>7.4</b> Modelo de regresión de Cox</a>
+<li class="chapter" data-level="7.3" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#funciones-involucradas-en-el-análisis-de-supervivencia"><i class="fa fa-check"></i><b>7.3</b> Funciones involucradas en el análisis de supervivencia</a></li>
+<li class="chapter" data-level="7.4" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#modelo-de-regresión-de-cox-con-datos-longitudinales"><i class="fa fa-check"></i><b>7.4</b> Modelo de regresión de Cox con datos longitudinales</a>
 <ul>
 <li class="chapter" data-level="7.4.1" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#efectos-tiempo-dependientes"><i class="fa fa-check"></i><b>7.4.1</b> Efectos tiempo-dependientes</a></li>
 <li class="chapter" data-level="7.4.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#variables-tiempo-dependientes-datos-longitudinales"><i class="fa fa-check"></i><b>7.4.2</b> Variables tiempo-dependientes (datos longitudinales)</a></li>
@@ -278,9 +278,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Normalente los datos se obtienen de un estudio de cohorte con seguimiento ya sea prospectivo o retrospectivo. Transcurrido el periodo de seguimiento o “follow-up time” puede que para alguno de los individuos de la muestra el evento de interés no se haya observado, ya sea porque ha finalizado el seguimiento o porque se han perdido o han tenido un evento diferente del de interés que ha interrumpido su seguimiento. En estos casos se suele decir que dichos individuos están <strong>censurados</strong>.</p>
 <p>Es muy importante registrar el tiempo que ha pasado des del inicio hasta el evento para los no censurados y también el momento que se ha perdido el seguimiento para los censurados. Así hay que definir bien el momento de inicio y el momento final para cada participante del estudio. Y también es importante que el <strong>mecanimso usado para obtener la información del seguimiento sea el mismo para todos.</strong></p>
 <p>En la siguiente figura tenemos una descripción de cómo recogeríamos la información para diez individuos donde se observa que cada uno de ellos puede entrar en un momento distinto en el tiempo a partir del inicio del estudio (01/0108), que algunos se observa el evento de interés (puntos negros) y para otros el tiempo está censurado (puntos rojos) bien sea porque se acaba el periodo de seguimiento (01/01/2020) o porque abandonan el estudio antes del final (puntos rojos antes del 01/01/2020)</p>
-<p><img src="fig_out/unnamed-chunk-162-1.png" width="960" /></p>
+<p><img src="fig_out/unnamed-chunk-145-1.png" width="960" /></p>
 <p>Normalment lo que hacemos es calcular el tiempo pasando toda la información a “tiempo cero”. La siguiente figura muestra cómo quedarían los datos para el ejemplo anterior</p>
-<p><img src="fig_out/unnamed-chunk-163-1.png" width="960" /></p>
+<p><img src="fig_out/unnamed-chunk-146-1.png" width="960" /></p>
 <p>De esta forma, para cada individuo anotaríamos la variable tiempo y crearíamos otra variable 0/1 que sería 0 para aquellos individuos censurados (puntos rojos) y 1 para los que observamos el evento de interés (puntos negros). En la práctica no se habla de variable censurada, si no de la variable evento, y es por eso que codificamos 0 a la censura y 1 a aquellos casos en los que observamos nuestro evento de interés.</p>
 <div id="ejemplos-3" class="section level3" number="7.1.1">
 <h3><span class="header-section-number">7.1.1</span> Ejemplos</h3>
@@ -362,7 +362,7 @@ El inicio sería la fecha del diagnóstico y la fecha final sería la fechad e r
 <span id="cb249-2"><a href="análisis-de-supervivencia.html#cb249-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ans.km, <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.8</span>,<span class="dv">1</span>), </span>
 <span id="cb249-3"><a href="análisis-de-supervivencia.html#cb249-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Tiempo de seguimiento (años)&quot;</span>, </span>
 <span id="cb249-4"><a href="análisis-de-supervivencia.html#cb249-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Supervivencia&quot;</span>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-170-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-153-1.png" width="672" /></p>
 <p>Si quisiéramos calcular Kaplan-Meier para distrintos grupos, por ejemplo para el los distintos grupos de intervención de nuestro estudio, bastaría con escribir:</p>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="análisis-de-supervivencia.html#cb250-1" aria-hidden="true" tabindex="-1"></a>ans.km.group <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>) <span class="sc">~</span> group, predimed)</span>
 <span id="cb250-2"><a href="análisis-de-supervivencia.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ans.km.group, <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.8</span>,<span class="dv">1</span>), </span>
@@ -370,7 +370,7 @@ El inicio sería la fecha del diagnóstico y la fecha final sería la fechad e r
 <span id="cb250-4"><a href="análisis-de-supervivencia.html#cb250-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Supervivencia&quot;</span>, <span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
 <span id="cb250-5"><a href="análisis-de-supervivencia.html#cb250-5" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="fu">levels</span>(predimed<span class="sc">$</span>group), </span>
 <span id="cb250-6"><a href="análisis-de-supervivencia.html#cb250-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty=</span><span class="dv">1</span>, <span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">bty=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-171-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-154-1.png" width="672" /></p>
 <p>Finalmente, podemos comparar las curvas de supervivencia entre grupos con la función <code>survdiff</code> que tiene implementado por defecto, el test de log-rank:</p>
 <div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="análisis-de-supervivencia.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>) <span class="sc">~</span> group, predimed)</span></code></pre></div>
 <pre><code>Call:
@@ -409,8 +409,8 @@ group=MedDiet + VOO  2182     82.7     91.6     0.857      1.40
 <p><img src="fig_out/plotkm2-1.png" width="672" /></p>
 <p>NOTA: la opción <code>pval=TRUE</code> nos permitiría ver el p-valor de Kaplan-Meier en el gráfico, pero puesto que hemos indicado que el eje Y se vea sólo de 0.9 a 1, el p-valor no se ve. Si se vería en caso de quitar la opción de <code>ylim</code> aunque entonces las curvas se verían muy juntas. Existen opciones para poder “tunear” esta visualización usando la función <code>annotate()</code>.</p>
 </div>
-<div id="medidas-para-variables-de-seguimiento" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> Medidas para variables de seguimiento</h2>
+<div id="funciones-involucradas-en-el-análisis-de-supervivencia" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Funciones involucradas en el análisis de supervivencia</h2>
 <p>Aparte de la función de supervivencia que se define como:</p>
 <ul>
 <li><strong>Supervivencia:</strong> probabilidad de estar libre de evento en el momento <span class="math inline">\(t\)</span> (se supone que el evento ocurre después)</li>
@@ -443,10 +443,10 @@ o bien</p>
 <span id="cb256-6"><a href="análisis-de-supervivencia.html#cb256-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>(),</span>
 <span id="cb256-7"><a href="análisis-de-supervivencia.html#cb256-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Estimación de la función de distribución con Kaplan-Meier&quot;</span></span>
 <span id="cb256-8"><a href="análisis-de-supervivencia.html#cb256-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-174-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-157-1.png" width="672" /></p>
 </div>
-<div id="modelo-de-regresión-de-cox" class="section level2" number="7.4">
-<h2><span class="header-section-number">7.4</span> Modelo de regresión de Cox</h2>
+<div id="modelo-de-regresión-de-cox-con-datos-longitudinales" class="section level2" number="7.4">
+<h2><span class="header-section-number">7.4</span> Modelo de regresión de Cox con datos longitudinales</h2>
 <p>Normalmente queremos estudiar cómo influye más de una variable en la supervivencia. Para este caso, necesitamos utilizar modelos de regresión. Los modelos de regresión de Cox sirven para evaluar el efecto de distintas variables sobre el tiempo hasta el evento, o para crear un moelo de predicción.</p>
 <p>Los modelos de cox asumen <strong>riesgos proporcionales</strong>, esto es, se separa el riesgo (“Hazard”) de paceder un evento antes del momento <span class="math inline">\(t\)</span> como un producto del</p>
 <ul>
@@ -498,7 +498,7 @@ Score (logrank) test = 73.94  on 4 df,   p=3e-15</code></pre>
 <p>En este gráfico se obtiene una curva de supervivencia para cada sexo, ajustado por las demás covariables (nota que en esta gráfica se asume que el efecto de las demás covariables es el mismo para ambos sexos).</p>
 <div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="análisis-de-supervivencia.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">survfit</span>(modelo2), <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.8</span>,<span class="dv">1</span>), <span class="at">lty=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
 <span id="cb262-2"><a href="análisis-de-supervivencia.html#cb262-2" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="fu">levels</span>(predimed<span class="sc">$</span>sex), <span class="at">lty=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">bty=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-178-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-161-1.png" width="672" /></p>
 <div id="efectos-tiempo-dependientes" class="section level3" number="7.4.1">
 <h3><span class="header-section-number">7.4.1</span> Efectos tiempo-dependientes</h3>
 <p>El efecto tiempo-dependiente (no confundir con variables tiempo-dependientes) se da cuando el efecto de una variable <span class="math inline">\(\beta_k\)</span> no es constante a lo largo del tiempo. En este caso, como se ha comentado anteriormente, si se trata de una variable categórica se puede poner en el modelo como <code>strata</code>. Si se trata de una variable continua, se puede incorporar la interacción de la variable <span class="math inline">\(x_k\)</span> con el tiempo.
@@ -634,7 +634,7 @@ pspline(CD4), nonlin         NA         NA         NA  5.669855 3.092747 1.36747
 drugddI               0.3164310 0.14684398 0.14682270  4.643503 1.000000 3.117131e-02
 gendermale           -0.3282002 0.24253118 0.24249275  1.831229 1.000000 1.759825e-01</code></pre>
 <div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="análisis-de-supervivencia.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">termplot</span>(modelo, <span class="at">terms=</span><span class="dv">1</span>, <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">rug=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-185-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-168-1.png" width="672" /></p>
 <p>en nuestro ejemplo, se demuestra que el efecto de CD4 es lineal (no hay términos cuadráticos, ni cúbicos, ni puntos de inflexión o cambios de tendencias, …) por lo que el modelo sin splines ya sería suficiente para modelar nuestros datos.</p>
 
 </div>
