@@ -37,7 +37,7 @@ El contenido del curso tiene los siguientes temas:
      + Análisis de supervivencia
      + Modelos con datos longitudinales
 
-- Módulo 4: Modelización conjunta de datos longitudinales y de supervivencia con eventos recurrentes
+- Módulo 4: Modelización conjunta de datos longitudinales y de supervivencia
      + Introducción
      + Joint models
 

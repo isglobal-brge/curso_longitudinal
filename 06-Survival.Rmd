@@ -215,14 +215,14 @@ $$\text{Pr}(T\leq t) = 1-S(t)$$
 Otras medidas interesantes son:
 
 
-- **Hazard**: o riesgo instantànea. Es la probabilidad que ocurra el evento en un intervalo infinitamente pequeño dado que no lo ha tenido hasta el momento $t$
+- **Hazard** (riesgo instantaneo): Es la probabilidad que ocurra el evento en un intervalo infinitamente pequeño dado que no lo ha tenido hasta el momento $t$
 
 $$\lambda(t) = \lim_{\delta \rightarrow 0} \frac{\text{Pr}\left(T \in (t, t+\delta) \right)}{S(t)} $$
 
-- **Hazard acumulado**: es la suma o integral del riesgo instantáneo hasta el momento $t$
+- **Cumulative Hazard** (riesgo acumulado): es la suma o integral del riesgo instantáneo hasta el momento $t$
 
 $$\Lambda(t) = \int_{0}^{t} \lambda(s) ds$$
-Existe la siguiente relación entre el hazard acumulado y la función de supervivencia
+Existe la siguiente relación entre el riesgo acumulado y la función de supervivencia
 
 $$S(t) = \text{exp} \left(-\Lambda(t)\right)$$
 o bien
@@ -246,7 +246,7 @@ ggsurvplot(
 
 
 
-## Modelo de regresión de Cox con datos longitudinales
+## Modelo de regresión de Cox
 
 Normalmente queremos estudiar cómo influye más de una variable en la supervivencia. Para este caso, necesitamos utilizar modelos de regresión. Los modelos de regresión de Cox sirven para evaluar el efecto de distintas variables sobre el tiempo hasta el evento, o para crear un moelo de predicción.
 
@@ -388,7 +388,7 @@ Una vez más se demuestra que, en estadística, uno puede usar cualquier modelo 
 
 **Validación del modelo**
 
-La validación del modelo con variables tiempo-dependientes se hace de la misma manera que para el modelo de Cox "clásico". Por ejemplo, también se puede aplicar la función `coxz.ph`. Sin embargo, la discriminación y la calibración que necesitan del cálculo del riesgo predicho a tiempo $t_0$ no és fácil de calcular: ¿cómo se tiene en cuenta que el valor de $x_k$ cambia y que ello conlleva a un cambio del riesgo $\Lambda$.
+La validación del modelo con variables tiempo-dependientes se hace de la misma manera que para el modelo de Cox "clásico". Por ejemplo, también se puede aplicar la función `coxz.ph`. Sin embargo, la discriminación y la calibración que necesitan del cálculo del riesgo predicho a tiempo $t_0$ no és fácil de calcular: ¿cómo se tiene en cuenta que el valor de $x_k$ cambia y que ello conlleva a un cambio del riesgo acumulado $\Lambda$?.
 
 ```{r}
 cox.zph(modelo)
