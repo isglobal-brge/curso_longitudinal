@@ -1,0 +1,409 @@
+# Análisis de supervivencia
+
+## Tiempo hasta evento
+
+
+En el análisis de superviviencia la variable respuesta es el **tiempo** hasta el evento de interés.
+
+Normalente los datos se obtienen de un estudio de cohorte con seguimiento ya sea prospectivo o retrospectivo. Transcurrido el periodo de seguimiento o "follow-up time" puede que para alguno de los individuos de la muestra el evento de interés no se haya observado, ya sea porque ha finalizado el seguimiento o porque se han perdido o han tenido un evento diferente del de interés que ha interrumpido su seguimiento. En estos casos se suele decir que dichos individuos están **censurados**.
+
+
+Es muy importante registrar el tiempo que ha pasado des del inicio hasta el evento para los no censurados y también el momento que se ha perdido el seguimiento para los censurados. Así hay que definir bien el momento de inicio y el momento final para cada participante del estudio. Y también es importante que el **mecanimso usado para obtener la información del seguimiento sea el mismo para todos.**
+
+En la siguiente figura tenemos una descripción de cómo recogeríamos la información para diez individuos donde se observa que cada uno de ellos puede entrar en un momento distinto en el tiempo a partir del inicio del estudio (01/0108), que algunos se observa el evento de interés (puntos negros) y para otros el tiempo está censurado (puntos rojos) bien sea porque se acaba el periodo de seguimiento (01/01/2020) o porque abandonan el estudio antes del final (puntos rojos antes del 01/01/2020)
+
+
+```{r, echo=FALSE, results="hide", fig.width=10, fig.heigth=10}
+library(chron)
+
+set.seed(123456)
+
+fstart <- chron("1/1/2008",format="d/m/Y")
+fend <- chron("31/12/2009",format="d/m/Y")
+frecruit <- chron(sample(fstart:fend, 10, replace=TRUE), out.format="d/m/Y")
+ffollow <- frecruit + sample((365):(365*15), 10, replace=TRUE)
+cens <- rbinom(10, 1, 0.8)
+cens <- ifelse(ffollow>chron("31/12/2019",format="d/m/Y"), 0, cens)
+ffollow <- ifelse(ffollow>chron("31/12/2019", format="d/m/Y"), chron("31/12/2019", format="d/m/Y"), ffollow)
+ffollow <- chron(ffollow, out.format="d/m/Y")
+
+
+plot(1, 1, type="n", xlim=range(c(frecruit, ffollow)), ylim=c(0, 13), xlab="Período de reclutamiento\ny seguimiento", ylab="indiv", axes=FALSE)
+axis(2, 1:10, tick=FALSE, las=1)
+axis(1, pretty(range(c(frecruit, ffollow))),chron(pretty(range(c(frecruit, ffollow))),out.format="d/m/Y"), tick=FALSE)
+for (i in 1:10){
+  lines(c(frecruit[i],ffollow[i]), c(i,i))
+  text(frecruit[i], i+0.5, frecruit[i], adj=0.1, cex=0.8)
+  text(ffollow[i], i+0.5, ffollow[i], adj=0.9, cex=0.8)  
+  points(ffollow[i],i,col=ifelse(cens[i]==0, "red","black"), pch=19, cex=0.8)
+}
+legend("topleft", c("Censurado","No censurado"),horiz = TRUE, fill=c(2,1),  bty="n")
+```
+
+
+Normalment lo que hacemos es calcular el tiempo pasando toda la información a "tiempo cero". La siguiente figura muestra cómo quedarían los datos para el ejemplo anterior
+
+```{r, echo=FALSE, results="hide", fig.width=10, fig.heigth=10}
+
+tiempos <- (ffollow-frecruit)/365.25
+
+plot(1, 1, type="n", xlim=c(0, max(tiempos)), ylim=c(0, 13), xlab="Seguimiento (años)", ylab="indiv", axes=FALSE)
+axis(2, 1:10, tick=FALSE, las=1)
+axis(1, pretty(c(0, max(tiempos))), tick=FALSE)
+for (i in 1:10){
+  lines(c(0, tiempos[i]), c(i,i))
+  text(tiempos[i], i+0.5, format(tiempos[i]), adj=0.9, cex=0.8)  
+  points(tiempos[i],i,col=ifelse(cens[i]==0, "red","black"), pch=19, cex=0.8)
+}
+legend("topleft", c("Censurado","No censurado"),horiz = TRUE, fill=c(2,1),  bty="n")
+```
+
+De esta forma, para cada individuo anotaríamos la variable tiempo y crearíamos otra variable 0/1 que sería 0 para aquellos individuos censurados (puntos rojos) y 1 para los que observamos el evento de interés (puntos negros). En la práctica no se habla de variable censurada, si no de la variable evento, y es por eso que codificamos 0 a la censura y 1 a aquellos casos en los que observamos nuestro evento de interés.
+
+
+### Ejemplos
+
+>Pacientes diagnosticados de cancer de próstata. Seguimiento hasta recidiva o muerte.
+>El inicio sería la fecha del diagnóstico y la fecha final sería la fechad e recidiva o muerte (para los no censurados) y la fecha de final de seguimiento para los censurados.
+
+>Estudio de una cohorte prospectiva a 10 años para estudiar el riesgo de infarto agudo de miocardio incidente. La fecha de inicio sería la fecha de inclusión en el estudio, y la fecha final sería la fecha de ingreso por infarto o muerte por infarto (para los no censurados), y la fecha de final de seguimiento o fecha de muerte por otra causa (para los censurados). 
+
+
+### Otros tipos de censura
+
+La censura que se ha descrito es concretamente censura por la derecha. Esto quiere decir que cuando un dato está censurado significa que és superior al tiempo observado. 
+
+Existen otros tipo de censura que no estudiaremos:
+
+- Censura por la izquierda: el tiempo es menor que el observado.
+
+- Censura por intervalo: el tiempo se encuentra entre dos fechas o momentos determinados.
+
+- Truncamiento por la izquierda: en realidad no es una censura, sino que es un retraso en el inicio del seguimiento. O sea, que el individuo lleva un tiempo en riesgo pero que ha entrado más tarde en el estudio.
+
+
+## Kaplan-Meier
+
+El método de Kaplan-Meier se usa para estimar la supervivencia o su complementario, la probabilidad de que el evento ocurra antes del tiempo $t$. 
+
+Si no hubieran eventos censurados antes del tiempo $t$, la probabilidad de que ocurra el evento en este periodo es simplemente $d_t/n$ donde $d_t$ es el númerod e eventos antes de $t$ y $n$ el número de individuos de la cohorte. Pero qué pasa cuando un individuo está censurado antes de $t$? Lo contamos en el denominador o no? Ambas opciones dan resultados sesgados.
+
+Kaplan-Meier propone un método para estimar el riesgo en cada momento $t$ (o su supervivencia) que da resultados no sesgados ya que incorpora la información de los individos censurados hasta el momento que fueron seguidos.
+
+
+**Ejemplo**
+
+Analizaremos los datos `predimed` de la librería `compareGroups`. Se trata de una cohorte con tres grupos de intervención y con un seguimiento de unos 7 años. El evento de interés es el cardiovascular. En este caso, la variable tiempo está recogida en `toevent` y la variable que indica si un individuo está censurado es `event` que en este caso está codificada como `No` y `Yes`. Notemos que en este caso `No` correspondería a censura y `Yes` a no censura, pero que como hemos dicho anteriormente, nos interesa indentificar aquellos individuos cuyo tiemo corresponde al transcurrido hasta que ocurre el evento que estamos estudiando.
+
+```{r}
+library(compareGroups)
+data(predimed)
+summary(predimed)
+```
+
+Para crear una variable censurada por la derecha se usa la función `Surv` del package `survival`. 
+
+```{r}
+library(survival)
+```
+
+
+Si la variable evento está codificada como 0/1 (0: censura 1:evento), como se suele tener habitualmente, basta con escribir:
+
+```{r, eval = FALSE}
+Surv(predimed$toevent, predimed$event)
+```
+
+
+En nuestro caso como la variable `event` es 'No' 'Yes', deberíamos indicar qué valor indica evento en la variable `event`
+
+
+
+```{r}
+library(survival)
+Surv(predimed$toevent, predimed$event=='Yes')[1:10]
+```
+
+Notemos que se crea una nueva variable donde aquellos individuos censurados tiene un '+'
+
+La función de supervivencia se puede estimar con el estimador de Kaplan-Meier mediante:
+
+```{r}
+ss <- survfit(Surv(toevent, event=='Yes')~1, data=predimed)
+```
+
+Y podemos ver dichas estimaciones (para los primeros 6 tiempos de eventos) con la instrucción
+
+```{r}
+summary(ss, times=1:6)
+```
+
+Normalmente lo que se suele hacer es visualizar las curvas de supervivencia mediante la instrucción
+
+```{r}
+ans.km <- survfit(Surv(toevent, event=='Yes') ~ 1, predimed)
+plot(ans.km, ylim=c(0.8,1), 
+     xlab="Tiempo de seguimiento (años)", 
+     ylab="Supervivencia")
+```
+
+Si quisiéramos calcular Kaplan-Meier para distrintos grupos, por ejemplo para el los distintos grupos de  intervención de nuestro estudio, bastaría con escribir:
+
+```{r}
+ans.km.group <- survfit(Surv(toevent, event=='Yes') ~ group, predimed)
+plot(ans.km.group, ylim=c(0.8,1), 
+     xlab="Tiempo de seguimiento (años)", 
+     ylab="Supervivencia", col=1:3)
+legend("bottomleft", levels(predimed$group), 
+       lty=1, col=1:3, bty="n")
+```
+
+
+Finalmente, podemos comparar las curvas de supervivencia entre grupos con la función `survdiff` que tiene implementado por defecto, el test de log-rank:
+
+```{r}
+survdiff(Surv(toevent, event=='Yes') ~ group, predimed)
+```
+
+Podemos concluir  que las diferencias observadas en las curvas de supervivencia, son significativamente distintas ya que el p-valor del test de log-rank es $<0.5%. 
+
+Este test considera que todas las diferencias observadas a lo largo del tiempo son igual de imporatantes. A veces, queremos dar más peso a las diferencias observadas al inicio del estudio. En ese caso, el test más potente es el del Wilcoxon que puede calcularse de la misma manera, pero usando el argumento `rho=1` 
+
+```{r}
+survdiff(Surv(toevent, event=='Yes') ~ group, predimed, rho = 1)
+```
+
+Llegamos a la misma conclusión que con el test de log-rank, pero notemos que el valor del estadistico (Chisq) es ligeramente superior, por lo que el p-valor es menor (es decir, más significativo) y nos daría más evidencias en contra de la hipótesis nula (notemos que aquí vemos 0.01 en ambos casos por un tema de redondeo).
+
+
+Podemos mejorar la visualización usando la función `ggsurvplot ()` de la librería `survminer`. Una caída vertical en las curvas indica un evento. Una marca vertical en las curvas significa que un individuo fue censurado.
+
+
+```{r plotkm2}
+library(survminer)
+ggsurvplot(
+  ans.km, ylim=c(0.9,1),
+  pval = TRUE,
+  conf.int = TRUE,
+  risk.table = TRUE,
+  ggtheme = theme_bw(),
+  title = "Estimación de la supervivencia con Kaplan-Meier"
+)
+```
+
+NOTA: la opción `pval=TRUE` nos permitiría ver el p-valor de Kaplan-Meier en el gráfico, pero puesto que hemos indicado que el eje Y se vea sólo de 0.9 a 1, el p-valor no se ve. Si se vería en caso de quitar la opción de `ylim` aunque entonces las curvas se verían muy juntas. Existen opciones para poder "tunear" esta visualización usando la función `annotate()`. 
+
+
+
+
+
+## Medidas para variables de seguimiento
+
+Aparte de la función de supervivencia que se define como:
+
+- **Supervivencia:** probabilidad de estar libre de evento en el momento $t$ (se supone que el evento ocurre después)
+
+$$S(t) = \text{Pr}(T>t)$$
+
+Existen otras medidas para resumir este tipo de estudios que pueden ser interesantes según el contexto. Por ejemplo, si nos interesa cuantificar la probabilidad de observar nuestro evento de interés (normalemete cuanod el evento no es "malo" como en el análisis de supervivencia tradicional que el evento es la muerte) podemos calcular la función de:
+
+
+- **Distribución**: probabilidad de evento antes de tiempo $t$. Es el complementario de la función de supervivencia
+
+$$\text{Pr}(T\leq t) = 1-S(t)$$
+
+Otras medidas interesantes son:
+
+
+- **Hazard**: o riesgo instantànea. Es la probabilidad que ocurra el evento en un intervalo infinitamente pequeño dado que no lo ha tenido hasta el momento $t$
+
+$$\lambda(t) = \lim_{\delta \rightarrow 0} \frac{\text{Pr}\left(T \in (t, t+\delta) \right)}{S(t)} $$
+
+- **Hazard acumulado**: es la suma o integral del riesgo instantáneo hasta el momento $t$
+
+$$\Lambda(t) = \int_{0}^{t} \lambda(s) ds$$
+Existe la siguiente relación entre el hazard acumulado y la función de supervivencia
+
+$$S(t) = \text{exp} \left(-\Lambda(t)\right)$$
+o bien
+
+$$\Lambda(t) = -\text{ln}\left(S(t)\right)$$
+
+
+Todas estas funciones se pueden calcular conla función `ggsurvplot()` cambiando el argumento `fun`. Por ejemplo la función de probabilidad se calcularía mediante la opción "event" y la de riesgo acumulado con "cumhaz"
+
+
+```{r}
+ggsurvplot(
+  ans.km, ylim=c(0,.1),
+  fun = "event",
+  conf.int = TRUE,
+  risk.table = TRUE,
+  ggtheme = theme_bw(),
+  title = "Estimación de la función de distribución con Kaplan-Meier"
+)
+```
+
+
+
+## Modelo de regresión de Cox
+
+Normalmente queremos estudiar cómo influye más de una variable en la supervivencia. Para este caso, necesitamos utilizar modelos de regresión. Los modelos de regresión de Cox sirven para evaluar el efecto de distintas variables sobre el tiempo hasta el evento, o para crear un moelo de predicción.
+
+Los modelos de cox asumen **riesgos proporcionales**, esto es, se separa el riesgo ("Hazard") de paceder un evento antes del momento $t$ como un producto del 
+
+- $\Lambda_0(t)$: riesgo basal, cuando todas las variables independientes $x$ valen cero) y 
+
+- $\sum_{k=1} \beta_k x_{ik}$: combinación lineal de las variables independientes (predictor lineal). 
+
+
+$$\Lambda(t|\vec{x}_i) = \Lambda_0(t)\cdot \text{exp}\left(\sum_{k=1} \beta_k x_{ik}\right)$$
+
+donde los coeficientes $\beta_k$ son los log-Hazard Ratios.
+
+
+Cox propone un método para estimar los coeficientes $\beta_k$ sin suponer ninguna distribución sobre la variable respuesta $T$ (tiempo hasta evento). Por esto se llama método semiparamétrico y se basa en estimar la "partial-likelihood".
+
+Existen otros métodos que suponen una distribución de la $T$, y por lo tanto parametrizan la incidencia basal $\Lambda_0(t)$. Por ejemplo,la regresión de Weibull que supone una distribución Weibull sobre $T$. Una de las ventaja que tienen los métodos no paramétricos es que permiten estimar la media o la mediana de $T$ aunque más de la mitad de los individuos de la muestra estén censurados (o sea, que no se llegue al 50% de eventos en el seguimiento). La desventaja es que suponen una distribución sobre $T$ que puede no ser correcta y que conllevaría a resultados sesgados. En biomedicina, el método más usado es el de los modelos de Cox y es el que estudiaremos en este curso. 
+
+
+**Ejemplo**
+
+Para ajustar un modelo de Cox en R se usa la función `coxph` de la librería `survival`.
+
+```{r}
+modelo <- coxph(Surv(toevent, event=='Yes')~age+sex+p14+group, predimed)
+```
+
+Hay diferentes aspectos a validar del modelo de Cox. Entre ellos la proporcionalidad de los efectos. Quiere decir que se supone que las $\beta_k$ no dependen del tiempo (por ejemplo, el efecto del sexo es el mismo tanto a 1 años como a 5 años). Ésto se puede comprovar mediante la siguiente función:
+
+
+```{r}
+cox.zph(modelo)
+```
+
+Aparece un p-valor para cada variable y uno global. En este caso parece que se cumple la proporcionalidad para todas las variables ya que el p-valor no es $<0.05$ y por lo tanto no podemos rechazar la hipótesis nula que es que los riesgos son proporcionales. No obstante, si no se cumpliera la proporcionalidad de una variable categórica, por ejemplo el sexo, ésta se puede poner como `strata` (se asume una curva de indidencia basal $\Lambda_0(t)$ para cada sexo) y se solucionaría el problema. Cuando esto no ocurre para una variable continua, debemos hacer modelos más avanzados que contemplan la posibilidad de introducir en el modelo una variable dependiente del tiempo (que veremos más adelante).
+
+```{r}
+modelo2 <- coxph(Surv(toevent, event=='Yes')~age+strata(sex)+p14+group, predimed)
+summary(modelo2)
+```
+
+En este gráfico se obtiene una curva de supervivencia para cada sexo, ajustado por las demás covariables (nota que en esta gráfica se asume que el efecto de las demás covariables es el mismo para ambos sexos).
+
+```{r}
+plot(survfit(modelo2), ylim=c(0.8,1), lty=1:2)
+legend("bottomleft", levels(predimed$sex), lty=1:2, bty="n")
+```
+
+
+
+### Efectos tiempo-dependientes
+
+El efecto tiempo-dependiente (no confundir con variables tiempo-dependientes) se da cuando el efecto de una variable $\beta_k$ no es constante a lo largo del tiempo. En este caso, como se ha comentado anteriormente, si se trata de una variable categórica se puede poner en el modelo como `strata`. Si se trata de una variable continua, se puede incorporar la interacción de la variable $x_k$ con el tiempo. 
+Otra estrategia que se usa habitualmente es dividir el tiempo de seguimiento en dos o tres tramos (a corto y a largo plazo), y realizar análisis por separado.
+
+
+De la anterior ecuación sobre la incidencia acumulada, se suponía que los efectos eran fijos y no dependían del tiempo. Pero si dependieran del tiempo en general se debería reescribir como:
+
+$$\Lambda(t|\vec{x}_i) = \Lambda_0(t)\cdot \text{exp}\left(\sum_{k=1} \color{blue}{\beta_k(t)} x_{ik}\right)$$
+donde $\beta_k(t)$ representa una función del tiempo.
+
+Este tipo de modelos con efectos tiempo dependientes no los veremos en este curso, sin embargo nos centraremos en otro aspecto fundamental que se da en estudios longitudinales que es el hecho de recoger una variable explicativa en distintos momentos del tiempo (variales tiempo-dependientes).
+
+
+### Variables tiempo-dependientes (datos longitudinales)
+
+Los modelos con variables tiempo-dependientes se tienen cuando en el seguimiento de los individuos de la muestra también se han ido actualizando los valores de todas o algunas de las variables indepndientes ($x_k$). Por ejemplo, el nivel de colesterol se puede recoger al inicio del estudio e introducir esa variable en el modelo de Cox para ver si influencia en el tiempo hasta sufrir un infarto de miocardio, pero también podemos recoger el nivel de colesterol en distintos momentos temporales y ver si esta variable cambiante a lo largo del tiempo se asocia con nuestro evento de interés. 
+
+Así pues, en cada momento $t$ el riesgo acumulado se tiene que estimar teniendo en cuenta el valor que toma cada $x_k$ en dicho tiempo $t$. Esto se puede formular de la siguiente manera
+
+
+$$\Lambda(t|\vec{x}_i = \Lambda_0(t)\cdot \text{exp}\left(\sum_{k=1} \beta_k \color{blue}{x_{itk}}\right)$$
+donde $x_{itk}$ representa el valor de la variable $x_k$ del individuo $i$ en el momento $t$
+
+### Estructura de los datos
+
+Para ajustar estos modelos, el reto principal (y único), es estructurar bien la base de datos. Así, para cada individuo tendremos tantas filas como actualizaciones tengamos de cada variable $x_k$. Además hay que anotar el momento de estos cambios. Adicionalemente tendremos una fila final donde se indicará el tiempo de evento o censura para nuestro evento de interés.
+
+Veámoslo con un ejemplo: Utilizaremos la base de datos `aids` de la librería `JM`
+
+
+```{r}
+library(JM)
+data(aids)
+head(aids)
+```
+
+
+En esta base de datos tenemos diferentes participantes en los que se ha tomado distintas medidas de la variable CD4. La variable `obstime` indica cuándo se han tomado las medidas de CD4. Mientras que la variable `time` y `death` indica el tiempo observado y si el individuo se ha muerto (1) o sigue vivo (0, dato censurado) al finalizar el seguimiento. En este caso el evento de interés es la muerte y los individuos vivos serán los censurados. La variable tiempo-dependiente es la variable CD4. Nuestro objetivo final es demostrar si hay diferencias en la mortalidad entre dos fármacos (variable 'drug': ddI = didanosine; ddC = zalcitabine.) ajustando por la variable 'gender'. 
+
+Para ajustar un modelo con variables tiempo-dependientes se ha de reestructurar esta base de datos. Para ello debemos llevar a cabo los siguientes pasos
+
+
+1. Creamos una base de datos con una fila por individuo, con los tiempos de muerte y las covariables de interés (fijas, no cambiantes a lo largo del tiempo - en nuestro caso 'drug' , 'gender') y creamos la variable `endpt`.
+
+```{r}
+temp <- aids %>% dplyr::select(patient, Time, death, drug, gender)
+x <- rep(1,nrow(temp))
+datos <- aggregate(x, temp, sum)
+datos <- tmerge(datos, datos, id=patient, endpt = event(Time, death))
+head(datos)
+```
+
+2. Luego, hacemos uso de la función `tmerge()` para crear la base de datos en el formato deseado. Las variables tiempo dependientes se especifican mediante la función `tdc` en que se indica también la variable que recoge cuando se han tomado sus medidas (en nuestro caso 'obstime').
+
+
+```{r}
+aids2 <- tmerge(datos, aids, id=patient, CD4 = tdc(obstime, CD4))
+head(aids2)
+```
+
+### Ajuste del modelo 
+
+En esta nueva base de datos, tenemos intervalos de tiempo `tstart` y `tstop` que se usará como tiempos de supervivencia en la función `Surv` y que ayuda a dividir el seguimento en los intervalos donde CD4 has sido observado de forma diferente para cada invididuo. Con esta información, podremos usar la función `coxph ()` de la forma habitual, pero usando esta nueva escala de tiempo:
+
+```{r}
+modelo <- coxph(Surv(tstart, tstop, endpt) ~ CD4 + drug + gender, data=aids2)
+summary(modelo)
+```
+
+Notemos que  que tanto las variables tiempo-dependientes (en este caso CD4) como las no-tiempo-dependientes (`drug` y `gender`) se ponen de la misma manera y de forma habitual en la fórmula.
+
+La interpretación de los resultados es exactamente la misma que para un modelo de Cox sin variables tiempo-dependientes.
+
+**Comparación con el modelo sin variables tiempo-dependientes**
+
+Estos resultados los podríamos comparar con el caso en el que consideráramos la primera medida de CD4 como una variable fija a lo largo del tiempo:
+
+```{r}
+aids1obs <- subset(aids, obstime==0)
+modelo1obs <- coxph(Surv(Time, death) ~ CD4 + drug + gender, aids1obs)
+summary(modelo1obs)
+```
+Notemos que utilizando este modelo, nuestra conclusión sería que no hay diferencias en la supervivencia entre fármacos ('drug') mientras que el modelo utilizando datos longitudinales para CD4 muestra que la didanosine (ddI) tiene una peor supervivencia (p = 0.0307). 
+
+Una vez más se demuestra que, en estadística, uno puede usar cualquier modelo para analizar sus datos y obtener resultados similares (en este segundo modelo casi sale significativo). Sin embargo, si no se utiliza el modelo correcto el perjudicado es el investigador, ya que, la utilización del modelo correcto proporciona el test más potente para detectar diferencias cuando realmente las hay. Es como el caso de analizar una variable 0,1 para comparar dos grupos y usar la t de Student. R nos dará un p-valor, pero este no será el test más potente para encontrar diferencias cuando realmente las haya, ya que ese test es el más potente cuando los datos son normales. Es por ello que en estos casos se usa la chi-cuadrado.
+
+
+**Validación del modelo**
+
+La validación del modelo con variables tiempo-dependientes se hace de la misma manera que para el modelo de Cox "clásico". Por ejemplo, también se puede aplicar la función `coxz.ph`. Sin embargo, la discriminación y la calibración que necesitan del cálculo del riesgo predicho a tiempo $t_0$ no és fácil de calcular: ¿cómo se tiene en cuenta que el valor de $x_k$ cambia y que ello conlleva a un cambio del riesgo $\Lambda$.
+
+```{r}
+cox.zph(modelo)
+```
+
+
+**Términos no lineales: "splines"**
+
+También, como en los modelo de Cox "clásicos" se pueden introducir términos polinómicos o de splines (`psplines`) para modelar efectos no lineases de las variables $x_k$ cuantitativas.
+
+
+```{r}
+modelo.splines <- coxph(Surv(tstart, tstop, endpt) ~ pspline(CD4) + drug + gender, data=aids2)
+coef(summary(modelo.splines))
+termplot(modelo, terms=1, se=TRUE, rug=TRUE)
+```
+
+en nuestro ejemplo, se demuestra que el efecto de CD4 es lineal (no hay términos cuadráticos, ni cúbicos, ni puntos de inflexión o cambios de tendencias, ...) por lo que el modelo sin splines ya sería suficiente para modelar nuestros datos.

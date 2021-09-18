@@ -32,14 +32,12 @@ El contenido del curso tiene los siguientes temas:
 
 - Módulo 2: Modelos lineales para datos longitudinales continuos (II)
      + Modelos mixtos
-     + Otros modelos: GLS, GEE
 
-- Módulo 3: Análisis de supervivencia con eventos recurrentes (I)
-     + Breve introducción al análisis de supervivencia
-     + Modelos condicionales y marginales
-     + Modelos de fragilidad
+- Módulo 3: Análisis de supervivencia con datos longitudinales
+     + Análisis de supervivencia
+     + Modelos con datos longitudinales
 
-- Módulo 4: Modelización conjunta de datos longitudinales y de supervivencia
+- Módulo 4: Modelización conjunta de datos longitudinales y de supervivencia con eventos recurrentes
      + Introducción
      + Joint models
 

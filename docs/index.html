@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-09-14" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -228,6 +228,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.8.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejercicio-5"><i class="fa fa-check"></i><b>6.8.2</b> Ejercicio 5</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html"><i class="fa fa-check"></i><b>7</b> Análisis de supervivencia</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#tiempo-hasta-evento"><i class="fa fa-check"></i><b>7.1</b> Tiempo hasta evento</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#ejemplos-3"><i class="fa fa-check"></i><b>7.1.1</b> Ejemplos</a></li>
+<li class="chapter" data-level="7.1.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#otros-tipos-de-censura"><i class="fa fa-check"></i><b>7.1.2</b> Otros tipos de censura</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#kaplan-meier"><i class="fa fa-check"></i><b>7.2</b> Kaplan-Meier</a></li>
+<li class="chapter" data-level="7.3" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#medidas-para-variables-de-seguimiento"><i class="fa fa-check"></i><b>7.3</b> Medidas para variables de seguimiento</a></li>
+<li class="chapter" data-level="7.4" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#modelo-de-regresión-de-cox"><i class="fa fa-check"></i><b>7.4</b> Modelo de regresión de Cox</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#efectos-tiempo-dependientes"><i class="fa fa-check"></i><b>7.4.1</b> Efectos tiempo-dependientes</a></li>
+<li class="chapter" data-level="7.4.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#variables-tiempo-dependientes-datos-longitudinales"><i class="fa fa-check"></i><b>7.4.2</b> Variables tiempo-dependientes (datos longitudinales)</a></li>
+<li class="chapter" data-level="7.4.3" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#estructura-de-los-datos-1"><i class="fa fa-check"></i><b>7.4.3</b> Estructura de los datos</a></li>
+<li class="chapter" data-level="7.4.4" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#ajuste-del-modelo"><i class="fa fa-check"></i><b>7.4.4</b> Ajuste del modelo</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><i class="fa fa-check"></i><b>8</b> Joint models para datos longitudinales y datos de supervivencia</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#por-qué-deberíamos-utilizar-este-tipo-de-modelos"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué deberíamos utilizar este tipo de modelos?</a></li>
+<li class="chapter" data-level="8.2" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#joint-models"><i class="fa fa-check"></i><b>8.2</b> Joint models</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -251,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Modelización estadística avanzada con R: análisis de datos longitudinales</h1>
 <p class="author"><em>Juan R González</em></p>
-<p class="date"><em>2021-09-14</em></p>
+<p class="date"><em>2021-09-18</em></p>
 </div>
 <div id="preámbulo" class="section level1" number="1">
 <h1><span class="header-section-number">Capítulo 1</span> Preámbulo</h1>
@@ -269,15 +291,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Módulo 2: Modelos lineales para datos longitudinales continuos (II)
 <ul>
 <li>Modelos mixtos</li>
-<li>Otros modelos: GLS, GEE</li>
 </ul></li>
-<li>Módulo 3: Análisis de supervivencia con eventos recurrentes (I)
+<li>Módulo 3: Análisis de supervivencia con datos longitudinales
 <ul>
-<li>Breve introducción al análisis de supervivencia</li>
-<li>Modelos condicionales y marginales</li>
-<li>Modelos de fragilidad</li>
+<li>Análisis de supervivencia</li>
+<li>Modelos con datos longitudinales</li>
 </ul></li>
-<li>Módulo 4: Modelización conjunta de datos longitudinales y de supervivencia
+<li>Módulo 4: Modelización conjunta de datos longitudinales y de supervivencia con eventos recurrentes
 <ul>
 <li>Introducción</li>
 <li>Joint models</li>

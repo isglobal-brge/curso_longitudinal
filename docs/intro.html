@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-09-14" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -228,6 +228,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.8.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejercicio-5"><i class="fa fa-check"></i><b>6.8.2</b> Ejercicio 5</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html"><i class="fa fa-check"></i><b>7</b> Análisis de supervivencia</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#tiempo-hasta-evento"><i class="fa fa-check"></i><b>7.1</b> Tiempo hasta evento</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#ejemplos-3"><i class="fa fa-check"></i><b>7.1.1</b> Ejemplos</a></li>
+<li class="chapter" data-level="7.1.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#otros-tipos-de-censura"><i class="fa fa-check"></i><b>7.1.2</b> Otros tipos de censura</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#kaplan-meier"><i class="fa fa-check"></i><b>7.2</b> Kaplan-Meier</a></li>
+<li class="chapter" data-level="7.3" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#medidas-para-variables-de-seguimiento"><i class="fa fa-check"></i><b>7.3</b> Medidas para variables de seguimiento</a></li>
+<li class="chapter" data-level="7.4" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#modelo-de-regresión-de-cox"><i class="fa fa-check"></i><b>7.4</b> Modelo de regresión de Cox</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#efectos-tiempo-dependientes"><i class="fa fa-check"></i><b>7.4.1</b> Efectos tiempo-dependientes</a></li>
+<li class="chapter" data-level="7.4.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#variables-tiempo-dependientes-datos-longitudinales"><i class="fa fa-check"></i><b>7.4.2</b> Variables tiempo-dependientes (datos longitudinales)</a></li>
+<li class="chapter" data-level="7.4.3" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#estructura-de-los-datos-1"><i class="fa fa-check"></i><b>7.4.3</b> Estructura de los datos</a></li>
+<li class="chapter" data-level="7.4.4" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#ajuste-del-modelo"><i class="fa fa-check"></i><b>7.4.4</b> Ajuste del modelo</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><i class="fa fa-check"></i><b>8</b> Joint models para datos longitudinales y datos de supervivencia</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#por-qué-deberíamos-utilizar-este-tipo-de-modelos"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué deberíamos utilizar este tipo de modelos?</a></li>
+<li class="chapter" data-level="8.2" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#joint-models"><i class="fa fa-check"></i><b>8.2</b> Joint models</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -258,15 +280,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Estudiar la <strong>evolución de una variable a lo largo del tiempo</strong>. Esto es equivalente a evaluar el efecto que tiene el tiempo sobre esta variable.</li>
 </ul>
-<p><img src="fig_out/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-19-1.png" width="672" /></p>
 <ul>
 <li>Ver si la <strong>evolución de una variable a lo largo del tiempo es la misma en diferentes grupos</strong>. Por ejemplo ver si la concentración de un fármaco evoluaciona de la misma manera que otro fármaco ó placebo.</li>
 </ul>
-<p><img src="fig_out/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-20-1.png" width="672" /></p>
 <ul>
 <li><strong>Identificar patrones en la evolución</strong> o cambio de una variable a lo largo del tiempo. En este contexto se pueden usar técnicas basadas en las distancias entre curvas (que no se explicarán en este curso).</li>
 </ul>
-<p><img src="fig_out/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-21-1.png" width="672" /></p>
 </div>
 <div id="ejemplos" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Ejemplos</h2>
@@ -335,22 +357,22 @@ Cada participante se visita anualmente durante sieta años en que se mide, entre
 <div id="todas-las-medidas-con-intervalos-fijos" class="section level3" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Todas las medidas con intervalos fijos</h3>
 <p>Medidas tomadas en los momentos <span class="math inline">\(t_1\)</span>, <span class="math inline">\(t_2\)</span>, …, <span class="math inline">\(t_5\)</span>. El intervalo transcurrido entre dos medidas puede ser constante o no. Pero son las mismas para todos los individuos. En caso que el intervalo no sea constante es importante anotar en qué momentos (segundos, minutos, horas, días, o metros…) se han hecho las medidas.</p>
-<p><img src="fig_out/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-22-1.png" width="672" /></p>
 </div>
 <div id="missings-al-azar-con-intervalos-fijos" class="section level3" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> Missings al azar con intervalos fijos</h3>
 <p>No todos los individuos tienen datos observados en todos los tiempos. Es importante que estos datos faltantes ocurran al azar para poder considerar los modelos que vamos a ver en este curso como correctos.</p>
-<p><img src="fig_out/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-23-1.png" width="672" /></p>
 </div>
 <div id="distintos-seguimientos" class="section level3" number="2.3.3">
 <h3><span class="header-section-number">2.3.3</span> Distintos seguimientos</h3>
 <p>Algunos individuos son seguidos a lo largo del tiempo en más visitas que otros.</p>
-<p><img src="fig_out/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-24-1.png" width="672" /></p>
 </div>
 <div id="todas-las-medidas-a-distintos-tiempos" class="section level3" number="2.3.4">
 <h3><span class="header-section-number">2.3.4</span> Todas las medidas a distintos tiempos</h3>
 <p>Los datos anteriores se consideran estudios de <strong>datos panel</strong>. Es decir, los datos se recogen de forma diara, semanal, anual, etc. (a tiempo fijo). Sin embargo, lo más habitual es disponer de observaciones en distintos tiempos para cada individuo y distintos número de observaciones para cada individuo.</p>
-<p><img src="fig_out/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="fig_out/unnamed-chunk-25-1.png" width="672" /></p>
 
 </div>
 </div>

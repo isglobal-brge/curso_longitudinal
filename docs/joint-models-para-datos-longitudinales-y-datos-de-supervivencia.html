@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 8 Joint models para datos longitudinales y datos de supervivencia | Modelización estadística avanzada con R: análisis de datos longitudinales</title>
+  <meta name="description" content="Capítulo 8 Joint models para datos longitudinales y datos de supervivencia | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 8 Joint models para datos longitudinales y datos de supervivencia | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 8 Joint models para datos longitudinales y datos de supervivencia | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  
+  
+  
+
+<meta name="author" content="Juan R González" />
+
+
+<meta name="date" content="2021-09-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="análisis-de-supervivencia.html"/>
+
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Datos Longitudinales</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preámbulo</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instalación-de-librerías-necesarias-para-el-curso"><i class="fa fa-check"></i><b>1.1</b> Instalación de librerías necesarias para el curso</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introducción a los diseños de datos longitudinales</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#definición"><i class="fa fa-check"></i><b>2.1</b> Definición</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#ejemplos"><i class="fa fa-check"></i><b>2.2</b> Ejemplos</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#esquemas-de-recogidas-de-datos"><i class="fa fa-check"></i><b>2.3</b> Esquemas de recogidas de datos</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#todas-las-medidas-con-intervalos-fijos"><i class="fa fa-check"></i><b>2.3.1</b> Todas las medidas con intervalos fijos</a></li>
+<li class="chapter" data-level="2.3.2" data-path="intro.html"><a href="intro.html#missings-al-azar-con-intervalos-fijos"><i class="fa fa-check"></i><b>2.3.2</b> Missings al azar con intervalos fijos</a></li>
+<li class="chapter" data-level="2.3.3" data-path="intro.html"><a href="intro.html#distintos-seguimientos"><i class="fa fa-check"></i><b>2.3.3</b> Distintos seguimientos</a></li>
+<li class="chapter" data-level="2.3.4" data-path="intro.html"><a href="intro.html#todas-las-medidas-a-distintos-tiempos"><i class="fa fa-check"></i><b>2.3.4</b> Todas las medidas a distintos tiempos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html"><i class="fa fa-check"></i><b>3</b> Estructura de los datos</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#formato-ancho-y-largo"><i class="fa fa-check"></i><b>3.1</b> Formato ancho y largo</a></li>
+<li class="chapter" data-level="3.2" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#formato-ancho"><i class="fa fa-check"></i><b>3.2</b> Formato ancho</a></li>
+<li class="chapter" data-level="3.3" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#formato-largo"><i class="fa fa-check"></i><b>3.3</b> Formato largo</a></li>
+<li class="chapter" data-level="3.4" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#valores-faltantes"><i class="fa fa-check"></i><b>3.4</b> Valores faltantes</a></li>
+<li class="chapter" data-level="3.5" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#tiempos-de-medidas-diferentes"><i class="fa fa-check"></i><b>3.5</b> Tiempos de medidas diferentes</a></li>
+<li class="chapter" data-level="3.6" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#transformación"><i class="fa fa-check"></i><b>3.6</b> Transformación</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#vertical-a-horizontal-y-viceversa"><i class="fa fa-check"></i><b>3.6.1</b> Vertical a horizontal y viceversa</a></li>
+<li class="chapter" data-level="3.6.2" data-path="estructura-de-los-datos.html"><a href="estructura-de-los-datos.html#colapsar"><i class="fa fa-check"></i><b>3.6.2</b> Colapsar</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html"><i class="fa fa-check"></i><b>4</b> Visualización de datos longitudinales</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html#trayectorias"><i class="fa fa-check"></i><b>4.1</b> Trayectorias</a></li>
+<li class="chapter" data-level="4.2" data-path="visualización-de-datos-longitudinales.html"><a href="visualización-de-datos-longitudinales.html#spaghetti-plots"><i class="fa fa-check"></i><b>4.2</b> Spaghetti plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ModelosNormal.html"><a href="ModelosNormal.html"><i class="fa fa-check"></i><b>5</b> Modelos con respuesta normal</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#técnica-de-la-suma-de-cuadrados"><i class="fa fa-check"></i><b>5.1</b> Técnica de la suma de cuadrados</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#diseño-1w1b"><i class="fa fa-check"></i><b>5.1.1</b> Diseño 1W+1B</a></li>
+<li class="chapter" data-level="5.1.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#diseño-1w"><i class="fa fa-check"></i><b>5.1.2</b> Diseño 1W</a></li>
+<li class="chapter" data-level="5.1.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#función-ezanova"><i class="fa fa-check"></i><b>5.1.3</b> Función <code>ezANOVA</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#respuesta-multivariante"><i class="fa fa-check"></i><b>5.2</b> Respuesta Multivariante</a></li>
+<li class="chapter" data-level="5.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejemplos-1"><i class="fa fa-check"></i><b>5.3</b> Ejemplos</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#Ejemplo1"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo 1</a></li>
+<li class="chapter" data-level="5.3.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#Ejemplo2"><i class="fa fa-check"></i><b>5.3.2</b> Ejemplo 2</a></li>
+<li class="chapter" data-level="5.3.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#Ejemplo3"><i class="fa fa-check"></i><b>5.3.3</b> Ejemplo 3</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicios"><i class="fa fa-check"></i><b>5.4</b> Ejercicios</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicio-1"><i class="fa fa-check"></i><b>5.4.1</b> Ejercicio 1</a></li>
+<li class="chapter" data-level="5.4.2" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicio-2"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio 2</a></li>
+<li class="chapter" data-level="5.4.3" data-path="ModelosNormal.html"><a href="ModelosNormal.html#ejercicio-3"><i class="fa fa-check"></i><b>5.4.3</b> Ejercicio 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html"><i class="fa fa-check"></i><b>6</b> Modelos Lineales Mixtos (LMM)</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ecuación"><i class="fa fa-check"></i><b>6.1</b> Ecuación</a></li>
+<li class="chapter" data-level="6.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#casos-particulares"><i class="fa fa-check"></i><b>6.2</b> Casos particulares</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#modelo-con-constante-aleatoria"><i class="fa fa-check"></i><b>6.2.1</b> Modelo con constante aleatoria</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#simplificación-del-modelo"><i class="fa fa-check"></i><b>6.3</b> Simplificación del modelo</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#significación-de-los-efectos-aleatorios"><i class="fa fa-check"></i><b>6.3.1</b> Significación de los efectos aleatorios</a></li>
+<li class="chapter" data-level="6.3.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#elección-matriz-covarianzas-de-los-efectos-aleatorios"><i class="fa fa-check"></i><b>6.3.2</b> Elección matriz covarianzas de los efectos aleatorios</a></li>
+<li class="chapter" data-level="6.3.3" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#estructura-de-correlación-de-los-errores"><i class="fa fa-check"></i><b>6.3.3</b> Estructura de correlación de los errores</a></li>
+<li class="chapter" data-level="6.3.4" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#efectos-fijos"><i class="fa fa-check"></i><b>6.3.4</b> Efectos fijos</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#validación-del-modelo"><i class="fa fa-check"></i><b>6.4</b> Validación del modelo</a></li>
+<li class="chapter" data-level="6.5" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#predicciones"><i class="fa fa-check"></i><b>6.5</b> Predicciones</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#efectos-marginales"><i class="fa fa-check"></i><b>6.5.1</b> Efectos marginales</a></li>
+<li class="chapter" data-level="6.5.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#estimación-de-los-efectos-aleatorios"><i class="fa fa-check"></i><b>6.5.2</b> Estimación de los efectos aleatorios</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#función-lme"><i class="fa fa-check"></i><b>6.6</b> Función <code>lme</code></a></li>
+<li class="chapter" data-level="6.7" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejemplos-2"><i class="fa fa-check"></i><b>6.7</b> Ejemplos</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejemplo-1"><i class="fa fa-check"></i><b>6.7.1</b> Ejemplo 1</a></li>
+<li class="chapter" data-level="6.7.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejemplo-2"><i class="fa fa-check"></i><b>6.7.2</b> Ejemplo 2</a></li>
+<li class="chapter" data-level="6.7.3" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejemplo-3"><i class="fa fa-check"></i><b>6.7.3</b> Ejemplo 3</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejercicios-1"><i class="fa fa-check"></i><b>6.8</b> Ejercicios</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejercicio-4"><i class="fa fa-check"></i><b>6.8.1</b> Ejercicio 4</a></li>
+<li class="chapter" data-level="6.8.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejercicio-5"><i class="fa fa-check"></i><b>6.8.2</b> Ejercicio 5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html"><i class="fa fa-check"></i><b>7</b> Análisis de supervivencia</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#tiempo-hasta-evento"><i class="fa fa-check"></i><b>7.1</b> Tiempo hasta evento</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#ejemplos-3"><i class="fa fa-check"></i><b>7.1.1</b> Ejemplos</a></li>
+<li class="chapter" data-level="7.1.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#otros-tipos-de-censura"><i class="fa fa-check"></i><b>7.1.2</b> Otros tipos de censura</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#kaplan-meier"><i class="fa fa-check"></i><b>7.2</b> Kaplan-Meier</a></li>
+<li class="chapter" data-level="7.3" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#medidas-para-variables-de-seguimiento"><i class="fa fa-check"></i><b>7.3</b> Medidas para variables de seguimiento</a></li>
+<li class="chapter" data-level="7.4" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#modelo-de-regresión-de-cox"><i class="fa fa-check"></i><b>7.4</b> Modelo de regresión de Cox</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#efectos-tiempo-dependientes"><i class="fa fa-check"></i><b>7.4.1</b> Efectos tiempo-dependientes</a></li>
+<li class="chapter" data-level="7.4.2" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#variables-tiempo-dependientes-datos-longitudinales"><i class="fa fa-check"></i><b>7.4.2</b> Variables tiempo-dependientes (datos longitudinales)</a></li>
+<li class="chapter" data-level="7.4.3" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#estructura-de-los-datos-1"><i class="fa fa-check"></i><b>7.4.3</b> Estructura de los datos</a></li>
+<li class="chapter" data-level="7.4.4" data-path="análisis-de-supervivencia.html"><a href="análisis-de-supervivencia.html#ajuste-del-modelo"><i class="fa fa-check"></i><b>7.4.4</b> Ajuste del modelo</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><i class="fa fa-check"></i><b>8</b> Joint models para datos longitudinales y datos de supervivencia</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#por-qué-deberíamos-utilizar-este-tipo-de-modelos"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué deberíamos utilizar este tipo de modelos?</a></li>
+<li class="chapter" data-level="8.2" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#joint-models"><i class="fa fa-check"></i><b>8.2</b> Joint models</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelización estadística avanzada con R: análisis de datos longitudinales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="joint-models-para-datos-longitudinales-y-datos-de-supervivencia" class="section level1" number="8">
+<h1><span class="header-section-number">Capítulo 8</span> Joint models para datos longitudinales y datos de supervivencia</h1>
+<p>En el capítulo anterior hemos visto cómo modelar una variable dependiente que mide el tiempo hasta una variable de interés (análisis de supervivencia). Vimos también cómo tener en cuenta como estimar modelos de supervivencia cuando una variable independiente es medida a lo largo del tiempo. En este tema, iremos un paso más allá y nos interesaremos por unos modelos en los que nuestra variable resultado está formada por dos tipos de variables: una variable respuesta medida de forma longitudinal y otra que recoge el tiempo hasta un evento de interés. A estos modelo se les comonce como <strong>“Joint Models”</strong>. Estos modelos tienen en cuenta las variables tiempo-dependientes para modelizar el tiempo hasta evento con posible censura por la derecha. Estos modelos surgen cuando hay valores faltantes en algunas medidas de las variables <span class="math inline">\(x_k\)</span>. Para solventarlo, modelizan una regresión de supervivencia de Cox, y en lugar de condicionar por los valores observados de <span class="math inline">\(x_k\)</span>, se condiciona por los valores ajustados de ellos según modelos de datos longitudinales que pueden ser los modelos mixtos. De esta forma se <strong>fusiona los modelos de medidas repetidas con los modelos de Cox.</strong>.</p>
+<p>En este curso mostraremos cómo llevar a cabo estos análisis mediante la librería <code>JM</code>, pero debemos tener en cuenta que también podemos usar la librería <strong><code>joineR</code></strong> para ajustar este tipo de modelos. Esta librería también tiene incorporadas funciones y opciones para tener encuenta <strong>eventos competitivos</strong>, es decir, cuando nuestro evento de interés no es uno sólo si no más de uno.</p>
+<div id="por-qué-deberíamos-utilizar-este-tipo-de-modelos" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> ¿Por qué deberíamos utilizar este tipo de modelos?</h2>
+<p>Como mencionamos en la sección anterior, el modelo de riesgos proporcionales de Cox se puede ampliar para incorporar variables dependientes del tiempo. Sin embargo, cuando enfocamos nuestro interés en el tiempo hasta el evento y deseamos tener en cuenta el efecto de la variable longitudinal como una covariable dependiente del tiempo, los enfoques tradicionales para analizar los datos del tiempo hasta el evento (como usar la verosimilitud parcial para los modelos de Cox) no son aplicables en todas las situaciones.</p>
+<p>En particular, los modelos estándar de tiempo hasta el evento requieren que las covariables dependientes del tiempo sean externas; es decir, el valor de esta covariable en el momento <span class="math inline">\(t\)</span> no debe verse afectado por la ocurrencia de un evento en el momento <span class="math inline">\(u\)</span>, cuando <span class="math inline">\(t&gt;u\)</span>. Sin embargo, el tipo de covariables dependientes del tiempo que tenemos en los estudios longitudinales no cumplen con esta condición. Esto se debe a que son el resultado de un proceso estocástico generado por el sujeto, el cual está directamente relacionado con el mecanismo que controla que se produzca el evento de interés. En otras palabras, la variable longitudinal no es independiente del evento de interés. Podemos imaginar varias situaciones donde esto ocurre. Supongamos que estamos interesados en estudiar el tiempo hasta que se produzca in evento cardiovascular. Obviamente, si recogemos la variable tensión arterial de forma longitudinal, ambos procesos estarán relacionados y por lo tanto, las condiciones para aplicar el modelo de Cox no se cumplen. En base a esto, para producir inferencias correctas, necesitamos aplicar un modelo conjunto que tenga en cuenta la distribución conjunta de los resultados longitudinales y de supervivencia.</p>
+<p>Otra ventaja de estos modelos es que permiten tratar las medidas de error en las variables dependientes del tiempo (variable longitudinal en este caso). En un modelo de Cox con covariables dependientes del tiempo, asumimos que las variables se miden sin error.</p>
+<blockquote>
+<p>IMPORTANTE: Cuando pensamos en covariables dependientes del tiempo, primero debemos distinguir entre dos categorías diferentes, a saber, covariables internas o endógenas o covariables externas o exógenas. Las covariables internas se generan a partir del propio individuo y por tanto requieren la existencia de dicho individuo. Por ejemplo el recuento de células CD4 y el riesgo de muerte por VIH son procesos estocásticos generados por el individuo. Por otro lado, la contaminación del aire es una covariable externa a los ataques de asma, ya que el paciente no influye en la contaminación del aire.</p>
+</blockquote>
+<p>De esta forma, nos enfrentamos ante dos situaciones en las que queremos usar estos modelos. Primero, cuando nos centramos en el resultado de supervivencia y deseamos tener en cuenta el efecto de una covariable dependiente del tiempo endógena medida con error, y segundo, cuando nos interesamos en que la variable resultado sea la variable longitudinal y deseamos corregir por el abandono no aleatorio (no aleatorio porque no seguimos observando al individuo ya que se ha producido el evento de interés).</p>
+</div>
+<div id="joint-models" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Joint models</h2>
+<p>Como mencionamos, los ‘joint models’ tienen en cuenta dos resultados, la respuesta longitudinal y el tiempo de supervivencia. Para estimar este tipo de modelos, primero necesitamos ajustar un modelo para la respuesta longitudinal (generalmente un modelo lineal mixto) y luego para el tiempo de supervivencia. Estos modelos ya los hemos visto en capítulos anteriores, así que ahora lo que haremos es explicar cómo estimar los ‘joint models’ con R.</p>
+<p>Para ilustrar cómo llevar a cabo estos análisis continuaremos con los datos de Sida analizados en el capítulo anterior. Primero necesitamos ajustar por separado el modelo lineal mixto (datos longitudinales) y el modelo Cox (tiempo hasta evento), y luego tomar los objetos devueltos y usarlos como argumentos principales en la función <code>jointModel()</code> de la librería <code>JM</code>.</p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(JM)</span>
+<span id="cb278-2"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb278-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(aids)</span>
+<span id="cb278-3"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb278-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aids)</span></code></pre></div>
+<pre><code>  patient  Time death       CD4 obstime drug gender prevOI         AZT start  stop event
+1       1 16.97     0 10.677078       0  ddC   male   AIDS intolerance     0  6.00     0
+2       1 16.97     0  8.426150       6  ddC   male   AIDS intolerance     6 12.00     0
+3       1 16.97     0  9.433981      12  ddC   male   AIDS intolerance    12 16.97     0
+4       2 19.00     0  6.324555       0  ddI   male noAIDS intolerance     0  6.00     0
+5       2 19.00     0  8.124038       6  ddI   male noAIDS intolerance     6 12.00     0
+6       2 19.00     0  4.582576      12  ddI   male noAIDS intolerance    12 18.00     0</code></pre>
+<p>La idea aquí es probar el efecto del tratamiento sobre la supervivencia después de ajustar el recuento de células CD4, que es una medida recogida a lo largo del tiempo. Este también es el modelo que ajustamos en la sección anterior usando un modelo de Cox con datos dependientes del tiempo, pero que como hemos comentado, no cumplen las condiciones necesarias para que la estimación mediante verosimilitud parcial sea correcta.</p>
+<p>Veamos que valores toma la variable CD4 a lo largo del tiempo usando las funciones de ggplot que ya hemos visto en este curso</p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(aids, <span class="fu">aes</span>(<span class="at">x =</span> obstime, <span class="at">y =</span> CD4, <span class="at">group =</span> patient)) <span class="sc">+</span></span>
+<span id="cb280-2"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb280-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Months&quot;</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>drug)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-187-1.png" width="672" />
+Visualicemos los 10 primeros individuos para ver si tenemos que usar un modelo mixto con intercept o pendiente aleatoria</p>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb281-1" aria-hidden="true" tabindex="-1"></a>aids10 <span class="ot">&lt;-</span> <span class="fu">filter</span>(aids, patient<span class="sc">%in%</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>))</span>
+<span id="cb281-2"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb281-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(aids10, <span class="fu">aes</span>(<span class="at">x =</span> obstime, <span class="at">y =</span> CD4)) <span class="sc">+</span> </span>
+<span id="cb281-3"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb281-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb281-4"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb281-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Months&quot;</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>patient)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-188-1.png" width="672" /></p>
+<p>Ahora vamos a especificar y ajustar los modelos para cada uno de nuestros outcomes. El modelo lineal de efectos mixtos para los recuentos de células CD4 incluye:</p>
+<ul>
+<li>Parte de efectos fijos: efecto principal del tiempo y la interacción con el tratamiento.</li>
+<li>Matriz de diseño de efectos aleatorios: el <em>intercept</em> y un término de tiempo, ya que vemos en la gráfica anterior que ambos son aleatorios, es decir hay <em>intercepts</em> y pendientes distintas para cada individuo.</li>
+</ul>
+<p>El submodelo de supervivencia incluye: efecto del tratamiento (como una covariable independiente del tiempo) y el verdadero efecto subyacente del recuento de células CD4 estimado a partir del modelo longitudinal (como dependiente del tiempo). Para el modelo de Cox, asumiremos que la función de riesgo basal es constante por partes (dependiendo de cuando se ha observado los datos longitudinales). Es por ello que definimos <code>method = "piecesiwse-PH-GH"</code>. Otras posibilidades incluye estimarla mediante un modelo paramétrico de Weibull (“weibull-AFT-GH”) o utilizar B-splines que nos daría una estimación suave de la functión de riesgo basal (“spline-PH-GH”). Para más detalles ejectuar <code>?JointModel</code></p>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb282-1" aria-hidden="true" tabindex="-1"></a>fitLME <span class="ot">&lt;-</span> <span class="fu">lme</span>(CD4 <span class="sc">~</span> obstime<span class="sc">:</span>drug, <span class="at">random =</span> <span class="sc">~</span> obstime <span class="sc">|</span> patient, <span class="at">data =</span> aids)</span>
+<span id="cb282-2"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb282-2" aria-hidden="true" tabindex="-1"></a>fitSURV <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(Time, death) <span class="sc">~</span> drug <span class="sc">+</span> gender, <span class="at">data =</span> aids.id, <span class="at">x =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb282-3"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb282-3" aria-hidden="true" tabindex="-1"></a>fitJM <span class="ot">&lt;-</span> <span class="fu">jointModel</span>(fitLME, fitSURV, <span class="at">timeVar =</span> <span class="st">&quot;obstime&quot;</span>, <span class="at">method =</span> <span class="st">&quot;piecewise-PH-GH&quot;</span>)</span>
+<span id="cb282-4"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb282-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitJM)</span></code></pre></div>
+<pre><code>
+Call:
+jointModel(lmeObject = fitLME, survObject = fitSURV, timeVar = &quot;obstime&quot;, 
+    method = &quot;piecewise-PH-GH&quot;)
+
+Data Descriptives:
+Longitudinal Process        Event Process
+Number of Observations: 1405    Number of Events: 188 (40.3%)
+Number of Groups: 467
+
+Joint Model Summary:
+Longitudinal Process: Linear mixed-effects model
+Event Process: Relative risk model with piecewise-constant
+        baseline risk function
+Parameterization: Time-dependent 
+
+   log.Lik      AIC      BIC
+ -4340.062 8714.123 8784.611
+
+Variance Components:
+             StdDev    Corr
+(Intercept)  4.5280  (Intr)
+obstime      0.1700 -0.0503
+Residual     1.8747        
+
+Coefficients:
+Longitudinal Process
+                  Value Std.Err z-value p-value
+(Intercept)      7.2059  0.1349 53.4349 &lt;0.0001
+obstime:drugddC -0.1897  0.0211 -8.9736 &lt;0.0001
+obstime:drugddI -0.1711  0.0217 -7.8684 &lt;0.0001
+
+Event Process
+             Value Std.Err z-value p-value
+drugddI     0.3548  0.1581  2.2441  0.0248
+gendermale -0.2893  0.2606 -1.1101  0.2669
+Assoct     -0.3001  0.0382 -7.8480 &lt;0.0001
+log(xi.1)  -2.2292  0.3037 -7.3400        
+log(xi.2)  -1.9447  0.2994 -6.4961        
+log(xi.3)  -1.6380  0.3384 -4.8407        
+log(xi.4)  -2.1784  0.4178 -5.2145        
+log(xi.5)  -2.1003  0.3968 -5.2931        
+log(xi.6)  -2.0977  0.4691 -4.4715        
+log(xi.7)  -2.0881  0.5873 -3.5556        
+
+Integration:
+method: Gauss-Hermite
+quadrature points: 15 
+
+Optimization:
+Convergence: 0 </code></pre>
+<blockquote>
+<p>IMPORTANTE: Debido al hecho de que la función <code>jointModel</code> extrae toda la información requerida de estos dos objetos (por ejemplo, vectores de respuesta, matrices de diseño, etc.), en la llamada a la función <code>coxph()</code> necesitamos especificar el argumento <code>x = TRUE</code>. Con esto, la matriz de diseño del modelo de Cox se incluye en el objeto devuelto.</p>
+<p>Además, el argumento principal <code>timeVar</code> de la función <code>jointModel()</code> se usa para especificar el nombre de la variable dependiente del tiempo en el modelo lineal mixto, que se requiere para el cálculo de este submodelo.</p>
+</blockquote>
+<p>Antes de continuar descriendo los resultados obtenidos, notemos que los resultados son similares al modelo de Cox utilizado en la sección anterior. Es decir, los individuos que toman didanosine (ddI) tienen peor supervivencia que los que toman zalcitabine (ddC) (p=0.0248). Notemos de nuevo como el valor es más significativo que con el modelo de Cox, cumpliéndose así la premisa que analizar los datos con el modelo más adecuado va en favor del investigador.</p>
+<p>El parámetro etiquetado ‘Assoct’ mide el efecto de la variable CD4 (modelada mediante el modelo mixto) en el riesgo de muerte, que en este caso es muy significativa (p&lt;0.0001) y nos indica que este riesgo decrece a medida que aumentan los valores de CD4. Los parametros (xi.1, xi.2, ..) corresponden a los parámetros de la functión de riesgo basal estimada mediante una functión constante por partes</p>
+<p>Para obtener el Hazard Ratio tanto de las variables fijas como de las variables longitudinales tenemos que exponenciar el valor que observamos en la tabla. En consecuencia, como este valor para la variable longitudinal CD4 es -0.30, entonces, un aumento de una unidad en el recuento de células CD4 disminuye el riesgo en un 26% (exp(-0.30) = 0.74).</p>
+<p>También podemos calcular el IC95% mediante</p>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(fitJM, <span class="at">parm =</span> <span class="st">&quot;Event&quot;</span>)</span></code></pre></div>
+<pre><code>                 2.5 %       est.     97.5 %
+drugddI     0.04492354  0.3547566  0.6645897
+gendermale -0.80012212 -0.2893215  0.2214791
+Assoct     -0.37504904 -0.3001018 -0.2251546</code></pre>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(fitJM, <span class="at">parm =</span> <span class="st">&quot;Event&quot;</span>))</span></code></pre></div>
+<pre><code>               2.5 %      est.    97.5 %
+drugddI    1.0459479 1.4258336 1.9436929
+gendermale 0.4492741 0.7487714 1.2479212
+Assoct     0.6872556 0.7407428 0.7983928</code></pre>
+<p>Si queremos ver los efectos para el modelo longitudinal</p>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(fitJM, <span class="at">parm =</span> <span class="st">&quot;Longitudinal&quot;</span>)</span></code></pre></div>
+<pre><code>                     2.5 %       est.     97.5 %
+(Intercept)      6.9416260  7.2059361  7.4702462
+obstime:drugddC -0.2311402 -0.1897056 -0.1482710
+obstime:drugddI -0.2137151 -0.1710964 -0.1284777</code></pre>
+<p>Podemos visualizar las predicciones para un individuo (por ejemplo el 2) tras las 3 o 4 primeras observaciones de CD4 mediante</p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb290-1" aria-hidden="true" tabindex="-1"></a>aids.id1 <span class="ot">&lt;-</span> <span class="fu">filter</span>(aids, patient<span class="sc">==</span><span class="dv">2</span>)</span>
+<span id="cb290-2"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb290-2" aria-hidden="true" tabindex="-1"></a>fit3 <span class="ot">&lt;-</span> <span class="fu">survfitJM</span>(fitJM, <span class="at">newdata =</span> aids.id1[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, ], <span class="at">idVar =</span> <span class="st">&quot;patient&quot;</span>) </span>
+<span id="cb290-3"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb290-3" aria-hidden="true" tabindex="-1"></a>fit4 <span class="ot">&lt;-</span> <span class="fu">survfitJM</span>(fitJM, <span class="at">newdata =</span> aids.id1[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, ], <span class="at">idVar =</span> <span class="st">&quot;patient&quot;</span>) </span>
+<span id="cb290-4"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb290-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb290-5"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb290-5" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">plot</span>(fit3, <span class="at">estimator=</span><span class="st">&quot;mean&quot;</span>, <span class="at">include.y =</span> <span class="cn">TRUE</span>, <span class="at">conf.int=</span><span class="fl">0.95</span>, </span>
+<span id="cb290-6"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb290-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill.area=</span><span class="cn">TRUE</span>, <span class="at">col.area=</span><span class="st">&quot;lightblue&quot;</span>, <span class="at">main=</span><span class="st">&quot;Patient 2&quot;</span>)</span>
+<span id="cb290-7"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb290-7" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">plot</span>(fit4, <span class="at">estimator=</span><span class="st">&quot;mean&quot;</span>, <span class="at">include.y =</span> <span class="cn">TRUE</span>, <span class="at">conf.int=</span><span class="fl">0.95</span>, </span>
+<span id="cb290-8"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb290-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill.area=</span><span class="cn">TRUE</span>, <span class="at">col.area=</span><span class="st">&quot;lightblue&quot;</span>, <span class="at">main=</span><span class="st">&quot;Patient 2&quot;</span>)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-192-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="análisis-de-supervivencia.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/isglobal-brge/curso_longitudinal/tree/master/docs07-JointModels.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["cursoLongitudinal-bookdown.pdf", "cursoLongitudinal-bookdown.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

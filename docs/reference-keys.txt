@@ -1,4 +1,4 @@
-fig:unnamed-chunk-9
+fig:unnamed-chunk-26
 preámbulo
 instalación-de-librerías-necesarias-para-el-curso
 intro
@@ -65,3 +65,17 @@ comparación-de-los-dos-tratamientos
 ejercicios-1
 ejercicio-4
 ejercicio-5
+análisis-de-supervivencia
+tiempo-hasta-evento
+ejemplos-3
+otros-tipos-de-censura
+kaplan-meier
+medidas-para-variables-de-seguimiento
+modelo-de-regresión-de-cox
+efectos-tiempo-dependientes
+variables-tiempo-dependientes-datos-longitudinales
+estructura-de-los-datos-1
+ajuste-del-modelo
+joint-models-para-datos-longitudinales-y-datos-de-supervivencia
+por-qué-deberíamos-utilizar-este-tipo-de-modelos
+joint-models
