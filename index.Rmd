@@ -48,7 +48,8 @@ Para poder reproducir todo el código de este libro se necesitan tener instalada
 
 ```
 install.packages(c("tidyverse", "dplyr", "magrittr", "ggplot2", "reshape2",
-                   "ez", "MANOVA.RM"))
+                   "ez", "MANOVA.RM", "nlme", "ggeffects", "gridExtra",
+                   "lme4", "chron", "compareGroups", "survminer", "JM"))
 
 ```
 
