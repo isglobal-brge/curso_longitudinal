@@ -72,7 +72,7 @@ Sin embargo, a veces es recomendable utilizar otras aproximaciones que nos ayude
 * funciones paramétricas
 
 
-El suavizado paramétrico se puede llevar acabo usando un suavizado de tipo *loess*. Podemos usar esta opción mediante la función `stat_smooth()` y controlar el grado de suavizado con el argumento `span`.
+El suavizado no paramétrico se puede llevar acabo usando un suavizado de tipo *loess*. Podemos usar esta opción mediante la función `stat_smooth()` y controlar el grado de suavizado con el argumento `span`.
 
 ```{r, fig.width = 4.5, fig.height = 5}
 ggplot(tolerance2, aes(x = age, y = tolerance)) +

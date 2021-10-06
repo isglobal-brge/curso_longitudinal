@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-10-05" />
+<meta name="date" content="2021-10-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -334,7 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>suavizado no paramétrico</li>
 <li>funciones paramétricas</li>
 </ul>
-<p>El suavizado paramétrico se puede llevar acabo usando un suavizado de tipo <em>loess</em>. Podemos usar esta opción mediante la función <code>stat_smooth()</code> y controlar el grado de suavizado con el argumento <code>span</code>.</p>
+<p>El suavizado no paramétrico se puede llevar acabo usando un suavizado de tipo <em>loess</em>. Podemos usar esta opción mediante la función <code>stat_smooth()</code> y controlar el grado de suavizado con el argumento <code>span</code>.</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="visualización-de-datos-longitudinales.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tolerance2, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> tolerance)) <span class="sc">+</span></span>
 <span id="cb43-2"><a href="visualización-de-datos-longitudinales.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb43-3"><a href="visualización-de-datos-longitudinales.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">span =</span> .<span class="dv">9</span>) <span class="sc">+</span></span>

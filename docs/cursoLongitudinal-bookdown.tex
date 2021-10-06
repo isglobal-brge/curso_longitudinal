@@ -110,6 +110,7 @@
 \setcounter{secnumdepth}{5}
 \usepackage{booktabs}
 \usepackage{amsthm}
+\usepackage{mathtools}
 \makeatletter
 \def\thm@space@setup{%
   \thm@preskip=8pt plus 2pt minus 4pt
@@ -124,7 +125,7 @@
 
 \title{Modelización estadística avanzada con R: análisis de datos longitudinales}
 \author{Juan R González}
-\date{2021-10-05}
+\date{2021-10-06}
 
 \begin{document}
 \maketitle
@@ -2199,7 +2200,7 @@ Sin embargo, a veces es recomendable utilizar otras aproximaciones que nos ayude
   funciones paramétricas
 \end{itemize}
 
-El suavizado paramétrico se puede llevar acabo usando un suavizado de tipo \emph{loess}. Podemos usar esta opción mediante la función \texttt{stat\_smooth()} y controlar el grado de suavizado con el argumento \texttt{span}.
+El suavizado no paramétrico se puede llevar acabo usando un suavizado de tipo \emph{loess}. Podemos usar esta opción mediante la función \texttt{stat\_smooth()} y controlar el grado de suavizado con el argumento \texttt{span}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
