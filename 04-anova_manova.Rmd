@@ -408,12 +408,12 @@ Como hay individuos con datos faltantes no podemos utilizar ANOVA o MANOVA y deb
 > Para estudiar las diferencias entre dos procedimientos diferentes de recuperación de pacientes de un infarto, se consideraron dos grupos experimentales en sendos hospitales, de 8 pacientes cada uno. La variable respuesta es el índice de Bartel, que varía entre 0 y 100, y que constituye una medida de la habilidad funcional con la que se valoran diferentes capacidades, de forma que valores más altos se corresponden con una mejor situación del paciente. De cada uno de los 16 pacientes se dispone de su respuesta cada semana a lo largo de 5 semanas consecutivas. Los datos se pueden encontrar en el archivo *recuperainfarto.txt*. El fichero contiene la información para cada individuo en una fila, la primera columna contiene la información del hostpital y las siguiente 5 columnas corresponden al valor del índice para cada semana.
 >
 1. Carga los datos en R.
-2. Nombra a las columnas del data.frame con `c("hospital", "bartel_1", "bartel_2", "bartel_3"), "bartel_4", "bartel_5")
-2. Añade una columna (`id`) a los datos que corresponda al identificador cada individuo (usa 1, 2, 3, ... 16).
+2. Añade una columna (id) a los datos que corresponda al identificador cada individuo (usa 1, 2, 3, … 16).
 3. Crea un data.frame con los datos en formato largo
-4. Crea una figura para visualizar la evolución en la respuesta a lo largo del tiempo para cada individuo.
-4. Crea una figura para mostrar si visualmente hay diferencias entre ambos procedimientos a lo largo del tiempo.
-5. ¿Qué procedimiento presenta una mejor recuperación de los pacientes? ¿Es esta diferencia estadísticamente significativa? 
+4. Ordena los datos por 'hospital' y 'tiempo'
+5. Crea una figura para visualizar la evolución en la respuesta a lo largo del tiempo para cada individuo.
+6. Crea una figura para mostrar si visualmente hay diferencias entre hospitales a lo largo del tiempo.
+7. ¿Qué hospital presenta una mejor recuperación de los pacientes? ¿Es esta diferencia estadísticamente significativa?
 
 ### Ejercicio 2
 
