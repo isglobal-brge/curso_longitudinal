@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-10-07" />
+<meta name="date" content="2021-10-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -596,17 +596,22 @@ Además, hay que convertir las variables <code>tiempo</code> e <code>indiv</code
 <span id="cb56-6"><a href="ModelosNormal.html#cb56-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-7"><a href="ModelosNormal.html#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(<span class="at">data=</span>datos.ez, <span class="at">dv=</span>medida, <span class="at">wid=</span>indiv, <span class="at">within=</span>tiempo, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>$ANOVA
-       Effect DFn DFd       SSn       SSd         F            p p&lt;.05       ges
-1 (Intercept)   1  11 66546.801 1892.0589 386.88796 6.390053e-10     * 0.9686088
-2      tiempo   2  22  2166.376  264.6244  90.05264 2.542699e-11     * 0.5011210
+       Effect DFn DFd       SSn       SSd         F
+1 (Intercept)   1  11 66546.801 1892.0589 386.88796
+2      tiempo   2  22  2166.376  264.6244  90.05264
+             p p&lt;.05       ges
+1 6.390053e-10     * 0.9686088
+2 2.542699e-11     * 0.5011210
 
 $`Mauchly&#39;s Test for Sphericity`
   Effect         W          p p&lt;.05
 2 tiempo 0.4433135 0.01712201     *
 
 $`Sphericity Corrections`
-  Effect       GGe        p[GG] p[GG]&lt;.05       HFe        p[HF] p[HF]&lt;.05
-2 tiempo 0.6423901 5.662497e-08         * 0.6905331 1.998401e-08         *</code></pre>
+  Effect       GGe        p[GG] p[GG]&lt;.05       HFe
+2 tiempo 0.6423901 5.662497e-08         * 0.6905331
+         p[HF] p[HF]&lt;.05
+2 1.998401e-08         *</code></pre>
 <p>La condición de esfericidad no se cumple dado que el test de Mauchly es significativo. Por lo tanto, hay que corregir los grados de libertad y, en consecuencia, el p-valor del factor tiempo. Después de la corrección, éste sigue siendo significativo.</p>
 </div>
 <div id="modelo-de-respuesta-multivariante-manova" class="section level4" number="5.3.1.3">
@@ -644,10 +649,13 @@ Residuals:
 -7.7167 -3.9667 -0.5667  4.0833  7.2833 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   32.117      1.445   22.23 1.72e-10 ***
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)   32.117      1.445   22.23 1.72e-10
+               
+(Intercept) ***
 ---
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+Signif. codes:  
+0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 5.006 on 11 degrees of freedom
 
@@ -662,10 +670,13 @@ Residuals:
 -12.167  -7.217   1.633   6.358  15.633 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   49.667      2.456   20.22 4.75e-10 ***
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)   49.667      2.456   20.22 4.75e-10
+               
+(Intercept) ***
 ---
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+Signif. codes:  
+0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 8.509 on 11 degrees of freedom
 
@@ -680,10 +691,13 @@ Residuals:
 -10.80  -9.15  -1.15   6.50  21.40 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   47.200      2.867   16.47 4.25e-09 ***
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)   47.200      2.867   16.47 4.25e-09
+               
+(Intercept) ***
 ---
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+Signif. codes:  
+0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 9.93 on 11 degrees of freedom</code></pre>
 <p>Para obtener la matriz de covarianzas de los residuos:</p>
@@ -706,11 +720,15 @@ medida_3 0.8466744 0.9622290 1.0000000</code></pre>
 Contrasts orthogonal to
 ~1
 
-            Df Pillai approx F num Df den Df    Pr(&gt;F)    
-(Intercept)  1  0.945   85.903      2     10 5.035e-07 ***
-Residuals   11                                            
+            Df Pillai approx F num Df den Df
+(Intercept)  1  0.945   85.903      2     10
+Residuals   11                              
+               Pr(&gt;F)    
+(Intercept) 5.035e-07 ***
+Residuals                
 ---
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+Signif. codes:  
+0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Los estadísticos disponibles (argumento <code>test</code>) son: “Pillai”, “Wilks”, “Hotelling-Lawley”, “Roy” o “Spherical”.</p>
 <p>Con la opcion <code>X=~1</code> se contrasta si <span class="math inline">\(\mu_1 = \mu_2 = \mu_3\)</span>. En cambio la opción por defecto <code>X = ~ 0</code>, contrasta <span class="math inline">\(\mu_1 = \mu_2 = \mu_3=0\)</span> que no es de interés.</p>
 <p>El término <code>(Intercept)</code> corresponde al efecto del tiempo.</p>
@@ -755,11 +773,16 @@ Como antes hay que convertir las variables <code>tiempo</code>, <code>indiv2</co
 <span id="cb73-12"><a href="ModelosNormal.html#cb73-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">between=</span>trat,</span>
 <span id="cb73-13"><a href="ModelosNormal.html#cb73-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>$ANOVA
-       Effect DFn DFd         SSn       SSd         F            p p&lt;.05       ges
-1 (Intercept)   1  22 102808.4513 2849.9219 793.63083 9.363797e-19     * 0.9701554
-2        trat   1  22   1952.0835 2849.9219  15.06913 8.040878e-04     * 0.3816578
-3      tiempo   2  44   1397.0700  312.7422  98.27755 5.878117e-17     * 0.3063929
-4 trat:tiempo   2  44    811.8211  312.7422  57.10794 5.921847e-13     * 0.2042582
+       Effect DFn DFd         SSn       SSd
+1 (Intercept)   1  22 102808.4513 2849.9219
+2        trat   1  22   1952.0835 2849.9219
+3      tiempo   2  44   1397.0700  312.7422
+4 trat:tiempo   2  44    811.8211  312.7422
+          F            p p&lt;.05       ges
+1 793.63083 9.363797e-19     * 0.9701554
+2  15.06913 8.040878e-04     * 0.3816578
+3  98.27755 5.878117e-17     * 0.3063929
+4  57.10794 5.921847e-13     * 0.2042582
 
 $`Mauchly&#39;s Test for Sphericity`
        Effect         W           p p&lt;.05
@@ -767,9 +790,12 @@ $`Mauchly&#39;s Test for Sphericity`
 4 trat:tiempo 0.5725954 0.002866835     *
 
 $`Sphericity Corrections`
-       Effect       GGe        p[GG] p[GG]&lt;.05       HFe        p[HF] p[HF]&lt;.05
-3      tiempo 0.7005722 1.520842e-12         * 0.7336894 4.932994e-13         *
-4 trat:tiempo 0.7005722 1.003472e-09         * 0.7336894 4.400536e-10         *</code></pre>
+       Effect       GGe        p[GG] p[GG]&lt;.05
+3      tiempo 0.7005722 1.520842e-12         *
+4 trat:tiempo 0.7005722 1.003472e-09         *
+        HFe        p[HF] p[HF]&lt;.05
+3 0.7336894 4.932994e-13         *
+4 0.7336894 4.400536e-10         *</code></pre>
 <p>Vemos como se aplican las correcciones sólo en los términos “intra sujeto” que son <code>tiempo</code> y la interacción <code>trat:tiempo</code>, ya que el test de Mauchly es significativo (p-valor &lt; 0.05).
 Una vez aplicados las correcciones sobre los grados de libertad, los p-valores cambian aunque las conclusiones son las mismas: tanto el efecto del tiempo como su interacción con el tratamiento son significativos.</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="ModelosNormal.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezPlot</span>(<span class="at">data=</span>datos.ez, </span>
@@ -826,11 +852,15 @@ Residuals:
 -7.7167 -3.9667 -0.7083  4.1271  7.6417 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    31.058      1.476  21.048 4.57e-16 ***
-tratTratados    1.058      2.087   0.507    0.617    
+             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)    31.058      1.476  21.048 4.57e-16
+tratTratados    1.058      2.087   0.507    0.617
+                
+(Intercept)  ***
+tratTratados    
 ---
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+Signif. codes:  
+0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 5.112 on 22 degrees of freedom
 Multiple R-squared:  0.01156,   Adjusted R-squared:  -0.03337 
@@ -847,11 +877,15 @@ Residuals:
 -12.1667  -6.6396   0.3375   5.2896  15.6333 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    33.158      2.113  15.692 1.98e-13 ***
-tratTratados   16.508      2.988   5.524 1.50e-05 ***
+             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)    33.158      2.113  15.692 1.98e-13
+tratTratados   16.508      2.988   5.524 1.50e-05
+                
+(Intercept)  ***
+tratTratados ***
 ---
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+Signif. codes:  
+0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 7.32 on 22 degrees of freedom
 Multiple R-squared:  0.5811,    Adjusted R-squared:  0.5621 
@@ -868,11 +902,15 @@ Residuals:
 -10.8000  -5.9063  -0.6625   5.6250  21.4000 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    33.525      2.310  14.511 9.55e-13 ***
-tratTratados   13.675      3.267   4.186 0.000384 ***
+             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)    33.525      2.310  14.511 9.55e-13
+tratTratados   13.675      3.267   4.186 0.000384
+                
+(Intercept)  ***
+tratTratados ***
 ---
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+Signif. codes:  
+0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 8.003 on 22 degrees of freedom
 Multiple R-squared:  0.4433,    Adjusted R-squared:  0.418 
@@ -884,24 +922,34 @@ F-statistic: 17.52 on 1 and 22 DF,  p-value: 0.0003835</code></pre>
 Contrasts orthogonal to
 ~1
 
-            Df  Pillai approx F num Df den Df    Pr(&gt;F)    
-(Intercept)  1 0.88537   81.102      2     21 1.326e-10 ***
-trat         1 0.83628   53.633      2     21 5.599e-09 ***
-Residuals   22                                             
+            Df  Pillai approx F num Df den Df
+(Intercept)  1 0.88537   81.102      2     21
+trat         1 0.83628   53.633      2     21
+Residuals   22                               
+               Pr(&gt;F)    
+(Intercept) 1.326e-10 ***
+trat        5.599e-09 ***
+Residuals                
 ---
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+Signif. codes:  
+0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Con la instrucción <code>summary</code>, contrasta si la media es diferente entre los dos grupos de tratamiento, y esto lo hace para cada momento por separado.</p>
 <p>En la tabla ANOVA, el p-valor de término <code>trat</code> contrasta si el efecto del tiempo es el mismo para los dos tratamientos, o sea, la interacción tratamiento y tiempo, que es lo que nos interesa. Mientras que el término <code>(Intercept)</code> corresponde al efecto marginal del tiempo.</p>
 <p>Fíjate qué pasa si no se especifica el argumento <code>X</code>:</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="ModelosNormal.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo)</span></code></pre></div>
 <pre><code>Analysis of Variance Table
 
-            Df  Pillai approx F num Df den Df    Pr(&gt;F)    
-(Intercept)  1 0.97752  289.829      3     20 &lt; 2.2e-16 ***
-trat         1 0.84439   36.176      3     20 2.854e-08 ***
-Residuals   22                                             
+            Df  Pillai approx F num Df den Df
+(Intercept)  1 0.97752  289.829      3     20
+trat         1 0.84439   36.176      3     20
+Residuals   22                               
+               Pr(&gt;F)    
+(Intercept) &lt; 2.2e-16 ***
+trat        2.854e-08 ***
+Residuals                
 ---
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+Signif. codes:  
+0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>En este caso, el p-valor del tratamiento contrasta si hay diferencias entre tratamientos en alguno de los momentos (hay 3 grados de libertad). Y este contraste no es la interacción entre tratamiento y tiempo.</p>
 </div>
 </div>
@@ -916,14 +964,22 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>Recodificamos nuestra variable tratamiento:</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="ModelosNormal.html#cb86-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>tx <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos<span class="sc">$</span>tx, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Tratados&quot;</span>))</span>
 <span id="cb86-2"><a href="ModelosNormal.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(datos)</span></code></pre></div>
-<pre><code>   respuesta         indiv            tiempo          edad              tx     
- Min.   : 9.80   Min.   :  1.00   Min.   :0.00   Min.   :25.00   Control :200  
- 1st Qu.:27.02   1st Qu.: 25.75   1st Qu.:0.75   1st Qu.:43.00   Tratados:200  
- Median :30.75   Median : 50.50   Median :1.50   Median :49.00                 
- Mean   :30.46   Mean   : 50.50   Mean   :1.50   Mean   :49.03                 
- 3rd Qu.:34.60   3rd Qu.: 75.25   3rd Qu.:2.25   3rd Qu.:57.00                 
- Max.   :43.70   Max.   :100.00   Max.   :3.00   Max.   :69.00                 
- NA&#39;s   :50                                                                    </code></pre>
+<pre><code>   respuesta         indiv            tiempo    
+ Min.   : 9.80   Min.   :  1.00   Min.   :0.00  
+ 1st Qu.:27.02   1st Qu.: 25.75   1st Qu.:0.75  
+ Median :30.75   Median : 50.50   Median :1.50  
+ Mean   :30.46   Mean   : 50.50   Mean   :1.50  
+ 3rd Qu.:34.60   3rd Qu.: 75.25   3rd Qu.:2.25  
+ Max.   :43.70   Max.   :100.00   Max.   :3.00  
+ NA&#39;s   :50                                     
+      edad              tx     
+ Min.   :25.00   Control :200  
+ 1st Qu.:43.00   Tratados:200  
+ Median :49.00                 
+ Mean   :49.03                 
+ 3rd Qu.:57.00                 
+ Max.   :69.00                 
+                               </code></pre>
 <p>Comprobemos si tenemos algún inviduo con datos faltantes</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="ModelosNormal.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">with</span>(datos, <span class="fu">tapply</span>(<span class="fu">is.na</span>(respuesta), indiv, any)))</span></code></pre></div>
 <pre><code>[1] 42</code></pre>

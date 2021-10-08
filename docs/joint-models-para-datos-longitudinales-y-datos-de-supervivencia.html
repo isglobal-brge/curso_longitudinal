@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-10-07" />
+<meta name="date" content="2021-10-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -291,13 +291,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(JM)</span>
 <span id="cb278-2"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb278-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(aids)</span>
 <span id="cb278-3"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb278-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aids)</span></code></pre></div>
-<pre><code>  patient  Time death       CD4 obstime drug gender prevOI         AZT start  stop event
-1       1 16.97     0 10.677078       0  ddC   male   AIDS intolerance     0  6.00     0
-2       1 16.97     0  8.426150       6  ddC   male   AIDS intolerance     6 12.00     0
-3       1 16.97     0  9.433981      12  ddC   male   AIDS intolerance    12 16.97     0
-4       2 19.00     0  6.324555       0  ddI   male noAIDS intolerance     0  6.00     0
-5       2 19.00     0  8.124038       6  ddI   male noAIDS intolerance     6 12.00     0
-6       2 19.00     0  4.582576      12  ddI   male noAIDS intolerance    12 18.00     0</code></pre>
+<pre><code>  patient  Time death       CD4 obstime drug gender
+1       1 16.97     0 10.677078       0  ddC   male
+2       1 16.97     0  8.426150       6  ddC   male
+3       1 16.97     0  9.433981      12  ddC   male
+4       2 19.00     0  6.324555       0  ddI   male
+5       2 19.00     0  8.124038       6  ddI   male
+6       2 19.00     0  4.582576      12  ddI   male
+  prevOI         AZT start  stop event
+1   AIDS intolerance     0  6.00     0
+2   AIDS intolerance     6 12.00     0
+3   AIDS intolerance    12 16.97     0
+4 noAIDS intolerance     0  6.00     0
+5 noAIDS intolerance     6 12.00     0
+6 noAIDS intolerance    12 18.00     0</code></pre>
 <p>La idea aquí es probar el efecto del tratamiento sobre la supervivencia después de ajustar el recuento de células CD4, que es una medida recogida a lo largo del tiempo. Este también es el modelo que ajustamos en la sección anterior usando un modelo de Cox con datos dependientes del tiempo, pero que como hemos comentado, no cumplen las condiciones necesarias para que la estimación mediante verosimilitud parcial sea correcta.</p>
 <p>Veamos que valores toma la variable CD4 a lo largo del tiempo usando las funciones de ggplot que ya hemos visto en este curso</p>
 <div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(aids, <span class="fu">aes</span>(<span class="at">x =</span> obstime, <span class="at">y =</span> CD4, <span class="at">group =</span> patient)) <span class="sc">+</span></span>

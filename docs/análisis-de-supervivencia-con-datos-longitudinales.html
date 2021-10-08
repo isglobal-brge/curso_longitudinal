@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-10-07" />
+<meta name="date" content="2021-10-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -313,27 +313,41 @@ El inicio sería la fecha del diagnóstico y la fecha final sería la fechad e r
 <div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compareGroups)</span>
 <span id="cb240-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb240-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(predimed)</span>
 <span id="cb240-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb240-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(predimed)</span></code></pre></div>
-<pre><code>            group          sex            age            smoke           bmi            waist      
- Control       :2042   Male  :2679   Min.   :49.00   Never  :3892   Min.   :19.64   Min.   : 50.0  
- MedDiet + Nuts:2100   Female:3645   1st Qu.:62.00   Current: 858   1st Qu.:27.23   1st Qu.: 93.0  
- MedDiet + VOO :2182                 Median :67.00   Former :1574   Median :29.76   Median :100.0  
-                                     Mean   :67.01                  Mean   :29.97   Mean   :100.4  
-                                     3rd Qu.:72.00                  3rd Qu.:32.46   3rd Qu.:107.0  
-                                     Max.   :87.00                  Max.   :51.94   Max.   :177.0  
-      wth          htn        diab      hyperchol  famhist     hormo           p14            toevent       
- Min.   :0.3012   No :1089   No :3322   No :1746   No :4895   No  :5564   Min.   : 0.000   Min.   :0.01643  
- 1st Qu.:0.5839   Yes:5235   Yes:3002   Yes:4578   Yes:1429   Yes :  97   1st Qu.: 7.000   1st Qu.:2.85832  
- Median :0.6258                                               NA&#39;s: 663   Median : 9.000   Median :4.78850  
- Mean   :0.6283                                                           Mean   : 8.678   Mean   :4.35517  
- 3rd Qu.:0.6687                                                           3rd Qu.:10.000   3rd Qu.:5.79056  
- Max.   :1.0000                                                           Max.   :14.000   Max.   :6.99795  
- event     
- No :6072  
- Yes: 252  
-           
-           
-           
-           </code></pre>
+<pre><code>            group          sex      
+ Control       :2042   Male  :2679  
+ MedDiet + Nuts:2100   Female:3645  
+ MedDiet + VOO :2182                
+                                    
+                                    
+                                    
+      age            smoke           bmi       
+ Min.   :49.00   Never  :3892   Min.   :19.64  
+ 1st Qu.:62.00   Current: 858   1st Qu.:27.23  
+ Median :67.00   Former :1574   Median :29.76  
+ Mean   :67.01                  Mean   :29.97  
+ 3rd Qu.:72.00                  3rd Qu.:32.46  
+ Max.   :87.00                  Max.   :51.94  
+     waist            wth          htn      
+ Min.   : 50.0   Min.   :0.3012   No :1089  
+ 1st Qu.: 93.0   1st Qu.:0.5839   Yes:5235  
+ Median :100.0   Median :0.6258             
+ Mean   :100.4   Mean   :0.6283             
+ 3rd Qu.:107.0   3rd Qu.:0.6687             
+ Max.   :177.0   Max.   :1.0000             
+  diab      hyperchol  famhist     hormo     
+ No :3322   No :1746   No :4895   No  :5564  
+ Yes:3002   Yes:4578   Yes:1429   Yes :  97  
+                                  NA&#39;s: 663  
+                                             
+                                             
+                                             
+      p14            toevent        event     
+ Min.   : 0.000   Min.   :0.01643   No :6072  
+ 1st Qu.: 7.000   1st Qu.:2.85832   Yes: 252  
+ Median : 9.000   Median :4.78850             
+ Mean   : 8.678   Mean   :4.35517             
+ 3rd Qu.:10.000   3rd Qu.:5.79056             
+ Max.   :14.000   Max.   :6.99795             </code></pre>
 <p>Para crear una variable censurada por la derecha se usa la función <code>Surv</code> del package <code>survival</code>.</p>
 <div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span></code></pre></div>
 <p>Si la variable evento está codificada como 0/1 (0: censura 1:evento), como se suele tener habitualmente, basta con escribir:</p>
@@ -341,7 +355,8 @@ El inicio sería la fecha del diagnóstico y la fecha final sería la fechad e r
 <p>En nuestro caso como la variable <code>event</code> es ‘No’ ‘Yes’, deberíamos indicar qué valor indica evento en la variable <code>event</code></p>
 <div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
 <span id="cb244-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb244-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Surv</span>(predimed<span class="sc">$</span>toevent, predimed<span class="sc">$</span>event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
-<pre><code> [1] 5.37440109  6.09719372+ 5.94661188+ 2.90759754  4.76112270+ 3.14852834  0.71457905+ 4.90075302+
+<pre><code> [1] 5.37440109  6.09719372+ 5.94661188+ 2.90759754 
+ [5] 4.76112270+ 3.14852834  0.71457905+ 4.90075302+
  [9] 0.04380561  0.88158798+</code></pre>
 <p>Notemos que se crea una nueva variable donde aquellos individuos censurados tiene un ‘+’</p>
 <p>La función de supervivencia se puede estimar con el estimador de Kaplan-Meier mediante:</p>
@@ -350,13 +365,20 @@ El inicio sería la fecha del diagnóstico y la fecha final sería la fechad e r
 <div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ss, <span class="at">times=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span></code></pre></div>
 <pre><code>Call: survfit(formula = Surv(toevent, event == &quot;Yes&quot;) ~ 1, data = predimed)
 
- time n.risk n.event survival std.err lower 95% CI upper 95% CI
-    1   6196      45    0.993 0.00106        0.991        0.995
-    2   5602      39    0.986 0.00147        0.984        0.989
-    3   4524      48    0.977 0.00196        0.973        0.981
-    4   3723      44    0.967 0.00250        0.962        0.972
-    5   2803      38    0.956 0.00301        0.950        0.962
-    6   1116      23    0.945 0.00380        0.938        0.953</code></pre>
+ time n.risk n.event survival std.err lower 95% CI
+    1   6196      45    0.993 0.00106        0.991
+    2   5602      39    0.986 0.00147        0.984
+    3   4524      48    0.977 0.00196        0.973
+    4   3723      44    0.967 0.00250        0.962
+    5   2803      38    0.956 0.00301        0.950
+    6   1116      23    0.945 0.00380        0.938
+ upper 95% CI
+        0.995
+        0.989
+        0.981
+        0.972
+        0.962
+        0.953</code></pre>
 <p>Normalmente lo que se suele hacer es visualizar las curvas de supervivencia mediante la instrucción</p>
 <div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb249-1" aria-hidden="true" tabindex="-1"></a>ans.km <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>) <span class="sc">~</span> <span class="dv">1</span>, predimed)</span>
 <span id="cb249-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb249-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ans.km, <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.8</span>,<span class="dv">1</span>), </span>
@@ -376,10 +398,14 @@ El inicio sería la fecha del diagnóstico y la fecha final sería la fechad e r
 <pre><code>Call:
 survdiff(formula = Surv(toevent, event == &quot;Yes&quot;) ~ group, data = predimed)
 
-                        N Observed Expected (O-E)^2/E (O-E)^2/V
-group=Control        2042       97     75.4     6.194      8.85
-group=MedDiet + Nuts 2100       70     82.7     1.946      2.90
-group=MedDiet + VOO  2182       85     93.9     0.848      1.35
+                        N Observed Expected
+group=Control        2042       97     75.4
+group=MedDiet + Nuts 2100       70     82.7
+group=MedDiet + VOO  2182       85     93.9
+                     (O-E)^2/E (O-E)^2/V
+group=Control            6.194      8.85
+group=MedDiet + Nuts     1.946      2.90
+group=MedDiet + VOO      0.848      1.35
 
  Chisq= 9  on 2 degrees of freedom, p= 0.01 </code></pre>
 <p>Podemos concluir que las diferencias observadas en las curvas de supervivencia, son significativamente distintas ya que el p-valor del test de log-rank es $&lt;0.5%.</p>
@@ -389,10 +415,14 @@ group=MedDiet + VOO  2182       85     93.9     0.848      1.35
 survdiff(formula = Surv(toevent, event == &quot;Yes&quot;) ~ group, data = predimed, 
     rho = 1)
 
-                        N Observed Expected (O-E)^2/E (O-E)^2/V
-group=Control        2042     95.0     73.6     6.222      9.11
-group=MedDiet + Nuts 2100     68.1     80.7     1.952      2.98
-group=MedDiet + VOO  2182     82.7     91.6     0.857      1.40
+                        N Observed Expected
+group=Control        2042     95.0     73.6
+group=MedDiet + Nuts 2100     68.1     80.7
+group=MedDiet + VOO  2182     82.7     91.6
+                     (O-E)^2/E (O-E)^2/V
+group=Control            6.222      9.11
+group=MedDiet + Nuts     1.952      2.98
+group=MedDiet + VOO      0.857      1.40
 
  Chisq= 9.3  on 2 degrees of freedom, p= 0.01 </code></pre>
 <p>Llegamos a la misma conclusión que con el test de log-rank, pero notemos que el valor del estadistico (Chisq) es ligeramente superior, por lo que el p-valor es menor (es decir, más significativo) y nos daría más evidencias en contra de la hipótesis nula (notemos que aquí vemos 0.01 en ambos casos por un tema de redondeo).</p>
@@ -477,19 +507,30 @@ coxph(formula = Surv(toevent, event == &quot;Yes&quot;) ~ age + strata(sex) +
 
   n= 6324, number of events= 252 
 
-                        coef exp(coef) se(coef)      z Pr(&gt;|z|)    
-age                  0.06790   1.07026  0.01010  6.720 1.82e-11 ***
-p14                 -0.12221   0.88497  0.03046 -4.012 6.03e-05 ***
-groupMedDiet + Nuts -0.39498   0.67369  0.15771 -2.505   0.0123 *  
-groupMedDiet + VOO  -0.31459   0.73009  0.14894 -2.112   0.0347 *  
+                        coef exp(coef) se(coef)
+age                  0.06790   1.07026  0.01010
+p14                 -0.12221   0.88497  0.03046
+groupMedDiet + Nuts -0.39498   0.67369  0.15771
+groupMedDiet + VOO  -0.31459   0.73009  0.14894
+                         z Pr(&gt;|z|)    
+age                  6.720 1.82e-11 ***
+p14                 -4.012 6.03e-05 ***
+groupMedDiet + Nuts -2.505   0.0123 *  
+groupMedDiet + VOO  -2.112   0.0347 *  
 ---
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+Signif. codes:  
+0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-                    exp(coef) exp(-coef) lower .95 upper .95
-age                    1.0703     0.9344    1.0493    1.0917
-p14                    0.8850     1.1300    0.8337    0.9394
-groupMedDiet + Nuts    0.6737     1.4844    0.4946    0.9177
-groupMedDiet + VOO     0.7301     1.3697    0.5453    0.9776
+                    exp(coef) exp(-coef) lower .95
+age                    1.0703     0.9344    1.0493
+p14                    0.8850     1.1300    0.8337
+groupMedDiet + Nuts    0.6737     1.4844    0.4946
+groupMedDiet + VOO     0.7301     1.3697    0.5453
+                    upper .95
+age                    1.0917
+p14                    0.9394
+groupMedDiet + Nuts    0.9177
+groupMedDiet + VOO     0.9776
 
 Concordance= 0.652  (se = 0.018 )
 Likelihood ratio test= 71.75  on 4 df,   p=1e-14
@@ -522,13 +563,20 @@ donde <span class="math inline">\(x_{itk}\)</span> representa el valor de la var
 <div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(JM)</span>
 <span id="cb263-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb263-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(aids)</span>
 <span id="cb263-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb263-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aids)</span></code></pre></div>
-<pre><code>  patient  Time death       CD4 obstime drug gender prevOI         AZT start  stop event
-1       1 16.97     0 10.677078       0  ddC   male   AIDS intolerance     0  6.00     0
-2       1 16.97     0  8.426150       6  ddC   male   AIDS intolerance     6 12.00     0
-3       1 16.97     0  9.433981      12  ddC   male   AIDS intolerance    12 16.97     0
-4       2 19.00     0  6.324555       0  ddI   male noAIDS intolerance     0  6.00     0
-5       2 19.00     0  8.124038       6  ddI   male noAIDS intolerance     6 12.00     0
-6       2 19.00     0  4.582576      12  ddI   male noAIDS intolerance    12 18.00     0</code></pre>
+<pre><code>  patient  Time death       CD4 obstime drug gender
+1       1 16.97     0 10.677078       0  ddC   male
+2       1 16.97     0  8.426150       6  ddC   male
+3       1 16.97     0  9.433981      12  ddC   male
+4       2 19.00     0  6.324555       0  ddI   male
+5       2 19.00     0  8.124038       6  ddI   male
+6       2 19.00     0  4.582576      12  ddI   male
+  prevOI         AZT start  stop event
+1   AIDS intolerance     0  6.00     0
+2   AIDS intolerance     6 12.00     0
+3   AIDS intolerance    12 16.97     0
+4 noAIDS intolerance     0  6.00     0
+5 noAIDS intolerance     6 12.00     0
+6 noAIDS intolerance    12 18.00     0</code></pre>
 <p>En esta base de datos tenemos diferentes participantes en los que se ha tomado distintas medidas de la variable CD4. La variable <code>obstime</code> indica cuándo se han tomado las medidas de CD4. Mientras que la variable <code>time</code> y <code>death</code> indica el tiempo observado y si el individuo se ha muerto (1) o sigue vivo (0, dato censurado) al finalizar el seguimiento. En este caso el evento de interés es la muerte y los individuos vivos serán los censurados. La variable tiempo-dependiente es la variable CD4. Nuestro objetivo final es demostrar si hay diferencias en la mortalidad entre dos fármacos (variable ‘drug’: ddI = didanosine; ddC = zalcitabine.) ajustando por la variable ‘gender’.</p>
 <p>Para ajustar un modelo con variables tiempo-dependientes se ha de reestructurar esta base de datos. Para ello debemos llevar a cabo los siguientes pasos</p>
 <ol style="list-style-type: decimal">
@@ -539,25 +587,39 @@ donde <span class="math inline">\(x_{itk}\)</span> representa el valor de la var
 <span id="cb265-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb265-3" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(x, temp, sum)</span>
 <span id="cb265-4"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb265-4" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">tmerge</span>(datos, datos, <span class="at">id=</span>patient, <span class="at">endpt =</span> <span class="fu">event</span>(Time, death))</span>
 <span id="cb265-5"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb265-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos)</span></code></pre></div>
-<pre><code>  patient  Time death drug gender x tstart tstop endpt
-1     351 12.27     0  ddC female 4      0 12.27     0
-2     305 12.30     0  ddC female 2      0 12.30     0
-3     336 12.57     0  ddC female 3      0 12.57     0
-4     268 12.73     0  ddC female 4      0 12.73     0
-5     160 13.20     0  ddC female 3      0 13.20     0
-6     377 13.50     0  ddC female 4      0 13.50     0</code></pre>
+<pre><code>  patient  Time death drug gender x tstart tstop
+1     351 12.27     0  ddC female 4      0 12.27
+2     305 12.30     0  ddC female 2      0 12.30
+3     336 12.57     0  ddC female 3      0 12.57
+4     268 12.73     0  ddC female 4      0 12.73
+5     160 13.20     0  ddC female 3      0 13.20
+6     377 13.50     0  ddC female 4      0 13.50
+  endpt
+1     0
+2     0
+3     0
+4     0
+5     0
+6     0</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Luego, hacemos uso de la función <code>tmerge()</code> para crear la base de datos en el formato deseado. Las variables tiempo dependientes se especifican mediante la función <code>tdc</code> en que se indica también la variable que recoge cuando se han tomado sus medidas (en nuestro caso ‘obstime’).</li>
 </ol>
 <div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb267-1" aria-hidden="true" tabindex="-1"></a>aids2 <span class="ot">&lt;-</span> <span class="fu">tmerge</span>(datos, aids, <span class="at">id=</span>patient, <span class="at">CD4 =</span> <span class="fu">tdc</span>(obstime, CD4))</span>
 <span id="cb267-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb267-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aids2)</span></code></pre></div>
-<pre><code>  patient  Time death drug gender x tstart tstop endpt      CD4
-1     351 12.27     0  ddC female 4      0  2.00     0 5.477226
-2     351 12.27     0  ddC female 4      2  6.00     0 6.403124
-3     351 12.27     0  ddC female 4      6 12.00     0 4.690416
-4     351 12.27     0  ddC female 4     12 12.27     0 4.000000
-5     305 12.30     0  ddC female 2      0  6.00     0 2.000000
-6     305 12.30     0  ddC female 2      6 12.30     0 2.449490</code></pre>
+<pre><code>  patient  Time death drug gender x tstart tstop
+1     351 12.27     0  ddC female 4      0  2.00
+2     351 12.27     0  ddC female 4      2  6.00
+3     351 12.27     0  ddC female 4      6 12.00
+4     351 12.27     0  ddC female 4     12 12.27
+5     305 12.30     0  ddC female 2      0  6.00
+6     305 12.30     0  ddC female 2      6 12.30
+  endpt      CD4
+1     0 5.477226
+2     0 6.403124
+3     0 4.690416
+4     0 4.000000
+5     0 2.000000
+6     0 2.449490</code></pre>
 </div>
 <div id="ajuste-del-modelo" class="section level3" number="7.4.4">
 <h3><span class="header-section-number">7.4.4</span> Ajuste del modelo</h3>
@@ -570,12 +632,17 @@ coxph(formula = Surv(tstart, tstop, endpt) ~ CD4 + drug + gender,
 
   n= 1405, number of events= 188 
 
-               coef exp(coef) se(coef)      z Pr(&gt;|z|)    
-CD4        -0.19440   0.82333  0.02434 -7.986  1.4e-15 ***
-drugddI     0.31698   1.37298  0.14669  2.161   0.0307 *  
-gendermale -0.32579   0.72196  0.24248 -1.344   0.1791    
+               coef exp(coef) se(coef)      z
+CD4        -0.19440   0.82333  0.02434 -7.986
+drugddI     0.31698   1.37298  0.14669  2.161
+gendermale -0.32579   0.72196  0.24248 -1.344
+           Pr(&gt;|z|)    
+CD4         1.4e-15 ***
+drugddI      0.0307 *  
+gendermale   0.1791    
 ---
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+Signif. codes:  
+0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
            exp(coef) exp(-coef) lower .95 upper .95
 CD4           0.8233     1.2146    0.7850    0.8636
@@ -598,12 +665,17 @@ coxph(formula = Surv(Time, death) ~ CD4 + drug + gender, data = aids1obs)
 
   n= 467, number of events= 188 
 
-               coef exp(coef) se(coef)      z Pr(&gt;|z|)    
-CD4        -0.18295   0.83281  0.02222 -8.232   &lt;2e-16 ***
-drugddI     0.26694   1.30597  0.14648  1.822   0.0684 .  
-gendermale -0.20238   0.81679  0.24216 -0.836   0.4033    
+               coef exp(coef) se(coef)      z
+CD4        -0.18295   0.83281  0.02222 -8.232
+drugddI     0.26694   1.30597  0.14648  1.822
+gendermale -0.20238   0.81679  0.24216 -0.836
+           Pr(&gt;|z|)    
+CD4          &lt;2e-16 ***
+drugddI      0.0684 .  
+gendermale   0.4033    
 ---
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+Signif. codes:  
+0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
            exp(coef) exp(-coef) lower .95 upper .95
 CD4           0.8328     1.2008    0.7973    0.8699
@@ -628,11 +700,21 @@ GLOBAL 1.9692  3 0.58</code></pre>
 <p>También, como en los modelo de Cox “clásicos” se pueden introducir términos polinómicos o de splines (<code>psplines</code>) para modelar efectos no lineases de las variables <span class="math inline">\(x_k\)</span> cuantitativas.</p>
 <div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb275-1" aria-hidden="true" tabindex="-1"></a>modelo.splines <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(tstart, tstop, endpt) <span class="sc">~</span> <span class="fu">pspline</span>(CD4) <span class="sc">+</span> drug <span class="sc">+</span> gender, <span class="at">data=</span>aids2)</span>
 <span id="cb275-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb275-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo.splines))</span></code></pre></div>
-<pre><code>                           coef   se(coef)        se2     Chisq       DF            p
-pspline(CD4), linear -0.1900175 0.02553879 0.02527049 55.358799 1.000000 1.004194e-13
-pspline(CD4), nonlin         NA         NA         NA  5.669855 3.092747 1.367478e-01
-drugddI               0.3164310 0.14684398 0.14682270  4.643503 1.000000 3.117131e-02
-gendermale           -0.3282002 0.24253118 0.24249275  1.831229 1.000000 1.759825e-01</code></pre>
+<pre><code>                           coef   se(coef)
+pspline(CD4), linear -0.1900175 0.02553879
+pspline(CD4), nonlin         NA         NA
+drugddI               0.3164310 0.14684398
+gendermale           -0.3282002 0.24253118
+                            se2     Chisq       DF
+pspline(CD4), linear 0.02527049 55.358799 1.000000
+pspline(CD4), nonlin         NA  5.669855 3.092747
+drugddI              0.14682270  4.643503 1.000000
+gendermale           0.24249275  1.831229 1.000000
+                                p
+pspline(CD4), linear 1.004194e-13
+pspline(CD4), nonlin 1.367478e-01
+drugddI              3.117131e-02
+gendermale           1.759825e-01</code></pre>
 <div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">termplot</span>(modelo, <span class="at">terms=</span><span class="dv">1</span>, <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">rug=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="fig_out/unnamed-chunk-168-1.png" width="672" /></p>
 <p>en nuestro ejemplo, se demuestra que el efecto de CD4 es lineal (no hay términos cuadráticos, ni cúbicos, ni puntos de inflexión o cambios de tendencias, …) por lo que el modelo sin splines ya sería suficiente para modelar nuestros datos.</p>
