@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-10-08" />
+<meta name="date" content="2022-03-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,6 +55,14 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.18/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -228,27 +236,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.8.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejercicio-5"><i class="fa fa-check"></i><b>6.8.2</b> Ejercicio 5</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html"><i class="fa fa-check"></i><b>7</b> Análisis de supervivencia con datos longitudinales</a>
+<li class="chapter" data-level="7" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html"><i class="fa fa-check"></i><b>7</b> Modelos con respuesta no normal</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#tiempo-hasta-evento"><i class="fa fa-check"></i><b>7.1</b> Tiempo hasta evento</a>
+<li class="chapter" data-level="7.1" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#distribución-de-la-variable-respuesta"><i class="fa fa-check"></i><b>7.1</b> Distribución de la variable respuesta</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#ejemplos-3"><i class="fa fa-check"></i><b>7.1.1</b> Ejemplos</a></li>
-<li class="chapter" data-level="7.1.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#otros-tipos-de-censura"><i class="fa fa-check"></i><b>7.1.2</b> Otros tipos de censura</a></li>
+<li class="chapter" data-level="7.1.1" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#distribución-binomial"><i class="fa fa-check"></i><b>7.1.1</b> Distribución Binomial</a></li>
+<li class="chapter" data-level="7.1.2" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#distribución-poisson"><i class="fa fa-check"></i><b>7.1.2</b> Distribución Poisson</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#kaplan-meier"><i class="fa fa-check"></i><b>7.2</b> Kaplan-Meier</a></li>
-<li class="chapter" data-level="7.3" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#funciones-involucradas-en-el-análisis-de-supervivencia"><i class="fa fa-check"></i><b>7.3</b> Funciones involucradas en el análisis de supervivencia</a></li>
-<li class="chapter" data-level="7.4" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#modelo-de-regresión-de-cox"><i class="fa fa-check"></i><b>7.4</b> Modelo de regresión de Cox</a>
+<li class="chapter" data-level="7.2" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#modelos-lineales-generalizados-mixtos"><i class="fa fa-check"></i><b>7.2</b> Modelos lineales generalizados mixtos</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#efectos-tiempo-dependientes"><i class="fa fa-check"></i><b>7.4.1</b> Efectos tiempo-dependientes</a></li>
-<li class="chapter" data-level="7.4.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#variables-tiempo-dependientes-datos-longitudinales"><i class="fa fa-check"></i><b>7.4.2</b> Variables tiempo-dependientes (datos longitudinales)</a></li>
-<li class="chapter" data-level="7.4.3" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#estructura-de-los-datos-1"><i class="fa fa-check"></i><b>7.4.3</b> Estructura de los datos</a></li>
-<li class="chapter" data-level="7.4.4" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#ajuste-del-modelo"><i class="fa fa-check"></i><b>7.4.4</b> Ajuste del modelo</a></li>
+<li class="chapter" data-level="7.2.1" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ecuación-1"><i class="fa fa-check"></i><b>7.2.1</b> Ecuación</a></li>
+<li class="chapter" data-level="7.2.2" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#predicciones-1"><i class="fa fa-check"></i><b>7.2.2</b> Predicciones</a></li>
+<li class="chapter" data-level="7.2.3" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#función-glmer"><i class="fa fa-check"></i><b>7.2.3</b> Función <code>glmer</code></a></li>
+<li class="chapter" data-level="7.2.4" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#función-mixed_model"><i class="fa fa-check"></i><b>7.2.4</b> Función <code>mixed_model</code></a></li>
+<li class="chapter" data-level="7.2.5" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ejemplo"><i class="fa fa-check"></i><b>7.2.5</b> Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#generalized-estimation-equations"><i class="fa fa-check"></i><b>7.3</b> <em>Generalized Estimation Equations</em></a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ecuación-2"><i class="fa fa-check"></i><b>7.3.1</b> Ecuación</a></li>
+<li class="chapter" data-level="7.3.2" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#función-geeglm"><i class="fa fa-check"></i><b>7.3.2</b> Función <code>geeglm</code></a></li>
+<li class="chapter" data-level="7.3.3" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ejemplos-3"><i class="fa fa-check"></i><b>7.3.3</b> Ejemplos</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ejercicios-2"><i class="fa fa-check"></i><b>7.4</b> Ejercicios</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ejercicio-5b"><i class="fa fa-check"></i><b>7.4.1</b> Ejercicio 5b</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><i class="fa fa-check"></i><b>8</b> Joint models para datos longitudinales y datos de supervivencia</a>
+<li class="chapter" data-level="8" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html"><i class="fa fa-check"></i><b>8</b> Análisis de supervivencia con datos longitudinales</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#por-qué-deberíamos-utilizar-este-tipo-de-modelos"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué deberíamos utilizar este tipo de modelos?</a></li>
-<li class="chapter" data-level="8.2" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#joint-models"><i class="fa fa-check"></i><b>8.2</b> Joint models</a></li>
+<li class="chapter" data-level="8.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#tiempo-hasta-evento"><i class="fa fa-check"></i><b>8.1</b> Tiempo hasta evento</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#ejemplos-4"><i class="fa fa-check"></i><b>8.1.1</b> Ejemplos</a></li>
+<li class="chapter" data-level="8.1.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#otros-tipos-de-censura"><i class="fa fa-check"></i><b>8.1.2</b> Otros tipos de censura</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#kaplan-meier"><i class="fa fa-check"></i><b>8.2</b> Kaplan-Meier</a></li>
+<li class="chapter" data-level="8.3" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#funciones-involucradas-en-el-análisis-de-supervivencia"><i class="fa fa-check"></i><b>8.3</b> Funciones involucradas en el análisis de supervivencia</a></li>
+<li class="chapter" data-level="8.4" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#modelo-de-regresión-de-cox"><i class="fa fa-check"></i><b>8.4</b> Modelo de regresión de Cox</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#efectos-tiempo-dependientes"><i class="fa fa-check"></i><b>8.4.1</b> Efectos tiempo-dependientes</a></li>
+<li class="chapter" data-level="8.4.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#variables-tiempo-dependientes-datos-longitudinales"><i class="fa fa-check"></i><b>8.4.2</b> Variables tiempo-dependientes (datos longitudinales)</a></li>
+<li class="chapter" data-level="8.4.3" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#estructura-de-los-datos-1"><i class="fa fa-check"></i><b>8.4.3</b> Estructura de los datos</a></li>
+<li class="chapter" data-level="8.4.4" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#ajuste-del-modelo"><i class="fa fa-check"></i><b>8.4.4</b> Ajuste del modelo</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><i class="fa fa-check"></i><b>9</b> Joint models para datos longitudinales y datos de supervivencia</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#por-qué-deberíamos-utilizar-este-tipo-de-modelos"><i class="fa fa-check"></i><b>9.1</b> ¿Por qué deberíamos utilizar este tipo de modelos?</a></li>
+<li class="chapter" data-level="9.2" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#joint-models"><i class="fa fa-check"></i><b>9.2</b> Joint models</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -273,7 +307,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Modelización estadística avanzada con R: análisis de datos longitudinales</h1>
 <p class="author"><em>Juan R González</em></p>
-<p class="date"><em>2021-10-08</em></p>
+<p class="date"><em>2022-03-06</em></p>
 </div>
 <div id="preámbulo" class="section level1" number="1">
 <h1><span class="header-section-number">Capítulo 1</span> Preámbulo</h1>

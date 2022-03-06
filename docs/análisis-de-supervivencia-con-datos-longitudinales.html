@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 7 Análisis de supervivencia con datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales</title>
-  <meta name="description" content="Capítulo 7 Análisis de supervivencia con datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <title>Capítulo 8 Análisis de supervivencia con datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales</title>
+  <meta name="description" content="Capítulo 8 Análisis de supervivencia con datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 7 Análisis de supervivencia con datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <meta property="og:title" content="Capítulo 8 Análisis de supervivencia con datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 7 Análisis de supervivencia con datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
+  <meta name="twitter:title" content="Capítulo 8 Análisis de supervivencia con datos longitudinales | Modelización estadística avanzada con R: análisis de datos longitudinales" />
   
   
   
@@ -24,14 +24,14 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-10-08" />
+<meta name="date" content="2022-03-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="modelos-lineales-mixtos-lmm.html"/>
+<link rel="prev" href="ModelosNoNormal.html"/>
 <link rel="next" href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -55,6 +55,14 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.18/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -228,27 +236,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.8.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejercicio-5"><i class="fa fa-check"></i><b>6.8.2</b> Ejercicio 5</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html"><i class="fa fa-check"></i><b>7</b> Análisis de supervivencia con datos longitudinales</a>
+<li class="chapter" data-level="7" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html"><i class="fa fa-check"></i><b>7</b> Modelos con respuesta no normal</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#tiempo-hasta-evento"><i class="fa fa-check"></i><b>7.1</b> Tiempo hasta evento</a>
+<li class="chapter" data-level="7.1" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#distribución-de-la-variable-respuesta"><i class="fa fa-check"></i><b>7.1</b> Distribución de la variable respuesta</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#ejemplos-3"><i class="fa fa-check"></i><b>7.1.1</b> Ejemplos</a></li>
-<li class="chapter" data-level="7.1.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#otros-tipos-de-censura"><i class="fa fa-check"></i><b>7.1.2</b> Otros tipos de censura</a></li>
+<li class="chapter" data-level="7.1.1" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#distribución-binomial"><i class="fa fa-check"></i><b>7.1.1</b> Distribución Binomial</a></li>
+<li class="chapter" data-level="7.1.2" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#distribución-poisson"><i class="fa fa-check"></i><b>7.1.2</b> Distribución Poisson</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#kaplan-meier"><i class="fa fa-check"></i><b>7.2</b> Kaplan-Meier</a></li>
-<li class="chapter" data-level="7.3" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#funciones-involucradas-en-el-análisis-de-supervivencia"><i class="fa fa-check"></i><b>7.3</b> Funciones involucradas en el análisis de supervivencia</a></li>
-<li class="chapter" data-level="7.4" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#modelo-de-regresión-de-cox"><i class="fa fa-check"></i><b>7.4</b> Modelo de regresión de Cox</a>
+<li class="chapter" data-level="7.2" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#modelos-lineales-generalizados-mixtos"><i class="fa fa-check"></i><b>7.2</b> Modelos lineales generalizados mixtos</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#efectos-tiempo-dependientes"><i class="fa fa-check"></i><b>7.4.1</b> Efectos tiempo-dependientes</a></li>
-<li class="chapter" data-level="7.4.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#variables-tiempo-dependientes-datos-longitudinales"><i class="fa fa-check"></i><b>7.4.2</b> Variables tiempo-dependientes (datos longitudinales)</a></li>
-<li class="chapter" data-level="7.4.3" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#estructura-de-los-datos-1"><i class="fa fa-check"></i><b>7.4.3</b> Estructura de los datos</a></li>
-<li class="chapter" data-level="7.4.4" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#ajuste-del-modelo"><i class="fa fa-check"></i><b>7.4.4</b> Ajuste del modelo</a></li>
+<li class="chapter" data-level="7.2.1" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ecuación-1"><i class="fa fa-check"></i><b>7.2.1</b> Ecuación</a></li>
+<li class="chapter" data-level="7.2.2" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#predicciones-1"><i class="fa fa-check"></i><b>7.2.2</b> Predicciones</a></li>
+<li class="chapter" data-level="7.2.3" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#función-glmer"><i class="fa fa-check"></i><b>7.2.3</b> Función <code>glmer</code></a></li>
+<li class="chapter" data-level="7.2.4" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#función-mixed_model"><i class="fa fa-check"></i><b>7.2.4</b> Función <code>mixed_model</code></a></li>
+<li class="chapter" data-level="7.2.5" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ejemplo"><i class="fa fa-check"></i><b>7.2.5</b> Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#generalized-estimation-equations"><i class="fa fa-check"></i><b>7.3</b> <em>Generalized Estimation Equations</em></a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ecuación-2"><i class="fa fa-check"></i><b>7.3.1</b> Ecuación</a></li>
+<li class="chapter" data-level="7.3.2" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#función-geeglm"><i class="fa fa-check"></i><b>7.3.2</b> Función <code>geeglm</code></a></li>
+<li class="chapter" data-level="7.3.3" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ejemplos-3"><i class="fa fa-check"></i><b>7.3.3</b> Ejemplos</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ejercicios-2"><i class="fa fa-check"></i><b>7.4</b> Ejercicios</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ejercicio-5b"><i class="fa fa-check"></i><b>7.4.1</b> Ejercicio 5b</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><i class="fa fa-check"></i><b>8</b> Joint models para datos longitudinales y datos de supervivencia</a>
+<li class="chapter" data-level="8" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html"><i class="fa fa-check"></i><b>8</b> Análisis de supervivencia con datos longitudinales</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#por-qué-deberíamos-utilizar-este-tipo-de-modelos"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué deberíamos utilizar este tipo de modelos?</a></li>
-<li class="chapter" data-level="8.2" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#joint-models"><i class="fa fa-check"></i><b>8.2</b> Joint models</a></li>
+<li class="chapter" data-level="8.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#tiempo-hasta-evento"><i class="fa fa-check"></i><b>8.1</b> Tiempo hasta evento</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#ejemplos-4"><i class="fa fa-check"></i><b>8.1.1</b> Ejemplos</a></li>
+<li class="chapter" data-level="8.1.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#otros-tipos-de-censura"><i class="fa fa-check"></i><b>8.1.2</b> Otros tipos de censura</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#kaplan-meier"><i class="fa fa-check"></i><b>8.2</b> Kaplan-Meier</a></li>
+<li class="chapter" data-level="8.3" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#funciones-involucradas-en-el-análisis-de-supervivencia"><i class="fa fa-check"></i><b>8.3</b> Funciones involucradas en el análisis de supervivencia</a></li>
+<li class="chapter" data-level="8.4" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#modelo-de-regresión-de-cox"><i class="fa fa-check"></i><b>8.4</b> Modelo de regresión de Cox</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#efectos-tiempo-dependientes"><i class="fa fa-check"></i><b>8.4.1</b> Efectos tiempo-dependientes</a></li>
+<li class="chapter" data-level="8.4.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#variables-tiempo-dependientes-datos-longitudinales"><i class="fa fa-check"></i><b>8.4.2</b> Variables tiempo-dependientes (datos longitudinales)</a></li>
+<li class="chapter" data-level="8.4.3" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#estructura-de-los-datos-1"><i class="fa fa-check"></i><b>8.4.3</b> Estructura de los datos</a></li>
+<li class="chapter" data-level="8.4.4" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#ajuste-del-modelo"><i class="fa fa-check"></i><b>8.4.4</b> Ajuste del modelo</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><i class="fa fa-check"></i><b>9</b> Joint models para datos longitudinales y datos de supervivencia</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#por-qué-deberíamos-utilizar-este-tipo-de-modelos"><i class="fa fa-check"></i><b>9.1</b> ¿Por qué deberíamos utilizar este tipo de modelos?</a></li>
+<li class="chapter" data-level="9.2" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#joint-models"><i class="fa fa-check"></i><b>9.2</b> Joint models</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -270,20 +304,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="análisis-de-supervivencia-con-datos-longitudinales" class="section level1" number="7">
-<h1><span class="header-section-number">Capítulo 7</span> Análisis de supervivencia con datos longitudinales</h1>
-<div id="tiempo-hasta-evento" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Tiempo hasta evento</h2>
+<div id="análisis-de-supervivencia-con-datos-longitudinales" class="section level1" number="8">
+<h1><span class="header-section-number">Capítulo 8</span> Análisis de supervivencia con datos longitudinales</h1>
+<div id="tiempo-hasta-evento" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Tiempo hasta evento</h2>
 <p>En el análisis de superviviencia la variable respuesta es el <strong>tiempo</strong> hasta el evento de interés.</p>
 <p>Normalente los datos se obtienen de un estudio de cohorte con seguimiento ya sea prospectivo o retrospectivo. Transcurrido el periodo de seguimiento o “follow-up time” puede que para alguno de los individuos de la muestra el evento de interés no se haya observado, ya sea porque ha finalizado el seguimiento o porque se han perdido o han tenido un evento diferente del de interés que ha interrumpido su seguimiento. En estos casos se suele decir que dichos individuos están <strong>censurados</strong>.</p>
 <p>Es muy importante registrar el tiempo que ha pasado des del inicio hasta el evento para los no censurados y también el momento que se ha perdido el seguimiento para los censurados. Así hay que definir bien el momento de inicio y el momento final para cada participante del estudio. Y también es importante que el <strong>mecanimso usado para obtener la información del seguimiento sea el mismo para todos.</strong></p>
 <p>En la siguiente figura tenemos una descripción de cómo recogeríamos la información para diez individuos donde se observa que cada uno de ellos puede entrar en un momento distinto en el tiempo a partir del inicio del estudio (01/0108), que algunos se observa el evento de interés (puntos negros) y para otros el tiempo está censurado (puntos rojos) bien sea porque se acaba el periodo de seguimiento (01/01/2020) o porque abandonan el estudio antes del final (puntos rojos antes del 01/01/2020)</p>
-<p><img src="fig_out/unnamed-chunk-145-1.png" width="960" /></p>
+<p><img src="fig_out/unnamed-chunk-169-1.png" width="960" /></p>
 <p>Normalment lo que hacemos es calcular el tiempo pasando toda la información a “tiempo cero”. La siguiente figura muestra cómo quedarían los datos para el ejemplo anterior</p>
-<p><img src="fig_out/unnamed-chunk-146-1.png" width="960" /></p>
+<p><img src="fig_out/unnamed-chunk-170-1.png" width="960" /></p>
 <p>De esta forma, para cada individuo anotaríamos la variable tiempo y crearíamos otra variable 0/1 que sería 0 para aquellos individuos censurados (puntos rojos) y 1 para los que observamos el evento de interés (puntos negros). En la práctica no se habla de variable censurada, si no de la variable evento, y es por eso que codificamos 0 a la censura y 1 a aquellos casos en los que observamos nuestro evento de interés.</p>
-<div id="ejemplos-3" class="section level3" number="7.1.1">
-<h3><span class="header-section-number">7.1.1</span> Ejemplos</h3>
+<div id="ejemplos-4" class="section level3" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Ejemplos</h3>
 <blockquote>
 <p>Pacientes diagnosticados de cancer de próstata. Seguimiento hasta recidiva o muerte.
 El inicio sería la fecha del diagnóstico y la fecha final sería la fechad e recidiva o muerte (para los no censurados) y la fecha de final de seguimiento para los censurados.</p>
@@ -292,8 +326,8 @@ El inicio sería la fecha del diagnóstico y la fecha final sería la fechad e r
 <p>Estudio de una cohorte prospectiva a 10 años para estudiar el riesgo de infarto agudo de miocardio incidente. La fecha de inicio sería la fecha de inclusión en el estudio, y la fecha final sería la fecha de ingreso por infarto o muerte por infarto (para los no censurados), y la fecha de final de seguimiento o fecha de muerte por otra causa (para los censurados).</p>
 </blockquote>
 </div>
-<div id="otros-tipos-de-censura" class="section level3" number="7.1.2">
-<h3><span class="header-section-number">7.1.2</span> Otros tipos de censura</h3>
+<div id="otros-tipos-de-censura" class="section level3" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> Otros tipos de censura</h3>
 <p>La censura que se ha descrito es concretamente censura por la derecha. Esto quiere decir que cuando un dato está censurado significa que és superior al tiempo observado.</p>
 <p>Existen otros tipo de censura que no estudiaremos:</p>
 <ul>
@@ -303,144 +337,121 @@ El inicio sería la fecha del diagnóstico y la fecha final sería la fechad e r
 </ul>
 </div>
 </div>
-<div id="kaplan-meier" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Kaplan-Meier</h2>
+<div id="kaplan-meier" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Kaplan-Meier</h2>
 <p>El método de Kaplan-Meier se usa para estimar la supervivencia o su complementario, la probabilidad de que el evento ocurra antes del tiempo <span class="math inline">\(t\)</span>.</p>
 <p>Si no hubieran eventos censurados antes del tiempo <span class="math inline">\(t\)</span>, la probabilidad de que ocurra el evento en este periodo es simplemente <span class="math inline">\(d_t/n\)</span> donde <span class="math inline">\(d_t\)</span> es el númerod e eventos antes de <span class="math inline">\(t\)</span> y <span class="math inline">\(n\)</span> el número de individuos de la cohorte. Pero qué pasa cuando un individuo está censurado antes de <span class="math inline">\(t\)</span>? Lo contamos en el denominador o no? Ambas opciones dan resultados sesgados.</p>
 <p>Kaplan-Meier propone un método para estimar el riesgo en cada momento <span class="math inline">\(t\)</span> (o su supervivencia) que da resultados no sesgados ya que incorpora la información de los individos censurados hasta el momento que fueron seguidos.</p>
 <p><strong>Ejemplo</strong></p>
 <p>Analizaremos los datos <code>predimed</code> de la librería <code>compareGroups</code>. Se trata de una cohorte con tres grupos de intervención y con un seguimiento de unos 7 años. El evento de interés es el cardiovascular. En este caso, la variable tiempo está recogida en <code>toevent</code> y la variable que indica si un individuo está censurado es <code>event</code> que en este caso está codificada como <code>No</code> y <code>Yes</code>. Notemos que en este caso <code>No</code> correspondería a censura y <code>Yes</code> a no censura, pero que como hemos dicho anteriormente, nos interesa indentificar aquellos individuos cuyo tiemo corresponde al transcurrido hasta que ocurre el evento que estamos estudiando.</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compareGroups)</span>
-<span id="cb240-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb240-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(predimed)</span>
-<span id="cb240-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb240-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(predimed)</span></code></pre></div>
-<pre><code>            group          sex      
- Control       :2042   Male  :2679  
- MedDiet + Nuts:2100   Female:3645  
- MedDiet + VOO :2182                
-                                    
-                                    
-                                    
-      age            smoke           bmi       
- Min.   :49.00   Never  :3892   Min.   :19.64  
- 1st Qu.:62.00   Current: 858   1st Qu.:27.23  
- Median :67.00   Former :1574   Median :29.76  
- Mean   :67.01                  Mean   :29.97  
- 3rd Qu.:72.00                  3rd Qu.:32.46  
- Max.   :87.00                  Max.   :51.94  
-     waist            wth          htn      
- Min.   : 50.0   Min.   :0.3012   No :1089  
- 1st Qu.: 93.0   1st Qu.:0.5839   Yes:5235  
- Median :100.0   Median :0.6258             
- Mean   :100.4   Mean   :0.6283             
- 3rd Qu.:107.0   3rd Qu.:0.6687             
- Max.   :177.0   Max.   :1.0000             
-  diab      hyperchol  famhist     hormo     
- No :3322   No :1746   No :4895   No  :5564  
- Yes:3002   Yes:4578   Yes:1429   Yes :  97  
-                                  NA&#39;s: 663  
-                                             
-                                             
-                                             
-      p14            toevent        event     
- Min.   : 0.000   Min.   :0.01643   No :6072  
- 1st Qu.: 7.000   1st Qu.:2.85832   Yes: 252  
- Median : 9.000   Median :4.78850             
- Mean   : 8.678   Mean   :4.35517             
- 3rd Qu.:10.000   3rd Qu.:5.79056             
- Max.   :14.000   Max.   :6.99795             </code></pre>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compareGroups)</span>
+<span id="cb312-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb312-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(predimed)</span>
+<span id="cb312-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb312-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(predimed)</span></code></pre></div>
+<pre><code>            group          sex            age         smoke     
+ Control       :2042   Male  :2679   Min.   :49   Never  :3892  
+ MedDiet + Nuts:2100   Female:3645   1st Qu.:62   Current: 858  
+ MedDiet + VOO :2182                 Median :67   Former :1574  
+                                     Mean   :67                 
+                                     3rd Qu.:72                 
+                                     Max.   :87                 
+      bmi           waist          wth         htn        diab     
+ Min.   :19.6   Min.   : 50   Min.   :0.301   No :1089   No :3322  
+ 1st Qu.:27.2   1st Qu.: 93   1st Qu.:0.584   Yes:5235   Yes:3002  
+ Median :29.8   Median :100   Median :0.626                        
+ Mean   :30.0   Mean   :100   Mean   :0.628                        
+ 3rd Qu.:32.5   3rd Qu.:107   3rd Qu.:0.669                        
+ Max.   :51.9   Max.   :177   Max.   :1.000                        
+ hyperchol  famhist     hormo           p14           toevent     
+ No :1746   No :4895   No  :5564   Min.   : 0.00   Min.   :0.016  
+ Yes:4578   Yes:1429   Yes :  97   1st Qu.: 7.00   1st Qu.:2.858  
+                       NA&#39;s: 663   Median : 9.00   Median :4.789  
+                                   Mean   : 8.68   Mean   :4.355  
+                                   3rd Qu.:10.00   3rd Qu.:5.791  
+                                   Max.   :14.00   Max.   :6.998  
+ event     
+ No :6072  
+ Yes: 252  
+           
+           
+           
+           </code></pre>
 <p>Para crear una variable censurada por la derecha se usa la función <code>Surv</code> del package <code>survival</code>.</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span></code></pre></div>
 <p>Si la variable evento está codificada como 0/1 (0: censura 1:evento), como se suele tener habitualmente, basta con escribir:</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Surv</span>(predimed<span class="sc">$</span>toevent, predimed<span class="sc">$</span>event)</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Surv</span>(predimed<span class="sc">$</span>toevent, predimed<span class="sc">$</span>event)</span></code></pre></div>
 <p>En nuestro caso como la variable <code>event</code> es ‘No’ ‘Yes’, deberíamos indicar qué valor indica evento en la variable <code>event</code></p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
-<span id="cb244-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb244-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Surv</span>(predimed<span class="sc">$</span>toevent, predimed<span class="sc">$</span>event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
-<pre><code> [1] 5.37440109  6.09719372+ 5.94661188+ 2.90759754 
- [5] 4.76112270+ 3.14852834  0.71457905+ 4.90075302+
- [9] 0.04380561  0.88158798+</code></pre>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb316-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb316-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Surv</span>(predimed<span class="sc">$</span>toevent, predimed<span class="sc">$</span>event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<pre><code> [1] 5.37440  6.09719+ 5.94661+ 2.90760  4.76112+ 3.14853  0.71458+
+ [8] 4.90075+ 0.04381  0.88159+</code></pre>
 <p>Notemos que se crea una nueva variable donde aquellos individuos censurados tiene un ‘+’</p>
 <p>La función de supervivencia se puede estimar con el estimador de Kaplan-Meier mediante:</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb246-1" aria-hidden="true" tabindex="-1"></a>ss <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>)<span class="sc">~</span><span class="dv">1</span>, <span class="at">data=</span>predimed)</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb318-1" aria-hidden="true" tabindex="-1"></a>ss <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>)<span class="sc">~</span><span class="dv">1</span>, <span class="at">data=</span>predimed)</span></code></pre></div>
 <p>Y podemos ver dichas estimaciones (para los primeros 6 tiempos de eventos) con la instrucción</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ss, <span class="at">times=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ss, <span class="at">times=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span></code></pre></div>
 <pre><code>Call: survfit(formula = Surv(toevent, event == &quot;Yes&quot;) ~ 1, data = predimed)
 
- time n.risk n.event survival std.err lower 95% CI
-    1   6196      45    0.993 0.00106        0.991
-    2   5602      39    0.986 0.00147        0.984
-    3   4524      48    0.977 0.00196        0.973
-    4   3723      44    0.967 0.00250        0.962
-    5   2803      38    0.956 0.00301        0.950
-    6   1116      23    0.945 0.00380        0.938
- upper 95% CI
-        0.995
-        0.989
-        0.981
-        0.972
-        0.962
-        0.953</code></pre>
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+    1   6196      45    0.993 0.00106        0.991        0.995
+    2   5602      39    0.986 0.00147        0.984        0.989
+    3   4524      48    0.977 0.00196        0.973        0.981
+    4   3723      44    0.967 0.00250        0.962        0.972
+    5   2803      38    0.956 0.00301        0.950        0.962
+    6   1116      23    0.945 0.00380        0.938        0.953</code></pre>
 <p>Normalmente lo que se suele hacer es visualizar las curvas de supervivencia mediante la instrucción</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb249-1" aria-hidden="true" tabindex="-1"></a>ans.km <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>) <span class="sc">~</span> <span class="dv">1</span>, predimed)</span>
-<span id="cb249-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb249-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ans.km, <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.8</span>,<span class="dv">1</span>), </span>
-<span id="cb249-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb249-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Tiempo de seguimiento (años)&quot;</span>, </span>
-<span id="cb249-4"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb249-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Supervivencia&quot;</span>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-153-1.png" width="672" /></p>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb321-1" aria-hidden="true" tabindex="-1"></a>ans.km <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>) <span class="sc">~</span> <span class="dv">1</span>, predimed)</span>
+<span id="cb321-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb321-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ans.km, <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.8</span>,<span class="dv">1</span>), </span>
+<span id="cb321-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb321-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Tiempo de seguimiento (años)&quot;</span>, </span>
+<span id="cb321-4"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb321-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Supervivencia&quot;</span>)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-177-1.png" width="672" /></p>
 <p>Si quisiéramos calcular Kaplan-Meier para distrintos grupos, por ejemplo para el los distintos grupos de intervención de nuestro estudio, bastaría con escribir:</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb250-1" aria-hidden="true" tabindex="-1"></a>ans.km.group <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>) <span class="sc">~</span> group, predimed)</span>
-<span id="cb250-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ans.km.group, <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.8</span>,<span class="dv">1</span>), </span>
-<span id="cb250-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb250-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Tiempo de seguimiento (años)&quot;</span>, </span>
-<span id="cb250-4"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb250-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Supervivencia&quot;</span>, <span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb250-5"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb250-5" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="fu">levels</span>(predimed<span class="sc">$</span>group), </span>
-<span id="cb250-6"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb250-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty=</span><span class="dv">1</span>, <span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">bty=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-154-1.png" width="672" /></p>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb322-1" aria-hidden="true" tabindex="-1"></a>ans.km.group <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>) <span class="sc">~</span> group, predimed)</span>
+<span id="cb322-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb322-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ans.km.group, <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.8</span>,<span class="dv">1</span>), </span>
+<span id="cb322-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb322-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Tiempo de seguimiento (años)&quot;</span>, </span>
+<span id="cb322-4"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb322-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Supervivencia&quot;</span>, <span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb322-5"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb322-5" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="fu">levels</span>(predimed<span class="sc">$</span>group), </span>
+<span id="cb322-6"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb322-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty=</span><span class="dv">1</span>, <span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">bty=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-178-1.png" width="672" /></p>
 <p>Finalmente, podemos comparar las curvas de supervivencia entre grupos con la función <code>survdiff</code> que tiene implementado por defecto, el test de log-rank:</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>) <span class="sc">~</span> group, predimed)</span></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>) <span class="sc">~</span> group, predimed)</span></code></pre></div>
 <pre><code>Call:
 survdiff(formula = Surv(toevent, event == &quot;Yes&quot;) ~ group, data = predimed)
 
-                        N Observed Expected
-group=Control        2042       97     75.4
-group=MedDiet + Nuts 2100       70     82.7
-group=MedDiet + VOO  2182       85     93.9
-                     (O-E)^2/E (O-E)^2/V
-group=Control            6.194      8.85
-group=MedDiet + Nuts     1.946      2.90
-group=MedDiet + VOO      0.848      1.35
+                        N Observed Expected (O-E)^2/E (O-E)^2/V
+group=Control        2042       97     75.4     6.194      8.85
+group=MedDiet + Nuts 2100       70     82.7     1.946      2.90
+group=MedDiet + VOO  2182       85     93.9     0.848      1.35
 
  Chisq= 9  on 2 degrees of freedom, p= 0.01 </code></pre>
 <p>Podemos concluir que las diferencias observadas en las curvas de supervivencia, son significativamente distintas ya que el p-valor del test de log-rank es $&lt;0.5%.</p>
 <p>Este test considera que todas las diferencias observadas a lo largo del tiempo son igual de imporatantes. A veces, queremos dar más peso a las diferencias observadas al inicio del estudio. En ese caso, el test más potente es el del Wilcoxon que puede calcularse de la misma manera, pero usando el argumento <code>rho=1</code></p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>) <span class="sc">~</span> group, predimed, <span class="at">rho =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>) <span class="sc">~</span> group, predimed, <span class="at">rho =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>Call:
 survdiff(formula = Surv(toevent, event == &quot;Yes&quot;) ~ group, data = predimed, 
     rho = 1)
 
-                        N Observed Expected
-group=Control        2042     95.0     73.6
-group=MedDiet + Nuts 2100     68.1     80.7
-group=MedDiet + VOO  2182     82.7     91.6
-                     (O-E)^2/E (O-E)^2/V
-group=Control            6.222      9.11
-group=MedDiet + Nuts     1.952      2.98
-group=MedDiet + VOO      0.857      1.40
+                        N Observed Expected (O-E)^2/E (O-E)^2/V
+group=Control        2042     95.0     73.6     6.222      9.11
+group=MedDiet + Nuts 2100     68.1     80.7     1.952      2.98
+group=MedDiet + VOO  2182     82.7     91.6     0.857      1.40
 
  Chisq= 9.3  on 2 degrees of freedom, p= 0.01 </code></pre>
 <p>Llegamos a la misma conclusión que con el test de log-rank, pero notemos que el valor del estadistico (Chisq) es ligeramente superior, por lo que el p-valor es menor (es decir, más significativo) y nos daría más evidencias en contra de la hipótesis nula (notemos que aquí vemos 0.01 en ambos casos por un tema de redondeo).</p>
 <p>Podemos mejorar la visualización usando la función <code>ggsurvplot ()</code> de la librería <code>survminer</code>. Una caída vertical en las curvas indica un evento. Una marca vertical en las curvas significa que un individuo fue censurado.</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
-<span id="cb255-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb255-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(</span>
-<span id="cb255-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb255-3" aria-hidden="true" tabindex="-1"></a>  ans.km, <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.9</span>,<span class="dv">1</span>),</span>
-<span id="cb255-4"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb255-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pval =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb255-5"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb255-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.int =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb255-6"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb255-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">risk.table =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb255-7"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb255-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>(),</span>
-<span id="cb255-8"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb255-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Estimación de la supervivencia con Kaplan-Meier&quot;</span></span>
-<span id="cb255-9"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb255-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
+<span id="cb327-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb327-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(</span>
+<span id="cb327-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb327-3" aria-hidden="true" tabindex="-1"></a>  ans.km, <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.9</span>,<span class="dv">1</span>),</span>
+<span id="cb327-4"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb327-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pval =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb327-5"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb327-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.int =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb327-6"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb327-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">risk.table =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb327-7"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb327-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>(),</span>
+<span id="cb327-8"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb327-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Estimación de la supervivencia con Kaplan-Meier&quot;</span></span>
+<span id="cb327-9"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb327-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="fig_out/plotkm2-1.png" width="672" /></p>
 <p>NOTA: la opción <code>pval=TRUE</code> nos permitiría ver el p-valor de Kaplan-Meier en el gráfico, pero puesto que hemos indicado que el eje Y se vea sólo de 0.9 a 1, el p-valor no se ve. Si se vería en caso de quitar la opción de <code>ylim</code> aunque entonces las curvas se verían muy juntas. Existen opciones para poder “tunear” esta visualización usando la función <code>annotate()</code>.</p>
 </div>
-<div id="funciones-involucradas-en-el-análisis-de-supervivencia" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> Funciones involucradas en el análisis de supervivencia</h2>
+<div id="funciones-involucradas-en-el-análisis-de-supervivencia" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Funciones involucradas en el análisis de supervivencia</h2>
 <p>Aparte de la función de supervivencia que se define como:</p>
 <ul>
 <li><strong>Supervivencia:</strong> probabilidad de estar libre de evento en el momento <span class="math inline">\(t\)</span> (se supone que el evento ocurre después)</li>
@@ -465,18 +476,18 @@ Existe la siguiente relación entre el riesgo acumulado y la función de supervi
 o bien</p>
 <p><span class="math display">\[\Lambda(t) = -\text{ln}\left(S(t)\right)\]</span></p>
 <p>Todas estas funciones se pueden calcular conla función <code>ggsurvplot()</code> cambiando el argumento <code>fun</code>. Por ejemplo la función de probabilidad se calcularía mediante la opción “event” y la de riesgo acumulado con “cumhaz”</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(</span>
-<span id="cb256-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb256-2" aria-hidden="true" tabindex="-1"></a>  ans.km, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">1</span>),</span>
-<span id="cb256-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb256-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fun =</span> <span class="st">&quot;event&quot;</span>,</span>
-<span id="cb256-4"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb256-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.int =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb256-5"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb256-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">risk.table =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb256-6"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb256-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>(),</span>
-<span id="cb256-7"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb256-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Estimación de la función de distribución con Kaplan-Meier&quot;</span></span>
-<span id="cb256-8"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb256-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-157-1.png" width="672" /></p>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(</span>
+<span id="cb328-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb328-2" aria-hidden="true" tabindex="-1"></a>  ans.km, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">1</span>),</span>
+<span id="cb328-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb328-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fun =</span> <span class="st">&quot;event&quot;</span>,</span>
+<span id="cb328-4"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb328-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.int =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb328-5"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb328-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">risk.table =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb328-6"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb328-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>(),</span>
+<span id="cb328-7"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb328-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Estimación de la función de distribución con Kaplan-Meier&quot;</span></span>
+<span id="cb328-8"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb328-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-181-1.png" width="672" /></p>
 </div>
-<div id="modelo-de-regresión-de-cox" class="section level2" number="7.4">
-<h2><span class="header-section-number">7.4</span> Modelo de regresión de Cox</h2>
+<div id="modelo-de-regresión-de-cox" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> Modelo de regresión de Cox</h2>
 <p>Normalmente queremos estudiar cómo influye más de una variable en la supervivencia. Para este caso, necesitamos utilizar modelos de regresión. Los modelos de regresión de Cox sirven para evaluar el efecto de distintas variables sobre el tiempo hasta el evento, o para crear un moelo de predicción.</p>
 <p>Los modelos de cox asumen <strong>riesgos proporcionales</strong>, esto es, se separa el riesgo (“Hazard”) de paceder un evento antes del momento <span class="math inline">\(t\)</span> como un producto del</p>
 <ul>
@@ -489,9 +500,9 @@ o bien</p>
 <p>Existen otros métodos que suponen una distribución de la <span class="math inline">\(T\)</span>, y por lo tanto parametrizan la incidencia basal <span class="math inline">\(\Lambda_0(t)\)</span>. Por ejemplo,la regresión de Weibull que supone una distribución Weibull sobre <span class="math inline">\(T\)</span>. Una de las ventaja que tienen los métodos no paramétricos es que permiten estimar la media o la mediana de <span class="math inline">\(T\)</span> aunque más de la mitad de los individuos de la muestra estén censurados (o sea, que no se llegue al 50% de eventos en el seguimiento). La desventaja es que suponen una distribución sobre <span class="math inline">\(T\)</span> que puede no ser correcta y que conllevaría a resultados sesgados. En biomedicina, el método más usado es el de los modelos de Cox y es el que estudiaremos en este curso.</p>
 <p><strong>Ejemplo</strong></p>
 <p>Para ajustar un modelo de Cox en R se usa la función <code>coxph</code> de la librería <code>survival</code>.</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb257-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>)<span class="sc">~</span>age<span class="sc">+</span>sex<span class="sc">+</span>p14<span class="sc">+</span>group, predimed)</span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb329-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>)<span class="sc">~</span>age<span class="sc">+</span>sex<span class="sc">+</span>p14<span class="sc">+</span>group, predimed)</span></code></pre></div>
 <p>Hay diferentes aspectos a validar del modelo de Cox. Entre ellos la proporcionalidad de los efectos. Quiere decir que se supone que las <span class="math inline">\(\beta_k\)</span> no dependen del tiempo (por ejemplo, el efecto del sexo es el mismo tanto a 1 años como a 5 años). Ésto se puede comprovar mediante la siguiente función:</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(modelo)</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(modelo)</span></code></pre></div>
 <pre><code>         chisq df     p
 age    0.33102  1 0.565
 sex    0.17845  1 0.673
@@ -499,49 +510,38 @@ p14    0.00189  1 0.965
 group  5.75156  2 0.056
 GLOBAL 6.35652  5 0.273</code></pre>
 <p>Aparece un p-valor para cada variable y uno global. En este caso parece que se cumple la proporcionalidad para todas las variables ya que el p-valor no es <span class="math inline">\(&lt;0.05\)</span> y por lo tanto no podemos rechazar la hipótesis nula que es que los riesgos son proporcionales. No obstante, si no se cumpliera la proporcionalidad de una variable categórica, por ejemplo el sexo, ésta se puede poner como <code>strata</code> (se asume una curva de indidencia basal <span class="math inline">\(\Lambda_0(t)\)</span> para cada sexo) y se solucionaría el problema. Cuando esto no ocurre para una variable continua, debemos hacer modelos más avanzados que contemplan la posibilidad de introducir en el modelo una variable dependiente del tiempo (que veremos más adelante).</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb260-1" aria-hidden="true" tabindex="-1"></a>modelo2 <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>)<span class="sc">~</span>age<span class="sc">+</span><span class="fu">strata</span>(sex)<span class="sc">+</span>p14<span class="sc">+</span>group, predimed)</span>
-<span id="cb260-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo2)</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb332-1" aria-hidden="true" tabindex="-1"></a>modelo2 <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(toevent, event<span class="sc">==</span><span class="st">&#39;Yes&#39;</span>)<span class="sc">~</span>age<span class="sc">+</span><span class="fu">strata</span>(sex)<span class="sc">+</span>p14<span class="sc">+</span>group, predimed)</span>
+<span id="cb332-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb332-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo2)</span></code></pre></div>
 <pre><code>Call:
 coxph(formula = Surv(toevent, event == &quot;Yes&quot;) ~ age + strata(sex) + 
     p14 + group, data = predimed)
 
   n= 6324, number of events= 252 
 
-                        coef exp(coef) se(coef)
-age                  0.06790   1.07026  0.01010
-p14                 -0.12221   0.88497  0.03046
-groupMedDiet + Nuts -0.39498   0.67369  0.15771
-groupMedDiet + VOO  -0.31459   0.73009  0.14894
-                         z Pr(&gt;|z|)    
-age                  6.720 1.82e-11 ***
-p14                 -4.012 6.03e-05 ***
-groupMedDiet + Nuts -2.505   0.0123 *  
-groupMedDiet + VOO  -2.112   0.0347 *  
+                       coef exp(coef) se(coef)     z Pr(&gt;|z|)    
+age                  0.0679    1.0703   0.0101  6.72  1.8e-11 ***
+p14                 -0.1222    0.8850   0.0305 -4.01  6.0e-05 ***
+groupMedDiet + Nuts -0.3950    0.6737   0.1577 -2.50    0.012 *  
+groupMedDiet + VOO  -0.3146    0.7301   0.1489 -2.11    0.035 *  
 ---
-Signif. codes:  
-0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-                    exp(coef) exp(-coef) lower .95
-age                    1.0703     0.9344    1.0493
-p14                    0.8850     1.1300    0.8337
-groupMedDiet + Nuts    0.6737     1.4844    0.4946
-groupMedDiet + VOO     0.7301     1.3697    0.5453
-                    upper .95
-age                    1.0917
-p14                    0.9394
-groupMedDiet + Nuts    0.9177
-groupMedDiet + VOO     0.9776
+                    exp(coef) exp(-coef) lower .95 upper .95
+age                     1.070      0.934     1.049     1.092
+p14                     0.885      1.130     0.834     0.939
+groupMedDiet + Nuts     0.674      1.484     0.495     0.918
+groupMedDiet + VOO      0.730      1.370     0.545     0.978
 
 Concordance= 0.652  (se = 0.018 )
-Likelihood ratio test= 71.75  on 4 df,   p=1e-14
-Wald test            = 72.99  on 4 df,   p=5e-15
-Score (logrank) test = 73.94  on 4 df,   p=3e-15</code></pre>
+Likelihood ratio test= 71.8  on 4 df,   p=1e-14
+Wald test            = 73  on 4 df,   p=5e-15
+Score (logrank) test = 73.9  on 4 df,   p=3e-15</code></pre>
 <p>En este gráfico se obtiene una curva de supervivencia para cada sexo, ajustado por las demás covariables (nota que en esta gráfica se asume que el efecto de las demás covariables es el mismo para ambos sexos).</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">survfit</span>(modelo2), <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.8</span>,<span class="dv">1</span>), <span class="at">lty=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
-<span id="cb262-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb262-2" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="fu">levels</span>(predimed<span class="sc">$</span>sex), <span class="at">lty=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">bty=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-161-1.png" width="672" /></p>
-<div id="efectos-tiempo-dependientes" class="section level3" number="7.4.1">
-<h3><span class="header-section-number">7.4.1</span> Efectos tiempo-dependientes</h3>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">survfit</span>(modelo2), <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.8</span>,<span class="dv">1</span>), <span class="at">lty=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb334-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb334-2" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="fu">levels</span>(predimed<span class="sc">$</span>sex), <span class="at">lty=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">bty=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-185-1.png" width="672" /></p>
+<div id="efectos-tiempo-dependientes" class="section level3" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> Efectos tiempo-dependientes</h3>
 <p>El efecto tiempo-dependiente (no confundir con variables tiempo-dependientes) se da cuando el efecto de una variable <span class="math inline">\(\beta_k\)</span> no es constante a lo largo del tiempo. En este caso, como se ha comentado anteriormente, si se trata de una variable categórica se puede poner en el modelo como <code>strata</code>. Si se trata de una variable continua, se puede incorporar la interacción de la variable <span class="math inline">\(x_k\)</span> con el tiempo.
 Otra estrategia que se usa habitualmente es dividir el tiempo de seguimiento en dos o tres tramos (a corto y a largo plazo), y realizar análisis por separado.</p>
 <p>De la anterior ecuación sobre la incidencia acumulada, se suponía que los efectos eran fijos y no dependían del tiempo. Pero si dependieran del tiempo en general se debería reescribir como:</p>
@@ -549,148 +549,124 @@ Otra estrategia que se usa habitualmente es dividir el tiempo de seguimiento en 
 donde <span class="math inline">\(\beta_k(t)\)</span> representa una función del tiempo.</p>
 <p>Este tipo de modelos con efectos tiempo dependientes no los veremos en este curso, sin embargo nos centraremos en otro aspecto fundamental que se da en estudios longitudinales que es el hecho de recoger una variable explicativa en distintos momentos del tiempo (variales tiempo-dependientes).</p>
 </div>
-<div id="variables-tiempo-dependientes-datos-longitudinales" class="section level3" number="7.4.2">
-<h3><span class="header-section-number">7.4.2</span> Variables tiempo-dependientes (datos longitudinales)</h3>
+<div id="variables-tiempo-dependientes-datos-longitudinales" class="section level3" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> Variables tiempo-dependientes (datos longitudinales)</h3>
 <p>Los modelos con variables tiempo-dependientes se tienen cuando en el seguimiento de los individuos de la muestra también se han ido actualizando los valores de todas o algunas de las variables indepndientes (<span class="math inline">\(x_k\)</span>). Por ejemplo, el nivel de colesterol se puede recoger al inicio del estudio e introducir esa variable en el modelo de Cox para ver si influencia en el tiempo hasta sufrir un infarto de miocardio, pero también podemos recoger el nivel de colesterol en distintos momentos temporales y ver si esta variable cambiante a lo largo del tiempo se asocia con nuestro evento de interés.</p>
 <p>Así pues, en cada momento <span class="math inline">\(t\)</span> el riesgo acumulado se tiene que estimar teniendo en cuenta el valor que toma cada <span class="math inline">\(x_k\)</span> en dicho tiempo <span class="math inline">\(t\)</span>. Esto se puede formular de la siguiente manera</p>
 <p><span class="math display">\[\Lambda(t|\vec{x}_i = \Lambda_0(t)\cdot \text{exp}\left(\sum_{k=1} \beta_k \color{blue}{x_{itk}}\right)\]</span>
 donde <span class="math inline">\(x_{itk}\)</span> representa el valor de la variable <span class="math inline">\(x_k\)</span> del individuo <span class="math inline">\(i\)</span> en el momento <span class="math inline">\(t\)</span></p>
 </div>
-<div id="estructura-de-los-datos-1" class="section level3" number="7.4.3">
-<h3><span class="header-section-number">7.4.3</span> Estructura de los datos</h3>
+<div id="estructura-de-los-datos-1" class="section level3" number="8.4.3">
+<h3><span class="header-section-number">8.4.3</span> Estructura de los datos</h3>
 <p>Para ajustar estos modelos, el reto principal (y único), es estructurar bien la base de datos. Así, para cada individuo tendremos tantas filas como actualizaciones tengamos de cada variable <span class="math inline">\(x_k\)</span>. Además hay que anotar el momento de estos cambios. Adicionalemente tendremos una fila final donde se indicará el tiempo de evento o censura para nuestro evento de interés.</p>
 <p>Veámoslo con un ejemplo: Utilizaremos la base de datos <code>aids</code> de la librería <code>JM</code></p>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(JM)</span>
-<span id="cb263-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb263-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(aids)</span>
-<span id="cb263-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb263-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aids)</span></code></pre></div>
-<pre><code>  patient  Time death       CD4 obstime drug gender
-1       1 16.97     0 10.677078       0  ddC   male
-2       1 16.97     0  8.426150       6  ddC   male
-3       1 16.97     0  9.433981      12  ddC   male
-4       2 19.00     0  6.324555       0  ddI   male
-5       2 19.00     0  8.124038       6  ddI   male
-6       2 19.00     0  4.582576      12  ddI   male
-  prevOI         AZT start  stop event
-1   AIDS intolerance     0  6.00     0
-2   AIDS intolerance     6 12.00     0
-3   AIDS intolerance    12 16.97     0
-4 noAIDS intolerance     0  6.00     0
-5 noAIDS intolerance     6 12.00     0
-6 noAIDS intolerance    12 18.00     0</code></pre>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(JM)</span>
+<span id="cb335-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb335-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(aids)</span>
+<span id="cb335-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb335-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aids)</span></code></pre></div>
+<pre><code>  patient  Time death    CD4 obstime drug gender prevOI         AZT
+1       1 16.97     0 10.677       0  ddC   male   AIDS intolerance
+2       1 16.97     0  8.426       6  ddC   male   AIDS intolerance
+3       1 16.97     0  9.434      12  ddC   male   AIDS intolerance
+4       2 19.00     0  6.325       0  ddI   male noAIDS intolerance
+5       2 19.00     0  8.124       6  ddI   male noAIDS intolerance
+6       2 19.00     0  4.583      12  ddI   male noAIDS intolerance
+  start  stop event
+1     0  6.00     0
+2     6 12.00     0
+3    12 16.97     0
+4     0  6.00     0
+5     6 12.00     0
+6    12 18.00     0</code></pre>
 <p>En esta base de datos tenemos diferentes participantes en los que se ha tomado distintas medidas de la variable CD4. La variable <code>obstime</code> indica cuándo se han tomado las medidas de CD4. Mientras que la variable <code>time</code> y <code>death</code> indica el tiempo observado y si el individuo se ha muerto (1) o sigue vivo (0, dato censurado) al finalizar el seguimiento. En este caso el evento de interés es la muerte y los individuos vivos serán los censurados. La variable tiempo-dependiente es la variable CD4. Nuestro objetivo final es demostrar si hay diferencias en la mortalidad entre dos fármacos (variable ‘drug’: ddI = didanosine; ddC = zalcitabine.) ajustando por la variable ‘gender’.</p>
 <p>Para ajustar un modelo con variables tiempo-dependientes se ha de reestructurar esta base de datos. Para ello debemos llevar a cabo los siguientes pasos</p>
 <ol style="list-style-type: decimal">
 <li>Creamos una base de datos con una fila por individuo, con los tiempos de muerte y las covariables de interés (fijas, no cambiantes a lo largo del tiempo - en nuestro caso ‘drug’ , ‘gender’) y creamos la variable <code>endpt</code>.</li>
 </ol>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb265-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> aids <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(patient, Time, death, drug, gender)</span>
-<span id="cb265-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb265-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>,<span class="fu">nrow</span>(temp))</span>
-<span id="cb265-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb265-3" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(x, temp, sum)</span>
-<span id="cb265-4"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb265-4" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">tmerge</span>(datos, datos, <span class="at">id=</span>patient, <span class="at">endpt =</span> <span class="fu">event</span>(Time, death))</span>
-<span id="cb265-5"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb265-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos)</span></code></pre></div>
-<pre><code>  patient  Time death drug gender x tstart tstop
-1     351 12.27     0  ddC female 4      0 12.27
-2     305 12.30     0  ddC female 2      0 12.30
-3     336 12.57     0  ddC female 3      0 12.57
-4     268 12.73     0  ddC female 4      0 12.73
-5     160 13.20     0  ddC female 3      0 13.20
-6     377 13.50     0  ddC female 4      0 13.50
-  endpt
-1     0
-2     0
-3     0
-4     0
-5     0
-6     0</code></pre>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb337-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> aids <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(patient, Time, death, drug, gender)</span>
+<span id="cb337-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb337-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>,<span class="fu">nrow</span>(temp))</span>
+<span id="cb337-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb337-3" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(x, temp, sum)</span>
+<span id="cb337-4"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb337-4" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">tmerge</span>(datos, datos, <span class="at">id=</span>patient, <span class="at">endpt =</span> <span class="fu">event</span>(Time, death))</span>
+<span id="cb337-5"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb337-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos)</span></code></pre></div>
+<pre><code>  patient  Time death drug gender x tstart tstop endpt
+1     351 12.27     0  ddC female 4      0 12.27     0
+2     305 12.30     0  ddC female 2      0 12.30     0
+3     336 12.57     0  ddC female 3      0 12.57     0
+4     268 12.73     0  ddC female 4      0 12.73     0
+5     160 13.20     0  ddC female 3      0 13.20     0
+6     377 13.50     0  ddC female 4      0 13.50     0</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Luego, hacemos uso de la función <code>tmerge()</code> para crear la base de datos en el formato deseado. Las variables tiempo dependientes se especifican mediante la función <code>tdc</code> en que se indica también la variable que recoge cuando se han tomado sus medidas (en nuestro caso ‘obstime’).</li>
 </ol>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb267-1" aria-hidden="true" tabindex="-1"></a>aids2 <span class="ot">&lt;-</span> <span class="fu">tmerge</span>(datos, aids, <span class="at">id=</span>patient, <span class="at">CD4 =</span> <span class="fu">tdc</span>(obstime, CD4))</span>
-<span id="cb267-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb267-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aids2)</span></code></pre></div>
-<pre><code>  patient  Time death drug gender x tstart tstop
-1     351 12.27     0  ddC female 4      0  2.00
-2     351 12.27     0  ddC female 4      2  6.00
-3     351 12.27     0  ddC female 4      6 12.00
-4     351 12.27     0  ddC female 4     12 12.27
-5     305 12.30     0  ddC female 2      0  6.00
-6     305 12.30     0  ddC female 2      6 12.30
-  endpt      CD4
-1     0 5.477226
-2     0 6.403124
-3     0 4.690416
-4     0 4.000000
-5     0 2.000000
-6     0 2.449490</code></pre>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb339-1" aria-hidden="true" tabindex="-1"></a>aids2 <span class="ot">&lt;-</span> <span class="fu">tmerge</span>(datos, aids, <span class="at">id=</span>patient, <span class="at">CD4 =</span> <span class="fu">tdc</span>(obstime, CD4))</span>
+<span id="cb339-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb339-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aids2)</span></code></pre></div>
+<pre><code>  patient  Time death drug gender x tstart tstop endpt   CD4
+1     351 12.27     0  ddC female 4      0  2.00     0 5.477
+2     351 12.27     0  ddC female 4      2  6.00     0 6.403
+3     351 12.27     0  ddC female 4      6 12.00     0 4.690
+4     351 12.27     0  ddC female 4     12 12.27     0 4.000
+5     305 12.30     0  ddC female 2      0  6.00     0 2.000
+6     305 12.30     0  ddC female 2      6 12.30     0 2.449</code></pre>
 </div>
-<div id="ajuste-del-modelo" class="section level3" number="7.4.4">
-<h3><span class="header-section-number">7.4.4</span> Ajuste del modelo</h3>
+<div id="ajuste-del-modelo" class="section level3" number="8.4.4">
+<h3><span class="header-section-number">8.4.4</span> Ajuste del modelo</h3>
 <p>En esta nueva base de datos, tenemos intervalos de tiempo <code>tstart</code> y <code>tstop</code> que se usará como tiempos de supervivencia en la función <code>Surv</code> y que ayuda a dividir el seguimento en los intervalos donde CD4 has sido observado de forma diferente para cada invididuo. Con esta información, podremos usar la función <code>coxph ()</code> de la forma habitual, pero usando esta nueva escala de tiempo:</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb269-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(tstart, tstop, endpt) <span class="sc">~</span> CD4 <span class="sc">+</span> drug <span class="sc">+</span> gender, <span class="at">data=</span>aids2)</span>
-<span id="cb269-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb269-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb341-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(tstart, tstop, endpt) <span class="sc">~</span> CD4 <span class="sc">+</span> drug <span class="sc">+</span> gender, <span class="at">data=</span>aids2)</span>
+<span id="cb341-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb341-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
 <pre><code>Call:
 coxph(formula = Surv(tstart, tstop, endpt) ~ CD4 + drug + gender, 
     data = aids2)
 
   n= 1405, number of events= 188 
 
-               coef exp(coef) se(coef)      z
-CD4        -0.19440   0.82333  0.02434 -7.986
-drugddI     0.31698   1.37298  0.14669  2.161
-gendermale -0.32579   0.72196  0.24248 -1.344
-           Pr(&gt;|z|)    
-CD4         1.4e-15 ***
-drugddI      0.0307 *  
-gendermale   0.1791    
+              coef exp(coef) se(coef)     z Pr(&gt;|z|)    
+CD4        -0.1944    0.8233   0.0243 -7.99  1.4e-15 ***
+drugddI     0.3170    1.3730   0.1467  2.16    0.031 *  
+gendermale -0.3258    0.7220   0.2425 -1.34    0.179    
 ---
-Signif. codes:  
-0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
            exp(coef) exp(-coef) lower .95 upper .95
-CD4           0.8233     1.2146    0.7850    0.8636
-drugddI       1.3730     0.7283    1.0299    1.8303
-gendermale    0.7220     1.3851    0.4489    1.1612
+CD4            0.823      1.215     0.785     0.864
+drugddI        1.373      0.728     1.030     1.830
+gendermale     0.722      1.385     0.449     1.161
 
 Concordance= 0.697  (se = 0.018 )
-Likelihood ratio test= 96.28  on 3 df,   p=&lt;2e-16
-Wald test            = 67.58  on 3 df,   p=1e-14
-Score (logrank) test = 75.22  on 3 df,   p=3e-16</code></pre>
+Likelihood ratio test= 96.3  on 3 df,   p=&lt;2e-16
+Wald test            = 67.6  on 3 df,   p=1e-14
+Score (logrank) test = 75.2  on 3 df,   p=3e-16</code></pre>
 <p>Notemos que que tanto las variables tiempo-dependientes (en este caso CD4) como las no-tiempo-dependientes (<code>drug</code> y <code>gender</code>) se ponen de la misma manera y de forma habitual en la fórmula.</p>
 <p>La interpretación de los resultados es exactamente la misma que para un modelo de Cox sin variables tiempo-dependientes.</p>
 <p><strong>Comparación con el modelo sin variables tiempo-dependientes</strong></p>
 <p>Estos resultados los podríamos comparar con el caso en el que consideráramos la primera medida de CD4 como una variable fija a lo largo del tiempo:</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb271-1" aria-hidden="true" tabindex="-1"></a>aids1obs <span class="ot">&lt;-</span> <span class="fu">subset</span>(aids, obstime<span class="sc">==</span><span class="dv">0</span>)</span>
-<span id="cb271-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb271-2" aria-hidden="true" tabindex="-1"></a>modelo1obs <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(Time, death) <span class="sc">~</span> CD4 <span class="sc">+</span> drug <span class="sc">+</span> gender, aids1obs)</span>
-<span id="cb271-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb271-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo1obs)</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb343-1" aria-hidden="true" tabindex="-1"></a>aids1obs <span class="ot">&lt;-</span> <span class="fu">subset</span>(aids, obstime<span class="sc">==</span><span class="dv">0</span>)</span>
+<span id="cb343-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb343-2" aria-hidden="true" tabindex="-1"></a>modelo1obs <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(Time, death) <span class="sc">~</span> CD4 <span class="sc">+</span> drug <span class="sc">+</span> gender, aids1obs)</span>
+<span id="cb343-3"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb343-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo1obs)</span></code></pre></div>
 <pre><code>Call:
 coxph(formula = Surv(Time, death) ~ CD4 + drug + gender, data = aids1obs)
 
   n= 467, number of events= 188 
 
-               coef exp(coef) se(coef)      z
-CD4        -0.18295   0.83281  0.02222 -8.232
-drugddI     0.26694   1.30597  0.14648  1.822
-gendermale -0.20238   0.81679  0.24216 -0.836
-           Pr(&gt;|z|)    
-CD4          &lt;2e-16 ***
-drugddI      0.0684 .  
-gendermale   0.4033    
+              coef exp(coef) se(coef)     z Pr(&gt;|z|)    
+CD4        -0.1830    0.8328   0.0222 -8.23   &lt;2e-16 ***
+drugddI     0.2669    1.3060   0.1465  1.82    0.068 .  
+gendermale -0.2024    0.8168   0.2422 -0.84    0.403    
 ---
-Signif. codes:  
-0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
            exp(coef) exp(-coef) lower .95 upper .95
-CD4           0.8328     1.2008    0.7973    0.8699
-drugddI       1.3060     0.7657    0.9801    1.7403
-gendermale    0.8168     1.2243    0.5081    1.3129
+CD4            0.833      1.201     0.797      0.87
+drugddI        1.306      0.766     0.980      1.74
+gendermale     0.817      1.224     0.508      1.31
 
 Concordance= 0.703  (se = 0.019 )
-Likelihood ratio test= 92.54  on 3 df,   p=&lt;2e-16
-Wald test            = 70.82  on 3 df,   p=3e-15
-Score (logrank) test = 78.19  on 3 df,   p=&lt;2e-16</code></pre>
+Likelihood ratio test= 92.5  on 3 df,   p=&lt;2e-16
+Wald test            = 70.8  on 3 df,   p=3e-15
+Score (logrank) test = 78.2  on 3 df,   p=&lt;2e-16</code></pre>
 <p>Notemos que utilizando este modelo, nuestra conclusión sería que no hay diferencias en la supervivencia entre fármacos (‘drug’) mientras que el modelo utilizando datos longitudinales para CD4 muestra que la didanosine (ddI) tiene una peor supervivencia (p = 0.0307).</p>
 <p>Una vez más se demuestra que, en estadística, uno puede usar cualquier modelo para analizar sus datos y obtener resultados similares (en este segundo modelo casi sale significativo). Sin embargo, si no se utiliza el modelo correcto el perjudicado es el investigador, ya que, la utilización del modelo correcto proporciona el test más potente para detectar diferencias cuando realmente las hay. Es como el caso de analizar una variable 0,1 para comparar dos grupos y usar la t de Student. R nos dará un p-valor, pero este no será el test más potente para encontrar diferencias cuando realmente las haya, ya que ese test es el más potente cuando los datos son normales. Es por ello que en estos casos se usa la chi-cuadrado.</p>
 <p><strong>Validación del modelo</strong></p>
 <p>La validación del modelo con variables tiempo-dependientes se hace de la misma manera que para el modelo de Cox “clásico”. Por ejemplo, también se puede aplicar la función <code>coxz.ph</code>. Sin embargo, la discriminación y la calibración que necesitan del cálculo del riesgo predicho a tiempo <span class="math inline">\(t_0\)</span> no és fácil de calcular: ¿cómo se tiene en cuenta que el valor de <span class="math inline">\(x_k\)</span> cambia y que ello conlleva a un cambio del riesgo acumulado <span class="math inline">\(\Lambda\)</span>?.</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(modelo)</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(modelo)</span></code></pre></div>
 <pre><code>        chisq df    p
 CD4    0.2875  1 0.59
 drug   0.0034  1 0.95
@@ -698,25 +674,20 @@ gender 1.6437  1 0.20
 GLOBAL 1.9692  3 0.58</code></pre>
 <p><strong>Términos no lineales: “splines”</strong></p>
 <p>También, como en los modelo de Cox “clásicos” se pueden introducir términos polinómicos o de splines (<code>psplines</code>) para modelar efectos no lineases de las variables <span class="math inline">\(x_k\)</span> cuantitativas.</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb275-1" aria-hidden="true" tabindex="-1"></a>modelo.splines <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(tstart, tstop, endpt) <span class="sc">~</span> <span class="fu">pspline</span>(CD4) <span class="sc">+</span> drug <span class="sc">+</span> gender, <span class="at">data=</span>aids2)</span>
-<span id="cb275-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb275-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo.splines))</span></code></pre></div>
-<pre><code>                           coef   se(coef)
-pspline(CD4), linear -0.1900175 0.02553879
-pspline(CD4), nonlin         NA         NA
-drugddI               0.3164310 0.14684398
-gendermale           -0.3282002 0.24253118
-                            se2     Chisq       DF
-pspline(CD4), linear 0.02527049 55.358799 1.000000
-pspline(CD4), nonlin         NA  5.669855 3.092747
-drugddI              0.14682270  4.643503 1.000000
-gendermale           0.24249275  1.831229 1.000000
-                                p
-pspline(CD4), linear 1.004194e-13
-pspline(CD4), nonlin 1.367478e-01
-drugddI              3.117131e-02
-gendermale           1.759825e-01</code></pre>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">termplot</span>(modelo, <span class="at">terms=</span><span class="dv">1</span>, <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">rug=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="fig_out/unnamed-chunk-168-1.png" width="672" /></p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb347-1" aria-hidden="true" tabindex="-1"></a>modelo.splines <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(tstart, tstop, endpt) <span class="sc">~</span> <span class="fu">pspline</span>(CD4) <span class="sc">+</span> drug <span class="sc">+</span> gender, <span class="at">data=</span>aids2)</span>
+<span id="cb347-2"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb347-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo.splines))</span></code></pre></div>
+<pre><code>                        coef se(coef)     se2  Chisq    DF
+pspline(CD4), linear -0.1900  0.02554 0.02527 55.359 1.000
+pspline(CD4), nonlin      NA       NA      NA  5.670 3.093
+drugddI               0.3164  0.14684 0.14682  4.644 1.000
+gendermale           -0.3282  0.24253 0.24249  1.831 1.000
+                             p
+pspline(CD4), linear 1.004e-13
+pspline(CD4), nonlin 1.367e-01
+drugddI              3.117e-02
+gendermale           1.760e-01</code></pre>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="fu">termplot</span>(modelo, <span class="at">terms=</span><span class="dv">1</span>, <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">rug=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="fig_out/unnamed-chunk-192-1.png" width="672" /></p>
 <p>en nuestro ejemplo, se demuestra que el efecto de CD4 es lineal (no hay términos cuadráticos, ni cúbicos, ni puntos de inflexión o cambios de tendencias, …) por lo que el modelo sin splines ya sería suficiente para modelar nuestros datos.</p>
 
 </div>
@@ -727,7 +698,7 @@ gendermale           1.759825e-01</code></pre>
           </div>
         </div>
       </div>
-<a href="modelos-lineales-mixtos-lmm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ModelosNoNormal.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

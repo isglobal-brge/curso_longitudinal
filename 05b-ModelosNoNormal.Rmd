@@ -1,0 +1,554 @@
+# Modelos con respuesta no normal {#ModelosNoNormal}
+
+En este capítulo veremos los modelos estadísticos para analizar medidas repetidas cuando la variable respuesta no es normal.
+En concreto, nos centraremos sobretodo cuando la variable respuesta es binaria: sí/no, caso/control, evento/no evento,  ...
+No se estudiará el caso de tener eventos censurados de estudios de cohorte o de seguimiento. 
+
+
+En cuanto a los modelos de regresión que veremos serán:
+
+- Modelos lineales generalizados mixtos (GLMM)
+
+- _Generalized Estimation Equations_ (GEE).
+
+## Distribución de la variable respuesta
+
+Cuando se habla **"generalizado"**, se entienden toda una familia de distribuiones entre las cuales se incluyen la **Binomial** (o binaria), la **Poisson** (propia de contajes) y también la distribución **Normal**, entre otras.
+
+No incluye la distribución de Weibull (propia de análisis de supervivencia). Tampoco veremos extensiones como la censura, truncamiento o inflación en el cero.
+
+
+### Distribución Binomial
+
+$$Y \sim B(n, p), \quad P(Y=k) = \begin{pmatrix} n \\ k \end{pmatrix} p^k (1-p)^{n-k}$$
+
+Donde $n$ es el número de ensayos y $p$ es la probabilidad del éxito en cada ensayo.
+
+Cuando $n$=1 tenemos la distribución de Bernoulli.
+
+La regresión logística es el modelo que para predecir respuesta Bernoulli o Binomial, donde la relación entre las variables independientes y el valor esperado de la variable respuesta es la función logística (link canónico).
+
+$$g(E(Y))=\text{logit}(p) = \log\left(\frac{p}{1-p}\right) = \beta_0 + \sum_{k=1}^K \beta_k x_k$$
+donde $g$ es la función link que en el caso de la regresión logística corresponde a la **función logit**.
+
+El término $\frac{p}{1-p}$ se conoce como el odds del evento. De aquí se deriva que $e^{\beta_k}$ sea el **Odds Ratio** de la variable $x_k$.
+
+En la regresión logística, para obtener **las predicciones** o valor esperado:
+
+$$E(Y) = p = \frac{1}{1+\text{exp} \left(-(\beta_0 + \sum_{k=1}^K \beta_k x_k)\right)}$$
+
+
+
+### Distribución Poisson
+
+$$Y \sim \text{Pois}(\lambda), \quad P(Y=k) = \frac{\lambda^k e^{-\lambda}}{k!}$$
+Donde $\lambda$ es la incidencia o riesgo y coincide con la esperanza.
+
+La regresión log-lineal es el modelo asociado a la distribución de Poisson que asocia la $\lambda$ con las variables independientes mediante el link logarítmico (link canónico).
+
+
+$$\log(\lambda) = \beta_0 + \sum_{k=1}^K \beta_k x_k$$
+De aquí que $e^{\beta_k}$ es el riesgo relativo de la variable $x_k$.
+
+La función link para la regresión log-lineal de Poisson es el función logarítmica.
+
+Para la regresión log-lineal de Poisson, **las predicciones** se obtienen como:
+
+$$E(Y) = \lambda = \exp \left( \beta_0 + \sum_{k=1}^K \beta_k x_k \right)$$
+
+
+
+## Modelos lineales generalizados mixtos
+
+### Ecuación
+
+Los modelos lineales generalizados mixtos, _Generalized Linear Mixed Models_ (GLMM), son una generalización de los modelos lineales para respuesta dentro de la família exponencial. 
+
+Cuando la respuesta no es normal la ecuación del modelo es
+
+$$g(E(y_{ij} | x_{ijk},\color{blue}{\beta_{0i},\cdots,\beta_{Ki}})) = \beta_{0i} + \sum_{k=1}^K \beta_{ki} x_{ijk}$$
+Donde $g$ es la función link.
+
+
+Fíjate que la ecuación es muy similar a lo de los modelos LMM. Sin embargo las diferencias son importantes:
+
+- A la izquierda de la igualdad no hay la variable respuesta, $Y$, sino el link del valor esperado, $\text{link}(E(y_{ij}))$.
+
+- A la derecha del igual no aparecen los errores. Por lo tanto **no habrá matriz de correlaciones de los residuos**.
+
+
+Como en los LMM, $\beta_{01}$ es la constante aleatoria y $\beta_{ki}$ son las pendientes o coeficientes aleatorios. El vector formado por la constante y pendientes aleatorios son los efectos aleatorios y también siguen una distribución normal:
+
+$$\vec{\beta}_i = (\beta_{0i},\beta_{1i},\ldots,\beta_{Ki})^t \sim N(\vec{\beta}, \Omega), \quad \forall i$$
+
+### Predicciones
+
+Existen dos tipus de predicciones que serán diferentes:
+
+1. Las predicciones en el valor esperado de los efectos aleatorios, o sea en un "individuo promedio"
+
+  - para regresión logística
+
+$$E(y_{ij}|x_{ijk}, \color{blue}{\beta_0,\cdots,\beta_K}) = \frac{1}{1+\text{exp} \left(-(\color{blue}{\beta_{0}} + \sum_{k=1}^K \color{blue}{\beta_{k}} x_{ijk}) \right)}$$
+  - para regresión log-lineal de Poisson
+
+$$E(y_{ij}|x_{ijk}, \color{blue}{\beta_0,\cdots,\beta_K}) = \text{exp} \left(\color{blue}{\beta_{0}} + \sum_{k=1}^K \color{blue}{\beta_{k}} x_{ijk} \right)$$
+
+
+2. Las predicciones promedio o marginales
+
+  - para regresión logística
+
+$$E(y_{ij}|x_{ijk}) = \int_{-\infty}^{-\infty} \cdots \int_{-\infty}^{-\infty} \frac{1}{1+\text{exp} \left(-(\color{blue}{\beta_{0i}} + \sum_{k=1}^K \color{blue}{\beta_{ki}} x_{ijk}) \right)} \phi(\beta_{0i},\ldots,\beta_{Ki})$$
+
+  - para regresión logística
+
+$$E(y_{ij}|x_{ijk}) = \int_{-\infty}^{-\infty} \cdots \int_{-\infty}^{-\infty} \text{exp} \left(\color{blue}{\beta_{0i}} + \sum_{k=1}^K \color{blue}{\beta_{ki}} x_{ijk} \right) \phi(\beta_{0i},\ldots,\beta_{Ki})$$
+
+
+Donde $\phi()$ es la función de densidad multivariante de los efectos aleatorios. 
+Esta predicción es computacionalmente mucho más difícil de calcular ya que requiere de integración múltiple y require de métodos numéricos intensivos.
+
+
+**Interpretación de los OR/RR**
+
+Supongamos un modelo con una sola variable independiente (sexo), y en que se considera la constante aleatoria:
+
+$$g(E(y_{ij}|x_{i},\beta_{0i})) = \beta_{0i} + \beta_1 x_i$$
+donde $x_i$ puede tomar valores de 0 (hombre) o 1 (mujer).
+
+El Odds Ratio (OR) o el Riesgo Relativo (RR) de la variable $x$ para la regresión logística o para la regresión log-lineal de Poisson respectivamente son
+
+
+$$\text{RR ó OR} = \frac{e^{\beta_{0\color{blue}{i}} + \beta_1}}{e^{\beta_{0\color{red}{j}}}}  = e^{\beta_{0i}-\beta_{0j}} e^{\beta_1}$$
+
+Fíjate que las constante aleatoria $\beta_{0i}$ es distinto en el numerador que en denominador ya que el individuo está anidado a la variable sexo cada individuo es de una categoría de sexo pero no puede ser de ambas.
+
+Luego el RR o el OR depende de los efectos aleatorio de la constante. Si tomamos el valor esperado del RR o del OR:
+
+
+$$E(\text{RR ó OR}) =  e^{\beta_1}\cdot E\left(e^{\beta_{0i}-\beta_{0j}}\right) = e^{\beta_1}\cdot \color{blue}{e^{\sigma_{\beta_{0}}^2}} $$
+
+ya que $\beta_{0i}-\beta_{0j} \sim N\left(0, 2\sigma_{\beta_{0}}^2\right)$.
+
+Por lo tanto, cuanta más variabilidad haya entre individuos ($\sigma_{\beta_{0}}^2$), mayor es la discrepancia entre $e^{\beta_1}$ el OR (ó RR) marginal.
+
+Nota que para la regresión lineal los efectos aleatorios se cancelan: $E(y|mujeres)-E(y|hombres) = \beta_1 + E(\beta_{0i})-E(\beta_{0j}) = \beta_1 + \beta_{0}-\beta_{0} = \beta_1$.
+
+Pero **cuando el link no es lineal** ésto no sucede y **la interpretación del efecto marginal de una variable depende de la varianza de los efectos aleatorios**.
+
+
+
+### Función `glmer`
+
+Una de las funciones más conocidas para analizar los datos mediante modelos GLMM para respuesta no normal es la función **`glmer`** del paquete **`lme4`**.
+
+Esta paquete tiene la función `lmer` para ajustar modelos LMM. Su sintaxis es similar a `lme`. No obstante no permite modelizar la matriz de correlaciones de los residuos.
+
+Los argumentos que tiene la función `glmer`, entre otros:
+
+- `formula`: para especificar tanto los efectos fijos como los efectos aleatorios. 
+
+- `family`: para especificar la distribución de la variable respuesta.
+
+
+```{r, eval=FALSE}
+library(lme4)
+?glmer
+```
+
+
+La diferencia importante respecto a `lme` es que no hay un argumento separado para especificar los términos fijos y los aleatorios; los términos aleatorios se especifican dentro del argumento **`formula`**:
+
+```
+ + (1 | sujeto)
+```
+para la constante aleatoria
+
+```
+ + (var1 + var2 +...+ var3 | sujeto)
+```
+Par constante y pendientes aleatorios.
+
+Otra diferencia es que no existe el argumento `correlation`, ya que no hay matriz de correlación de los residuos en estos modelos generalizados (respuesta no normal).
+
+
+Para especificar que no hay correlación entre los efectos aleatorios
+
+
+```
+ + (1 | sujeto) + (0 + var1 | sujeto) + (0 + var2 | sujeto) + (0 + var3 | sujeto)
+```
+
+ó equivalentemente
+
+
+```
+ + (var1 + var2 + var3 || sujeto)
+```
+
+Otro argumento específico en esta función `glmer` que no estaba en la función `lme` es el argumento **`family`**:
+
+- `binomial`, `binomial()` ó `"binomial"`: para regresión logística
+- `poisson`, `poisson()` ó `"poisson"`: para regresión log-lineal de poisson
+
+
+Al argumento **`weights`** de la función `glmer`, a diferencia de la función `lme`, hay que pasarle un vector numérico con tantas componentes como observaciones. Por lo tanto, este vector contiene literlmente los pesos que se le quiere dar a cada observación, y no hay necesidad de usar ninguna función intermedia (`varident`, `varPower`, ...) como pasaba con `lme`.
+
+```
+glmer(..., weights = pesos, ...)
+```
+
+
+
+
+### Función `mixed_model`
+
+
+Una alternativa a `glmer` es la función **`mixed_model`** del paquete `GLMMadaptive`. 
+
+Los argumentos `mixed_model` son los mismos que `lme` excepto que no tiene el argumento `correlation`, ya que, al igual que pasa con `glmer` no se pueden especificar la correlación de los errores. 
+
+Como en la función `lme` se especifican los efectos fijos y los aleatorios con los argumentos `fixed` y `random`, respectivamente, y de la misma forma.
+
+Al igual que ocurre con la función `glmer`, para especificar que no hay correlación entre los efectos aleatoorios se especifica con `||`
+
+```
+random = ~ tiempo || indiv
+```
+
+Comparado con la función `glmer`, las implementaciones nuevas son:
+
+- método robusto para calcular los errores estándar de las estimaciones de los coeficientes fijos.
+
+- calcula el intervalo de confianza también de las varianzas de los efectos aleatorios.
+
+- estima predicciones promedio y también los Odds Ratios o Riesgos Relativos marginales
+
+- usa un método más completo de optimización.
+
+La función `mixed_model` también tiene implementado el argumento **`weights`**. Pero es diferente de la función `lme` y de la función `glmer`. Para `mixed_model` hay que pasarle un vector con tantas componentes como individuos. Así pues, lo que hace `mixed_model` es ponderar todas las observaciones de un individuo de la misma manera (pondera los individuos en lugar de las observacioens).
+
+```{r, eval=FALSE}
+library(GLMMadaptive)
+?mixed_model
+```
+
+
+
+### Ejemplo
+
+Para ilustrar la función `mixed_model` y también la función `glmer`, cogemos unos datos simulados (véase la vignette del package `GLMMadaptive`).
+
+```{r, eval=FALSE}
+help(package="GLMMadaptive")
+```
+
+
+Ahora no nos tendremos que preocupar de especificar bien la matriz de correlaciones de los errores, y sólo de los efectos aleatorios.
+
+
+```{r}
+set.seed(1234)
+n <- 100 # number of subjects
+K <- 8 # number of measurements per subject
+t_max <- 15 # maximum follow-up time
+
+# we constuct a data frame with the design: 
+# everyone has a baseline measurment, and then measurements at random follow-up times
+DF <- data.frame(id = rep(seq_len(n), each = K),
+                 time = c(replicate(n, c(0, sort(runif(K - 1, 0, t_max))))),
+                 sex = rep(gl(2, n/2, labels = c("male", "female")), each = K))
+
+# design matrices for the fixed and random effects
+X <- model.matrix(~ sex * time, data = DF)
+Z <- model.matrix(~ time, data = DF)
+
+betas <- c(-2.13, -0.25, 0.24, -0.05) # fixed effects coefficients
+D11 <- 0.48 # variance of random intercepts
+D22 <- 0.1 # variance of random slopes
+
+# we simulate random effects
+b <- cbind(rnorm(n, sd = sqrt(D11)), rnorm(n, sd = sqrt(D22)))
+# linear predictor
+eta_y <- as.vector(X %*% betas + rowSums(Z * b[DF$id, ]))
+# we simulate binary longitudinal data
+DF$y <- rbinom(n * K, 1, plogis(eta_y))
+```
+
+
+```{r}
+DT::datatable(DF)
+```
+
+**Uso de la función `glmer`**
+
+
+```{r}
+
+###################
+
+library(lme4)
+
+modelo1.glmer <- glmer(formula = y ~ sex * time + (time | id), 
+                       data = DF, 
+                       family = binomial)
+summary(modelo1.glmer) # quizá no converge...
+
+## sin correlación entre los efectos aleatorios
+modelo2.glmer <- glmer(formula = y ~ sex*time + (1 | id) + (0 + time | id), 
+                       data = DF, 
+                       family = binomial)
+summary(modelo2.glmer)
+
+# o bien
+modelo2b.glmer <- glmer(formula = y ~ sex*time + (time || id),
+                        data = DF, 
+                        family = binomial)
+summary(modelo2b.glmer)
+
+
+# sólo la constante aleatoria
+modelo3.glmer <- glmer(formula = y ~ sex*time + (1 | id),
+                       data = DF, 
+                       family = binomial)
+summary(modelo3.glmer)
+
+# vemos cuál es mejor
+anova(modelo1.glmer, modelo2.glmer, modelo3.glmer)
+```
+
+No hay diferencias entre el modelo 1 y el 2. Elegimos el modelo 2 que es más simple.
+
+- Estimación de los efectos fijos e IC de las varianzas
+
+```{r, cache=TRUE}
+# efectos fijos (beta0, beta1)
+fixef(modelo2.glmer)
+# IC de los efectos fijos 
+# parm = c(3:4) ya que hay 4 coeficientes fijos elijo dos
+confint(modelo2.glmer, parm = c(3:4))
+```
+
+- Varianzas y covarianzas de los efectos aleatorios
+
+```{r}
+VarCorr(modelo2.glmer)
+```
+
+- Score tests de los parámetros
+
+```{r}
+summary(modelo2.glmer)
+```
+
+
+- Predicciones
+
+Para las siguientes combinaciones de las variables:
+
+```{r}
+newd <- expand.grid(time=seq(0,15,5), sex=c("male","female"), id=1)
+newd
+```
+
+```{r}
+predict(modelo2.glmer, newd, type="response")
+```
+
+
+- Gráfico de predicciones
+
+```{r}
+library(ggeffects)
+pr.random <- ggpredict(modelo2.glmer, c("time [all]","sex"), type="random")
+pr.random
+pr.fixed <- ggpredict(modelo2.glmer, c("time [all]","sex"), type="fixed")
+pr.fixed
+
+library(gridExtra)
+grid.arrange(
+    plot(pr.random) + ggtitle("random"),
+    plot(pr.fixed) + ggtitle("fixed"),
+nrow=1, ncol=2)
+```
+
+**Usando la función `mixed_model`**
+
+El modelo escogido usando el `glmer` se ajustaría con la siguiente sintaxis:
+
+```{r}
+library(GLMMadaptive)
+
+modelo2.mixed <- mixed_model(fixed = y ~ sex*time,
+                             random = ~ time || id,
+                             data = DF,
+                             family = binomial)
+summary(modelo2.mixed)
+```
+
+
+- efectos condicionales e intervalos de confianza
+
+
+```{r}
+confint(modelo2.mixed)
+```
+
+
+- efectos marginales e intervalos de confianza
+
+
+```{r, cache=TRUE}
+marginal_coefs(modelo2.mixed, std_errors = TRUE)
+```
+
+
+
+- Estimación de las varianzas de los efectos aleatorios con sus intervalos de confianza
+
+```{r}
+confint(modelo2.mixed, parm = "var-cov")
+```
+
+- Predicciones
+
+Para las siguientes combinaciones de las variables:
+
+```{r}
+newd <- expand.grid(time=seq(0,15,5), sex=c("male","female"))
+newd
+```
+
+
+```{r, cache=TRUE}
+predict(modelo2.mixed, newd, type = "marginal")
+predict(modelo2.mixed, newd, type = "mean_subject")
+```
+
+
+y con los errores estándar (del predictor lineal).
+
+```{r, cache=TRUE}
+predict(modelo2.mixed, newd, type = "marginal", se.fit=TRUE)
+predict(modelo2.mixed, newd, type = "mean_subject", se.fit=TRUE)
+```
+
+
+```{r}
+library("effects")
+plot(predictorEffect("time", modelo2.mixed), type = "response")
+```
+
+
+Para el modelo ajustado con `mixed_model`, las funciones `summary`, `confint`, `predict` y `marginal_coefs`, tiene el argumento `sandwich=TRUE` con el que los errores estándar se calculan mediante el método sandwich (más robusto). Sin embargo, sólo funciona si el modelo tiene sólo la constante aleatoria.  
+
+
+
+## _Generalized Estimation Equations_ 
+
+### Ecuación
+
+Los modelo GEE ("Generalized Estimation Equations"), se basan en la primera derivada de la función de verosimilitud, y encontrar los parámetros que igualen esta derivada a cero.
+
+
+Es importante remarcar que **no se basan propiamente en la función de verosimilitud**. Por lo tanto, no se podrán realizar contrastes de LRT para comparar modelos anidados ni obtener los índices AIC ni BIC.
+
+En su lugar, sí que se pueden calcular los QIC ("quasi-likelihood information criteria") para comparar modelos.
+
+
+
+
+### Función `geeglm`
+
+Para ajustar los modelos GEE usaremos la función `geeglm` del package **`geepack`**, el cual es una extensión del paquete `gee`. El valor añadio de `geepack` es que aporta la función `QIC` ("quasi-likelihood information criteria") que permite comparar modelos para escojer entre matrices de correlación de los errores.
+
+Las posibles **matrices de correlación** ("working matrices") son:
+
+- "independence" 
+- "exchangeable"
+- "ar1"
+- "unstructured"
+- "userdefined"
+
+
+El argumento `weights` de la función `geeglm` tiene el mismo significado y funcionamiento que en la función `glmer`, o sea que es un vector de pesos para cada observación.  
+
+
+### Ejemplos
+
+Fíjate en el argumento `waves`.
+
+
+```{r}
+library(geepack)
+
+modelo2.gee <- geeglm(formula = y ~ sex*time,
+                      id = id,
+                      waves = time,
+                      corstr = "ar1",
+                      family = binomial(),
+                      std.err = "san.se", #default; others: 'jack', 'j1s', 'fij'
+                      data = DF)
+summary(modelo2.gee)
+anova(modelo2.gee)
+QIC(modelo2.gee)
+```
+
+Por defecto, los errores estándard se calculan mediante el método sandwich. Otra posibilidad es usar el método jacknife.
+
+
+Comparamos los resultados de los coeficientes fijos con la función `glmer`, `mixed_model` (modelos mixtos) y la función `geeglm` (GEE):
+
+
+
+```{r, cache=TRUE}
+coef(summary(modelo2.glmer))
+coef(summary(modelo2.mixed))
+marginal_coefs(modelo2.mixed, std_errors = TRUE)
+coef(summary(modelo2.gee))
+```
+
+
+## Ejercicios
+
+### Ejercicio 5b
+
+Analiza los datos `toenail` disponible en el package `HSAUR3`. En ellos hay la información de un estudio para comparar dos fármacos sobre la evolución de una infección. 
+
+```{r, eval=FALSE}
+library(HSAUR3)
+?toenail
+```
+
+Analiza cómo cambia el riesgo de paceder una infección moderada o severa ("moderate or severe") a lo largo de las visitas y según el tratamiento. Empieza por visualizar los datos y hacer una descriptiva. Después, para contestar a la pregunta científica, prueba de usar tanto las funciones para ajustar los modelos GLMM como para los modelos GEE.
+
+
+```{r, eval=FALSE, echo=FALSE}
+library(HSAUR3)
+toenail$outcome2 <- as.integer(toenail$outcome=='moderate or severe')
+modelo <- glmer(outcome2~treatment*visit+(1|patientID),
+                 data=toenail,
+                 family=binomial)
+
+summary(modelo)
+
+library(ggeffects)
+pr <- ggpredict(modelo, c("visit","treatment"))
+plot(pr)
+
+library(GLMMadaptive)
+modelo.mixed <- mixed_model(fixed = outcome2 ~ visit*treatment,
+                             random = ~ 1 | patientID,
+                             data = toenail,
+                             control = list(optimizer="optim"),
+                             family = binomial)
+summary(modelo.mixed)
+
+library("effects")
+plot(predictorEffect("visit", modelo.mixed), type = "response")
+
+```
+
+
+

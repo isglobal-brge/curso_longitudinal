@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-10-08" />
+<meta name="date" content="2022-03-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="ModelosNormal.html"/>
-<link rel="next" href="análisis-de-supervivencia-con-datos-longitudinales.html"/>
+<link rel="next" href="ModelosNoNormal.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -55,6 +55,14 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.18/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -228,27 +236,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.8.2" data-path="modelos-lineales-mixtos-lmm.html"><a href="modelos-lineales-mixtos-lmm.html#ejercicio-5"><i class="fa fa-check"></i><b>6.8.2</b> Ejercicio 5</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html"><i class="fa fa-check"></i><b>7</b> Análisis de supervivencia con datos longitudinales</a>
+<li class="chapter" data-level="7" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html"><i class="fa fa-check"></i><b>7</b> Modelos con respuesta no normal</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#tiempo-hasta-evento"><i class="fa fa-check"></i><b>7.1</b> Tiempo hasta evento</a>
+<li class="chapter" data-level="7.1" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#distribución-de-la-variable-respuesta"><i class="fa fa-check"></i><b>7.1</b> Distribución de la variable respuesta</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#ejemplos-3"><i class="fa fa-check"></i><b>7.1.1</b> Ejemplos</a></li>
-<li class="chapter" data-level="7.1.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#otros-tipos-de-censura"><i class="fa fa-check"></i><b>7.1.2</b> Otros tipos de censura</a></li>
+<li class="chapter" data-level="7.1.1" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#distribución-binomial"><i class="fa fa-check"></i><b>7.1.1</b> Distribución Binomial</a></li>
+<li class="chapter" data-level="7.1.2" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#distribución-poisson"><i class="fa fa-check"></i><b>7.1.2</b> Distribución Poisson</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#kaplan-meier"><i class="fa fa-check"></i><b>7.2</b> Kaplan-Meier</a></li>
-<li class="chapter" data-level="7.3" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#funciones-involucradas-en-el-análisis-de-supervivencia"><i class="fa fa-check"></i><b>7.3</b> Funciones involucradas en el análisis de supervivencia</a></li>
-<li class="chapter" data-level="7.4" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#modelo-de-regresión-de-cox"><i class="fa fa-check"></i><b>7.4</b> Modelo de regresión de Cox</a>
+<li class="chapter" data-level="7.2" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#modelos-lineales-generalizados-mixtos"><i class="fa fa-check"></i><b>7.2</b> Modelos lineales generalizados mixtos</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#efectos-tiempo-dependientes"><i class="fa fa-check"></i><b>7.4.1</b> Efectos tiempo-dependientes</a></li>
-<li class="chapter" data-level="7.4.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#variables-tiempo-dependientes-datos-longitudinales"><i class="fa fa-check"></i><b>7.4.2</b> Variables tiempo-dependientes (datos longitudinales)</a></li>
-<li class="chapter" data-level="7.4.3" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#estructura-de-los-datos-1"><i class="fa fa-check"></i><b>7.4.3</b> Estructura de los datos</a></li>
-<li class="chapter" data-level="7.4.4" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#ajuste-del-modelo"><i class="fa fa-check"></i><b>7.4.4</b> Ajuste del modelo</a></li>
+<li class="chapter" data-level="7.2.1" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ecuación-1"><i class="fa fa-check"></i><b>7.2.1</b> Ecuación</a></li>
+<li class="chapter" data-level="7.2.2" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#predicciones-1"><i class="fa fa-check"></i><b>7.2.2</b> Predicciones</a></li>
+<li class="chapter" data-level="7.2.3" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#función-glmer"><i class="fa fa-check"></i><b>7.2.3</b> Función <code>glmer</code></a></li>
+<li class="chapter" data-level="7.2.4" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#función-mixed_model"><i class="fa fa-check"></i><b>7.2.4</b> Función <code>mixed_model</code></a></li>
+<li class="chapter" data-level="7.2.5" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ejemplo"><i class="fa fa-check"></i><b>7.2.5</b> Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#generalized-estimation-equations"><i class="fa fa-check"></i><b>7.3</b> <em>Generalized Estimation Equations</em></a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ecuación-2"><i class="fa fa-check"></i><b>7.3.1</b> Ecuación</a></li>
+<li class="chapter" data-level="7.3.2" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#función-geeglm"><i class="fa fa-check"></i><b>7.3.2</b> Función <code>geeglm</code></a></li>
+<li class="chapter" data-level="7.3.3" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ejemplos-3"><i class="fa fa-check"></i><b>7.3.3</b> Ejemplos</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ejercicios-2"><i class="fa fa-check"></i><b>7.4</b> Ejercicios</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="ModelosNoNormal.html"><a href="ModelosNoNormal.html#ejercicio-5b"><i class="fa fa-check"></i><b>7.4.1</b> Ejercicio 5b</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><i class="fa fa-check"></i><b>8</b> Joint models para datos longitudinales y datos de supervivencia</a>
+<li class="chapter" data-level="8" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html"><i class="fa fa-check"></i><b>8</b> Análisis de supervivencia con datos longitudinales</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#por-qué-deberíamos-utilizar-este-tipo-de-modelos"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué deberíamos utilizar este tipo de modelos?</a></li>
-<li class="chapter" data-level="8.2" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#joint-models"><i class="fa fa-check"></i><b>8.2</b> Joint models</a></li>
+<li class="chapter" data-level="8.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#tiempo-hasta-evento"><i class="fa fa-check"></i><b>8.1</b> Tiempo hasta evento</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#ejemplos-4"><i class="fa fa-check"></i><b>8.1.1</b> Ejemplos</a></li>
+<li class="chapter" data-level="8.1.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#otros-tipos-de-censura"><i class="fa fa-check"></i><b>8.1.2</b> Otros tipos de censura</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#kaplan-meier"><i class="fa fa-check"></i><b>8.2</b> Kaplan-Meier</a></li>
+<li class="chapter" data-level="8.3" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#funciones-involucradas-en-el-análisis-de-supervivencia"><i class="fa fa-check"></i><b>8.3</b> Funciones involucradas en el análisis de supervivencia</a></li>
+<li class="chapter" data-level="8.4" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#modelo-de-regresión-de-cox"><i class="fa fa-check"></i><b>8.4</b> Modelo de regresión de Cox</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#efectos-tiempo-dependientes"><i class="fa fa-check"></i><b>8.4.1</b> Efectos tiempo-dependientes</a></li>
+<li class="chapter" data-level="8.4.2" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#variables-tiempo-dependientes-datos-longitudinales"><i class="fa fa-check"></i><b>8.4.2</b> Variables tiempo-dependientes (datos longitudinales)</a></li>
+<li class="chapter" data-level="8.4.3" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#estructura-de-los-datos-1"><i class="fa fa-check"></i><b>8.4.3</b> Estructura de los datos</a></li>
+<li class="chapter" data-level="8.4.4" data-path="análisis-de-supervivencia-con-datos-longitudinales.html"><a href="análisis-de-supervivencia-con-datos-longitudinales.html#ajuste-del-modelo"><i class="fa fa-check"></i><b>8.4.4</b> Ajuste del modelo</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><i class="fa fa-check"></i><b>9</b> Joint models para datos longitudinales y datos de supervivencia</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#por-qué-deberíamos-utilizar-este-tipo-de-modelos"><i class="fa fa-check"></i><b>9.1</b> ¿Por qué deberíamos utilizar este tipo de modelos?</a></li>
+<li class="chapter" data-level="9.2" data-path="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html"><a href="joint-models-para-datos-longitudinales-y-datos-de-supervivencia.html#joint-models"><i class="fa fa-check"></i><b>9.2</b> Joint models</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -613,24 +647,18 @@ Correlation Structure: AR(1)
          Phi 
 0.0001428372 
 Fixed effects:  medida ~ poly(tiempo, 2) 
-                     Value Std.Error DF    t-value
-(Intercept)       42.99444  2.185832 22  19.669598
-poly(tiempo, 2)1  36.94647  4.443447 22   8.314823
-poly(tiempo, 2)2 -28.30784  2.076632 22 -13.631610
-                 p-value
-(Intercept)            0
-poly(tiempo, 2)1       0
-poly(tiempo, 2)2       0
+                     Value Std.Error DF    t-value p-value
+(Intercept)       42.99444  2.185832 22  19.669598       0
+poly(tiempo, 2)1  36.94647  4.443447 22   8.314823       0
+poly(tiempo, 2)2 -28.30784  2.076632 22 -13.631610       0
  Correlation: 
                  (Intr) p(,2)1
 poly(tiempo, 2)1  0.828       
 poly(tiempo, 2)2 -0.475 -0.497
 
 Standardized Within-Group Residuals:
-       Min         Q1        Med         Q3 
--1.0450552 -0.4346930 -0.1931843  0.5001057 
-       Max 
- 1.1924184 
+       Min         Q1        Med         Q3        Max 
+-1.0450552 -0.4346930 -0.1931843  0.5001057  1.1924184 
 
 Number of Observations: 36
 Number of Groups: 12 </code></pre>
@@ -638,14 +666,10 @@ Number of Groups: 12 </code></pre>
 <li>Valor esperado de la constante y coeficientes, <span class="math inline">\(\beta_0, \ldots, \beta_K\)</span>. También se conoce como los coeficientes fijos. Para obtener la tabla de sus estimaciones y los p-valores:</li>
 </ul>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="modelos-lineales-mixtos-lmm.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
-<pre><code>                     Value Std.Error DF    t-value
-(Intercept)       42.99444  2.185832 22  19.669598
-poly(tiempo, 2)1  36.94647  4.443447 22   8.314823
-poly(tiempo, 2)2 -28.30784  2.076632 22 -13.631610
-                      p-value
-(Intercept)      1.886788e-15
-poly(tiempo, 2)1 3.092000e-08
-poly(tiempo, 2)2 3.311649e-12</code></pre>
+<pre><code>                     Value Std.Error DF    t-value      p-value
+(Intercept)       42.99444  2.185832 22  19.669598 1.886788e-15
+poly(tiempo, 2)1  36.94647  4.443447 22   8.314823 3.092000e-08
+poly(tiempo, 2)2 -28.30784  2.076632 22 -13.631610 3.311649e-12</code></pre>
 <ul>
 <li>Estimación de los efectos aleatorios, <span class="math inline">\(\color{green}{(\beta_{0i}^{*},\beta_{1i}^{*},\beta_{2i}^{*})}\)</span></li>
 </ul>
@@ -670,14 +694,10 @@ poly(tiempo, 2)2 3.311649e-12</code></pre>
 </ul>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="modelos-lineales-mixtos-lmm.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getVarCov</span>(modelo)</span></code></pre></div>
 <pre><code>Random effects variance covariance matrix
-                 (Intercept) poly(tiempo, 2)1
-(Intercept)           56.642           96.553
-poly(tiempo, 2)1      96.553          211.990
-poly(tiempo, 2)2     -25.856          -54.998
-                 poly(tiempo, 2)2
-(Intercept)               -25.856
-poly(tiempo, 2)1          -54.998
-poly(tiempo, 2)2           26.816
+                 (Intercept) poly(tiempo, 2)1 poly(tiempo, 2)2
+(Intercept)           56.642           96.553          -25.856
+poly(tiempo, 2)1      96.553          211.990          -54.998
+poly(tiempo, 2)2     -25.856          -54.998           26.816
   Standard Deviations: 7.5261 14.56 5.1784 </code></pre>
 <ul>
 <li>Matriz de correlaciones de los residuos, <span class="math inline">\(\Sigma_i\)</span></li>
@@ -701,10 +721,8 @@ poly(tiempo, 2)2           26.816
 Random effects:
  Formula: ~poly(tiempo, 2) | indiv
  Structure: Diagonal
-        (Intercept) poly(tiempo, 2)1
-StdDev:  0.00304907         9.921619
-        poly(tiempo, 2)2 Residual
-StdDev:     6.785107e-05 7.683502
+        (Intercept) poly(tiempo, 2)1 poly(tiempo, 2)2 Residual
+StdDev:  0.00304907         9.921619     6.785107e-05 7.683502
 
 Correlation Structure: AR(1)
  Formula: ~1 | indiv 
@@ -712,65 +730,46 @@ Correlation Structure: AR(1)
      Phi 
 0.896943 
 Fixed effects:  medida ~ poly(tiempo, 2) 
-                     Value Std.Error DF    t-value
-(Intercept)       42.99444  2.116748 22  20.311555
-poly(tiempo, 2)1  36.94647  4.443466 22   8.314786
-poly(tiempo, 2)2 -28.30784  2.065204 22 -13.707045
-                 p-value
-(Intercept)            0
-poly(tiempo, 2)1       0
-poly(tiempo, 2)2       0
+                     Value Std.Error DF    t-value p-value
+(Intercept)       42.99444  2.116748 22  20.311555       0
+poly(tiempo, 2)1  36.94647  4.443466 22   8.314786       0
+poly(tiempo, 2)2 -28.30784  2.065204 22 -13.707045       0
  Correlation: 
                  (Intr) p(,2)1
 poly(tiempo, 2)1  0.000       
 poly(tiempo, 2)2 -0.098  0.000
 
 Standardized Within-Group Residuals:
-        Min          Q1         Med          Q3 
--1.58347912 -0.87272384  0.04840927  0.77580090 
-        Max 
- 2.40352231 
+        Min          Q1         Med          Q3         Max 
+-1.58347912 -0.87272384  0.04840927  0.77580090  2.40352231 
 
 Number of Observations: 36
 Number of Groups: 12 </code></pre>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="modelos-lineales-mixtos-lmm.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getVarCov</span>(modelo2)</span></code></pre></div>
 <pre><code>Random effects variance covariance matrix
-                 (Intercept) poly(tiempo, 2)1
-(Intercept)       9.2968e-06            0.000
-poly(tiempo, 2)1  0.0000e+00           98.439
-poly(tiempo, 2)2  0.0000e+00            0.000
-                 poly(tiempo, 2)2
-(Intercept)            0.0000e+00
-poly(tiempo, 2)1       0.0000e+00
-poly(tiempo, 2)2       4.6038e-09
+                 (Intercept) poly(tiempo, 2)1 poly(tiempo, 2)2
+(Intercept)       9.2968e-06            0.000       0.0000e+00
+poly(tiempo, 2)1  0.0000e+00           98.439       0.0000e+00
+poly(tiempo, 2)2  0.0000e+00            0.000       4.6038e-09
   Standard Deviations: 0.0030491 9.9216 6.7851e-05 </code></pre>
 <p>Y para contrastar esta asunción</p>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="modelos-lineales-mixtos-lmm.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, modelo2)</span></code></pre></div>
-<pre><code>        Model df      AIC      BIC     logLik
-modelo      1 11 208.6888 225.1504  -93.34439
-modelo2     2  8 217.8098 229.7819 -100.90491
-          Test  L.Ratio p-value
-modelo                         
-modelo2 1 vs 2 15.12105  0.0017</code></pre>
+<pre><code>        Model df      AIC      BIC     logLik   Test  L.Ratio
+modelo      1 11 208.6888 225.1504  -93.34439                
+modelo2     2  8 217.8098 229.7819 -100.90491 1 vs 2 15.12105
+        p-value
+modelo         
+modelo2  0.0017</code></pre>
 <p>El mejor a escoger es el que contempla que hay correlación entre los efectos aleatorios.</p>
 <p><strong>Simplificación del modelo</strong></p>
 <p>Miramos primero si los coeficientes son aleatorios o fijos. Para ello comparamos el modelo completo con el modelo sólo con la constante aleatoria.</p>
 <div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="modelos-lineales-mixtos-lmm.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> indiv))</span></code></pre></div>
-<pre><code>                                    Model df
-modelo                                  1 11
-update(modelo, random = ~1 | indiv)     2  6
-                                         AIC
-modelo                              208.6888
-update(modelo, random = ~1 | indiv) 214.6890
-                                         BIC
-modelo                              225.1504
-update(modelo, random = ~1 | indiv) 223.6680
-                                        logLik
-modelo                               -93.34439
-update(modelo, random = ~1 | indiv) -101.34449
-                                      Test  L.Ratio
-modelo                                             
-update(modelo, random = ~1 | indiv) 1 vs 2 16.00021
+<pre><code>                                    Model df      AIC      BIC
+modelo                                  1 11 208.6888 225.1504
+update(modelo, random = ~1 | indiv)     2  6 214.6890 223.6680
+                                        logLik   Test  L.Ratio
+modelo                               -93.34439                
+update(modelo, random = ~1 | indiv) -101.34449 1 vs 2 16.00021
                                     p-value
 modelo                                     
 update(modelo, random = ~1 | indiv)  0.0068</code></pre>
@@ -805,21 +804,12 @@ update(modelo, random = list(indiv = pdDiag(~poly(tiempo, 2))))  0.0017</code></
 <p>Nos quedamos con el modelo más complejo, ya que el p-valor del LRT es &lt; 0.005.</p>
 <p>Finalmente, miramos si podemos simplificar la matriz de correlación de los residuos. Comparamos mediante el LRT el modelo ajustado con uno que suponga independencia de los residuos:</p>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="modelos-lineales-mixtos-lmm.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">correlation=</span><span class="cn">NULL</span>))</span></code></pre></div>
-<pre><code>                                   Model df
-modelo                                 1 11
-update(modelo, correlation = NULL)     2 10
-                                        AIC
-modelo                             208.6888
-update(modelo, correlation = NULL) 206.6888
-                                        BIC
-modelo                             225.1504
-update(modelo, correlation = NULL) 221.6539
-                                      logLik   Test
-modelo                             -93.34439       
-update(modelo, correlation = NULL) -93.34439 1 vs 2
-                                        L.Ratio
-modelo                                         
-update(modelo, correlation = NULL) 3.668106e-10
+<pre><code>                                   Model df      AIC      BIC
+modelo                                 1 11 208.6888 225.1504
+update(modelo, correlation = NULL)     2 10 206.6888 221.6539
+                                      logLik   Test      L.Ratio
+modelo                             -93.34439                    
+update(modelo, correlation = NULL) -93.34439 1 vs 2 3.668106e-10
                                    p-value
 modelo                                    
 update(modelo, correlation = NULL)       1</code></pre>
@@ -827,14 +817,10 @@ update(modelo, correlation = NULL)       1</code></pre>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="modelos-lineales-mixtos-lmm.html#cb122-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">update</span>(modelo, <span class="at">correlation=</span><span class="cn">NULL</span>)</span></code></pre></div>
 <p>En el siguiente paso evaluamos la significación de los efectos fijos:</p>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="modelos-lineales-mixtos-lmm.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
-<pre><code>                     Value Std.Error DF    t-value
-(Intercept)       42.99444  2.185834 22  19.669582
-poly(tiempo, 2)1  36.94647  4.443441 22   8.314834
-poly(tiempo, 2)2 -28.30784  2.076630 22 -13.631623
-                      p-value
-(Intercept)      1.886821e-15
-poly(tiempo, 2)1 3.091930e-08
-poly(tiempo, 2)2 3.311588e-12</code></pre>
+<pre><code>                     Value Std.Error DF    t-value      p-value
+(Intercept)       42.99444  2.185834 22  19.669582 1.886821e-15
+poly(tiempo, 2)1  36.94647  4.443441 22   8.314834 3.091930e-08
+poly(tiempo, 2)2 -28.30784  2.076630 22 -13.631623 3.311588e-12</code></pre>
 <p>Todos los coeficientes son significativos. Por lo tanto no podemos simplificar el modelo.</p>
 <div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="modelos-lineales-mixtos-lmm.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
 <pre><code>Linear mixed-effects model fit by REML
@@ -852,24 +838,18 @@ poly(tiempo, 2)2  5.178188 -0.663 -0.729
 Residual          1.441501              
 
 Fixed effects:  medida ~ poly(tiempo, 2) 
-                     Value Std.Error DF    t-value
-(Intercept)       42.99444  2.185834 22  19.669582
-poly(tiempo, 2)1  36.94647  4.443441 22   8.314834
-poly(tiempo, 2)2 -28.30784  2.076630 22 -13.631623
-                 p-value
-(Intercept)            0
-poly(tiempo, 2)1       0
-poly(tiempo, 2)2       0
+                     Value Std.Error DF    t-value p-value
+(Intercept)       42.99444  2.185834 22  19.669582       0
+poly(tiempo, 2)1  36.94647  4.443441 22   8.314834       0
+poly(tiempo, 2)2 -28.30784  2.076630 22 -13.631623       0
  Correlation: 
                  (Intr) p(,2)1
 poly(tiempo, 2)1  0.828       
 poly(tiempo, 2)2 -0.475 -0.497
 
 Standardized Within-Group Residuals:
-       Min         Q1        Med         Q3 
--1.0451512 -0.4348223 -0.1931091  0.5002053 
-       Max 
- 1.1925501 
+       Min         Q1        Med         Q3        Max 
+-1.0451512 -0.4348223 -0.1931091  0.5002053  1.1925501 
 
 Number of Observations: 36
 Number of Groups: 12 </code></pre>
@@ -952,36 +932,26 @@ Correlation Structure: General
 2  0.081       
 3 -0.561  0.628
 Fixed effects:  medida ~ as.factor(tiempo) 
-                      Value Std.Error DF   t-value
-(Intercept)        32.11667  2.277053 22 14.104488
-as.factor(tiempo)2 17.55000  1.368874 22 12.820757
-as.factor(tiempo)3 15.08333  1.784415 22  8.452817
-                   p-value
-(Intercept)              0
-as.factor(tiempo)2       0
-as.factor(tiempo)3       0
+                      Value Std.Error DF   t-value p-value
+(Intercept)        32.11667  2.277053 22 14.104488       0
+as.factor(tiempo)2 17.55000  1.368874 22 12.820757       0
+as.factor(tiempo)3 15.08333  1.784415 22  8.452817       0
  Correlation: 
                    (Intr) as.()2
 as.factor(tiempo)2 -0.301       
 as.factor(tiempo)3 -0.392  0.880
 
 Standardized Within-Group Residuals:
-        Min          Q1         Med          Q3 
--1.95466422 -0.48588298 -0.07605957  0.47680669 
-        Max 
- 2.08061488 
+        Min          Q1         Med          Q3         Max 
+-1.95466422 -0.48588298 -0.07605957  0.47680669  2.08061488 
 
 Number of Observations: 36
 Number of Groups: 12 </code></pre>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="modelos-lineales-mixtos-lmm.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
-<pre><code>                      Value Std.Error DF   t-value
-(Intercept)        32.11667  2.277053 22 14.104488
-as.factor(tiempo)2 17.55000  1.368874 22 12.820757
-as.factor(tiempo)3 15.08333  1.784415 22  8.452817
-                        p-value
-(Intercept)        1.683824e-12
-as.factor(tiempo)2 1.104451e-11
-as.factor(tiempo)3 2.338498e-08</code></pre>
+<pre><code>                      Value Std.Error DF   t-value      p-value
+(Intercept)        32.11667  2.277053 22 14.104488 1.683824e-12
+as.factor(tiempo)2 17.55000  1.368874 22 12.820757 1.104451e-11
+as.factor(tiempo)3 15.08333  1.784415 22  8.452817 2.338498e-08</code></pre>
 <p>La función <code>anova</code> aplicada a un sólo modelo ajustado es útil para contrastar la significación de un factor de más de una categoría (o posibles interacciones de factores de más de dos categorías).</p>
 <div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="modelos-lineales-mixtos-lmm.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo)</span></code></pre></div>
 <pre><code>                  numDF denDF  F-value p-value
@@ -1020,39 +990,24 @@ Correlation Structure: AR(1)
          Phi 
 5.458068e-05 
 Fixed effects:  medida ~ poly(tiempo, 2) * trat 
-                          Value Std.Error DF
-(Intercept)            22.16667  4.241672 44
-poly(tiempo, 2)1      -35.16063 10.516421 44
-poly(tiempo, 2)2       33.10000  5.617817 44
-trat                   10.41389  2.682669 22
-poly(tiempo, 2)1:trat  43.70542  6.651169 44
-poly(tiempo, 2)2:trat -36.56667  3.553020 44
-                         t-value p-value
-(Intercept)             5.225927  0.0000
-poly(tiempo, 2)1       -3.343403  0.0017
-poly(tiempo, 2)2        5.891968  0.0000
-trat                    3.881914  0.0008
-poly(tiempo, 2)1:trat   6.571088  0.0000
-poly(tiempo, 2)2:trat -10.291715  0.0000
+                          Value Std.Error DF    t-value p-value
+(Intercept)            22.16667  4.241672 44   5.225927  0.0000
+poly(tiempo, 2)1      -35.16063 10.516421 44  -3.343403  0.0017
+poly(tiempo, 2)2       33.10000  5.617817 44   5.891968  0.0000
+trat                   10.41389  2.682669 22   3.881914  0.0008
+poly(tiempo, 2)1:trat  43.70542  6.651169 44   6.571088  0.0000
+poly(tiempo, 2)2:trat -36.56667  3.553020 44 -10.291715  0.0000
  Correlation: 
-                      (Intr) pl(,2)1 pl(,2)2 trat  
-poly(tiempo, 2)1       0.659                       
-poly(tiempo, 2)2      -0.435 -0.414                
-trat                  -0.949 -0.625   0.413        
-poly(tiempo, 2)1:trat -0.625 -0.949   0.393   0.659
-poly(tiempo, 2)2:trat  0.413  0.393  -0.949  -0.435
-                      p(,2)1:
-poly(tiempo, 2)1             
-poly(tiempo, 2)2             
-trat                         
-poly(tiempo, 2)1:trat        
-poly(tiempo, 2)2:trat -0.414 
+                      (Intr) pl(,2)1 pl(,2)2 trat   p(,2)1:
+poly(tiempo, 2)1       0.659                               
+poly(tiempo, 2)2      -0.435 -0.414                        
+trat                  -0.949 -0.625   0.413                
+poly(tiempo, 2)1:trat -0.625 -0.949   0.393   0.659        
+poly(tiempo, 2)2:trat  0.413  0.393  -0.949  -0.435 -0.414 
 
 Standardized Within-Group Residuals:
-        Min          Q1         Med          Q3 
--1.17636054 -0.41451565 -0.05512438  0.37021883 
-        Max 
- 1.36156358 
+        Min          Q1         Med          Q3         Max 
+-1.17636054 -0.41451565 -0.05512438  0.37021883  1.36156358 
 
 Number of Observations: 72
 Number of Groups: 24 </code></pre>
@@ -1061,24 +1016,12 @@ Si los individuos estuvieran anidados dentro de clusters, se especificaría en e
 <p><strong>Observación</strong> Para que el modelo quede bien definido no es posible poner la interacción del tiempo y el tratamiento como coeficiente aleatorio. De esta manera se especifican como aleatorios la costante y los coeficientes del tiempo (lineal y cuadrático) para el grupo control.</p>
 <p>Como en el anterior ejemplo, contrastamos la significación de los coeficientes aleatorios del tiempo:</p>
 <div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="modelos-lineales-mixtos-lmm.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> indiv2))</span></code></pre></div>
-<pre><code>                                     Model df
-modelo                                   1 14
-update(modelo, random = ~1 | indiv2)     2  9
-                                          AIC
-modelo                               386.9140
-update(modelo, random = ~1 | indiv2) 393.6099
-                                          BIC
-modelo                               417.5692
-update(modelo, random = ~1 | indiv2) 413.3168
-                                       logLik
-modelo                               -179.457
-update(modelo, random = ~1 | indiv2) -187.805
-                                       Test
-modelo                                     
-update(modelo, random = ~1 | indiv2) 1 vs 2
-                                      L.Ratio
-modelo                                       
-update(modelo, random = ~1 | indiv2) 16.69594
+<pre><code>                                     Model df      AIC      BIC
+modelo                                   1 14 386.9140 417.5692
+update(modelo, random = ~1 | indiv2)     2  9 393.6099 413.3168
+                                       logLik   Test  L.Ratio
+modelo                               -179.457                
+update(modelo, random = ~1 | indiv2) -187.805 1 vs 2 16.69594
                                      p-value
 modelo                                      
 update(modelo, random = ~1 | indiv2)  0.0051</code></pre>
@@ -1112,18 +1055,12 @@ update(modelo, random = list(indiv2 = pdDiag(~poly(tiempo, 2))))   0.001</code><
 <p>El test LRT es significativo (p-valor &lt; 0.05). Por lo tanto nos quedamos con el modelo más complejo que supone que hay correlación entre los efectos aleatorios.</p>
 <p>Seguidamente, miramos si se puede simplificar la matriz de correlaciones de los errores.</p>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="modelos-lineales-mixtos-lmm.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">correlation=</span><span class="cn">NULL</span>))</span></code></pre></div>
-<pre><code>                                   Model df     AIC
-modelo                                 1 14 386.914
-update(modelo, correlation = NULL)     2 13 384.914
-                                        BIC
-modelo                             417.5692
-update(modelo, correlation = NULL) 413.3795
-                                     logLik   Test
-modelo                             -179.457       
-update(modelo, correlation = NULL) -179.457 1 vs 2
-                                        L.Ratio
-modelo                                         
-update(modelo, correlation = NULL) 1.063989e-08
+<pre><code>                                   Model df     AIC      BIC
+modelo                                 1 14 386.914 417.5692
+update(modelo, correlation = NULL)     2 13 384.914 413.3795
+                                     logLik   Test      L.Ratio
+modelo                             -179.457                    
+update(modelo, correlation = NULL) -179.457 1 vs 2 1.063989e-08
                                    p-value
 modelo                                    
 update(modelo, correlation = NULL)  0.9999</code></pre>
@@ -1131,50 +1068,46 @@ update(modelo, correlation = NULL)  0.9999</code></pre>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="modelos-lineales-mixtos-lmm.html#cb152-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">update</span>(modelo, <span class="at">correlation=</span><span class="cn">NULL</span>)</span></code></pre></div>
 <p>Por lo tanto el modelo final, que supone independencia entre residuos, tiene la siguiente estimación de los efectos fijos:</p>
 <div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="modelos-lineales-mixtos-lmm.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
-<pre><code>                          Value Std.Error DF
-(Intercept)            22.16667  4.241667 44
-poly(tiempo, 2)1      -35.16063 10.516526 44
-poly(tiempo, 2)2       33.10000  5.617838 44
-trat                   10.41389  2.682666 22
-poly(tiempo, 2)1:trat  43.70542  6.651235 44
-poly(tiempo, 2)2:trat -36.56667  3.553033 44
-                         t-value      p-value
-(Intercept)             5.225932 4.556683e-06
-poly(tiempo, 2)1       -3.343370 1.698154e-03
-poly(tiempo, 2)2        5.891946 4.863408e-07
-trat                    3.881918 8.040480e-04
-poly(tiempo, 2)1:trat   6.571023 4.876727e-08
-poly(tiempo, 2)2:trat -10.291677 2.732020e-13</code></pre>
+<pre><code>                          Value Std.Error DF    t-value
+(Intercept)            22.16667  4.241667 44   5.225932
+poly(tiempo, 2)1      -35.16063 10.516526 44  -3.343370
+poly(tiempo, 2)2       33.10000  5.617838 44   5.891946
+trat                   10.41389  2.682666 22   3.881918
+poly(tiempo, 2)1:trat  43.70542  6.651235 44   6.571023
+poly(tiempo, 2)2:trat -36.56667  3.553033 44 -10.291677
+                           p-value
+(Intercept)           4.556683e-06
+poly(tiempo, 2)1      1.698154e-03
+poly(tiempo, 2)2      4.863408e-07
+trat                  8.040480e-04
+poly(tiempo, 2)1:trat 4.876727e-08
+poly(tiempo, 2)2:trat 2.732020e-13</code></pre>
 <p>Vemos como el efecto del tiempo para el grupo control no llega a ser significativo (p-valores &gt;0.05) tanto para su componente lineal como cuadrático. Hay efecto del tratamiento en el momento basal (<code>trat2</code>).</p>
 <p>Si queremos ver el efecto del tiempo para el grupo 2, hay que cambiar su categoría de referencia.</p>
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="modelos-lineales-mixtos-lmm.html#cb155-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>trat <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(datos<span class="sc">$</span>trat),<span class="dv">2</span>)</span>
 <span id="cb155-2"><a href="modelos-lineales-mixtos-lmm.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(<span class="fu">update</span>(modelo)))</span></code></pre></div>
-<pre><code>                           Value Std.Error DF
-(Intercept)             42.99444  1.896932 44
-poly(tiempo, 2)1        52.25020  4.703133 44
-poly(tiempo, 2)2       -40.03333  2.512374 44
-trat1                  -10.41389  2.682666 22
-poly(tiempo, 2)1:trat1 -43.70542  6.651235 44
-poly(tiempo, 2)2:trat1  36.56667  3.553033 44
-                          t-value      p-value
-(Intercept)             22.665259 6.756030e-26
-poly(tiempo, 2)1        11.109658 2.358252e-14
-poly(tiempo, 2)2       -15.934465 6.870764e-20
-trat1                   -3.881917 8.040486e-04
-poly(tiempo, 2)1:trat1  -6.571023 4.876723e-08
-poly(tiempo, 2)2:trat1  10.291676 2.732023e-13</code></pre>
+<pre><code>                           Value Std.Error DF    t-value
+(Intercept)             42.99444  1.896932 44  22.665259
+poly(tiempo, 2)1        52.25020  4.703133 44  11.109658
+poly(tiempo, 2)2       -40.03333  2.512374 44 -15.934465
+trat1                  -10.41389  2.682666 22  -3.881917
+poly(tiempo, 2)1:trat1 -43.70542  6.651235 44  -6.571023
+poly(tiempo, 2)2:trat1  36.56667  3.553033 44  10.291676
+                            p-value
+(Intercept)            6.756030e-26
+poly(tiempo, 2)1       2.358252e-14
+poly(tiempo, 2)2       6.870764e-20
+trat1                  8.040486e-04
+poly(tiempo, 2)1:trat1 4.876723e-08
+poly(tiempo, 2)2:trat1 2.732023e-13</code></pre>
 <p>Vemos que para el grupo 2 tanto la componente lineal como la cuadrática del tiempo son significativas.</p>
 <p>Con la siguiente matriz de varianzas y covarianzas de los efectos aleatorios:</p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="modelos-lineales-mixtos-lmm.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getVarCov</span>(modelo)</span></code></pre></div>
 <pre><code>Random effects variance covariance matrix
-                 (Intercept) poly(tiempo, 2)1
-(Intercept)           42.625           70.566
-poly(tiempo, 2)1      70.566          225.490
-poly(tiempo, 2)2     -24.889          -58.669
-                 poly(tiempo, 2)2
-(Intercept)               -24.889
-poly(tiempo, 2)1          -58.669
-poly(tiempo, 2)2           35.802
+                 (Intercept) poly(tiempo, 2)1 poly(tiempo, 2)2
+(Intercept)           42.625           70.566          -24.889
+poly(tiempo, 2)1      70.566          225.490          -58.669
+poly(tiempo, 2)2     -24.889          -58.669           35.802
   Standard Deviations: 6.5288 15.016 5.9835 </code></pre>
 <p>Y varianza de los residuos</p>
 <div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="modelos-lineales-mixtos-lmm.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(modelo)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
@@ -1223,22 +1156,22 @@ Adjusted for:
 <p>Recodificamos nuestra variable tratamiento:</p>
 <div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="modelos-lineales-mixtos-lmm.html#cb168-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>tx <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos<span class="sc">$</span>tx, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Tratados&quot;</span>))</span>
 <span id="cb168-2"><a href="modelos-lineales-mixtos-lmm.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(datos)</span></code></pre></div>
-<pre><code>   respuesta         indiv            tiempo    
- Min.   : 9.80   Min.   :  1.00   Min.   :0.00  
- 1st Qu.:27.02   1st Qu.: 25.75   1st Qu.:0.75  
- Median :30.75   Median : 50.50   Median :1.50  
- Mean   :30.46   Mean   : 50.50   Mean   :1.50  
- 3rd Qu.:34.60   3rd Qu.: 75.25   3rd Qu.:2.25  
- Max.   :43.70   Max.   :100.00   Max.   :3.00  
- NA&#39;s   :50                                     
-      edad              tx     
- Min.   :25.00   Control :200  
- 1st Qu.:43.00   Tratados:200  
- Median :49.00                 
- Mean   :49.03                 
- 3rd Qu.:57.00                 
- Max.   :69.00                 
-                               </code></pre>
+<pre><code>   respuesta         indiv            tiempo          edad      
+ Min.   : 9.80   Min.   :  1.00   Min.   :0.00   Min.   :25.00  
+ 1st Qu.:27.02   1st Qu.: 25.75   1st Qu.:0.75   1st Qu.:43.00  
+ Median :30.75   Median : 50.50   Median :1.50   Median :49.00  
+ Mean   :30.46   Mean   : 50.50   Mean   :1.50   Mean   :49.03  
+ 3rd Qu.:34.60   3rd Qu.: 75.25   3rd Qu.:2.25   3rd Qu.:57.00  
+ Max.   :43.70   Max.   :100.00   Max.   :3.00   Max.   :69.00  
+ NA&#39;s   :50                                                     
+        tx     
+ Control :200  
+ Tratados:200  
+               
+               
+               
+               
+               </code></pre>
 <p>Recordemos también que estos datos no puedieron ser analizados con métodos tradicionales ya que tienen inviduos con datos faltantes</p>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="modelos-lineales-mixtos-lmm.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">with</span>(datos, <span class="fu">tapply</span>(<span class="fu">is.na</span>(respuesta), indiv, any)))</span></code></pre></div>
 <pre><code>[1] 42</code></pre>
@@ -1291,18 +1224,12 @@ Correlation Structure: Continuous AR(1)
       Phi 
 0.1999231 
 Fixed effects:  respuesta ~ poly(tiempo, 3) + edad 
-                      Value Std.Error  DF   t-value
-(Intercept)       10.409728 1.4770932 115  7.047442
-poly(tiempo, 3)1 -15.045596 1.6657189 115 -9.032494
-poly(tiempo, 3)2  -0.518758 1.0075975 115 -0.514846
-poly(tiempo, 3)3   1.865008 0.8918255 115  2.091225
-edad               0.432945 0.0297828  48 14.536718
-                 p-value
-(Intercept)       0.0000
-poly(tiempo, 3)1  0.0000
-poly(tiempo, 3)2  0.6076
-poly(tiempo, 3)3  0.0387
-edad              0.0000
+                      Value Std.Error  DF   t-value p-value
+(Intercept)       10.409728 1.4770932 115  7.047442  0.0000
+poly(tiempo, 3)1 -15.045596 1.6657189 115 -9.032494  0.0000
+poly(tiempo, 3)2  -0.518758 1.0075975 115 -0.514846  0.6076
+poly(tiempo, 3)3   1.865008 0.8918255 115  2.091225  0.0387
+edad               0.432945 0.0297828  48 14.536718  0.0000
  Correlation: 
                  (Intr) p(,3)1 p(,3)2 p(,3)3
 poly(tiempo, 3)1 -0.024                     
@@ -1311,10 +1238,8 @@ poly(tiempo, 3)3  0.012 -0.041  0.149
 edad             -0.978 -0.001 -0.037 -0.003
 
 Standardized Within-Group Residuals:
-         Min           Q1          Med           Q3 
--1.025920132 -0.293663743 -0.008367651  0.290693758 
-         Max 
- 1.093099300 
+         Min           Q1          Med           Q3          Max 
+-1.025920132 -0.293663743 -0.008367651  0.290693758  1.093099300 
 
 Number of Observations: 168
 Number of Groups: 50 </code></pre>
@@ -1324,48 +1249,39 @@ Number of Groups: 50 </code></pre>
 <div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="modelos-lineales-mixtos-lmm.html#cb178-1" aria-hidden="true" tabindex="-1"></a>modelo0 <span class="ot">&lt;-</span> <span class="fu">update</span>(modelo, <span class="at">fixed =</span> . <span class="sc">~</span> . <span class="sc">-</span>edad)</span>
 <span id="cb178-2"><a href="modelos-lineales-mixtos-lmm.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getVarCov</span>(modelo)</span></code></pre></div>
 <pre><code>Random effects variance covariance matrix
-                 (Intercept) poly(tiempo, 3)1
-(Intercept)           4.5096          -3.2917
-poly(tiempo, 3)1     -3.2917         118.2200
-poly(tiempo, 3)2      3.6035           4.1274
-poly(tiempo, 3)3      0.5144          -1.1839
-                 poly(tiempo, 3)2 poly(tiempo, 3)3
-(Intercept)                3.6035           0.5144
-poly(tiempo, 3)1           4.1274          -1.1839
-poly(tiempo, 3)2          28.5740           4.4056
-poly(tiempo, 3)3           4.4056          18.1740
+                 (Intercept) poly(tiempo, 3)1 poly(tiempo, 3)2
+(Intercept)           4.5096          -3.2917           3.6035
+poly(tiempo, 3)1     -3.2917         118.2200           4.1274
+poly(tiempo, 3)2      3.6035           4.1274          28.5740
+poly(tiempo, 3)3      0.5144          -1.1839           4.4056
+                 poly(tiempo, 3)3
+(Intercept)                0.5144
+poly(tiempo, 3)1          -1.1839
+poly(tiempo, 3)2           4.4056
+poly(tiempo, 3)3          18.1740
   Standard Deviations: 2.1236 10.873 5.3455 4.2631 </code></pre>
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="modelos-lineales-mixtos-lmm.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getVarCov</span>(modelo0) <span class="co"># sin la edad</span></span></code></pre></div>
 <pre><code>Random effects variance covariance matrix
-                 (Intercept) poly(tiempo, 3)1
-(Intercept)         22.65700         -2.56910
-poly(tiempo, 3)1    -2.56910        108.79000
-poly(tiempo, 3)2     0.79669          2.88170
-poly(tiempo, 3)3     0.60630          0.23627
-                 poly(tiempo, 3)2 poly(tiempo, 3)3
-(Intercept)               0.79669          0.60630
-poly(tiempo, 3)1          2.88170          0.23627
-poly(tiempo, 3)2         20.71700          3.90920
-poly(tiempo, 3)3          3.90920         13.19500
+                 (Intercept) poly(tiempo, 3)1 poly(tiempo, 3)2
+(Intercept)         22.65700         -2.56910          0.79669
+poly(tiempo, 3)1    -2.56910        108.79000          2.88170
+poly(tiempo, 3)2     0.79669          2.88170         20.71700
+poly(tiempo, 3)3     0.60630          0.23627          3.90920
+                 poly(tiempo, 3)3
+(Intercept)               0.60630
+poly(tiempo, 3)1          0.23627
+poly(tiempo, 3)2          3.90920
+poly(tiempo, 3)3         13.19500
   Standard Deviations: 4.76 10.43 4.5516 3.6326 </code></pre>
 <p>Es importante poner la edad ya que si no, la varianza de los efectos aleatorios quedan infladas y la inferencia no es válida.</p>
 <p><strong>Contraste de los efectos aleatorios</strong></p>
 <div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="modelos-lineales-mixtos-lmm.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> indiv))</span></code></pre></div>
-<pre><code>                                    Model df
-modelo                                  1 17
-update(modelo, random = ~1 | indiv)     2  8
-                                         AIC
-modelo                              672.3888
-update(modelo, random = ~1 | indiv) 662.1079
-                                         BIC
-modelo                              724.9826
-update(modelo, random = ~1 | indiv) 686.8579
-                                       logLik
-modelo                              -319.1944
-update(modelo, random = ~1 | indiv) -323.0539
-                                      Test  L.Ratio
-modelo                                             
-update(modelo, random = ~1 | indiv) 1 vs 2 7.719062
+<pre><code>                                    Model df      AIC      BIC
+modelo                                  1 17 672.3888 724.9826
+update(modelo, random = ~1 | indiv)     2  8 662.1079 686.8579
+                                       logLik   Test  L.Ratio
+modelo                              -319.1944                
+update(modelo, random = ~1 | indiv) -323.0539 1 vs 2 7.719062
                                     p-value
 modelo                                     
 update(modelo, random = ~1 | indiv)  0.5627</code></pre>
@@ -1392,18 +1308,12 @@ Correlation Structure: Continuous AR(1)
 0.8409838 
 
 Coefficients:
-                      Value Std.Error   t-value
-(Intercept)       10.743564 1.5857081  6.775247
-poly(tiempo, 3)1 -15.049949 1.6527760 -9.105861
-poly(tiempo, 3)2  -0.382757 1.0563295 -0.362347
-poly(tiempo, 3)3   1.978662 0.8789044  2.251283
-edad               0.425951 0.0319656 13.325311
-                 p-value
-(Intercept)       0.0000
-poly(tiempo, 3)1  0.0000
-poly(tiempo, 3)2  0.7176
-poly(tiempo, 3)3  0.0257
-edad              0.0000
+                      Value Std.Error   t-value p-value
+(Intercept)       10.743564 1.5857081  6.775247  0.0000
+poly(tiempo, 3)1 -15.049949 1.6527760 -9.105861  0.0000
+poly(tiempo, 3)2  -0.382757 1.0563295 -0.362347  0.7176
+poly(tiempo, 3)3   1.978662 0.8789044  2.251283  0.0257
+edad               0.425951 0.0319656 13.325311  0.0000
 
  Correlation: 
                  (Intr) p(,3)1 p(,3)2 p(,3)3
@@ -1413,10 +1323,8 @@ poly(tiempo, 3)3  0.003 -0.121  0.024
 edad             -0.980 -0.002 -0.008 -0.001
 
 Standardized residuals:
-        Min          Q1         Med          Q3 
--2.39865570 -0.70572628 -0.01464924  0.74989249 
-        Max 
- 2.07647314 
+        Min          Q1         Med          Q3         Max 
+-2.39865570 -0.70572628 -0.01464924  0.74989249  2.07647314 
 
 Residual standard error: 2.492824 
 Degrees of freedom: 168 total; 163 residual</code></pre>
@@ -1437,18 +1345,12 @@ Correlation Structure: Continuous AR(1)
       Phi 
 0.8266025 
 Fixed effects:  respuesta ~ poly(tiempo, 3) + edad 
-                      Value Std.Error  DF   t-value
-(Intercept)       10.738507 1.6033545 115  6.697525
-poly(tiempo, 3)1 -15.048689 1.6348726 115 -9.204808
-poly(tiempo, 3)2  -0.382488 1.0548435 115 -0.362602
-poly(tiempo, 3)3   1.978466 0.8786767 115  2.251643
-edad               0.426057 0.0323229  48 13.181289
-                 p-value
-(Intercept)       0.0000
-poly(tiempo, 3)1  0.0000
-poly(tiempo, 3)2  0.7176
-poly(tiempo, 3)3  0.0262
-edad              0.0000
+                      Value Std.Error  DF   t-value p-value
+(Intercept)       10.738507 1.6033545 115  6.697525  0.0000
+poly(tiempo, 3)1 -15.048689 1.6348726 115 -9.204808  0.0000
+poly(tiempo, 3)2  -0.382488 1.0548435 115 -0.362602  0.7176
+poly(tiempo, 3)3   1.978466 0.8786767 115  2.251643  0.0262
+edad               0.426057 0.0323229  48 13.181289  0.0000
  Correlation: 
                  (Intr) p(,3)1 p(,3)2 p(,3)3
 poly(tiempo, 3)1  0.001                     
@@ -1457,54 +1359,40 @@ poly(tiempo, 3)3  0.003 -0.122  0.024
 edad             -0.980 -0.002 -0.008 -0.001
 
 Standardized Within-Group Residuals:
-        Min          Q1         Med          Q3 
--2.25670886 -0.66026076  0.01991706  0.66013218 
-        Max 
- 1.92440305 
+        Min          Q1         Med          Q3         Max 
+-2.25670886 -0.66026076  0.01991706  0.66013218  1.92440305 
 
 Number of Observations: 168
 Number of Groups: 50 </code></pre>
 <div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="modelos-lineales-mixtos-lmm.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, modelo.gls)</span></code></pre></div>
-<pre><code>           Model df      AIC      BIC    logLik
-modelo         1  8 662.1079 686.8579 -323.0539
-modelo.gls     2  7 660.2088 681.8651 -323.1044
-             Test   L.Ratio p-value
-modelo                             
-modelo.gls 1 vs 2 0.1009386  0.7507</code></pre>
+<pre><code>           Model df      AIC      BIC    logLik   Test   L.Ratio
+modelo         1  8 662.1079 686.8579 -323.0539                 
+modelo.gls     2  7 660.2088 681.8651 -323.1044 1 vs 2 0.1009386
+           p-value
+modelo            
+modelo.gls  0.7507</code></pre>
 <p>Los dos modelos no están anidados. Así que a parte del p-valor del LRT también miraremos el AIC y el BIC. Bajo los tres criterios nos decantamos por el modelo con la constante aleatoria.</p>
 <p><strong>Estructura de correlación de los errores</strong></p>
 <p>Comparamos con la matriz de independencia</p>
 <div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="modelos-lineales-mixtos-lmm.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">correlation=</span><span class="cn">NULL</span>))</span></code></pre></div>
-<pre><code>                                   Model df
-modelo                                 1  8
-update(modelo, correlation = NULL)     2  7
-                                        AIC
-modelo                             662.1079
-update(modelo, correlation = NULL) 677.6130
-                                        BIC
-modelo                             686.8579
-update(modelo, correlation = NULL) 699.2693
-                                      logLik   Test
-modelo                             -323.0539       
-update(modelo, correlation = NULL) -331.8065 1 vs 2
-                                    L.Ratio p-value
-modelo                                             
-update(modelo, correlation = NULL) 17.50515  &lt;.0001</code></pre>
+<pre><code>                                   Model df      AIC      BIC
+modelo                                 1  8 662.1079 686.8579
+update(modelo, correlation = NULL)     2  7 677.6130 699.2693
+                                      logLik   Test  L.Ratio
+modelo                             -323.0539                
+update(modelo, correlation = NULL) -331.8065 1 vs 2 17.50515
+                                   p-value
+modelo                                    
+update(modelo, correlation = NULL)  &lt;.0001</code></pre>
 <p>Nos quedamos con la estructura AR1</p>
 <p><strong>Contraste de los efectos fijos</strong></p>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="modelos-lineales-mixtos-lmm.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
-<pre><code>                       Value Std.Error  DF
-(Intercept)       10.7385066 1.6033545 115
-poly(tiempo, 3)1 -15.0486889 1.6348726 115
-poly(tiempo, 3)2  -0.3824884 1.0548435 115
-poly(tiempo, 3)3   1.9784662 0.8786767 115
-edad               0.4260575 0.0323229  48
-                   t-value      p-value
-(Intercept)       6.697525 8.187045e-10
-poly(tiempo, 3)1 -9.204808 1.848306e-15
-poly(tiempo, 3)2 -0.362602 7.175678e-01
-poly(tiempo, 3)3  2.251643 2.624396e-02
-edad             13.181289 1.441756e-17</code></pre>
+<pre><code>                       Value Std.Error  DF   t-value      p-value
+(Intercept)       10.7385066 1.6033545 115  6.697525 8.187045e-10
+poly(tiempo, 3)1 -15.0486889 1.6348726 115 -9.204808 1.848306e-15
+poly(tiempo, 3)2  -0.3824884 1.0548435 115 -0.362602 7.175678e-01
+poly(tiempo, 3)3   1.9784662 0.8786767 115  2.251643 2.624396e-02
+edad               0.4260575 0.0323229  48 13.181289 1.441756e-17</code></pre>
 <p>Vemos como la parte cuadrática no es significativa y la cúbico tampoco.
 Para contrastar los dos términos (cuadrático y cúbico) a la vez comparamos mediante el LRT el modelo completo con el modelo que supone el efecto del tiempo lineal</p>
 <div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="modelos-lineales-mixtos-lmm.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(</span>
@@ -1554,36 +1442,26 @@ Correlation Structure: Continuous AR(1)
       Phi 
 0.7045807 
 Fixed effects:  respuesta ~ edad + tiempo 
-                Value Std.Error  DF   t-value
-(Intercept) 12.084507 1.5894665 117  7.602870
-edad         0.426773 0.0319158  48 13.371839
-tiempo      -0.959328 0.1030230 117 -9.311792
-            p-value
-(Intercept)       0
-edad              0
-tiempo            0
+                Value Std.Error  DF   t-value p-value
+(Intercept) 12.084507 1.5894665 117  7.602870       0
+edad         0.426773 0.0319158  48 13.371839       0
+tiempo      -0.959328 0.1030230 117 -9.311792       0
  Correlation: 
        (Intr) edad  
 edad   -0.976       
 tiempo -0.092 -0.002
 
 Standardized Within-Group Residuals:
-        Min          Q1         Med          Q3 
--2.13574976 -0.49274745  0.00586512  0.57010471 
-        Max 
- 2.16657427 
+        Min          Q1         Med          Q3         Max 
+-2.13574976 -0.49274745  0.00586512  0.57010471  2.16657427 
 
 Number of Observations: 168
 Number of Groups: 50 </code></pre>
 <div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="modelos-lineales-mixtos-lmm.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
-<pre><code>                 Value  Std.Error  DF   t-value
-(Intercept) 12.0845065 1.58946650 117  7.602870
-edad         0.4267727 0.03191578  48 13.371839
-tiempo      -0.9593285 0.10302297 117 -9.311792
-                 p-value
-(Intercept) 7.939399e-12
-edad        8.365041e-18
-tiempo      9.105728e-16</code></pre>
+<pre><code>                 Value  Std.Error  DF   t-value      p-value
+(Intercept) 12.0845065 1.58946650 117  7.602870 7.939399e-12
+edad         0.4267727 0.03191578  48 13.371839 8.365041e-18
+tiempo      -0.9593285 0.10302297 117 -9.311792 9.105728e-16</code></pre>
 <p><strong>Validación del modelo</strong></p>
 <ul>
 <li>Errores</li>
@@ -1662,18 +1540,12 @@ Adjusted for:
 Random effects:
  Formula: ~poly(tiempo, 3, raw = 3) | indiv
  Structure: General positive-definite, Log-Cholesky parametrization
-                          StdDev    Corr  
-(Intercept)               2.3069274 (Intr)
-poly(tiempo, 3, raw = 3)1 1.9231468 -0.470
-poly(tiempo, 3, raw = 3)2 1.7013762  0.354
-poly(tiempo, 3, raw = 3)3 0.3562430 -0.342
-Residual                  0.9432126       
-                                               
-(Intercept)               p(,3,r=3)1 p(,3,r=3)2
-poly(tiempo, 3, raw = 3)1                      
-poly(tiempo, 3, raw = 3)2 -0.904               
-poly(tiempo, 3, raw = 3)3  0.852     -0.990    
-Residual                                       
+                          StdDev    Corr                        
+(Intercept)               2.3069274 (Intr) p(,3,r=3)1 p(,3,r=3)2
+poly(tiempo, 3, raw = 3)1 1.9231468 -0.470                      
+poly(tiempo, 3, raw = 3)2 1.7013762  0.354 -0.904               
+poly(tiempo, 3, raw = 3)3 0.3562430 -0.342  0.852     -0.990    
+Residual                  0.9432126                             
 
 Correlation Structure: Continuous AR(1)
  Formula: ~tiempo | indiv 
@@ -1681,57 +1553,41 @@ Correlation Structure: Continuous AR(1)
      Phi 
 0.248855 
 Fixed effects:  respuesta ~ poly(tiempo, 3, raw = 3) + tx:poly(tiempo, 3, raw = 3) +      edad 
-                                 Value Std.Error
-(Intercept)                  11.168714 1.1301845
-poly(tiempo, 3, raw = 3)1     2.402332 1.2555058
-poly(tiempo, 3, raw = 3)2    -2.075890 1.1602056
-poly(tiempo, 3, raw = 3)3     0.447207 0.2546185
-edad                          0.442918 0.0224834
-poly(tiempo, 3, raw = 3)1:tx -2.107063 0.7636948
-poly(tiempo, 3, raw = 3)2:tx  0.905552 0.7097238
-poly(tiempo, 3, raw = 3)3:tx -0.194165 0.1561157
-                              DF   t-value p-value
-(Intercept)                  244  9.882204  0.0000
-poly(tiempo, 3, raw = 3)1    244  1.913438  0.0569
-poly(tiempo, 3, raw = 3)2    244 -1.789243  0.0748
-poly(tiempo, 3, raw = 3)3    244  1.756379  0.0803
-edad                          98 19.699782  0.0000
-poly(tiempo, 3, raw = 3)1:tx 244 -2.759037  0.0062
-poly(tiempo, 3, raw = 3)2:tx 244  1.275922  0.2032
-poly(tiempo, 3, raw = 3)3:tx 244 -1.243724  0.2148
+                                 Value Std.Error  DF   t-value
+(Intercept)                  11.168714 1.1301845 244  9.882204
+poly(tiempo, 3, raw = 3)1     2.402332 1.2555058 244  1.913438
+poly(tiempo, 3, raw = 3)2    -2.075890 1.1602056 244 -1.789243
+poly(tiempo, 3, raw = 3)3     0.447207 0.2546185 244  1.756379
+edad                          0.442918 0.0224834  98 19.699782
+poly(tiempo, 3, raw = 3)1:tx -2.107063 0.7636948 244 -2.759037
+poly(tiempo, 3, raw = 3)2:tx  0.905552 0.7097238 244  1.275922
+poly(tiempo, 3, raw = 3)3:tx -0.194165 0.1561157 244 -1.243724
+                             p-value
+(Intercept)                   0.0000
+poly(tiempo, 3, raw = 3)1     0.0569
+poly(tiempo, 3, raw = 3)2     0.0748
+poly(tiempo, 3, raw = 3)3     0.0803
+edad                          0.0000
+poly(tiempo, 3, raw = 3)1:tx  0.0062
+poly(tiempo, 3, raw = 3)2:tx  0.2032
+poly(tiempo, 3, raw = 3)3:tx  0.2148
  Correlation: 
-                             (Intr) pl(,3,r=3)1
-poly(tiempo, 3, raw = 3)1    -0.048            
-poly(tiempo, 3, raw = 3)2     0.033 -0.949     
-poly(tiempo, 3, raw = 3)3    -0.028  0.899     
-edad                         -0.975  0.027     
-poly(tiempo, 3, raw = 3)1:tx  0.020 -0.948     
-poly(tiempo, 3, raw = 3)2:tx -0.013  0.898     
-poly(tiempo, 3, raw = 3)3:tx  0.010 -0.849     
-                             pl(,3,r=3)2
-poly(tiempo, 3, raw = 3)1               
-poly(tiempo, 3, raw = 3)2               
-poly(tiempo, 3, raw = 3)3    -0.989     
-edad                         -0.020     
-poly(tiempo, 3, raw = 3)1:tx  0.903     
-poly(tiempo, 3, raw = 3)2:tx -0.951     
-poly(tiempo, 3, raw = 3)3:tx  0.939     
-                             pl(,3,r=3)3 edad  
-poly(tiempo, 3, raw = 3)1                      
-poly(tiempo, 3, raw = 3)2                      
-poly(tiempo, 3, raw = 3)3                      
-edad                          0.016            
-poly(tiempo, 3, raw = 3)1:tx -0.856      -0.020
-poly(tiempo, 3, raw = 3)2:tx  0.941       0.013
-poly(tiempo, 3, raw = 3)3:tx -0.951      -0.010
-                             p(,3,r=3)1:
-poly(tiempo, 3, raw = 3)1               
-poly(tiempo, 3, raw = 3)2               
-poly(tiempo, 3, raw = 3)3               
-edad                                    
-poly(tiempo, 3, raw = 3)1:tx            
-poly(tiempo, 3, raw = 3)2:tx -0.947     
-poly(tiempo, 3, raw = 3)3:tx  0.896     
+                             (Intr) pl(,3,r=3)1 pl(,3,r=3)2
+poly(tiempo, 3, raw = 3)1    -0.048                        
+poly(tiempo, 3, raw = 3)2     0.033 -0.949                 
+poly(tiempo, 3, raw = 3)3    -0.028  0.899      -0.989     
+edad                         -0.975  0.027      -0.020     
+poly(tiempo, 3, raw = 3)1:tx  0.020 -0.948       0.903     
+poly(tiempo, 3, raw = 3)2:tx -0.013  0.898      -0.951     
+poly(tiempo, 3, raw = 3)3:tx  0.010 -0.849       0.939     
+                             pl(,3,r=3)3 edad   p(,3,r=3)1:
+poly(tiempo, 3, raw = 3)1                                  
+poly(tiempo, 3, raw = 3)2                                  
+poly(tiempo, 3, raw = 3)3                                  
+edad                          0.016                        
+poly(tiempo, 3, raw = 3)1:tx -0.856      -0.020            
+poly(tiempo, 3, raw = 3)2:tx  0.941       0.013 -0.947     
+poly(tiempo, 3, raw = 3)3:tx -0.951      -0.010  0.896     
                              p(,3,r=3)2:
 poly(tiempo, 3, raw = 3)1               
 poly(tiempo, 3, raw = 3)2               
@@ -1742,10 +1598,8 @@ poly(tiempo, 3, raw = 3)2:tx
 poly(tiempo, 3, raw = 3)3:tx -0.988     
 
 Standardized Within-Group Residuals:
-        Min          Q1         Med          Q3 
--1.65153170 -0.36449401 -0.04684107  0.39784060 
-        Max 
- 1.80027927 
+        Min          Q1         Med          Q3         Max 
+-1.65153170 -0.36449401 -0.04684107  0.39784060  1.80027927 
 
 Number of Observations: 350
 Number of Groups: 100 </code></pre>
@@ -1753,21 +1607,12 @@ Number of Groups: 100 </code></pre>
 <p>Fijate cómo se ha escrito la fórmula. De esta manera, cuando tiempo=0 (momento basal) no hay diferencias entre en los tratamientos.</p>
 <p><strong>Efectos aleatorios</strong></p>
 <div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="modelos-lineales-mixtos-lmm.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> indiv))</span></code></pre></div>
-<pre><code>                                    Model df
-modelo                                  1 20
-update(modelo, random = ~1 | indiv)     2 11
-                                         AIC
-modelo                              1417.874
-update(modelo, random = ~1 | indiv) 1408.597
-                                        BIC
-modelo                              1494.57
-update(modelo, random = ~1 | indiv) 1450.78
-                                       logLik
-modelo                              -688.9369
-update(modelo, random = ~1 | indiv) -693.2985
-                                      Test L.Ratio
-modelo                                            
-update(modelo, random = ~1 | indiv) 1 vs 2  8.7233
+<pre><code>                                    Model df      AIC     BIC
+modelo                                  1 20 1417.874 1494.57
+update(modelo, random = ~1 | indiv)     2 11 1408.597 1450.78
+                                       logLik   Test L.Ratio
+modelo                              -688.9369               
+update(modelo, random = ~1 | indiv) -693.2985 1 vs 2  8.7233
                                     p-value
 modelo                                     
 update(modelo, random = ~1 | indiv)  0.4632</code></pre>
@@ -1776,42 +1621,27 @@ update(modelo, random = ~1 | indiv)  0.4632</code></pre>
 <p><strong>Estructura de correlación de los errores</strong></p>
 <p>Comparamos con la matriz de independencia</p>
 <div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="modelos-lineales-mixtos-lmm.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, <span class="fu">update</span>(modelo, <span class="at">correlation=</span><span class="cn">NULL</span>))</span></code></pre></div>
-<pre><code>                                   Model df
-modelo                                 1 11
-update(modelo, correlation = NULL)     2 10
-                                        AIC
-modelo                             1408.597
-update(modelo, correlation = NULL) 1446.555
-                                        BIC
-modelo                             1450.780
-update(modelo, correlation = NULL) 1484.903
-                                      logLik   Test
-modelo                             -693.2985       
-update(modelo, correlation = NULL) -713.2774 1 vs 2
-                                    L.Ratio p-value
-modelo                                             
-update(modelo, correlation = NULL) 39.95779  &lt;.0001</code></pre>
+<pre><code>                                   Model df      AIC      BIC
+modelo                                 1 11 1408.597 1450.780
+update(modelo, correlation = NULL)     2 10 1446.555 1484.903
+                                      logLik   Test  L.Ratio
+modelo                             -693.2985                
+update(modelo, correlation = NULL) -713.2774 1 vs 2 39.95779
+                                   p-value
+modelo                                    
+update(modelo, correlation = NULL)  &lt;.0001</code></pre>
 <p>Nos quedamos con la estructura AR1.</p>
 <p>Finalmente, comprovamos los efectos fijos:</p>
 <div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="modelos-lineales-mixtos-lmm.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
-<pre><code>                                  Value  Std.Error
-(Intercept)                  10.9983674 1.17012354
-poly(tiempo, 3, raw = 3)1     2.2104398 1.28087236
-poly(tiempo, 3, raw = 3)2    -1.8762381 1.14921815
-poly(tiempo, 3, raw = 3)3     0.4026454 0.25308582
-edad                          0.4463927 0.02329682
-poly(tiempo, 3, raw = 3)1:tx -1.9653182 0.78262641
-poly(tiempo, 3, raw = 3)2:tx  0.7598944 0.70301744
-poly(tiempo, 3, raw = 3)3:tx -0.1617992 0.15513365
-                              DF   t-value
-(Intercept)                  244  9.399322
-poly(tiempo, 3, raw = 3)1    244  1.725730
-poly(tiempo, 3, raw = 3)2    244 -1.632621
-poly(tiempo, 3, raw = 3)3    244  1.590944
-edad                          98 19.161101
-poly(tiempo, 3, raw = 3)1:tx 244 -2.511183
-poly(tiempo, 3, raw = 3)2:tx 244  1.080904
-poly(tiempo, 3, raw = 3)3:tx 244 -1.042967
+<pre><code>                                  Value  Std.Error  DF   t-value
+(Intercept)                  10.9983674 1.17012354 244  9.399322
+poly(tiempo, 3, raw = 3)1     2.2104398 1.28087236 244  1.725730
+poly(tiempo, 3, raw = 3)2    -1.8762381 1.14921815 244 -1.632621
+poly(tiempo, 3, raw = 3)3     0.4026454 0.25308582 244  1.590944
+edad                          0.4463927 0.02329682  98 19.161101
+poly(tiempo, 3, raw = 3)1:tx -1.9653182 0.78262641 244 -2.511183
+poly(tiempo, 3, raw = 3)2:tx  0.7598944 0.70301744 244  1.080904
+poly(tiempo, 3, raw = 3)3:tx -0.1617992 0.15513365 244 -1.042967
                                   p-value
 (Intercept)                  4.150278e-18
 poly(tiempo, 3, raw = 3)1    8.566199e-02
@@ -1825,50 +1655,35 @@ poly(tiempo, 3, raw = 3)3:tx 2.979960e-01</code></pre>
 <p>Contrastamos el efecto cuadrático y cúbico del tiempo (tanto para el grupo control como para el grupo de tratados):</p>
 <div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="modelos-lineales-mixtos-lmm.html#cb222-1" aria-hidden="true" tabindex="-1"></a>modelo2 <span class="ot">&lt;-</span> <span class="fu">update</span>(modelo, <span class="at">fixed =</span> . <span class="sc">~</span> tiempo <span class="sc">+</span> tiempo<span class="sc">:</span>tx <span class="sc">+</span> edad)</span>
 <span id="cb222-2"><a href="modelos-lineales-mixtos-lmm.html#cb222-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo2))</span></code></pre></div>
-<pre><code>                 Value  Std.Error  DF    t-value
-(Intercept) 11.0143619 1.16920806 248  9.4203610
-tiempo       0.1947449 0.21775844 248  0.8943163
-edad         0.4462810 0.02328366  98 19.1671311
-tiempo:tx   -1.1381679 0.13574697 248 -8.3844810
-                 p-value
-(Intercept) 3.281588e-18
-tiempo      3.720198e-01
-edad        6.352777e-35
-tiempo:tx   3.860440e-15</code></pre>
+<pre><code>                 Value  Std.Error  DF    t-value      p-value
+(Intercept) 11.0143619 1.16920806 248  9.4203610 3.281588e-18
+tiempo       0.1947449 0.21775844 248  0.8943163 3.720198e-01
+edad         0.4462810 0.02328366  98 19.1671311 6.352777e-35
+tiempo:tx   -1.1381679 0.13574697 248 -8.3844810 3.860440e-15</code></pre>
 <div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="modelos-lineales-mixtos-lmm.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo, modelo2)</span></code></pre></div>
-<pre><code>        Model df      AIC      BIC    logLik   Test
-modelo      1 11 1408.597 1450.780 -693.2985       
-modelo2     2  7 1394.327 1421.252 -690.1637 1 vs 2
-         L.Ratio p-value
-modelo                  
-modelo2 6.269749  0.1799</code></pre>
+<pre><code>        Model df      AIC      BIC    logLik   Test  L.Ratio
+modelo      1 11 1408.597 1450.780 -693.2985                
+modelo2     2  7 1394.327 1421.252 -690.1637 1 vs 2 6.269749
+        p-value
+modelo         
+modelo2  0.1799</code></pre>
 <p>Como el p-valor del LRT es &gt;0.05, nos quedamos con el modelo más simple, en que el tiempo tiene un efecto lineal en ambos grupos</p>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="modelos-lineales-mixtos-lmm.html#cb226-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> modelo2</span>
 <span id="cb226-2"><a href="modelos-lineales-mixtos-lmm.html#cb226-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(modelo))</span></code></pre></div>
-<pre><code>                 Value  Std.Error  DF    t-value
-(Intercept) 11.0143619 1.16920806 248  9.4203610
-tiempo       0.1947449 0.21775844 248  0.8943163
-edad         0.4462810 0.02328366  98 19.1671311
-tiempo:tx   -1.1381679 0.13574697 248 -8.3844810
-                 p-value
-(Intercept) 3.281588e-18
-tiempo      3.720198e-01
-edad        6.352777e-35
-tiempo:tx   3.860440e-15</code></pre>
+<pre><code>                 Value  Std.Error  DF    t-value      p-value
+(Intercept) 11.0143619 1.16920806 248  9.4203610 3.281588e-18
+tiempo       0.1947449 0.21775844 248  0.8943163 3.720198e-01
+edad         0.4462810 0.02328366  98 19.1671311 6.352777e-35
+tiempo:tx   -1.1381679 0.13574697 248 -8.3844810 3.860440e-15</code></pre>
 <p>El efecto del tiempo en el grupo control no es significativo.</p>
 <p>Para ver el efecto del tiempo en el grupo de tratamiento, cambiamos la categoria de referencia:</p>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="modelos-lineales-mixtos-lmm.html#cb228-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>tx <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos<span class="sc">$</span>tx, <span class="dv">2</span><span class="sc">:</span><span class="dv">1</span>)</span>
 <span id="cb228-2"><a href="modelos-lineales-mixtos-lmm.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(<span class="fu">update</span>(modelo)))</span></code></pre></div>
-<pre><code>                Value  Std.Error  DF    t-value
-(Intercept) 11.014362 1.16920806 248   9.420361
-tiempo      -2.081591 0.10101027 248 -20.607715
-edad         0.446281 0.02328366  98  19.167131
-tiempo:tx1   1.138168 0.13574697 248   8.384481
-                 p-value
-(Intercept) 3.281588e-18
-tiempo      1.166972e-55
-edad        6.352777e-35
-tiempo:tx1  3.860440e-15</code></pre>
+<pre><code>                Value  Std.Error  DF    t-value      p-value
+(Intercept) 11.014362 1.16920806 248   9.420361 3.281588e-18
+tiempo      -2.081591 0.10101027 248 -20.607715 1.166972e-55
+edad         0.446281 0.02328366  98  19.167131 6.352777e-35
+tiempo:tx1   1.138168 0.13574697 248   8.384481 3.860440e-15</code></pre>
 <p>Vemos como el efecto del tiempo en el grupo de tratados es significativo y la pendiente es negativa.</p>
 <p><strong>Validación</strong></p>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="modelos-lineales-mixtos-lmm.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="co"># residuos</span></span>
@@ -1966,7 +1781,7 @@ Adjusted for:
         </div>
       </div>
 <a href="ModelosNormal.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="análisis-de-supervivencia-con-datos-longitudinales.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ModelosNoNormal.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
