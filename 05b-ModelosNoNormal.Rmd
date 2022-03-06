@@ -512,7 +512,7 @@ coef(summary(modelo2.gee))
 
 ## Ejercicios
 
-### Ejercicio 5b
+### Ejercicio 6
 
 Analiza los datos `toenail` disponible en el package `HSAUR3`. En ellos hay la información de un estudio para comparar dos fármacos sobre la evolución de una infección. 
 

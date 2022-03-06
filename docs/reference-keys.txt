@@ -80,7 +80,7 @@ ecuación-2
 función-geeglm
 ejemplos-3
 ejercicios-2
-ejercicio-5b
+ejercicio-6
 análisis-de-supervivencia-con-datos-longitudinales
 tiempo-hasta-evento
 ejemplos-4
